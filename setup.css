@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Kite+One&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Kite One', sans-serif;
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body {
+  background-color: #2F3136;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  display: grid;
+  place-items: center;
+}
+.pondasi {
+  padding: 20px;
+}
+.profile img {
+  display: block;
+  margin: 0 auto;
+  height: 5rem;
+  width: 5rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.profile  p {
+  text-align: center;
+  margin-top: 13px;
+  font-size: 1.5em;
+  color: white;
+}
+.link ul li {
+  width: 100%;
+  margin: 1.2rem 0;
+  padding: 0.4rem 0.8rem;
+  background: rgba( 255, 255, 255, 0.1 );
+  backdrop-filter: blur( 0px );
+  border-radius: 5px;
+  transform-style: preserve-3d;
+  perspective: 500px;
+  box-shadow: 0 0 0.8rem rgba(255, 255, 255, .12);
+}
+.js-tilt-glare {
+  border-radius: 5px;
+}
+.link ul li a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: #ffff;
+  font-size: 1rem;
+
+}
+.link ul li a i {
+  text-align: center;
+  line-height: 4rem;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
+  transform: scale(1.4) translateZ(50px);
+  transition: 0.25s;
+}
+.link ul li a span {
+  line-height: 1.4rem;
+}
+.link ul .tiktok:hover {
+  background: linear-gradient(to right, #000000 30%, #ffffff 100%);
+}
+.link ul .github:hover {
+  background: linear-gradient(to right, #000000 30%, #ffffff 100%);
+}
+.link ul .twitter:hover {
+  background: linear-gradient(to right, #19a2f7 0%, #ffffff 100%);
+}
+.link ul .facebook:hover {
+  background: linear-gradient(to right, #0065e6 0%, #ffffff 100%);
+}
+.link ul .instagram:hover {
+  background: linear-gradient(to right, #cc00ff 0%, #ff5050 100%);
+}
+.link ul .discord:hover {
+  background: linear-gradient(to right, #5265f7 0%, #ffffff 100%);
+}
+@media only screen and (max-width: 549px) {
+  .container {
+    width: 88vw;
+  }
+}
