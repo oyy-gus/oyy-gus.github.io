@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/oyy-gus">
+  <a href="https://oyy-gus.vercel.app">
     <img src="https://avatars.githubusercontent.com/u/97151655" height="128" width="128">
   </a>
 </p>
