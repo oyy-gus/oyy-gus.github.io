@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-  Hi <img src="./src/image/dada.gif" width="30">, I'm Guss
+  Hi <img src="src/image/gifIcon/dada.gif" width="30">, I'm Guss
 </h1>
 
 <h3 align="left">
@@ -16,17 +16,17 @@ convinced by her sweet promise and doubted by her behavior and cell phone conten
 <p align="left">
 
 <a href="https://www.instagram.com/oyy_gus" targer="blank">
-<img src="./src/icon/instagram.svg" height="30" width="40"></a>
+<img src="src/image/sosialIcon/instagram.svg" height="30" width="40"></a>
 <a href="https://www.facebook.com/profile.php?id=100074979668113" targer="blank">
-<img src="./src/icon/facebook.svg" height="30" width="40"></a>
+<img src="src/image/sosialIcon/facebook.svg" height="30" width="40"></a>
 <a href="https://www.twitter.com/Oyy_gus" targer="blank">
-<img src="./src/icon/twitter.svg" height="30" width="40"></a>
+<img src="src/image/sosialIcon/twitter.svg" height="30" width="40"></a>
 <a href="https://www.tiktok.com/@oyy_gus" targer="blank">
-<img src="./src/icon/tiktok.svg" height="30" width="40"></a>
+<img src="src/image/sosialIcon/tiktok.svg" height="30" width="40"></a>
 <a href="https://discord.gg/BtkfkGjJfN" targer="blank">
-<img src="./src/icon/discord.svg" height="30" width="40"></a>
+<img src="src/image/sosialIcon/discord.svg" height="30" width="40"></a>
 <a href="https://open.spotify.com/user/31zl4c4uw3jh2o6c3we6v34gzc4m" targer="blank">
-<img src="./src/icon/spotify.svg" height="30" width="40"></a>
+<img src="src/image/sosialIcon/spotify.svg" height="30" width="40"></a>
 
 <br>
   <div>
