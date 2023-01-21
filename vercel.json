@@ -1,9 +1,0 @@
-{
-  "name": " oyy-gus",
-  "version": 2,
-  "public": false,
-  "env": {
-    "MY_KEY": "",
-    "SECRET": ""
-  }
-}
