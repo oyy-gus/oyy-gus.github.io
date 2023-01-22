@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Kite+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kite+One&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Kite One', sans-serif;
+  font-family: "Kite One", sans-serif;
   list-style: none;
 }
 a {
   text-decoration: none;
 }
 body {
-  background-color: #2F3136;
+  background-color: #2f3136;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -39,12 +39,12 @@ body {
   width: 100%;
   margin: 1.2rem 0;
   padding: 0.4rem 0.8rem;
-  background: rgba( 255, 255, 255, 0.1 );
-  backdrop-filter: blur( 0px );
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(0px);
   border-radius: 5px;
   transform-style: preserve-3d;
   perspective: 500px;
-  box-shadow: 0 0 0.8rem rgba(255, 255, 255, .12);
+  box-shadow: 0 0 0.8rem rgba(255, 255, 255, 0.12);
 }
 .js-tilt-glare {
   border-radius: 5px;
@@ -55,7 +55,6 @@ body {
   align-items: center;
   color: #ffff;
   font-size: 1rem;
-
 }
 .link ul li a i {
   text-align: center;

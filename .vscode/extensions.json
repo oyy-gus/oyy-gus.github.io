@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "ritwickdey.liveserver",
+        "blackmist.linkcheckmd",
+        "esbenp.prettier-vscode",
+        "formulahendry.code-runner",
+        "ms-vscode.sublime-keybindings"
+    ]
+}
