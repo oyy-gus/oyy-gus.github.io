@@ -19,7 +19,7 @@ convinced by her sweet promise and doubted by her behavior and cell phone conten
 <img src="src/image/sosialIcon/instagram.svg" height="30" width="40"></a>
 <a href="https://www.facebook.com/profile.php?id=100074979668113" targer="blank">
 <img src="src/image/sosialIcon/facebook.svg" height="30" width="40"></a>
-<a href="https://www.twitter.com/Oyy_gus" targer="blank">
+<a href="https://www.twitter.com/oyy_gus" targer="blank">
 <img src="src/image/sosialIcon/twitter.svg" height="30" width="40"></a>
 <a href="https://www.tiktok.com/@oyy_gus" targer="blank">
 <img src="src/image/sosialIcon/tiktok.svg" height="30" width="40"></a>
