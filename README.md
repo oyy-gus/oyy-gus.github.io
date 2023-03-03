@@ -23,7 +23,7 @@ convinced by her sweet promise and doubted by her behavior and cell phone conten
   <a href="https://www.twitter.com/oyy_gus"><img src="https://img.shields.io/badge/-twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"></a>
   <a href="https://www.instagram.com/oyy_gus"><img alt="Instagram" title="Instagram" src="https://img.shields.io/badge/-instagram-red?style=for-the-badge&logo=instagram&logoColor=white"/></a>
   <a href="https://www.facebook.com/profile.php?id=100074979668113"><img alt="Facebook" title="Facebook" src="https://img.shields.io/badge/-facebook-0065E6?style=for-the-badge&logo=facebook&logoColor=white"/></a>
-  <a href="https://open.spotify.com/user/31zl4c4uw3jh2o6c3we6v34gzc4m"><img alt="Spotify" title="Spotify" src="https://img.shields.io/badge/-spotify-0077B5?style=for-the-badge&logo=spotify&logoColor=white"/></a>
+  <a href="https://open.spotify.com/user/31zl4c4uw3jh2o6c3we6v34gzc4m"><img alt="Spotify" title="Spotify" src="https://img.shields.io/badge/-spotify-1DD860?style=for-the-badge&logo=spotify&logoColor=white"/></a>
   <a href="https://discord.gg/BtkfkGjJfN"><img alt="Discord" title="Join to my discord servers." src="https://img.shields.io/badge/-Join%20to%20my%20discord%20servers.-5265F7?style=for-the-badge&logo=discord&logoColor=white"/></a>
 </p>
 
