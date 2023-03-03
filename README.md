@@ -47,6 +47,6 @@ convinced by her sweet promise and doubted by her behavior and cell phone conten
 ## 🔥 My contribution streak:
 <p align="center">
   <a href="https://github.com/oyy-gus/oyy-gus">
-    <img src="https://github-readme-streak-stats.herokuapp.com/?user=oyy-gus#version3"/>
+    <img src="https://github-readme-streak-stats.herokuapp.com?user=oyy-gus&theme=onedark-duo&border_radius=5.0&locale=id&date_format=j%20M%5B%20Y%5D#version3"/>
   </a>
 </p>
