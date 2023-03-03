@@ -38,7 +38,7 @@ convinced by her sweet promise and doubted by her behavior and cell phone conten
 <details> 
   <summary>💻 Most used languages</summary>
   <br/>
-  <a href="https://github.com/oyy-gus/oyy-gus"><img alt="Guss's Top Languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=oyy-gus&langs_count=10&bg_color=131516&layout=compact#" /></a>
+  <a href="https://github.com/oyy-gus/oyy-gus"><img alt="Guss's Top Languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=oyy-gus&langs_count=10&bg_color=131516&title_color=8A8BFF&layout=compact#" /></a>
   <br/>
   <b>Note:</b> This chart is only a metric of which languages my public code on GitHub consists of and does not reflect my experience or skill level.
 </details>
