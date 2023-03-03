@@ -32,7 +32,7 @@ convinced by her sweet promise and doubted by her behavior and cell phone conten
 <details>
   <summary>📊 GitHub profile stats</summary>
   <br/>
-  <a href="https://github.com/oyy-gus/oyy-gus"><img alt="Guss's Github Stats" src="https://github-readme-stats.vercel.app/api?username=oyy-gus&show_icons=true&title_color=8A8BFF&icon_color=8A8BFF&text_color=ffffff&bg_color=131516&count_private=true" /></a>
+  <a href="https://github.com/oyy-gus/oyy-gus"><img alt="Guss's Github Stats" src="https://github-readme-stats.vercel.app/api?username=oyy-gus&show_icons=true&title_color=8A8BFF&icon_color=8A8BFF&text_color=ffffff&bg_color=131516&count_private=false" /></a>
 </details>
 
 <details> 
