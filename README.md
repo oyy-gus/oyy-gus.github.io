@@ -1,6 +1,6 @@
 <!-- profile view -->
 <p align="left">
-  <a href="https://github.com/oyy-gus"><img alt="view" title="Profile view" src="https://komarev.com/ghpvc/?username=oyy-gus"/></a>
+  <a href="https://github.com/oyy-gus"><img alt="views" title="Github views" src="https://komarev.com/ghpvc/?username=oyy-gus"/></a>
 </p>
 
 <!-- image -->
