@@ -14,7 +14,7 @@
 
 <!-- about -->
 ## 📄 About me:
-convinced by her sweet promise and doubted by her behavior and cell phone content
+saya fikir menaruh harapan kepada seseorang adalah hal yang salah, tapi itu memang benar 😌
 
 <!-- social link -->
 ## 🙋‍♂️ Connect with me:
