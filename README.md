@@ -38,7 +38,7 @@ saya fikir menaruh harapan kepada seseorang adalah hal yang salah, tapi itu mema
 <details>
   <summary>📊 GitHub profile stats</summary>
   <br/>
-  <a href="#"><img alt="Guss's Github Stats" src="https://github-readme-stats.vercel.app/api?username=oyy-gus&show_icons=true&title_color=8A8BFF&icon_color=8A8BFF&text_color=ffffff&bg_color=131516&count_private=true" /></a>
+  <a href="#"><img alt="Guss's Github Stats" src="https://github-readme-stats.vercel.app/api?username=oyy-gus&show_icons=true&title_color=8A8BFF&icon_color=8A8BFF&text_color=ffffff&bg_color=131516&include_all_commits=true&count_private=true" /></a>
 </details>
 
 <details> 
