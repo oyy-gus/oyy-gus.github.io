@@ -27,12 +27,6 @@ saya fikir menaruh harapan kepada seseorang adalah hal yang salah, tapi itu mema
 <a href="https://discord.gg/BtkfkGjJfN"><img alt="Discord" title="Join to my discord servers." src="https://img.shields.io/badge/-Join%20to%20my%20discord%20servers.-5265F7?style=for-the-badge&logo=discord&logoColor=white" /></a>
 </p>
 
-<!-- discord activity -->
-<p align="center">
-<a href="https://discord.gg/BtkfkGjJfN"><img src="https://lanyard.cnrad.dev/api/592763330427355136"></a>
-<!--a href="https://discordbotlist.com/bots/929174084410028083"><img src="https://discordbotlist.com/api/v1/bots/929174084410028083/widget"></a-->
-</p>
-
 <!-- github stats -->
 ## 📈 Github stats:
 <details>
