@@ -1,11 +1,11 @@
 {
-  "name": "Download VT",
-  "short_name": "DL VT",
+  "name": "Downloader VT",
+  "short_name": "Downloader VT",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0f0c29",
   "theme_color": "#0f0c29",
-  "description": "Aplikasi untuk mendownload video VT",
+  "description": "Aplikasi untuk mendownload video tiktok!",
   "icons": [
     {
       "src": "https://oyy-gus.github.io/oyy-gus/image/download-icon-192.png",
