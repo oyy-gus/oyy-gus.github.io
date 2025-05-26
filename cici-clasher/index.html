@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="apple-mobile-web-app-title" content="Cici Clasher" />
+        <meta name="application-name" content="Cici Clasher" />
+        <meta name="msapplication-TileColor" content="#5865f2" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cici Clasher</title>
+        <meta name="description" content="Input data member Cici Clasher!" />
+        <meta property="og:site_name" content="cici clasher" />
+        <meta property="og:title" content="Cici Clasher" />
+        <meta
+            property="og:description"
+            content="Input data member Cici Clasher!"
+        />
+        <meta
+            property="og:image"
+            content="https://oyy-gus.github.io/oyy-gus/image/cici-clasher.png"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            * {
+                box-sizing: border-box;
+                transition: all 0.3s ease;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Inter", sans-serif;
+                background: #1a1a2e;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .container {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                padding: 40px 30px;
+                border-radius: 20px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                width: 320px;
+                position: relative;
+                overflow: hidden;
+                touch-action: none;
+            }
+
+            .profile img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin-bottom: 10px;
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            }
+
+            .profile-name {
+                font-size: 22px;
+                font-weight: 600;
+                margin: 8px 0;
+            }
+
+            .social-links {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .social-links img {
+                width: 30px;
+                height: 30px;
+                transition: transform 0.3s;
+            }
+
+            .social-links img:hover {
+                transform: scale(1.1);
+            }
+
+            .dropdown-toggle {
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 18px;
+                text-transform: uppercase;
+                color: #8f94fb;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .arrow-svg {
+                width: 27px;
+                margin: 8px auto 0;
+                display: block;
+                fill: #8f94fb;
+                animation: bounce 1.8s ease-in-out infinite;
+            }
+
+            @keyframes bounce {
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-6px);
+                }
+            }
+
+            .menu {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                opacity: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition:
+                    opacity 0.6s ease,
+                    max-height 0.7s ease;
+            }
+
+            .nav-button {
+                width: 180px;
+                padding: 12px;
+                background: #8f94fb;
+                color: #fff;
+                border: none;
+                border-radius: 12px;
+                font-size: 15px;
+                font-weight: bold;
+                cursor: pointer;
+                transform: translateY(20px);
+                opacity: 0;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .nav-button:hover {
+                background: #7d82f1;
+                transform: translateY(-3px) scale(1.03);
+            }
+
+            .slide-in {
+                animation: slideIn 0.4s forwards;
+            }
+
+            .slide-out {
+                animation: slideOut 0.3s forwards;
+            }
+
+            @keyframes slideIn {
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes slideOut {
+                to {
+                    transform: translateY(20px);
+                    opacity: 0;
+                }
+            }
+
+            .arrow-up {
+                width: 27px;
+                fill: #8f94fb;
+                margin-top: -5px;
+                opacity: 0;
+                cursor: pointer;
+                animation: bounceUp 2s infinite;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            @keyframes bounceUp {
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(6px);
+                }
+            }
+
+            .arrow-up.slide-in {
+                animation:
+                    slideIn 0.4s forwards,
+                    bounceUp 2s infinite;
+            }
+
+            .arrow-up.slide-out {
+                animation: slideOut 0.4s forwards;
+            }
+
+            .container.open .arrow-svg.arrow-down {
+                transform: rotate(180deg);
+                opacity: 0;
+            }
+
+            .container.open .menu {
+                opacity: 1;
+                max-height: 800px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="swipeArea">
+            <div class="profile">
+                <img
+                    src="https://oyy-gus.github.io/oyy-gus/image/cici-clasher.png"
+                    alt="Cici Clasher"
+                />
+                <div class="profile-name">Cici Clasher</div>
+                <div class="social-links">
+                    <a
+                        href="https://www.tiktok.com/@ciciclasher"
+                        target="_blank"
+                    >
+                        <img
+                            src="https://oyy-gus.github.io/oyy-gus/image/tiktok.png"
+                            alt="TikTok"
+                        />
+                    </a>
+                    <a href="https://discord.gg/duSRahJjQ2" target="_blank">
+                        <img
+                            src="https://oyy-gus.github.io/oyy-gus/image/discord.png"
+                            alt="Discord"
+                        />
+                    </a>
+                    <a href="https://saweria.co/Faniilov" target="_blank">
+                        <img
+                            src="https://oyy-gus.github.io/oyy-gus/image/saweria.png"
+                            alt="Saweria"
+                        />
+                    </a>
+                </div>
+            </div>
+
+            <div class="dropdown-toggle" onclick="toggleMenu()">
+                Input Data Member
+            </div>
+
+            <svg
+                class="arrow-svg arrow-down"
+                viewBox="0 0 24 24"
+                height="60"
+                onclick="toggleMenu()"
+            >
+                <path d="M7 10l5 5 5-5H7z"></path>
+                <path d="M7 13l5 5 5-5H7z"></path>
+                <path d="M7 16l5 5 5-5H7z"></path>
+            </svg>
+
+            <div class="menu" id="menu">
+                <button
+                    class="nav-button"
+                    onclick="location.href='input/data/clan/butterfly/'"
+                >
+                    BUTTERFLY
+                </button>
+                <button
+                    class="nav-button"
+                    onclick="location.href='input/data/clan/butterfly-2/'"
+                >
+                    BUTTERFLY II
+                </button>
+                <button
+                    class="nav-button"
+                    onclick="location.href='input/data/clan/cifa-esport/'"
+                >
+                    CIFA ESPORT
+                </button>
+                <button
+                    class="nav-button"
+                    onclick="location.href='input/data/clan/cici-clasher/'"
+                >
+                    CICI CLASHER
+                </button>
+                <button
+                    class="nav-button"
+                    onclick="location.href='input/data/clan/cici-clasher-2/'"
+                >
+                    CICI CLASHER II
+                </button>
+                <button
+                    class="nav-button"
+                    onclick="location.href='input/data/clan/pulu-pulu-clasher/'"
+                >
+                    PULU" CLASHER
+                </button>
+                <button
+                    class="nav-button"
+                    onclick="location.href='input/data/clan/trick-of-skill/'"
+                >
+                    TRICK OF SKILL
+                </button>
+
+                <svg
+                    class="arrow-up"
+                    viewBox="0 0 24 24"
+                    height="60"
+                    onclick="toggleMenu()"
+                >
+                    <path d="M7 14l5-5 5 5H7z"></path>
+                    <path d="M7 17l5-5 5 5H7z"></path>
+                    <path d="M7 20l5-5 5 5H7z"></path>
+                </svg>
+            </div>
+        </div>
+
+        <script>
+            const menu = document.getElementById("menu");
+            const container = document.getElementById("swipeArea");
+            const buttons = menu.querySelectorAll(".nav-button");
+            const arrowUp = menu.querySelector(".arrow-up");
+
+            function toggleMenu() {
+                const isOpen = container.classList.contains("open");
+
+                if (isOpen) {
+                    buttons.forEach((btn, i) => {
+                        setTimeout(() => {
+                            btn.classList.remove("slide-in");
+                            btn.classList.add("slide-out");
+                        }, i * 80);
+                    });
+
+                    arrowUp.classList.remove("slide-in");
+                    arrowUp.classList.add("slide-out");
+
+                    setTimeout(
+                        () => {
+                            menu.classList.remove("show");
+                            container.classList.remove("open");
+                            buttons.forEach(btn =>
+                                btn.classList.remove("slide-out")
+                            );
+                            arrowUp.classList.remove("slide-out");
+                        },
+                        buttons.length * 80 + 300
+                    );
+                } else {
+                    menu.classList.add("show");
+                    container.classList.add("open");
+                    buttons.forEach((btn, i) => {
+                        setTimeout(() => {
+                            btn.classList.add("slide-in");
+                        }, i * 80);
+                    });
+                    setTimeout(() => {
+                        arrowUp.classList.add("slide-in");
+                    }, buttons.length * 80);
+                }
+            }
+
+            let startY = 0;
+            container.addEventListener("touchstart", e => {
+                startY = e.touches[0].clientY;
+            });
+
+            container.addEventListener("touchend", e => {
+                const endY = e.changedTouches[0].clientY;
+                const isOpen = container.classList.contains("open");
+
+                if (!isOpen && endY - startY > 50) {
+                    toggleMenu();
+                } else if (isOpen && startY - endY > 50) {
+                    toggleMenu();
+                }
+            });
+        </script>
+    </body>
+</html>
