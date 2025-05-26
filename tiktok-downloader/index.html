@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Download VT</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f0c29" />
   <style>
     :root {
       --bg-color: #0f0c29;
@@ -112,6 +114,14 @@
       a.click();
       document.body.removeChild(a);
     });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+          console.log('Service worker registered.', reg);
+        });
+      });
+    }
   </script>
 </body>
 </html>
