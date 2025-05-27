@@ -1,191 +1,262 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="apple-mobile-web-app-title" content="Tiktok Downloader" />
-    <meta name="application-name" content="Tiktok Downloader" />
-    <meta name="msapplication-TileColor" content="#5865f2" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tiktok Downloader</title>
-    <meta name="description" content="Download tiktok videos without watermark and ads!" />
-    <meta property="og:site_name" content="Tiktok Downloader" />
-    <meta property="og:title" content="Tiktok Downloader" />
-    <meta property="og:description" content="Download tiktok videos without watermark and ads!" />
-    <meta property="og:image" content="https://oyy-gus.github.io/oyy-gus/image/download-icon-512.png" />
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#0f0c29" />
-    
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="apple-mobile-web-app-title" content="Tiktok Downloader" />
+  <meta name="application-name" content="Tiktok Downloader" />
+  <meta name="msapplication-TileColor" content="#0f0c29" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TikTok Downloader</title>
+  <meta name="description" content="Download tiktok videos without watermark and ads!" />
+  <meta property="og:site_name" content="Tiktok Downloader" />
+  <meta property="og:title" content="Tiktok Downloader" />
+  <meta property="og:description" content="Download tiktok videos without watermark and ads!" />
+  <meta property="og:image" content="https://oyy-gus.github.io/oyy-gus/image/download-icon-512.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f0c29" />
+  <link rel="icon" href="https://oyy-gus.github.io/oyy-gus/image/download-icon-192.png" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+  />
+  <style>
+    * { box-sizing: border-box; }
 
-    <style>
-      :root {
-        --bg-color: #0f0c29;
-        --container-bg: #1e1e1e;
-        --text-color: #ffffff;
-        --accent-color: #00b894;
-        --accent-hover: #019874;
-        --input-bg: #2c2c2c;
-        --border-color: #444;
-        --shadow: 0 0 20px rgba(0, 255, 180, 0.2);
-      }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f0c29;
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 30px 15px;
+    }
 
-      body {
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: var(--bg-color);
-        color: var(--text-color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 2rem;
-      }
+    .container {
+      background: #1b183d;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 600px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
 
-      .container {
-        background: var(--container-bg);
-        padding: 2rem;
-        border-radius: 16px;
-        box-shadow: var(--shadow);
-        width: 100%;
-        max-width: 480px;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-      h1 {
-        text-align: center;
-        margin-bottom: 1.5rem;
-        font-size: 1.8rem;
-      }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
 
-      .input-wrapper {
-        margin-bottom: 1.2rem;
-      }
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-      .input-with-button {
-        position: relative;
-        width: 100%;
-        display: flex;
-      }
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 48px 14px 16px;
+      border-radius: 10px;
+      border: 1px solid #3a365b;
+      background: #26234f;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
 
-      .input-with-button input {
-        flex: 1;
-        padding: 12px;
-        padding-right: 70px;
-        font-size: 1rem;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        background: var(--input-bg);
-        color: var(--text-color);
-      }
+    input[type="text"]:focus {
+      border-color: #6f6cf1;
+    }
 
-      .input-with-button input:focus {
-        border-color: var(--accent-color);
-        outline: none;
-      }
+    .input-wrapper button {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #bbb;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-      .input-with-button button {
-        position: absolute;
-        top: 50%;
-        right: 8px;
-        transform: translateY(-50%);
-        padding: 6px 10px;
-        font-size: 0.9rem;
-        background-color: var(--accent-hover);
-        color: var(--text-color);
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        -webkit-tap-highlight-color: transparent;
-        transition: background-color 0.3s;
-      }
+    .input-wrapper button:hover {
+      color: #6f6cf1;
+    }
 
-      .input-with-button button:hover {
-        background-color: var(--accent-color);
-      }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: #6f6cf1;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-      button[type="submit"] {
-        width: 100%;
-        padding: 12px;
-        font-size: 1rem;
-        background-color: var(--accent-color);
-        color: var(--text-color);
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.2s;
-        -webkit-tap-highlight-color: transparent;
-      }
+    .btn:hover {
+      background: #5b59cc;
+    }
 
-      button[type="submit"]:hover {
-        background-color: var(--accent-hover);
-        transform: scale(1.02);
-      }
+    .result {
+      margin-top: 30px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
 
-      button[type="submit"]:active {
-        transform: scale(0.98);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Download Video Tiktok</h1>
-      <form id="tiktokForm">
-        <div class="input-wrapper">
-          <div class="input-with-button">
-            <input
-              type="text"
-              id="videoUrl"
-              placeholder="Masukkan URL VT"
-              required
-            />
-            <button type="button" id="pasteBtn">
-              <i class="fas fa-clipboard"></i>
-              Paste
-            </button>
-          </div>
-        </div>
-        <button type="submit">Download Video</button>
-      </form>
+    .result img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+
+    .result audio {
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .download-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .download-btn {
+      flex: 1;
+      padding: 10px;
+      background: #2d2a60;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .download-btn:hover {
+      background: #4441a3;
+    }
+
+    .error {
+      color: #ff6b6b;
+      margin-top: 10px;
+    }
+
+    .loader {
+      color: #aaa;
+      text-align: center;
+      font-style: italic;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>TikTok Downloader</h2>
+    <div class="input-wrapper">
+      <input type="text" id="url" placeholder="Paste TikTok video URL..." />
+      <button onclick="pasteUrl()" title="Paste">
+        <i class="fas fa-clipboard"></i>
+      </button>
     </div>
+    <button class="btn" onclick="fetchData()">Search</button>
+    <div class="result" id="result"></div>
+  </div>
 
-    <script>
-      document.getElementById("tiktokForm").addEventListener("submit", e => {
-        e.preventDefault();
-        const url = document.getElementById("videoUrl").value.trim();
-        if (!url) return alert("URL tidak boleh kosong.");
+  <script>
+    async function pasteUrl() {
+      try {
+        const text = await navigator.clipboard.readText();
+        document.getElementById("url").value = text;
+      } catch (err) {
+        alert("Clipboard access denied.");
+      }
+    }
 
-        const encodedUrl = encodeURIComponent(url);
-        const downloadUrl = `https://guss-suka-nete.glitch.me/api/download?url=${encodedUrl}`;
+    async function fetchData() {
+      const input = document.getElementById("url");
+      const result = document.getElementById("result");
+      const url = input.value.trim();
+      result.innerHTML = "";
+
+      if (!url) {
+        result.innerHTML = "<p class='error'>Please enter a valid TikTok video URL.</p>";
+        return;
+      }
+
+      result.innerHTML = "<p class='loader'>Fetching video, please wait...</p>";
+
+      try {
+        const res = await fetch("https://tiktok-api.koyeb.app/api/tiktok", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url })
+        });
+        const data = await res.json();
+
+        if (data.error) {
+          result.innerHTML = `<p class="error">Error: ${data.error}</p>`;
+          return;
+        }
+
+        result.innerHTML = `
+          <h3>${data.title}</h3>
+          <img src="${data.thumbnail}" alt="Video thumbnail">
+          <p><strong>Duration:</strong> ${data.duration}s</p>
+          <audio controls src="${data.audio}"></audio>
+          <h4>Download:</h4>
+          <div class="download-group">
+            <div class="download-btn" onclick="downloadFile('${data.wm_video}', 'video-wm.mp4')">With Watermark</div>
+            <div class="download-btn" onclick="downloadFile('${data.sd_video}', 'video-sd.mp4')">SD Video</div>
+            <div class="download-btn" onclick="downloadFile('${data.hd_video}', 'video-hd.mp4')">HD Video</div>
+            <div class="download-btn" onclick="downloadFile('${data.audio}', 'audio.mp3')">Audio</div>
+          </div>
+        `;
+      } catch (err) {
+        result.innerHTML = `<p class="error">Request failed: ${err.message}</p>`;
+      }
+    }
+
+    async function downloadFile(url, filename) {
+      try {
+        const res = await fetch(url);
+        const blob = await res.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
 
         const a = document.createElement("a");
-        a.href = downloadUrl;
-        a.download = "";
+        a.href = blobUrl;
+        a.download = filename;
         document.body.appendChild(a);
         a.click();
-        document.body.removeChild(a);
-      });
-
-      document.getElementById("pasteBtn").addEventListener("click", async () => {
-        try {
-          const text = await navigator.clipboard.readText();
-          document.getElementById("videoUrl").value = text;
-        } catch (err) {
-          alert("Gagal menempel dari clipboard.");
-        }
-      });
-
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker.register("sw.js").then(reg => {
-            console.log("Service worker registered.", reg);
-          });
-        });
+        a.remove();
+        URL.revokeObjectURL(blobUrl);
+      } catch (err) {
+        alert("Download failed: " + err.message);
       }
-    </script>
-  </body>
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.error('SW registration failed:', err));
+    }
+  </script>
+</body>
 </html>

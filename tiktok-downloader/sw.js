@@ -1,22 +1,18 @@
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open('vt-cache').then(cache => {
-      return cache.addAll([
-        '/',
-        'index.html',
-        'manifest.json',
-        'sw.js',
-        'https://oyy-gus.github.io/oyy-gus/image/download-icon-192.png',
-        'https://oyy-gus.github.io/oyy-gus/image/download-icon-512.png'
-      ]);
-    })
+const CACHE_NAME = 'tiktok-dl-cache-v1';
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/manifest.json'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
 });
 
-self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(response => {
-      return response || fetch(e.request);
-    })
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => response || fetch(event.request))
   );
 });
