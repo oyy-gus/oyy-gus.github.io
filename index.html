@@ -1,14 +1,294 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coming soon ...</title>
+  <meta charset="UTF-8" />
+  <meta name="apple-mobile-web-app-title" content="Guss">
+  <meta name="application-name" content="Guss">
+  <meta name="msapplication-TileColor" content="#5865f2">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guss</title>
+  <meta name="description" content="I created this website to show off some of my social media!" />
+  <meta property="og:site_name" content="oyy-gus" />
+  <meta property="og:title" content="Guss" />
+  <meta property="og:description" content="I created this website to show off some of my social media!" />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/97151655" />
+  <!--link rel="icon" href="https://avatars.githubusercontent.com/u/97151655" /-->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b423d98a73.js" crossorigin="anonymous"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #0f0c29;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding-bottom: 40px;
+      overflow-x: hidden;
+    }
+
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .profile-container {
+      text-align: center;
+      margin: 70px 20px 40px;
+    }
+
+    .profile-container img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-container img:hover {
+      transform: scale(1.07);
+    }
+
+    .profile-container h1 {
+      margin-top: 20px;
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #00fff0, #1c75bc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    .open-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: 0.25s ease;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.05);
+    }
+
+    .open-btn:hover {
+      transform: translateY(-4px);
+      background: rgba(28, 117, 188, 0.3);
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .overlay-content {
+      background: rgba(25, 25, 40, 0.95);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+      animation: fadeIn 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .overlay-content img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .overlay-content h2 a {
+      color: #00ffff;
+      font-size: 1.25rem;
+      text-decoration: none;
+    }
+
+    .overlay-content p {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      background: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .close-btn:hover {
+      background: #e60000;
+    }
+
+    footer {
+      margin-top: auto;
+      font-size: 12px;
+      text-align: center;
+      padding: 20px;
+      color: #aaa;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    footer a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-container h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
-Coming soon ...
+  <div id="tsparticles"></div>
+
+  <div class="profile-container">
+    <img src="https://avatars.githubusercontent.com/u/97151655" alt="Profile Picture" />
+    <h1>Guss</h1>
+  </div>
+
+  <div class="button-grid">
+    <button class="open-btn" onclick="openOverlay('tiktok')"><i class="fab fa-tiktok"></i> TikTok</button>
+    <button class="open-btn" onclick="openOverlay('instagram')"><i class="fab fa-instagram"></i> Instagram</button>
+    <button class="open-btn" onclick="openOverlay('github')"><i class="fab fa-github"></i> GitHub</button>
+    <button class="open-btn" onclick="openOverlay('discord')"><i class="fab fa-discord"></i> Discord</button>
+  </div>
+
+  <!-- Overlay Components -->
+  <div id="overlay-tiktok" class="overlay">
+    <div class="overlay-content">
+      <img src="https://avatars.githubusercontent.com/u/97151655" alt="TikTok" />
+      <h2><a href="https://www.tiktok.com/@oyy_gus" target="_blank">@oyy_gus</a></h2>
+      <p>Konten keren menantimu di TikTok!</p>
+      <button class="close-btn" onclick="closeOverlay('tiktok')">Tutup</button>
+    </div>
+  </div>
+
+  <div id="overlay-instagram" class="overlay">
+    <div class="overlay-content">
+      <img src="https://avatars.githubusercontent.com/u/97151655" alt="Instagram" />
+      <h2><a href="https://instagram.com/oyy_gus" target="_blank">oyy_gus</a></h2>
+      <p>Yuk, intip keseharian saya di Instagram!</p>
+      <button class="close-btn" onclick="closeOverlay('instagram')">Tutup</button>
+    </div>
+  </div>
+
+  <div id="overlay-github" class="overlay">
+    <div class="overlay-content">
+      <img src="https://avatars.githubusercontent.com/u/97151655" alt="GitHub" />
+      <h2><a href="https://github.com/oyy-gus" target="_blank">oyy-gus</a></h2>
+      <p>Lihat proyek-proyek menarik buatan saya!</p>
+      <button class="close-btn" onclick="closeOverlay('github')">Tutup</button>
+    </div>
+  </div>
+
+  <div id="overlay-discord" class="overlay">
+    <div class="overlay-content">
+      <img src="https://avatars.githubusercontent.com/u/97151655" alt="Discord" />
+      <h2><a href="https://discord.gg/xZRx7WyBuD" target="_blank">ANU</a></h2>
+      <p>Gabung server kami dan ngobrol bareng!</p>
+      <button class="close-btn" onclick="closeOverlay('discord')">Tutup</button>
+    </div>
+  </div>
+
+  <footer>
+    Dibuat oleh <a href="https://github.com/oyy-gus" target="_blank">oyy-gus</a> | 
+    <a href="https://github.com/oyy-gus/oyy-gus/fork" target="_blank">Fork this</a>
+  </footer>
+
+  <script>
+    function openOverlay(id) {
+      document.getElementById(`overlay-${id}`).style.display = 'flex';
+    }
+    function closeOverlay(id) {
+      document.getElementById(`overlay-${id}`).style.display = 'none';
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script>
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: true, zIndex: -1 },
+      particles: {
+        number: { value: 50 },
+        color: { value: "#00ffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: { min: 1, max: 3 } },
+        move: { enable: true, speed: 1, direction: "none", outModes: "bounce" },
+        links: {
+          enable: true,
+          color: "#00ffff",
+          distance: 120,
+          opacity: 0.25,
+          width: 1
+        }
+      },
+      background: { color: "#0f0c29" }
+    });
+  </script>
 </body>
 
 </html>
