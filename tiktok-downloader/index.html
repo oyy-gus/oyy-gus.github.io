@@ -1,222 +1,260 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="apple-mobile-web-app-title" content="Tiktok Downloader" />
-  <meta name="application-name" content="Tiktok Downloader" />
-  <meta name="msapplication-TileColor" content="#0f0c29" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TikTok Downloader</title>
-  <meta name="description" content="Download tiktok videos without watermark and ads!" />
-  <meta property="og:site_name" content="Tiktok Downloader" />
-  <meta property="og:title" content="Tiktok Downloader" />
-  <meta property="og:description" content="Download tiktok videos without watermark and ads!" />
-  <meta property="og:image" content="https://oyy-gus.github.io/image/download-icon-512.png" />
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#0f0c29" />
-  <link rel="icon" href="https://oyy-gus.github.io/image/download-icon-192.png" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    crossorigin="anonymous"
-  />
-  <style>
-    * { box-sizing: border-box; }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="apple-mobile-web-app-title" content="Tiktok Downloader" />
+        <meta name="application-name" content="Tiktok Downloader" />
+        <meta name="msapplication-TileColor" content="#0f0c29" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TikTok Downloader</title>
+        <meta
+            name="description"
+            content="Download tiktok videos without watermark and ads!"
+        />
+        <meta property="og:site_name" content="Tiktok Downloader" />
+        <meta property="og:title" content="Tiktok Downloader" />
+        <meta
+            property="og:description"
+            content="Download tiktok videos without watermark and ads!"
+        />
+        <meta
+            property="og:image"
+            content="https://oyy-gus.github.io/image/download-icon-512.png"
+        />
+        <link rel="manifest" href="manifest.json" />
+        <meta name="theme-color" content="#0f0c29" />
+        <link
+            rel="icon"
+            href="https://oyy-gus.github.io/image/download-icon-192.png"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+            crossorigin="anonymous"
+        />
+        <style>
+            * {
+                box-sizing: border-box;
+            }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0f0c29;
-      color: #e0e0e0;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 30px 15px;
-    }
+            body {
+                margin: 0;
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                background: #0f0c29;
+                color: #e0e0e0;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                min-height: 100vh;
+                padding: 30px 15px;
+            }
 
-    .container {
-      background: #1b183d;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-      width: 100%;
-      max-width: 600px;
-      animation: fadeIn 0.5s ease-in-out;
-    }
+            .container {
+                background: #1b183d;
+                padding: 30px;
+                border-radius: 16px;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+                width: 100%;
+                max-width: 600px;
+                animation: fadeIn 0.5s ease-in-out;
+            }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 24px;
-    }
+            h2 {
+                text-align: center;
+                margin-bottom: 25px;
+                font-size: 24px;
+            }
 
-    .input-wrapper {
-      position: relative;
-      margin-bottom: 20px;
-      -webkit-tap-highlight-color: transparent;
-    }
+            .input-wrapper {
+                position: relative;
+                margin-bottom: 20px;
+                -webkit-tap-highlight-color: transparent;
+            }
 
-    input[type="text"] {
-      width: 100%;
-      padding: 14px 48px 14px 16px;
-      border-radius: 10px;
-      border: 1px solid #3a365b;
-      background: #26234f;
-      color: #fff;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.3s ease;
-    }
+            input[type="text"] {
+                width: 100%;
+                padding: 14px 48px 14px 16px;
+                border-radius: 10px;
+                border: 1px solid #3a365b;
+                background: #26234f;
+                color: #fff;
+                font-size: 16px;
+                outline: none;
+                transition: border-color 0.3s ease;
+            }
 
-    input[type="text"]:focus {
-      border-color: #6f6cf1;
-    }
+            input[type="text"]:focus {
+                border-color: #6f6cf1;
+            }
 
-    .input-wrapper button {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: #bbb;
-      font-size: 18px;
-      cursor: pointer;
-      padding: 4px;
-      -webkit-tap-highlight-color: transparent;
-    }
+            .input-wrapper button {
+                position: absolute;
+                right: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                color: #bbb;
+                font-size: 18px;
+                cursor: pointer;
+                padding: 4px;
+                -webkit-tap-highlight-color: transparent;
+            }
 
-    .input-wrapper button:hover {
-      color: #6f6cf1;
-    }
+            .input-wrapper button:hover {
+                color: #6f6cf1;
+            }
 
-    .btn {
-      width: 100%;
-      padding: 14px;
-      background: #6f6cf1;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      color: white;
-      cursor: pointer;
-      margin-top: 8px;
-      transition: background 0.3s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
+            .btn {
+                width: 100%;
+                padding: 14px;
+                background: #6f6cf1;
+                border: none;
+                border-radius: 10px;
+                font-size: 16px;
+                color: white;
+                cursor: pointer;
+                margin-top: 8px;
+                transition: background 0.3s ease;
+                -webkit-tap-highlight-color: transparent;
+            }
 
-    .btn:hover {
-      background: #5b59cc;
-    }
+            .btn:hover {
+                background: #5b59cc;
+            }
 
-    .result {
-      margin-top: 30px;
-      animation: fadeIn 0.4s ease-in-out;
-    }
+            .result {
+                margin-top: 30px;
+                animation: fadeIn 0.4s ease-in-out;
+            }
 
-    .result img {
-      width: 100%;
-      border-radius: 10px;
-      margin-top: 12px;
-    }
+            .result img {
+                width: 100%;
+                border-radius: 10px;
+                margin-top: 12px;
+            }
 
-    .result audio {
-      width: 100%;
-      margin-top: 12px;
-    }
+            .result audio {
+                width: 100%;
+                margin-top: 12px;
+            }
 
-    .download-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 15px;
-    }
+            .download-group {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-top: 15px;
+            }
 
-    .download-btn {
-      flex: 1;
-      padding: 10px;
-      background: #2d2a60;
-      color: #fff;
-      text-align: center;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      text-decoration: none;
-      -webkit-tap-highlight-color: transparent;
-    }
+            .download-btn {
+                flex: 1;
+                padding: 10px;
+                background: #2d2a60;
+                color: #fff;
+                text-align: center;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background 0.3s ease;
+                text-decoration: none;
+                -webkit-tap-highlight-color: transparent;
+            }
 
-    .download-btn:hover {
-      background: #4441a3;
-    }
+            .download-btn:hover {
+                background: #4441a3;
+            }
 
-    .error {
-      color: #ff6b6b;
-      margin-top: 10px;
-    }
+            .result h3 {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                word-break: break-word;
+                white-space: normal;
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
 
-    .loader {
-      color: #aaa;
-      text-align: center;
-      font-style: italic;
-      margin-top: 20px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>TikTok Downloader</h2>
-    <div class="input-wrapper">
-      <input type="text" id="url" placeholder="Paste TikTok video URL..." />
-      <button onclick="pasteUrl()" title="Paste">
-        <i class="fas fa-clipboard"></i>
-      </button>
-    </div>
-    <button class="btn" onclick="fetchData()">Search</button>
-    <div class="result" id="result"></div>
-  </div>
+            .error {
+                color: #ff6b6b;
+                margin-top: 10px;
+            }
 
-  <script>
-    async function pasteUrl() {
-      try {
-        const text = await navigator.clipboard.readText();
-        document.getElementById("url").value = text;
-      } catch (err) {
-        alert("Clipboard access denied.");
-      }
-    }
+            .loader {
+                color: #aaa;
+                text-align: center;
+                font-style: italic;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>TikTok Downloader</h2>
+            <div class="input-wrapper">
+                <input
+                    type="text"
+                    id="url"
+                    placeholder="Paste TikTok video URL..."
+                />
+                <button onclick="pasteUrl()" title="Paste">
+                    <i class="fas fa-clipboard"></i>
+                </button>
+            </div>
+            <button class="btn" onclick="fetchData()">Search</button>
+            <div class="result" id="result"></div>
+        </div>
 
-    async function fetchData() {
-      const input = document.getElementById("url");
-      const result = document.getElementById("result");
-      const url = input.value.trim();
-      result.innerHTML = "";
+        <script>
+            async function pasteUrl() {
+                try {
+                    const text = await navigator.clipboard.readText();
+                    document.getElementById("url").value = text;
+                } catch (err) {
+                    alert("Clipboard access denied.");
+                }
+            }
 
-      if (!url) {
-        result.innerHTML = "<p class='error'>Please enter a valid TikTok video URL.</p>";
-        return;
-      }
+            async function fetchData() {
+                const input = document.getElementById("url");
+                const result = document.getElementById("result");
+                const url = input.value.trim();
+                result.innerHTML = "";
 
-      result.innerHTML = "<p class='loader'>Fetching video, please wait...</p>";
+                if (!url) {
+                    result.innerHTML =
+                        "<p class='error'>Please enter a valid TikTok video URL.</p>";
+                    return;
+                }
 
-      try {
-        const res = await fetch("https://tiktok-api.koyeb.app/api/tiktok", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url })
-        });
-        const data = await res.json();
+                result.innerHTML =
+                    "<p class='loader'>Fetching video, please wait...</p>";
 
-        if (data.error) {
-          result.innerHTML = `<p class="error">Error: ${data.error}</p>`;
-          return;
-        }
+                try {
+                    const res = await fetch(
+                        "https://tiktok-api.koyeb.app/api/tiktok",
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ url })
+                        }
+                    );
+                    const data = await res.json();
 
-        result.innerHTML = `
+                    if (data.error) {
+                        result.innerHTML = `<p class="error">Error: ${data.error}</p>`;
+                        return;
+                    }
+
+                    result.innerHTML = `
           <h3>${data.title}</h3>
           <img src="${data.thumbnail}" alt="Video thumbnail">
           <p><strong>Duration:</strong> ${data.duration}s</p>
@@ -229,34 +267,37 @@
             <div class="download-btn" onclick="downloadFile('${data.audio}', 'audio.mp3')">Audio</div>
           </div>
         `;
-      } catch (err) {
-        result.innerHTML = `<p class="error">Request failed: ${err.message}</p>`;
-      }
-    }
+                } catch (err) {
+                    result.innerHTML = `<p class="error">Request failed: ${err.message}</p>`;
+                }
+            }
 
-    async function downloadFile(url, filename) {
-      try {
-        const res = await fetch(url);
-        const blob = await res.blob();
-        const blobUrl = window.URL.createObjectURL(blob);
+            async function downloadFile(url, filename) {
+                try {
+                    const res = await fetch(url);
+                    const blob = await res.blob();
+                    const blobUrl = window.URL.createObjectURL(blob);
 
-        const a = document.createElement("a");
-        a.href = blobUrl;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(blobUrl);
-      } catch (err) {
-        alert("Download failed: " + err.message);
-      }
-    }
+                    const a = document.createElement("a");
+                    a.href = blobUrl;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(blobUrl);
+                } catch (err) {
+                    alert("Download failed: " + err.message);
+                }
+            }
 
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(() => console.log('Service Worker registered'))
-        .catch(err => console.error('SW registration failed:', err));
-    }
-  </script>
-</body>
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker
+                    .register("sw.js")
+                    .then(() => console.log("Service Worker registered"))
+                    .catch(err =>
+                        console.error("SW registration failed:", err)
+                    );
+            }
+        </script>
+    </body>
 </html>
