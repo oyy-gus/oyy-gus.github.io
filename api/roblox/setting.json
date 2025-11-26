@@ -1,4 +1,46 @@
 {
+    "Server": {
+        "MaxQueuePerPlayer": 3,
+        "MaxFavorites": 20,
+        "MaxRecentlyPlayed": 10,
+        "DefaultVolume": 0.5,
+        "FetchCooldown": 300,
+        "SkipVote": {
+            "SmallServer": 0.5,
+            "MediumServer": 0.6,
+            "LargeServer": 0.7,
+            "MinVotes": 2,
+            "MaxVotes": 15
+        }
+    },
+    "Messages": {
+        "Success": {
+            "SongAdded": "Song added to queue!",
+            "DefaultSongAdded": "Default song added to queue!",
+            "FavoriteAdded": "Added to favorites!",
+            "FavoriteRemoved": "Removed from favorites!",
+            "FavoriteQueued": "Favorite added to queue!",
+            "SongsRefreshed": "Songs refreshed!"
+        },
+        "Error": {
+            "InvalidSongID": "Invalid song ID!",
+            "SongAlreadyInQueue": "This song is already in the queue or currently playing!",
+            "MaxQueueReached": "Maximum 3 songs in queue per player!",
+            "SongNotFound": "Song not found or deleted!",
+            "InvalidID": "Invalid ID!",
+            "InvalidSong": "Invalid song!",
+            "AlreadyInFavorites": "Already in favorites!",
+            "MaxFavorites": "Maximum 20 favorites!",
+            "NoFavorites": "No favorites!",
+            "NotInFavorites": "Not found in favorites!",
+            "SongNotInFavorites": "Song not in favorites!",
+            "RefreshFailed": "Failed to refresh songs from API"
+        }
+    },
+    "DataStore": {
+        "Name": "UserMusicFavorites",
+        "KeyPrefix": "User_"
+    },
     "Colors": {
         "MainFrame": {
             "Background": { "R": 25, "G": 25, "B": 35 },
@@ -10,24 +52,150 @@
             "TitleText": { "R": 255, "G": 255, "B": 255 },
             "CloseButton": { "R": 255, "G": 100, "B": 100 }
         },
-        "NowPlaying": {
-            "AuthorText": { "R": 150, "G": 200, "B": 255 }
-        }
-    },
-    "Text": {
-        "Header": {
-            "Title": "🎵 My Music System"
+        "Tabs": {
+            "Active": { "R": 80, "G": 120, "B": 200 },
+            "Inactive": { "R": 50, "G": 50, "B": 65 },
+            "TextColor": { "R": 255, "G": 255, "B": 255 }
         },
-        "Labels": {
-            "Author": "Author: "
+        "NowPlaying": {
+            "Background": { "R": 35, "G": 35, "B": 50 },
+            "ThumbnailBg": { "R": 60, "G": 60, "B": 80 },
+            "SongNameText": { "R": 255, "G": 255, "B": 255 },
+            "RequesterText": { "R": 180, "G": 180, "B": 200 },
+            "AuthorText": { "R": 150, "G": 200, "B": 255 },
+            "DurationText": { "R": 150, "G": 150, "B": 170 },
+            "FavoriteButton": { "R": 255, "G": 180, "B": 50 }
+        },
+        "Volume": {
+            "LabelText": { "R": 200, "G": 200, "B": 220 },
+            "SliderBg": { "R": 60, "G": 60, "B": 80 },
+            "SliderFill": { "R": 80, "G": 120, "B": 200 },
+            "SliderButton": { "R": 255, "G": 255, "B": 255 }
+        },
+        "Controls": {
+            "SkipButton": { "R": 200, "G": 80, "B": 80 },
+            "DeafenButton": { "R": 100, "G": 100, "B": 120 },
+            "DeafenActive": { "R": 200, "G": 50, "B": 50 },
+            "AddButton": { "R": 80, "G": 160, "B": 80 },
+            "ButtonText": { "R": 255, "G": 255, "B": 255 }
+        },
+        "Input": {
+            "Background": { "R": 45, "G": 45, "B": 60 },
+            "TextColor": { "R": 255, "G": 255, "B": 255 }
+        },
+        "Queue": {
+            "Background": { "R": 30, "G": 30, "B": 45 },
+            "ItemBg": { "R": 45, "G": 45, "B": 60 },
+            "TitleText": { "R": 255, "G": 255, "B": 255 },
+            "SongText": { "R": 255, "G": 255, "B": 255 },
+            "RequesterText": { "R": 150, "G": 150, "B": 170 },
+            "AuthorText": { "R": 150, "G": 200, "B": 255 },
+            "ScrollBar": { "R": 80, "G": 80, "B": 100 }
+        },
+        "Songs": {
+            "Background": { "R": 30, "G": 30, "B": 45 },
+            "ItemBg": { "R": 45, "G": 45, "B": 60 },
+            "TitleText": { "R": 255, "G": 255, "B": 255 },
+            "SongText": { "R": 255, "G": 255, "B": 255 },
+            "AuthorText": { "R": 150, "G": 200, "B": 255 },
+            "IDText": { "R": 150, "G": 150, "B": 170 },
+            "PlayButton": { "R": 80, "G": 160, "B": 80 },
+            "PlayButtonText": { "R": 255, "G": 255, "B": 255 },
+            "ScrollBar": { "R": 80, "G": 80, "B": 100 }
+        },
+        "Favorites": {
+            "Background": { "R": 30, "G": 30, "B": 45 },
+            "ItemBg": { "R": 45, "G": 45, "B": 60 },
+            "ThumbnailBg": { "R": 60, "G": 60, "B": 80 },
+            "TitleText": { "R": 255, "G": 255, "B": 255 },
+            "SongText": { "R": 255, "G": 255, "B": 255 },
+            "IDText": { "R": 150, "G": 150, "B": 170 },
+            "PlayButton": { "R": 80, "G": 160, "B": 80 },
+            "RemoveButton": { "R": 200, "G": 80, "B": 80 },
+            "ButtonText": { "R": 255, "G": 255, "B": 255 },
+            "ScrollBar": { "R": 80, "G": 80, "B": 100 }
+        },
+        "ToggleButton": {
+            "Background": { "R": 80, "G": 120, "B": 200 },
+            "TextColor": { "R": 255, "G": 255, "B": 255 },
+            "Stroke": { "R": 100, "G": 140, "B": 220 }
+        },
+        "Notifications": {
+            "DeafenIndicatorBg": { "R": 200, "G": 50, "B": 50 },
+            "DeafenIndicatorText": { "R": 255, "G": 255, "B": 255 }
         }
     },
     "Layout": {
         "MainFrameCorner": 12,
-        "ButtonCorner": 8
+        "ButtonCorner": 8,
+        "SmallCorner": 6,
+        "ScrollBarThickness": 6,
+        "ScrollBarThicknessMobile": 4,
+        "ItemPadding": 5,
+        "RoundButton": 0.5,
+        "ToggleButtonStroke": 2,
+        "ToggleButton": {
+            "Width": 50,
+            "Height": 50,
+            "OffsetX": 10,
+            "AnchorY": 1,
+            "OffsetY": -70,
+            "TextSize": 24
+        }
+    },
+    "Text": {
+        "Header": {
+            "Title": "🎵 Music System",
+            "CloseButton": "✕"
+        },
+        "Tabs": {
+            "Player": "🎧 Player",
+            "Songs": "📀 Songs",
+            "Favorites": "⭐ Favorites"
+        },
+        "Labels": {
+            "NoSongPlaying": "No song playing",
+            "Duration": "Duration: ",
+            "DurationFormat": "%s / %s",
+            "VolumeFormat": "Vol: %d%%",
+            "SongQueue": "📋 Song Queue",
+            "DefaultSongs": "🎵 Default Songs",
+            "MyFavorites": "⭐ My Favorites",
+            "Unknown": "Unknown",
+            "SongID": "ID: ",
+            "QueueItemFormat": "%d. %s",
+            "QueueRequester": "Requested by: ",
+            "RequestedBy": "Requested by: ",
+            "Author": "Author: "
+        },
+        "PlayerButtons": {
+            "VoteSkip": "⏭️ Vote Skip",
+            "VoteSkipFormat": "⏭️ Vote Skip (%d/%d)",
+            "Deafen": "🔊 Deafen",
+            "Unmute": "🔇 Unmute",
+            "AddToQueue": "➕ Add",
+            "AddFavorite": "⭐"
+        },
+        "SongButtons": {
+            "Play": "▶️ Play",
+            "PlayIcon": "▶️",
+            "Remove": "✕"
+        },
+        "Input": {
+            "SongIDPlaceholder": "Enter Roblox Song ID..."
+        },
+        "ToggleButton": {
+            "Text": "🎵"
+        },
+        "Notifications": {
+            "SuccessTitle": "Success",
+            "ErrorTitle": "Error",
+            "DeafenIndicator": "🔇 Music Muted"
+        }
     },
     "Assets": {
-        "DefaultThumbnailText": "🎵",
-        "UseTextThumbnail": true
+        "DefaultThumbnail": "rbxassetid://6034509993",
+        "UseTextThumbnail": true,
+        "DefaultThumbnailText": "🎵"
     }
 }
