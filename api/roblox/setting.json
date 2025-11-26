@@ -1,1 +1,33 @@
-{}
+{
+    "Colors": {
+        "MainFrame": {
+            "Background": { "R": 25, "G": 25, "B": 35 },
+            "GradientStart": { "R": 35, "G": 35, "B": 50 },
+            "GradientEnd": { "R": 20, "G": 20, "B": 30 }
+        },
+        "Header": {
+            "Background": { "R": 40, "G": 40, "B": 55 },
+            "TitleText": { "R": 255, "G": 255, "B": 255 },
+            "CloseButton": { "R": 255, "G": 100, "B": 100 }
+        },
+        "NowPlaying": {
+            "AuthorText": { "R": 150, "G": 200, "B": 255 }
+        }
+    },
+    "Text": {
+        "Header": {
+            "Title": "🎵 My Music System"
+        },
+        "Labels": {
+            "Author": "Author: "
+        }
+    },
+    "Layout": {
+        "MainFrameCorner": 12,
+        "ButtonCorner": 8
+    },
+    "Assets": {
+        "DefaultThumbnailText": "🎵",
+        "UseTextThumbnail": true
+    }
+}
