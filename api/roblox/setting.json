@@ -43,13 +43,17 @@
     },
     "Text": {
         "ToggleButton": {
-            "Text": "Music"
+            "Text": "Menu"
         },
         "Header": {
             "Title": "🎵 Music System",
             "CloseButton": "✖"
         },
-        "Tabs": {
+        "MainTabs": {
+            "Music": "🎵 Music",
+            "Players": "👥 Players"
+        },
+        "SubTabs": {
             "Player": "🎵 Player",
             "Songs": "📂 Songs",
             "Favorites": "⭐ Favorites"
@@ -81,7 +85,8 @@
             "QueueItemFormat": "%d. %s",
             "QueueRequester": "By: ",
             "Unknown": "Unknown",
-            "Author": "Author: "
+            "Author": "Author: ",
+            "PlayersOnline": "👥 %d Players Online"
         },
         "Input": {
             "SongIDPlaceholder": "Enter Song ID..."
@@ -94,86 +99,104 @@
     },
     "Colors": {
         "MainFrame": {
-            "Background": { "R": 25, "G": 25, "B": 35 },
-            "GradientStart": { "R": 35, "G": 35, "B": 50 },
-            "GradientEnd": { "R": 25, "G": 25, "B": 35 }
+            "Background": {"R": 25, "G": 25, "B": 35},
+            "GradientStart": {"R": 35, "G": 35, "B": 50},
+            "GradientEnd": {"R": 25, "G": 25, "B": 35}
         },
         "Header": {
-            "Background": { "R": 45, "G": 45, "B": 60 },
-            "TitleText": { "R": 255, "G": 255, "B": 255 },
-            "CloseButton": { "R": 255, "G": 255, "B": 255 }
+            "Background": {"R": 40, "G": 40, "B": 55},
+            "TitleText": {"R": 255, "G": 255, "B": 255},
+            "CloseButton": {"R": 255, "G": 255, "B": 255}
         },
-        "Tabs": {
-            "Active": { "R": 100, "G": 200, "B": 255 },
-            "Inactive": { "R": 60, "G": 60, "B": 70 },
-            "TextColor": { "R": 255, "G": 255, "B": 255 }
+        "MainTabs": {
+            "ActiveText": {"R": 100, "G": 200, "B": 255},
+            "InactiveText": {"R": 150, "G": 150, "B": 160},
+            "UnderlineActive": {"R": 100, "G": 200, "B": 255},
+            "Divider": {"R": 80, "G": 80, "B": 100}
+        },
+        "SubTabs": {
+            "Active": {"R": 80, "G": 160, "B": 220},
+            "Inactive": {"R": 55, "G": 55, "B": 65},
+            "TextColor": {"R": 255, "G": 255, "B": 255}
         },
         "NowPlaying": {
-            "Background": { "R": 35, "G": 35, "B": 45 },
-            "ThumbnailBg": { "R": 20, "G": 20, "B": 30 },
-            "SongNameText": { "R": 255, "G": 255, "B": 255 },
-            "RequesterText": { "R": 200, "G": 200, "B": 200 },
-            "AuthorText": { "R": 150, "G": 200, "B": 255 },
-            "DurationText": { "R": 180, "G": 180, "B": 180 },
-            "FavoriteButton": { "R": 255, "G": 200, "B": 50 }
+            "Background": {"R": 35, "G": 35, "B": 45},
+            "ThumbnailBg": {"R": 20, "G": 20, "B": 30},
+            "SongNameText": {"R": 255, "G": 255, "B": 255},
+            "RequesterText": {"R": 200, "G": 200, "B": 200},
+            "AuthorText": {"R": 150, "G": 200, "B": 255},
+            "DurationText": {"R": 180, "G": 180, "B": 180},
+            "FavoriteButton": {"R": 255, "G": 200, "B": 50}
         },
         "Volume": {
-            "LabelText": { "R": 255, "G": 255, "B": 255 },
-            "SliderBg": { "R": 60, "G": 60, "B": 70 },
-            "SliderFill": { "R": 100, "G": 200, "B": 255 },
-            "SliderButton": { "R": 255, "G": 255, "B": 255 }
+            "LabelText": {"R": 255, "G": 255, "B": 255},
+            "SliderBg": {"R": 60, "G": 60, "B": 70},
+            "SliderFill": {"R": 100, "G": 200, "B": 255},
+            "SliderButton": {"R": 255, "G": 255, "B": 255}
         },
         "Controls": {
-            "SkipButton": { "R": 200, "G": 50, "B": 50 },
-            "DeafenButton": { "R": 70, "G": 70, "B": 80 },
-            "DeafenActive": { "R": 200, "G": 50, "B": 50 },
-            "AddButton": { "R": 50, "G": 150, "B": 50 },
-            "ButtonText": { "R": 255, "G": 255, "B": 255 }
+            "SkipButton": {"R": 200, "G": 50, "B": 50},
+            "DeafenButton": {"R": 70, "G": 70, "B": 80},
+            "DeafenActive": {"R": 200, "G": 50, "B": 50},
+            "AddButton": {"R": 50, "G": 150, "B": 50},
+            "ButtonText": {"R": 255, "G": 255, "B": 255}
         },
         "Input": {
-            "Background": { "R": 40, "G": 40, "B": 50 },
-            "TextColor": { "R": 255, "G": 255, "B": 255 }
+            "Background": {"R": 40, "G": 40, "B": 50},
+            "TextColor": {"R": 255, "G": 255, "B": 255},
+            "PlaceholderColor": {"R": 150, "G": 150, "B": 150}
         },
         "Queue": {
-            "Background": { "R": 30, "G": 30, "B": 40 },
-            "ItemBg": { "R": 40, "G": 40, "B": 50 },
-            "TitleText": { "R": 255, "G": 255, "B": 255 },
-            "SongText": { "R": 255, "G": 255, "B": 255 },
-            "RequesterText": { "R": 180, "G": 180, "B": 180 },
-            "AuthorText": { "R": 150, "G": 200, "B": 255 },
-            "ScrollBar": { "R": 100, "G": 100, "B": 100 }
+            "Background": {"R": 30, "G": 30, "B": 40},
+            "ItemBg": {"R": 40, "G": 40, "B": 50},
+            "TitleText": {"R": 255, "G": 255, "B": 255},
+            "SongText": {"R": 255, "G": 255, "B": 255},
+            "RequesterText": {"R": 180, "G": 180, "B": 180},
+            "AuthorText": {"R": 150, "G": 200, "B": 255},
+            "ScrollBar": {"R": 100, "G": 100, "B": 100}
         },
         "Songs": {
-            "Background": { "R": 30, "G": 30, "B": 40 },
-            "ItemBg": { "R": 40, "G": 40, "B": 50 },
-            "TitleText": { "R": 255, "G": 255, "B": 255 },
-            "SongText": { "R": 255, "G": 255, "B": 255 },
-            "AuthorText": { "R": 150, "G": 200, "B": 255 },
-            "IDText": { "R": 150, "G": 150, "B": 150 },
-            "PlayButton": { "R": 50, "G": 150, "B": 50 },
-            "PlayButtonText": { "R": 255, "G": 255, "B": 255 },
-            "ScrollBar": { "R": 100, "G": 100, "B": 100 }
+            "Background": {"R": 30, "G": 30, "B": 40},
+            "ItemBg": {"R": 40, "G": 40, "B": 50},
+            "TitleText": {"R": 255, "G": 255, "B": 255},
+            "SongText": {"R": 255, "G": 255, "B": 255},
+            "AuthorText": {"R": 150, "G": 200, "B": 255},
+            "IDText": {"R": 150, "G": 150, "B": 150},
+            "PlayButton": {"R": 50, "G": 150, "B": 50},
+            "PlayButtonText": {"R": 255, "G": 255, "B": 255},
+            "ScrollBar": {"R": 100, "G": 100, "B": 100}
         },
         "Favorites": {
-            "Background": { "R": 30, "G": 30, "B": 40 },
-            "ItemBg": { "R": 40, "G": 40, "B": 50 },
-            "ThumbnailBg": { "R": 30, "G": 30, "B": 40 },
-            "TitleText": { "R": 255, "G": 255, "B": 255 },
-            "SongText": { "R": 255, "G": 255, "B": 255 },
-            "IDText": { "R": 150, "G": 150, "B": 150 },
-            "PlayButton": { "R": 50, "G": 150, "B": 50 },
-            "RemoveButton": { "R": 200, "G": 50, "B": 50 },
-            "ButtonText": { "R": 255, "G": 255, "B": 255 },
-            "ScrollBar": { "R": 100, "G": 100, "B": 100 }
+            "Background": {"R": 30, "G": 30, "B": 40},
+            "ItemBg": {"R": 40, "G": 40, "B": 50},
+            "ThumbnailBg": {"R": 30, "G": 30, "B": 40},
+            "TitleText": {"R": 255, "G": 255, "B": 255},
+            "SongText": {"R": 255, "G": 255, "B": 255},
+            "AuthorText": {"R": 150, "G": 200, "B": 255},
+            "IDText": {"R": 150, "G": 150, "B": 150},
+            "PlayButton": {"R": 50, "G": 150, "B": 50},
+            "RemoveButton": {"R": 200, "G": 50, "B": 50},
+            "ButtonText": {"R": 255, "G": 255, "B": 255},
+            "ScrollBar": {"R": 100, "G": 100, "B": 100}
+        },
+        "PlayerList": {
+            "Background": {"R": 30, "G": 30, "B": 40},
+            "ItemBg": {"R": 40, "G": 40, "B": 50},
+            "ItemHover": {"R": 50, "G": 50, "B": 65},
+            "NameText": {"R": 255, "G": 255, "B": 255},
+            "UsernameText": {"R": 140, "G": 140, "B": 150},
+            "OnlineIndicator": {"R": 50, "G": 200, "B": 50},
+            "CountText": {"R": 180, "G": 180, "B": 190},
+            "ScrollBar": {"R": 100, "G": 100, "B": 100}
         },
         "ToggleButton": {
-            "Background": { "R": 30, "G": 30, "B": 40 },
-            "TextColor": { "R": 230, "G": 230, "B": 230 },
-            "Stroke": { "R": 50, "G": 50, "B": 60 }
+            "Background": {"R": 35, "G": 35, "B": 50},
+            "TextColor": {"R": 255, "G": 255, "B": 255},
+            "Stroke": {"R": 60, "G": 60, "B": 80}
         },
         "Notifications": {
-            "DeafenIndicatorBg": { "R": 200, "G": 50, "B": 50 },
-            "DeafenIndicatorText": { "R": 255, "G": 255, "B": 255 }
+            "DeafenIndicatorBg": {"R": 200, "G": 50, "B": 50},
+            "DeafenIndicatorText": {"R": 255, "G": 255, "B": 255}
         }
     },
     "Layout": {
@@ -187,17 +210,215 @@
         "ScrollBarThickness": 4,
         "ScrollBarThicknessMobile": 6,
         "ToggleButton": {
-            "Width": 40,
-            "Height": 40,
+            "Width": 50,
+            "Height": 50,
             "OffsetX": 10,
             "AnchorY": 0.5,
-            "OffsetY": -20,
-            "TextSize": 12
+            "OffsetY": 0,
+            "TextSize": 11
+        },
+        "Scaling": {
+            "Mobile": {
+                "Portrait": {
+                    "MenuWidthPercent": 0.92,
+                    "MenuHeightPercent": 0.70,
+                    "MinWidth": 280,
+                    "MaxWidth": 420,
+                    "MinHeight": 380,
+                    "MaxHeight": 600
+                },
+                "Landscape": {
+                    "MenuWidthPercent": 0.55,
+                    "MenuHeightPercent": 0.85,
+                    "MinWidth": 280,
+                    "MaxWidth": 520,
+                    "MinHeight": 200,
+                    "MaxHeight": 380
+                }
+            },
+            "Desktop": {
+                "Small": {
+                    "MaxScreenWidth": 1280,
+                    "MenuWidthPercent": 0.42,
+                    "MenuHeightPercent": 0.80,
+                    "MinWidth": 380,
+                    "MaxWidth": 480,
+                    "MinHeight": 450,
+                    "MaxHeight": 550
+                },
+                "Medium": {
+                    "MaxScreenWidth": 1600,
+                    "MenuWidthPercent": 0.38,
+                    "MenuHeightPercent": 0.78,
+                    "MinWidth": 420,
+                    "MaxWidth": 520,
+                    "MinHeight": 500,
+                    "MaxHeight": 620
+                },
+                "Large": {
+                    "MaxScreenWidth": 1920,
+                    "MenuWidthPercent": 0.35,
+                    "MenuHeightPercent": 0.75,
+                    "MinWidth": 480,
+                    "MaxWidth": 560,
+                    "MinHeight": 550,
+                    "MaxHeight": 680
+                },
+                "UltraWide": {
+                    "MaxScreenWidth": 9999,
+                    "MenuWidthPercent": 0.30,
+                    "MenuHeightPercent": 0.72,
+                    "MinWidth": 520,
+                    "MaxWidth": 640,
+                    "MinHeight": 600,
+                    "MaxHeight": 750
+                }
+            },
+            "SafeArea": {
+                "Mobile": {
+                    "Portrait": {
+                        "Top": 44,
+                        "Bottom": 34,
+                        "Left": 10,
+                        "Right": 10
+                    },
+                    "Landscape": {
+                        "Top": 10,
+                        "Bottom": 10,
+                        "Left": 44,
+                        "Right": 44
+                    },
+                    "TallAspect": {
+                        "Portrait": {
+                            "Top": 54,
+                            "Bottom": 44,
+                            "Left": 10,
+                            "Right": 10
+                        },
+                        "Landscape": {
+                            "Top": 10,
+                            "Bottom": 10,
+                            "Left": 54,
+                            "Right": 54
+                        }
+                    }
+                },
+                "Desktop": {
+                    "Top": 10,
+                    "Bottom": 10,
+                    "Left": 10,
+                    "Right": 10
+                }
+            }
+        },
+        "TextSizes": {
+            "SongName": {"Base": 15, "Min": 11, "Max": 18},
+            "Author": {"Base": 12, "Min": 9, "Max": 14},
+            "Requester": {"Base": 11, "Min": 9, "Max": 13},
+            "Duration": {"Base": 11, "Min": 9, "Max": 13},
+            "Volume": {"Base": 12, "Min": 9, "Max": 14},
+            "Button": {"Base": 13, "Min": 10, "Max": 15},
+            "SubTab": {"Base": 14, "Min": 10, "Max": 16},
+            "Label": {"Base": 13, "Min": 10, "Max": 15},
+            "QueueSong": {"Base": 13, "Min": 10, "Max": 15},
+            "QueueAuthor": {"Base": 11, "Min": 9, "Max": 13},
+            "QueueRequester": {"Base": 10, "Min": 8, "Max": 12},
+            "SongListName": {"Base": 13, "Min": 10, "Max": 15},
+            "SongListAuthor": {"Base": 11, "Min": 9, "Max": 13},
+            "SongListID": {"Base": 10, "Min": 8, "Max": 12},
+            "PlayerCount": {"Base": 15, "Min": 12, "Max": 18},
+            "PlayerDisplayName": {"Base": 15, "Min": 11, "Max": 17},
+            "PlayerUsername": {"Base": 12, "Min": 9, "Max": 14},
+            "TabText": {"Base": 18, "Min": 14, "Max": 20},
+            "TabTextMobileLandscape": {"Base": 15, "Min": 12, "Max": 17}
+        },
+        "ElementSizes": {
+            "Header": {
+                "Desktop": {"Base": 52, "Min": 48, "Max": 60},
+                "MobilePortrait": {"HeightPercent": 0.065, "Min": 45, "Max": 58},
+                "MobileLandscape": {"HeightPercent": 0.12, "Min": 38, "Max": 48}
+            },
+            "SubTab": {
+                "Desktop": {"Base": 38, "Min": 32, "Max": 46},
+                "MobileLandscape": {"Base": 32, "Min": 26, "Max": 40}
+            },
+            "NowPlaying": {
+                "Desktop": {"Base": 145, "Min": 125, "Max": 165},
+                "MobileLandscape": {"Base": 100, "Min": 85, "Max": 115}
+            },
+            "Thumbnail": {
+                "Desktop": {"Base": 85, "Min": 70, "Max": 100},
+                "MobileLandscape": {"Base": 48, "Min": 40, "Max": 58}
+            },
+            "Controls": {
+                "Desktop": {"Base": 36, "Min": 32, "Max": 42},
+                "MobileLandscape": {"Base": 30, "Min": 26, "Max": 36}
+            },
+            "QueueSection": {
+                "Desktop": {"Base": 115, "Min": 95, "Max": 135},
+                "MobileLandscape": {"Base": 90, "Min": 75, "Max": 105}
+            },
+            "QueueItem": {
+                "Desktop": {"Base": 58, "Min": 50, "Max": 68},
+                "MobileLandscape": {"Base": 48, "Min": 42, "Max": 56}
+            },
+            "SongItem": {
+                "Desktop": {"Base": 62, "Min": 54, "Max": 72},
+                "MobileLandscape": {"Base": 52, "Min": 46, "Max": 60}
+            },
+            "FavoriteItem": {
+                "Desktop": {"Base": 62, "Min": 54, "Max": 72},
+                "MobileLandscape": {"Base": 52, "Min": 46, "Max": 60}
+            },
+            "FavoriteThumbnail": {
+                "Desktop": {"Base": 48, "Min": 40, "Max": 56},
+                "MobileLandscape": {"Base": 38, "Min": 32, "Max": 46}
+            },
+            "PlayerItem": {
+                "Desktop": {"Base": 60, "Min": 52, "Max": 70},
+                "MobileLandscape": {"Base": 50, "Min": 44, "Max": 58}
+            },
+            "OnlineIndicator": {
+                "Desktop": {"Base": 12, "Min": 10, "Max": 14},
+                "MobileLandscape": {"Base": 10, "Min": 8, "Max": 12}
+            },
+            "VolumeButton": {
+                "Size": 16,
+                "SliderHeight": 6
+            },
+            "FavoriteActionButton": {
+                "Size": 26
+            },
+            "AddFavoriteButton": {
+                "Size": 26
+            },
+            "PlayButton": {
+                "Width": 55
+            }
+        },
+        "ScaleFactors": {
+            "MobileLandscape": 0.88,
+            "MobilePortrait": 0.95,
+            "Desktop": 1.0
         }
     },
     "Assets": {
         "DefaultThumbnail": "rbxassetid://79841488741754",
         "DefaultThumbnailText": "🎵",
         "UseTextThumbnail": false
+    },
+    "Animation": {
+        "MenuToggle": {
+            "Duration": 0.4,
+            "EasingStyle": "Quint"
+        },
+        "Hover": {
+            "Duration": 0.15,
+            "EasingStyle": "Quad"
+        },
+        "TabSwitch": {
+            "Duration": 0.2,
+            "EasingStyle": "Quad"
+        }
     }
 }
