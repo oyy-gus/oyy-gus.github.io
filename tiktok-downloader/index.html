@@ -1,304 +1,857 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="apple-mobile-web-app-title" content="Tiktok Downloader" />
-        <meta name="application-name" content="Tiktok Downloader" />
-        <meta name="msapplication-TileColor" content="#0f0c29" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>TikTok Downloader</title>
-        <meta name="keywords" content="Guss, tiktok, tiktok downloader">
-        <meta
-            name="description"
-            content="Download tiktok videos without watermark and ads!"
-        />
-        <meta property="og:site_name" content="Tiktok Downloader" />
-        <meta property="og:title" content="Tiktok Downloader" />
-        <meta
-            property="og:description"
-            content="Download tiktok videos without watermark and ads!"
-        />
-        <meta
-            property="og:image"
-            content="https://oyy-gus.github.io/image/download-icon-512.png"
-        />
-        <link rel="manifest" href="manifest.json" />
-        <meta name="theme-color" content="#0f0c29" />
-        <link
-            rel="icon"
-            href="https://oyy-gus.github.io/image/download-icon-192.png"
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-            crossorigin="anonymous"
-        />
-        <style>
-            * {
-                box-sizing: border-box;
-            }
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-title" content="TikTok Downloader" />
+    <meta name="application-name" content="TikTok Downloader" />
+    <meta name="msapplication-TileColor" content="#0f0c29" />
+    <title>TikTok Downloader</title>
+    <meta name="keywords" content="Guss, tiktok, tiktok downloader, no watermark" />
+    <meta name="description" content="Download TikTok videos without watermark - Fast & Free!" />
+    <meta property="og:site_name" content="TikTok Downloader" />
+    <meta property="og:title" content="TikTok Downloader - No Watermark" />
+    <meta property="og:description" content="Download TikTok videos without watermark and ads!" />
+    <meta property="og:image" content="https://oyy-gus.github.io/image/download-icon-512.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#0f0c29" />
+    <link rel="icon" href="https://oyy-gus.github.io/image/download-icon-192.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-            body {
-                margin: 0;
-                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-                background: #0f0c29;
-                color: #e0e0e0;
-                display: flex;
-                justify-content: center;
-                align-items: flex-start;
-                min-height: 100vh;
-                padding: 30px 15px;
-            }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            background-attachment: fixed;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px 15px 40px;
+        }
 
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            animation: move 25s infinite;
+            border-radius: 50%;
+        }
+
+        .bg-animation span:nth-child(1) { left: 10%; animation-delay: 0s; width: 80px; height: 80px; }
+        .bg-animation span:nth-child(2) { left: 20%; animation-delay: 2s; width: 20px; height: 20px; }
+        .bg-animation span:nth-child(3) { left: 35%; animation-delay: 4s; width: 60px; height: 60px; }
+        .bg-animation span:nth-child(4) { left: 50%; animation-delay: 0s; width: 40px; height: 40px; }
+        .bg-animation span:nth-child(5) { left: 65%; animation-delay: 3s; width: 30px; height: 30px; }
+        .bg-animation span:nth-child(6) { left: 80%; animation-delay: 5s; width: 50px; height: 50px; }
+        .bg-animation span:nth-child(7) { left: 90%; animation-delay: 1s; width: 25px; height: 25px; }
+
+        @keyframes move {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .container {
+            background: rgba(27, 24, 61, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 35px 30px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            animation: slideUp 0.6s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header .logo {
+            font-size: 50px;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff6b9d, #c44cff, #6f6cf1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #8a87a8;
+            font-size: 14px;
+        }
+
+        /* Input Section */
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 16px 50px 16px 20px;
+            border-radius: 14px;
+            border: 2px solid rgba(111, 108, 241, 0.3);
+            background: rgba(38, 35, 79, 0.8);
+            color: #fff;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #6f6cf1;
+            box-shadow: 0 0 20px rgba(111, 108, 241, 0.3);
+        }
+
+        input[type="text"]::placeholder {
+            color: #6a678a;
+        }
+
+        .paste-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #8a87a8;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 8px;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .paste-btn:hover {
+            color: #6f6cf1;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .search-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #6f6cf1 0%, #c44cff 100%);
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(111, 108, 241, 0.4);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
+        }
+
+        .search-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Result Section */
+        .result {
+            margin-top: 25px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Video Card */
+        .video-card {
+            background: rgba(38, 35, 79, 0.6);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .thumbnail-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9/10;
+            overflow: hidden;
+        }
+
+        .thumbnail-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .thumbnail-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .duration-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        /* Author Section */
+        .author-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #6f6cf1;
+        }
+
+        .author-info h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .author-info span {
+            font-size: 13px;
+            color: #8a87a8;
+        }
+
+        /* Title */
+        .video-title {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #c9c7e0;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            background: rgba(111, 108, 241, 0.15);
+            padding: 12px 8px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(111, 108, 241, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .stat-item i {
+            font-size: 16px;
+            color: #6f6cf1;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .stat-item span {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* Music Section */
+        .music-section {
+            background: rgba(196, 76, 255, 0.1);
+            padding: 15px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .music-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #c44cff, #6f6cf1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .music-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .music-info h5 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .music-info span {
+            font-size: 12px;
+            color: #8a87a8;
+        }
+
+        /* Audio Player */
+        audio {
+            width: 100%;
+            height: 45px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background: rgba(38, 35, 79, 0.8);
+        }
+
+        /* Download Section */
+        .download-section h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-section h4 i {
+            color: #6f6cf1;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .download-btn {
+            padding: 14px 12px;
+            background: rgba(111, 108, 241, 0.15);
+            color: #fff;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: 1px solid rgba(111, 108, 241, 0.3);
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .download-btn i {
+            font-size: 20px;
+            color: #6f6cf1;
+        }
+
+        .download-btn:hover {
+            background: rgba(111, 108, 241, 0.3);
+            border-color: #6f6cf1;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(111, 108, 241, 0.2);
+        }
+
+        .download-btn.hd {
+            background: linear-gradient(135deg, rgba(111, 108, 241, 0.3), rgba(196, 76, 255, 0.3));
+            border-color: #c44cff;
+        }
+
+        .download-btn.hd:hover {
+            background: linear-gradient(135deg, rgba(111, 108, 241, 0.5), rgba(196, 76, 255, 0.5));
+        }
+
+        .download-btn.audio-btn {
+            grid-column: span 2;
+            background: rgba(255, 107, 157, 0.15);
+            border-color: rgba(255, 107, 157, 0.3);
+        }
+
+        .download-btn.audio-btn i {
+            color: #ff6b9d;
+        }
+
+        .download-btn.audio-btn:hover {
+            background: rgba(255, 107, 157, 0.3);
+            border-color: #ff6b9d;
+        }
+
+        /* Error Message */
+        .error-msg {
+            background: rgba(255, 107, 129, 0.15);
+            border: 1px solid rgba(255, 107, 129, 0.3);
+            color: #ff6b81;
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .error-msg i {
+            font-size: 20px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(40, 167, 69, 0.95);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.error {
+            background: rgba(220, 53, 69, 0.95);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer p {
+            font-size: 12px;
+            color: #6a678a;
+        }
+
+        .footer a {
+            color: #6f6cf1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #c44cff;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
             .container {
-                background: #1b183d;
-                padding: 30px;
-                border-radius: 16px;
-                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-                width: 100%;
-                max-width: 600px;
-                animation: fadeIn 0.5s ease-in-out;
+                padding: 25px 20px;
             }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .download-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .download-btn.audio-btn {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-            @keyframes fadeIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            h2 {
-                text-align: center;
-                margin-bottom: 25px;
-                font-size: 24px;
-            }
-
-            .input-wrapper {
-                position: relative;
-                margin-bottom: 20px;
-                -webkit-tap-highlight-color: transparent;
-            }
-
-            input[type="text"] {
-                width: 100%;
-                padding: 14px 48px 14px 16px;
-                border-radius: 10px;
-                border: 1px solid #3a365b;
-                background: #26234f;
-                color: #fff;
-                font-size: 16px;
-                outline: none;
-                transition: border-color 0.3s ease;
-            }
-
-            input[type="text"]:focus {
-                border-color: #6f6cf1;
-            }
-
-            .input-wrapper button {
-                position: absolute;
-                right: 12px;
-                top: 50%;
-                transform: translateY(-50%);
-                background: none;
-                border: none;
-                color: #bbb;
-                font-size: 18px;
-                cursor: pointer;
-                padding: 4px;
-                -webkit-tap-highlight-color: transparent;
-            }
-
-            .input-wrapper button:hover {
-                color: #6f6cf1;
-            }
-
-            .btn {
-                width: 100%;
-                padding: 14px;
-                background: #6f6cf1;
-                border: none;
-                border-radius: 10px;
-                font-size: 16px;
-                color: white;
-                cursor: pointer;
-                margin-top: 8px;
-                transition: background 0.3s ease;
-                -webkit-tap-highlight-color: transparent;
-            }
-
-            .btn:hover {
-                background: #5b59cc;
-            }
-
-            .result {
-                margin-top: 30px;
-                animation: fadeIn 0.4s ease-in-out;
-            }
-
-            .result img {
-                width: 100%;
-                border-radius: 10px;
-                margin-top: 12px;
-            }
-
-            .result audio {
-                width: 100%;
-                margin-top: 12px;
-            }
-
-            .download-group {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                margin-top: 15px;
-            }
-
-            .download-btn {
-                flex: 1;
-                padding: 10px;
-                background: #2d2a60;
-                color: #fff;
-                text-align: center;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: background 0.3s ease;
-                text-decoration: none;
-                -webkit-tap-highlight-color: transparent;
-            }
-
-            .download-btn:hover {
-                background: #4441a3;
-            }
-
-            .result h3 {
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                word-break: break-word;
-                white-space: normal;
-                font-size: 15px;
-                margin-bottom: 10px;
-            }
-
-            .error {
-                color: #ff6b6b;
-                margin-top: 10px;
-            }
-
-            .loader {
-                color: #aaa;
-                text-align: center;
-                font-style: italic;
-                margin-top: 20px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h2>TikTok Downloader</h2>
-            <div class="input-wrapper">
-                <input
-                    type="text"
-                    id="url"
-                    placeholder="Paste TikTok video URL..."
-                />
-                <button onclick="pasteUrl()" title="Paste">
-                    <i class="fas fa-clipboard"></i>
-                </button>
-            </div>
-            <button class="btn" onclick="fetchData()">Search</button>
-            <div class="result" id="result"></div>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🎵</div>
+            <h1>TikTok Downloader</h1>
+            <p>Download videos without watermark - Fast & Free!</p>
         </div>
 
-        <script>
-            async function pasteUrl() {
-                try {
-                    const text = await navigator.clipboard.readText();
-                    document.getElementById("url").value = text;
-                } catch (err) {
-                    alert("Clipboard access denied.");
-                }
+        <!-- Input Section -->
+        <div class="input-section">
+            <div class="input-wrapper">
+                <input type="text" id="url" placeholder="Paste TikTok video URL here..." />
+                <button class="paste-btn" onclick="pasteUrl()" title="Paste from clipboard">
+                    <i class="fas fa-paste"></i>
+                </button>
+            </div>
+            <button class="search-btn" id="searchBtn" onclick="fetchData()">
+                <i class="fas fa-search"></i>
+                <span>Download Video</span>
+            </button>
+        </div>
+
+        <!-- Result -->
+        <div class="result" id="result"></div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Made with ❤️ by <a href="https://github.com/oyy-gus" target="_blank">oyy-gus</a></p>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // API Endpoint
+        const API_URL = "https://oyy-gus.koyeb.app/api/tiktok";
+
+        // Show Toast Notification
+        function showToast(message, isError = false) {
+            const toast = document.getElementById("toast");
+            toast.innerHTML = `<i class="fas fa-${isError ? 'exclamation-circle' : 'check-circle'}"></i> ${message}`;
+            toast.className = `toast show ${isError ? 'error' : ''}`;
+            
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+
+        // Paste URL from Clipboard
+        async function pasteUrl() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById("url").value = text;
+                showToast("URL pasted successfully!");
+            } catch (err) {
+                showToast("Clipboard access denied", true);
+            }
+        }
+
+        // Format Number
+        function formatNumber(num) {
+            if (!num) return "0";
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + "M";
+            }
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + "K";
+            }
+            return num.toString();
+        }
+
+        // Fetch TikTok Data
+        async function fetchData() {
+            const input = document.getElementById("url");
+            const result = document.getElementById("result");
+            const searchBtn = document.getElementById("searchBtn");
+            const url = input.value.trim();
+
+            // Clear result
+            result.innerHTML = "";
+
+            // Validate URL
+            if (!url) {
+                result.innerHTML = `
+                    <div class="error-msg">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Please enter a valid TikTok video URL
+                    </div>
+                `;
+                return;
             }
 
-            async function fetchData() {
-                const input = document.getElementById("url");
-                const result = document.getElementById("result");
-                const url = input.value.trim();
-                result.innerHTML = "";
+            // Show loading state
+            searchBtn.disabled = true;
+            searchBtn.innerHTML = `<div class="spinner"></div><span>Processing...</span>`;
 
-                if (!url) {
-                    result.innerHTML =
-                        "<p class='error'>Please enter a valid TikTok video URL.</p>";
-                    return;
+            try {
+                const res = await fetch(`${API_URL}?url=${encodeURIComponent(url)}`);
+                const data = await res.json();
+
+                if (!data.success || !data.data) {
+                    throw new Error(data.error || "Failed to fetch video");
                 }
 
-                result.innerHTML =
-                    "<p class='loader'>Fetching video, please wait...</p>";
+                const video = data.data;
 
-                try {
-                    const res = await fetch(
-                        "https://tiktok-api.koyeb.app/api/tiktok",
-                        {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ url })
-                        }
-                    );
-                    const data = await res.json();
+                result.innerHTML = `
+                    <div class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="${video.thumbnail}" alt="Video thumbnail" onerror="this.src='https://via.placeholder.com/400x500?text=No+Thumbnail'" />
+                            <div class="duration-badge">
+                                <i class="fas fa-clock"></i> ${video.duration || 'N/A'}
+                            </div>
+                        </div>
+                        
+                        <div class="video-info">
+                            <!-- Author -->
+                            <div class="author-section">
+                                <img class="author-avatar" src="${video.author?.avatar || 'https://via.placeholder.com/45'}" alt="Avatar" onerror="this.src='https://via.placeholder.com/45'" />
+                                <div class="author-info">
+                                    <h4>${video.author?.nickname || 'Unknown'}</h4>
+                                    <span>@${video.author?.username || 'unknown'}</span>
+                                </div>
+                            </div>
 
-                    if (data.error) {
-                        result.innerHTML = `<p class="error">Error: ${data.error}</p>`;
-                        return;
-                    }
+                            <!-- Title -->
+                            <p class="video-title">${video.title || 'No description'}</p>
 
-                    result.innerHTML = `
-          <h3>${data.title}</h3>
-          <img src="${data.thumbnail}" alt="Video thumbnail">
-          <p><strong>Duration:</strong> ${data.duration}s</p>
-          <audio controls src="${data.audio}"></audio>
-          <h4>Download:</h4>
-          <div class="download-group">
-            <div class="download-btn" onclick="downloadFile('${data.wm_video}', 'video-wm.mp4')">With Watermark</div>
-            <div class="download-btn" onclick="downloadFile('${data.sd_video}', 'video-sd.mp4')">SD Video</div>
-            <div class="download-btn" onclick="downloadFile('${data.hd_video}', 'video-hd.mp4')">HD Video</div>
-            <div class="download-btn" onclick="downloadFile('${data.audio}', 'audio.mp3')">Audio</div>
-          </div>
-        `;
-                } catch (err) {
-                    result.innerHTML = `<p class="error">Request failed: ${err.message}</p>`;
-                }
+                            <!-- Stats -->
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <i class="fas fa-play"></i>
+                                    <span>${formatNumber(video.stats?.plays)}</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-heart"></i>
+                                    <span>${formatNumber(video.stats?.likes)}</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-comment"></i>
+                                    <span>${formatNumber(video.stats?.comments)}</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-share"></i>
+                                    <span>${formatNumber(video.stats?.shares)}</span>
+                                </div>
+                            </div>
+
+                            <!-- Music -->
+                            ${video.music?.title ? `
+                            <div class="music-section">
+                                <div class="music-icon">
+                                    <i class="fas fa-music"></i>
+                                </div>
+                                <div class="music-info">
+                                    <h5>${video.music.title}</h5>
+                                    <span>${video.music.author || 'Original Sound'}</span>
+                                </div>
+                            </div>
+                            ` : ''}
+
+                            <!-- Audio Player -->
+                            ${video.music?.url ? `
+                            <audio controls src="${video.music.url}"></audio>
+                            ` : ''}
+
+                            <!-- Download Buttons -->
+                            <div class="download-section">
+                                <h4><i class="fas fa-download"></i> Download Options</h4>
+                                <div class="download-grid">
+                                    ${video.video?.no_watermark_hd ? `
+                                    <div class="download-btn hd" onclick="downloadFile('${video.video.no_watermark_hd}', 'tiktok-hd.mp4')">
+                                        <i class="fas fa-film"></i>
+                                        HD Quality
+                                    </div>
+                                    ` : ''}
+                                    ${video.video?.no_watermark ? `
+                                    <div class="download-btn" onclick="downloadFile('${video.video.no_watermark}', 'tiktok-nowm.mp4')">
+                                        <i class="fas fa-video"></i>
+                                        No Watermark
+                                    </div>
+                                    ` : ''}
+                                    ${video.video?.with_watermark ? `
+                                    <div class="download-btn" onclick="downloadFile('${video.video.with_watermark}', 'tiktok-wm.mp4')">
+                                        <i class="fas fa-video"></i>
+                                        With Watermark
+                                    </div>
+                                    ` : ''}
+                                    ${video.music?.url ? `
+                                    <div class="download-btn audio-btn" onclick="downloadFile('${video.music.url}', 'tiktok-audio.mp3')">
+                                        <i class="fas fa-headphones"></i>
+                                        Download Audio (MP3)
+                                    </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                showToast("Video loaded successfully!");
+
+            } catch (err) {
+                result.innerHTML = `
+                    <div class="error-msg">
+                        <i class="fas fa-times-circle"></i>
+                        ${err.message || 'Failed to fetch video. Please check the URL.'}
+                    </div>
+                `;
+                showToast(err.message || "Failed to fetch video", true);
+            } finally {
+                searchBtn.disabled = false;
+                searchBtn.innerHTML = `<i class="fas fa-search"></i><span>Download Video</span>`;
             }
+        }
 
-            async function downloadFile(url, filename) {
-                try {
-                    const res = await fetch(url);
-                    const blob = await res.blob();
-                    const blobUrl = window.URL.createObjectURL(blob);
+        // Download File
+        async function downloadFile(url, filename) {
+            showToast("Starting download...");
+            
+            try {
+                const res = await fetch(url);
+                
+                if (!res.ok) throw new Error("Download failed");
+                
+                const blob = await res.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
 
-                    const a = document.createElement("a");
-                    a.href = blobUrl;
-                    a.download = filename;
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-                    URL.revokeObjectURL(blobUrl);
-                } catch (err) {
-                    alert("Download failed: " + err.message);
-                }
+                const a = document.createElement("a");
+                a.href = blobUrl;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(blobUrl);
+
+                showToast("Download complete!");
+            } catch (err) {
+                // Fallback: Open in new tab
+                window.open(url, '_blank');
+                showToast("Opening in new tab...");
             }
+        }
 
-            if ("serviceWorker" in navigator) {
-                navigator.serviceWorker
-                    .register("sw.js")
-                    .then(() => console.log("Service Worker registered"))
-                    .catch(err =>
-                        console.error("SW registration failed:", err)
-                    );
+        // Enter Key Support
+        document.getElementById("url").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                fetchData();
             }
-        </script>
-    </body>
+        });
+
+        // Register Service Worker
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js")
+                .then(() => console.log("✅ Service Worker registered"))
+                .catch(err => console.error("❌ SW registration failed:", err));
+        }
+    </script>
+</body>
 </html>
