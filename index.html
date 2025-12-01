@@ -8,32 +8,82 @@
   <meta name="msapplication-TileColor" content="#6a0dad">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Guss</title>
-  <meta name="keywords" content="Guss, supercell, clash of clans, supercell store, top up clash of clans, tiktok, tiktok downloader">
-  <meta name="description" content="I created this website to show off some of my social media!" />
-  <meta property="og:site_name" content="oyy-gus" />
-  <meta property="og:title" content="Guss" />
-  <meta property="og:description" content="I created this website to show off some of my social media!" />
+  <meta name="keywords" content="Guss, social media, tiktok, instagram, github, discord">
+  <meta name="description" content="Welcome to my personal portfolio - Connect with me on social media!" />
+  <meta property="og:site_name" content="Guss" />
+  <meta property="og:title" content="Guss - Personal Portfolio" />
+  <meta property="og:description" content="Welcome to my personal portfolio - Connect with me on social media!" />
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/97151655" />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/b423d98a73.js" crossorigin="anonymous"></script>
 
   <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --primary-light: #a78bfa;
+      --secondary: #c084fc;
+      --accent: #e879f9;
+      --bg-dark: #0a0014;
+      --bg-gradient-1: #1a0a2e;
+      --bg-gradient-2: #16082a;
+      --card-bg: rgba(139, 92, 246, 0.08);
+      --card-border: rgba(139, 92, 246, 0.2);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --glow-primary: rgba(139, 92, 246, 0.5);
+      --glow-accent: rgba(232, 121, 249, 0.4);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Outfit', sans-serif;
-      background: #1a0033;
-      color: #fff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      padding-bottom: 40px;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated Background */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.25), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 50%, rgba(232, 121, 249, 0.15), transparent),
+        radial-gradient(ellipse 50% 30% at 20% 80%, rgba(124, 58, 237, 0.2), transparent),
+        linear-gradient(180deg, var(--bg-gradient-1) 0%, var(--bg-dark) 50%, var(--bg-gradient-2) 100%);
+    }
+
+    .bg-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: 
+        linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
     }
 
     #tsparticles {
@@ -45,133 +95,797 @@
       z-index: -1;
     }
 
+    /* Floating Orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      animation: float 20s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--primary);
+      top: -100px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent);
+      bottom: -50px;
+      left: -100px;
+      animation-delay: -7s;
+    }
+
+    .orb-3 {
+      width: 250px;
+      height: 250px;
+      background: var(--secondary);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(20px, 30px) scale(1.02); }
+    }
+
+    /* Main Container */
+    .main-container {
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Profile Section */
     .profile-container {
       text-align: center;
-      margin: 70px 20px 40px;
+      margin: 80px 0 50px;
+      position: relative;
+    }
+
+    .profile-image-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+
+    .profile-ring {
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        var(--primary),
+        var(--accent),
+        var(--secondary),
+        var(--primary-light),
+        var(--primary)
+      );
+      animation: spin 4s linear infinite;
+      opacity: 0.8;
+    }
+
+    .profile-ring::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      background: var(--bg-dark);
+      border-radius: 50%;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .profile-container img {
-      width: 160px;
-      height: 160px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
-      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+      border: 4px solid var(--bg-dark);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: saturate(1.1);
     }
 
     .profile-container img:hover {
-      transform: scale(1.07);
+      transform: scale(1.08);
+      filter: saturate(1.2) brightness(1.1);
+    }
+
+    .profile-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, var(--glow-primary) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(30px);
+      z-index: 0;
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.1); }
     }
 
     .profile-container h1 {
-      margin-top: 20px;
-      font-size: 2.8rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
       font-weight: 800;
-      background: linear-gradient(90deg, #460ab8, #6d3ed7);
+      background: linear-gradient(135deg, #fff 0%, var(--primary-light) 50%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+      background-clip: text;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      text-shadow: 0 0 60px var(--glow-primary);
     }
 
+    .profile-tagline {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .profile-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 8px 20px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: #4ade80;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* Button Grid */
     .button-grid {
-      display: grid;
-      grid-template-columns: 1fr; /*repeat(auto-fit, minmax(220px, 1fr));*/
-      gap: 10px;
-      padding: 20px;
-      width: 90%;
-      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      padding: 0 10px;
     }
 
-    .open-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1.5px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      color: white;
-      padding: 14px 20px;
-      border-radius: 16px;
-      font-size: 1.05rem;
+    .link-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 28px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, 
+        rgba(139, 92, 246, 0.2) 0%, 
+        rgba(232, 121, 249, 0.1) 50%,
+        rgba(139, 92, 246, 0.2) 100%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .link-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.03),
+        transparent
+      );
+      transform: rotate(45deg) translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .link-btn:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 
+        0 20px 40px -10px rgba(139, 92, 246, 0.4),
+        0 0 0 1px rgba(139, 92, 246, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .link-btn:hover::before {
+      opacity: 1;
+    }
+
+    .link-btn:hover::after {
+      transform: rotate(45deg) translateX(100%);
+    }
+
+    .link-btn:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    .btn-icon {
+      width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      transition: 0.25s ease;
-      box-shadow: 0 0 10px rgba(138, 43, 226, 0.08);
-      text-decoration: none;
-      -webkit-tap-highlight-color: transparent;
+      border-radius: 14px;
+      font-size: 1.3rem;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
     }
 
-    .open-btn:hover {
+    .link-btn:hover .btn-icon {
+      transform: scale(1.1);
+    }
+
+    .btn-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .btn-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .btn-arrow {
+      margin-left: auto;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .link-btn:hover .btn-arrow {
+      color: var(--primary-light);
+      transform: translateX(5px);
+    }
+
+    /* Button Colors */
+    .btn-tiktok .btn-icon {
+      background: linear-gradient(135deg, #00f2ea, #ff0050);
+    }
+
+    .btn-instagram .btn-icon {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    }
+
+    .btn-github .btn-icon {
+      background: linear-gradient(135deg, #333, #6e5494);
+    }
+
+    .btn-discord .btn-icon {
+      background: linear-gradient(135deg, #5865F2, #7289da);
+    }
+
+    .btn-tiktok-dl .btn-icon {
+      background: linear-gradient(135deg, #69c9d0, #ee1d52);
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      margin: 30px 0;
+      padding: 0 10px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+    }
+
+    .divider-text {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 500;
+    }
+
+    /* Stats Section */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+      padding: 0 10px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      border-color: var(--primary);
       transform: translateY(-4px);
-      background: rgba(138, 43, 226, 0.3);
     }
 
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* Footer */
     footer {
       margin-top: auto;
-      font-size: 12px;
+      padding: 40px 20px;
       text-align: center;
-      padding: 20px;
-      color: #bbb;
-      -webkit-tap-highlight-color: transparent;
+      width: 100%;
     }
 
-    footer a {
-      color: #d3aaff;
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-link:hover {
+      color: var(--primary-light);
+    }
+
+    .footer-credit {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-credit a {
+      color: var(--primary-light);
       text-decoration: none;
       font-weight: 600;
+      transition: all 0.3s ease;
     }
 
-    @media (max-width: 480px) {
-      .profile-container h1 {
-        font-size: 2rem;
+    .footer-credit a:hover {
+      color: var(--accent);
+      text-shadow: 0 0 20px var(--glow-accent);
+    }
+
+    .footer-heart {
+      color: #ef4444;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .profile-container {
+        margin: 60px 0 40px;
       }
+
+      .profile-container img {
+        width: 150px;
+        height: 150px;
+      }
+
+      .profile-ring {
+        top: -6px;
+        left: -6px;
+        right: -6px;
+        bottom: -6px;
+      }
+
+      .profile-container h1 {
+        font-size: 2.8rem;
+      }
+
+      .profile-tagline {
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+      }
+
+      .link-btn {
+        padding: 16px 20px;
+        gap: 14px;
+      }
+
+      .btn-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+      }
+
+      .btn-title {
+        font-size: 1rem;
+      }
+
+      .stats-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 16px 10px;
+      }
+
+      .stat-value {
+        font-size: 1.4rem;
+      }
+
+      .orb-1 { width: 250px; height: 250px; }
+      .orb-2 { width: 200px; height: 200px; }
+      .orb-3 { width: 150px; height: 150px; }
+    }
+
+    @media (max-width: 380px) {
+      .profile-container h1 {
+        font-size: 2.2rem;
+      }
+
+      .btn-subtitle {
+        display: none;
+      }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-light);
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--primary);
+      color: white;
     }
   </style>
 </head>
 
 <body>
+  <!-- Background Elements -->
+  <div class="bg-gradient"></div>
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
   <div id="tsparticles"></div>
 
-  <div class="profile-container">
-    <img src="https://avatars.githubusercontent.com/u/97151655" alt="Profile Picture" />
-    <h1>Guss</h1>
+  <div class="main-container">
+    <!-- Profile Section -->
+    <div class="profile-container">
+      <div class="profile-image-wrapper">
+        <div class="profile-glow"></div>
+        <div class="profile-ring"></div>
+        <img src="https://avatars.githubusercontent.com/u/97151655" alt="Guss Profile Picture" />
+      </div>
+      <h1>Guss</h1>
+      <p class="profile-tagline">Developer & Content Creator</p>
+      <div class="profile-status">
+        <span class="status-dot"></span>
+        Available for projects
+      </div>
+    </div>
+
+    <!-- Social Links -->
+    <div class="button-grid">
+      <a class="link-btn btn-tiktok" href="https://www.tiktok.com/@uyy_gus" target="_blank" rel="noopener">
+        <div class="btn-icon">
+          <i class="fab fa-tiktok"></i>
+        </div>
+        <div class="btn-content">
+          <span class="btn-title">TikTok</span>
+          <span class="btn-subtitle">@uyy_gus</span>
+        </div>
+        <i class="fas fa-arrow-right btn-arrow"></i>
+      </a>
+
+      <a class="link-btn btn-instagram" href="https://instagram.com/oyy_gus" target="_blank" rel="noopener">
+        <div class="btn-icon">
+          <i class="fab fa-instagram"></i>
+        </div>
+        <div class="btn-content">
+          <span class="btn-title">Instagram</span>
+          <span class="btn-subtitle">@oyy_gus</span>
+        </div>
+        <i class="fas fa-arrow-right btn-arrow"></i>
+      </a>
+
+      <a class="link-btn btn-github" href="https://github.com/oyy-gus" target="_blank" rel="noopener">
+        <div class="btn-icon">
+          <i class="fab fa-github"></i>
+        </div>
+        <div class="btn-content">
+          <span class="btn-title">GitHub</span>
+          <span class="btn-subtitle">View my repositories</span>
+        </div>
+        <i class="fas fa-arrow-right btn-arrow"></i>
+      </a>
+
+      <a class="link-btn btn-discord" href="https://discord.gg/ZnMFNwcYzy" target="_blank" rel="noopener">
+        <div class="btn-icon">
+          <i class="fab fa-discord"></i>
+        </div>
+        <div class="btn-content">
+          <span class="btn-title">Discord</span>
+          <span class="btn-subtitle">Join my community</span>
+        </div>
+        <i class="fas fa-arrow-right btn-arrow"></i>
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-text">Tools</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Tools Section -->
+    <div class="button-grid">
+      <a class="link-btn btn-tiktok-dl" href="https://oyy-gus.github.io/tiktok-downloader" target="_blank" rel="noopener">
+        <div class="btn-icon">
+          <i class="fas fa-download"></i>
+        </div>
+        <div class="btn-content">
+          <span class="btn-title">TikTok Downloader</span>
+          <span class="btn-subtitle">Download videos without watermark</span>
+        </div>
+        <i class="fas fa-arrow-right btn-arrow"></i>
+      </a>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-text">Stats</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="stats-container">
+      <div class="stat-card">
+        <div class="stat-value">5+</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">1K+</div>
+        <div class="stat-label">Followers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">∞</div>
+        <div class="stat-label">Passion</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a class="footer-link" href="https://github.com/oyy-gus/oyy-gus/fork" target="_blank" rel="noopener">
+            <i class="fas fa-code-fork"></i>
+            Fork this
+          </a>
+          <a class="footer-link" href="mailto:contact@guss.dev" target="_blank" rel="noopener">
+            <i class="fas fa-envelope"></i>
+            Contact
+          </a>
+        </div>
+        <p class="footer-credit">
+          Made with <span class="footer-heart">♥</span> by 
+          <a href="https://github.com/oyy-gus" target="_blank" rel="noopener">Guss</a>
+        </p>
+      </div>
+    </footer>
   </div>
 
-  <div class="button-grid">
-    <a class="open-btn" href="https://www.tiktok.com/@uyy_gus" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-    <a class="open-btn" href="https://instagram.com/oyy_gus" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-    <a class="open-btn" href="https://github.com/oyy-gus" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-    <a class="open-btn" href="https://discord.gg/ZnMFNwcYzy" target="_blank"><i class="fab fa-discord"></i> Discord</a>
-    <a class="open-btn" href="https://link.clashofclans.com/id?action=OpenClanProfile&tag=2Q082JYVY" target="_blank"><i class="fas fa-shield-halved"></i> Visit Clan (Clash Of Clans)</a>
-    <a class="open-btn" href="https://store.supercell.com/id/clashofclans" target="_blank"><i class="fas fa-store"></i> Supercell Store (TOP UP)</a>
-    <a class="open-btn" href="https://oyy-gus.github.io/davina-bot" target="_blank"><i class="fas fa-robot"></i> Davina BOT</a>
-    <a class="open-btn" href="https://oyy-gus.github.io/tiktok-downloader" target="_blank"><i class="fas fa-download"></i> TikTok Downloader</a>
-  </div>
-
-  <footer>
-    Created by <a href="https://github.com/oyy-gus" target="_blank">oyy-gus</a> | 
-    <a href="https://github.com/oyy-gus/oyy-gus/fork" target="_blank">Fork this</a>
-  </footer>
-
+  <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <script>
     tsParticles.load("tsparticles", {
-      fullScreen: { enable: true, zIndex: -1 },
+      fullScreen: { enable: false },
+      fpsLimit: 60,
       particles: {
-        number: { value: 50 },
-        color: { value: "#d3aaff" },
+        number: { 
+          value: 80,
+          density: { enable: true, area: 800 }
+        },
+        color: { 
+          value: ["#8b5cf6", "#a78bfa", "#c084fc", "#e879f9"] 
+        },
         shape: { type: "circle" },
-        opacity: { value: 0.3 },
-        size: { value: { min: 1, max: 3 } },
-        move: { enable: true, speed: 2, direction: "none", outModes: "bounce" },
+        opacity: { 
+          value: { min: 0.1, max: 0.4 },
+          animation: {
+            enable: true,
+            speed: 0.5,
+            minimumValue: 0.1
+          }
+        },
+        size: { 
+          value: { min: 1, max: 3 },
+          animation: {
+            enable: true,
+            speed: 2,
+            minimumValue: 0.5
+          }
+        },
+        move: { 
+          enable: true, 
+          speed: { min: 0.5, max: 1.5 },
+          direction: "none", 
+          random: true,
+          straight: false,
+          outModes: { default: "out" },
+          attract: {
+            enable: true,
+            rotateX: 600,
+            rotateY: 1200
+          }
+        },
         links: {
           enable: true,
-          color: "#d3aaff",
-          distance: 120,
-          opacity: 0.25,
-          width: 1
+          color: "#8b5cf6",
+          distance: 150,
+          opacity: 0.15,
+          width: 1,
+          triangles: {
+            enable: true,
+            opacity: 0.03
+          }
         }
       },
-      background: { color: "#1a0033" }
+      interactivity: {
+        detectsOn: "window",
+        events: {
+          onHover: {
+            enable: true,
+            mode: "grab"
+          },
+          onClick: {
+            enable: true,
+            mode: "push"
+          }
+        },
+        modes: {
+          grab: {
+            distance: 150,
+            links: { opacity: 0.4 }
+          },
+          push: { quantity: 3 }
+        }
+      },
+      detectRetina: true,
+      background: { color: "transparent" }
+    });
+
+    // Add smooth reveal animation
+    document.addEventListener('DOMContentLoaded', () => {
+      const elements = document.querySelectorAll('.link-btn, .stat-card');
+      elements.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          el.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 100 + (index * 80));
+      });
     });
   </script>
 </body>
