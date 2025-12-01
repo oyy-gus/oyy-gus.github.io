@@ -15,26 +15,26 @@
     },
     "Messages": {
         "Success": {
-            "SongAdded": "Song added to queue!",
-            "DefaultSongAdded": "Default song added to queue!",
-            "FavoriteAdded": "Added to favorites!",
-            "FavoriteRemoved": "Removed from favorites!",
-            "FavoriteQueued": "Favorite added to queue!",
-            "SongsRefreshed": "Songs refreshed!"
+            "SongAdded": "Lagu ditambahkan ke antrean!",
+            "DefaultSongAdded": "Lagu default ditambahkan ke antrean!",
+            "FavoriteAdded": "Ditambahkan ke favorit!",
+            "FavoriteRemoved": "Dihapus dari favorit!",
+            "FavoriteQueued": "Favorit ditambahkan ke antrean!",
+            "SongsRefreshed": "Lagu berhasil diperbarui!"
         },
         "Error": {
-            "InvalidSongID": "Invalid song ID!",
-            "SongAlreadyInQueue": "This song is already in the queue or currently playing!",
-            "MaxQueueReached": "Maximum 3 songs in queue per player!",
-            "SongNotFound": "Song not found or deleted!",
-            "InvalidID": "Invalid ID!",
-            "InvalidSong": "Invalid song!",
-            "AlreadyInFavorites": "Already in favorites!",
-            "MaxFavorites": "Maximum 20 favorites!",
-            "NoFavorites": "No favorites!",
-            "NotInFavorites": "Not found in favorites!",
-            "SongNotInFavorites": "Song not in favorites!",
-            "RefreshFailed": "Failed to refresh songs from API"
+            "InvalidSongID": "ID lagu tidak valid!",
+            "SongAlreadyInQueue": "Lagu ini sudah ada di antrean atau sedang diputar!",
+            "MaxQueueReached": "Maksimal 3 lagu dalam antrean per pemain!",
+            "SongNotFound": "Lagu tidak ditemukan atau sudah dihapus!",
+            "InvalidID": "ID tidak valid!",
+            "InvalidSong": "Lagu tidak valid!",
+            "AlreadyInFavorites": "Sudah ada di favorit!",
+            "MaxFavorites": "Maksimal 20 favorit!",
+            "NoFavorites": "Tidak ada favorit!",
+            "NotInFavorites": "Tidak ditemukan di favorit!",
+            "SongNotInFavorites": "Lagu tidak ada di favorit!",
+            "RefreshFailed": "Gagal memperbarui lagu dari API"
         }
     },
     "DataStore": {
@@ -46,55 +46,55 @@
             "Text": "Menu"
         },
         "Header": {
-            "Title": "🎵 Music System",
+            "Title": "🎵 Sistem Musik",
             "CloseButton": "✖"
         },
         "MainTabs": {
-            "Music": "🎵 Music",
-            "Players": "👥 Players"
+            "Music": "🎵 Musik",
+            "Players": "👥 Pemain"
         },
         "SubTabs": {
-            "Player": "🎵 Player",
-            "Songs": "📂 Songs",
-            "Favorites": "⭐ Favorites"
+            "Player": "🎵 Pemutar",
+            "Songs": "📂 Lagu",
+            "Favorites": "⭐ Favorit"
         },
         "PlayerButtons": {
-            "VoteSkip": "⏭️ Vote Skip",
-            "VoteSkipFormat": "⏭️ Vote Skip (%d/%d)",
-            "Deafen": "🔊 Deafen",
-            "Unmute": "🔇 Unmute",
-            "AddToQueue": "➕ Add",
+            "VoteSkip": "⏭️ Vote Lewati",
+            "VoteSkipFormat": "⏭️ Vote Lewati (%d/%d)",
+            "Deafen": "🔊 Bisukan",
+            "Unmute": "🔇 Aktifkan",
+            "AddToQueue": "➕ Tambah",
             "AddFavorite": "⭐"
         },
         "SongButtons": {
-            "Play": "▶ Play",
+            "Play": "▶ Putar",
             "PlayIcon": "▶",
             "Remove": "🗑️"
         },
         "Labels": {
-            "NoSongPlaying": "No song playing",
-            "RequestedBy": "Requested by: ",
-            "Duration": "Duration: ",
-            "DurationFormat": "Duration: %s / %s",
+            "NoSongPlaying": "Tidak ada lagu diputar",
+            "RequestedBy": "Diminta oleh: ",
+            "Duration": "Durasi: ",
+            "DurationFormat": "Durasi: %s / %s",
             "Volume": "Volume: ",
             "VolumeFormat": "Volume: %d%%",
-            "SongQueue": "Song Queue:",
-            "DefaultSongs": "Default Songs:",
-            "MyFavorites": "My Favorites:",
+            "SongQueue": "Antrean Lagu:",
+            "DefaultSongs": "Lagu Default:",
+            "MyFavorites": "Favorit Saya:",
             "SongID": "ID: ",
             "QueueItemFormat": "%d. %s",
-            "QueueRequester": "By: ",
-            "Unknown": "Unknown",
-            "Author": "Author: ",
-            "PlayersOnline": "👥 %d Players Online"
+            "QueueRequester": "Oleh: ",
+            "Unknown": "Tidak Diketahui",
+            "Author": "Artis: ",
+            "PlayersOnline": "👥 %d Pemain Online"
         },
         "Input": {
-            "SongIDPlaceholder": "Enter Song ID..."
+            "SongIDPlaceholder": "Masukkan ID Lagu..."
         },
         "Notifications": {
-            "DeafenIndicator": "🔇 Music Muted",
-            "SuccessTitle": "Success",
-            "ErrorTitle": "Error"
+            "DeafenIndicator": "🔇 Musik Dibisukan",
+            "SuccessTitle": "Berhasil",
+            "ErrorTitle": "Gagal"
         }
     },
     "Colors": {
