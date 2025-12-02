@@ -38,6 +38,10 @@
       --text-muted: rgba(255, 255, 255, 0.4);
       --glow: rgba(168, 85, 247, 0.6);
       --glow-intense: rgba(217, 70, 239, 0.8);
+      /* Saweria Colors */
+      --saweria-orange: #f59e0b;
+      --saweria-yellow: #fbbf24;
+      --saweria-gold: #f97316;
     }
 
     * {
@@ -544,6 +548,102 @@
       background: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
     }
 
+    /* Saweria Donate Icon */
+    .icon-saweria {
+      background: linear-gradient(135deg, #f59e0b 0%, #f97316 50%, #fbbf24 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .icon-saweria::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 60%
+      );
+      animation: saweria-shine 3s ease-in-out infinite;
+    }
+
+    @keyframes saweria-shine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    /* Donate Card Special Styling */
+    .link-card.donate-card {
+      background: rgba(245, 158, 11, 0.08);
+      border-color: rgba(245, 158, 11, 0.25);
+    }
+
+    .link-card.donate-card::before {
+      background: linear-gradient(
+        135deg,
+        rgba(245, 158, 11, 0.15) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(251, 191, 36, 0.15) 100%
+      );
+    }
+
+    .link-card.donate-card:hover {
+      border-color: rgba(245, 158, 11, 0.6);
+      box-shadow: 
+        0 25px 50px -12px rgba(245, 158, 11, 0.35),
+        0 0 0 1px rgba(245, 158, 11, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 80px -20px rgba(245, 158, 11, 0.6);
+    }
+
+    .link-card.donate-card .link-arrow {
+      color: var(--saweria-orange);
+    }
+
+    .link-card.donate-card:hover .link-arrow {
+      color: var(--saweria-yellow);
+    }
+
+    /* Floating Hearts Animation for Donate */
+    .donate-hearts {
+      position: absolute;
+      top: 50%;
+      right: 60px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .donate-heart {
+      position: absolute;
+      font-size: 12px;
+      opacity: 0;
+      animation: floatHeart 2s ease-in-out infinite;
+    }
+
+    .donate-heart:nth-child(1) { animation-delay: 0s; left: 0; }
+    .donate-heart:nth-child(2) { animation-delay: 0.5s; left: 15px; }
+    .donate-heart:nth-child(3) { animation-delay: 1s; left: 30px; }
+
+    @keyframes floatHeart {
+      0% { 
+        opacity: 0; 
+        transform: translateY(0) scale(0.5); 
+      }
+      50% { 
+        opacity: 1; 
+        transform: translateY(-15px) scale(1); 
+      }
+      100% { 
+        opacity: 0; 
+        transform: translateY(-30px) scale(0.5); 
+      }
+    }
+
     .link-content {
       flex: 1;
       display: flex;
@@ -563,6 +663,10 @@
       font-size: 0.8rem;
       color: var(--text-secondary);
       font-weight: 400;
+    }
+
+    .link-card.donate-card .link-subtitle {
+      color: rgba(251, 191, 36, 0.8);
     }
 
     .link-arrow {
@@ -728,6 +832,10 @@
       .orb-1 { width: 300px; height: 300px; }
       .orb-2 { width: 250px; height: 250px; }
       .orb-3 { width: 200px; height: 200px; }
+
+      .donate-hearts {
+        right: 50px;
+      }
     }
 
     @media (max-width: 400px) {
@@ -742,6 +850,10 @@
       .status-badge {
         font-size: 0.75rem;
         padding: 10px 18px;
+      }
+
+      .donate-hearts {
+        display: none;
       }
     }
 
@@ -889,9 +1001,34 @@
         </div>
         <i class="fas fa-arrow-right link-arrow"></i>
       </a>
+
+      <!-- SAWERIA DONATE SECTION -->
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">Support</span>
+        <div class="section-label-line"></div>
+      </div>
+
+      <a class="link-card donate-card fade-in" href="https://saweria.co/GussJTM" target="_blank" rel="noopener" style="animation-delay: 0.7s;">
+        <div class="link-icon icon-saweria">
+          <i class="fas fa-mug-hot"></i>
+        </div>
+        <div class="link-content">
+          <span class="link-title">Buy Me a Coffee ☕</span>
+          <span class="link-subtitle">Support my work via Saweria</span>
+        </div>
+        <div class="donate-hearts">
+          <span class="donate-heart">💛</span>
+          <span class="donate-heart">🧡</span>
+          <span class="donate-heart">❤️</span>
+        </div>
+        <i class="fas fa-arrow-right link-arrow"></i>
+      </a>
+      <!-- END SAWERIA DONATE SECTION -->
+
     </section>
 
-    <footer class="fade-in" style="animation-delay: 0.7s;">
+    <footer class="fade-in" style="animation-delay: 0.8s;">
       <div class="footer-content">
         <a class="footer-fork" href="https://github.com/oyy-gus/oyy-gus.github.io/fork" target="_blank" rel="noopener">
           <i class="fas fa-code-fork"></i>
