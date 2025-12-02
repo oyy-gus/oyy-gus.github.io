@@ -243,6 +243,7 @@
             width: 100%;
             aspect-ratio: 9/10;
             overflow: hidden;
+            background: rgba(0,0,0,0.3);
         }
 
         .thumbnail-container img {
@@ -254,6 +255,22 @@
 
         .thumbnail-container:hover img {
             transform: scale(1.05);
+        }
+
+        .thumbnail-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #6a678a;
+        }
+
+        .thumbnail-placeholder i {
+            font-size: 60px;
+            margin-bottom: 10px;
         }
 
         .duration-badge {
@@ -285,6 +302,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #6f6cf1;
+            background: #2a2a4a;
         }
 
         .author-info h4 {
@@ -347,7 +365,7 @@
             background: rgba(196, 76, 255, 0.1);
             padding: 15px;
             border-radius: 14px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -363,6 +381,7 @@
             justify-content: center;
             font-size: 18px;
             animation: pulse 2s infinite;
+            flex-shrink: 0;
         }
 
         @keyframes pulse {
@@ -389,14 +408,18 @@
             color: #8a87a8;
         }
 
-        audio {
-            width: 100%;
-            height: 45px;
-            border-radius: 10px;
+        .audio-player-wrapper {
             margin-bottom: 20px;
         }
 
-        audio::-webkit-media-controls-panel {
+        .audio-player-wrapper audio {
+            width: 100%;
+            height: 45px;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .audio-player-wrapper audio::-webkit-media-controls-panel {
             background: rgba(38, 35, 79, 0.8);
         }
 
@@ -443,6 +466,12 @@
             color: #6f6cf1;
         }
 
+        .download-btn .size-label {
+            font-size: 10px;
+            color: #8a87a8;
+            font-weight: 400;
+        }
+
         .download-btn:hover {
             background: rgba(111, 108, 241, 0.3);
             border-color: #6f6cf1;
@@ -453,6 +482,10 @@
         .download-btn.hd {
             background: linear-gradient(135deg, rgba(111, 108, 241, 0.3), rgba(196, 76, 255, 0.3));
             border-color: #c44cff;
+        }
+
+        .download-btn.hd i {
+            color: #c44cff;
         }
 
         .download-btn.hd:hover {
@@ -472,6 +505,11 @@
         .download-btn.audio-btn:hover {
             background: rgba(255, 107, 157, 0.3);
             border-color: #ff6b9d;
+        }
+
+        .download-btn.downloading {
+            pointer-events: none;
+            opacity: 0.7;
         }
 
         .error-msg {
@@ -510,6 +548,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            max-width: 90%;
+            text-align: center;
         }
 
         .toast.show {
@@ -607,7 +647,9 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        const API_URL = "https://oyy-gus.koyeb.app/api/tiktok";
+        const API_BASE = "https://oyy-gus.koyeb.app";
+        const API_URL = `${API_BASE}/api/tiktok`;
+        const PROXY_URL = `${API_BASE}/api/proxy`;
 
         function showToast(message, isError = false) {
             const toast = document.getElementById("toast");
@@ -640,6 +682,12 @@
             return num.toString();
         }
 
+        // Fungsi untuk membuat URL proxy
+        function getProxyUrl(url, filename) {
+            if (!url) return null;
+            return `${PROXY_URL}?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename || 'download')}`;
+        }
+
         async function fetchData() {
             const input = document.getElementById("url");
             const result = document.getElementById("result");
@@ -665,24 +713,117 @@
                 const res = await fetch(`${API_URL}?url=${encodeURIComponent(url)}`);
                 const data = await res.json();
 
+                console.log("API Response:", data); // Debug
+
                 if (!data.success || !data.data) {
                     throw new Error(data.error || "Failed to fetch video");
                 }
 
                 const video = data.data;
 
+                // Build thumbnail HTML
+                let thumbnailHTML = '';
+                if (video.thumbnail) {
+                    thumbnailHTML = `<img src="${video.thumbnail}" alt="Video thumbnail" onerror="this.parentElement.innerHTML='<div class=\\'thumbnail-placeholder\\'><i class=\\'fas fa-video\\'></i><span>No Preview</span></div>'" />`;
+                } else {
+                    thumbnailHTML = `<div class="thumbnail-placeholder"><i class="fas fa-video"></i><span>No Preview</span></div>`;
+                }
+
+                // Build duration badge
+                let durationBadge = '';
+                if (video.duration) {
+                    durationBadge = `
+                        <div class="duration-badge">
+                            <i class="fas fa-clock"></i> ${video.duration}
+                        </div>
+                    `;
+                }
+
+                // Build music section
+                let musicHTML = '';
+                if (video.music?.title || video.music?.url) {
+                    musicHTML = `
+                        <div class="music-section">
+                            <div class="music-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="music-info">
+                                <h5>${video.music.title || 'Original Sound'}</h5>
+                                <span>${video.music.author || 'Unknown Artist'}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Build audio player - menggunakan proxy
+                let audioPlayerHTML = '';
+                if (video.music?.url) {
+                    const audioProxyUrl = getProxyUrl(video.music.url, 'audio.mp3');
+                    audioPlayerHTML = `
+                        <div class="audio-player-wrapper">
+                            <audio controls preload="metadata">
+                                <source src="${audioProxyUrl}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    `;
+                }
+
+                // Build download buttons
+                let downloadBtnsHTML = '';
+                
+                if (video.video?.no_watermark_hd) {
+                    const sizeLabel = video.video.hd_size_formatted ? `<span class="size-label">${video.video.hd_size_formatted}</span>` : '';
+                    downloadBtnsHTML += `
+                        <div class="download-btn hd" onclick="downloadFile('${video.video.no_watermark_hd}', 'tiktok-hd.mp4', this)">
+                            <i class="fas fa-film"></i>
+                            <span>HD Quality</span>
+                            ${sizeLabel}
+                        </div>
+                    `;
+                }
+                
+                if (video.video?.no_watermark) {
+                    const sizeLabel = video.video.size_formatted ? `<span class="size-label">${video.video.size_formatted}</span>` : '';
+                    downloadBtnsHTML += `
+                        <div class="download-btn" onclick="downloadFile('${video.video.no_watermark}', 'tiktok-nowm.mp4', this)">
+                            <i class="fas fa-video"></i>
+                            <span>No Watermark</span>
+                            ${sizeLabel}
+                        </div>
+                    `;
+                }
+                
+                if (video.video?.with_watermark) {
+                    const sizeLabel = video.video.wm_size_formatted ? `<span class="size-label">${video.video.wm_size_formatted}</span>` : '';
+                    downloadBtnsHTML += `
+                        <div class="download-btn" onclick="downloadFile('${video.video.with_watermark}', 'tiktok-wm.mp4', this)">
+                            <i class="fas fa-video"></i>
+                            <span>With Watermark</span>
+                            ${sizeLabel}
+                        </div>
+                    `;
+                }
+                
+                if (video.music?.url) {
+                    downloadBtnsHTML += `
+                        <div class="download-btn audio-btn" onclick="downloadFile('${video.music.url}', 'tiktok-audio.mp3', this)">
+                            <i class="fas fa-headphones"></i>
+                            <span>Download Audio (MP3)</span>
+                        </div>
+                    `;
+                }
+
                 result.innerHTML = `
                     <div class="video-card">
                         <div class="thumbnail-container">
-                            <img src="${video.thumbnail}" alt="Video thumbnail" onerror="this.src='https://via.placeholder.com/400x500?text=No+Thumbnail'" />
-                            <div class="duration-badge">
-                                <i class="fas fa-clock"></i> ${video.duration || 'N/A'}
-                            </div>
+                            ${thumbnailHTML}
+                            ${durationBadge}
                         </div>
                         
                         <div class="video-info">
                             <div class="author-section">
-                                <img class="author-avatar" src="${video.author?.avatar || 'https://via.placeholder.com/45'}" alt="Avatar" onerror="this.src='https://via.placeholder.com/45'" />
+                                <img class="author-avatar" src="${video.author?.avatar || ''}" alt="Avatar" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%232a2a4a%22 width=%22100%22 height=%22100%22/><text x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22%236f6cf1%22>👤</text></svg>'" />
                                 <div class="author-info">
                                     <h4>${video.author?.nickname || 'Unknown'}</h4>
                                     <span>@${video.author?.username || 'unknown'}</span>
@@ -710,49 +851,13 @@
                                 </div>
                             </div>
 
-                            ${video.music?.title ? `
-                            <div class="music-section">
-                                <div class="music-icon">
-                                    <i class="fas fa-music"></i>
-                                </div>
-                                <div class="music-info">
-                                    <h5>${video.music.title}</h5>
-                                    <span>${video.music.author || 'Original Sound'}</span>
-                                </div>
-                            </div>
-                            ` : ''}
-
-                            ${video.music?.url ? `
-                            <audio controls src="${video.music.url}"></audio>
-                            ` : ''}
+                            ${musicHTML}
+                            ${audioPlayerHTML}
 
                             <div class="download-section">
                                 <h4><i class="fas fa-download"></i> Download Options</h4>
                                 <div class="download-grid">
-                                    ${video.video?.no_watermark_hd ? `
-                                    <div class="download-btn hd" onclick="downloadFile('${video.video.no_watermark_hd}', 'tiktok-hd.mp4')">
-                                        <i class="fas fa-film"></i>
-                                        HD Quality
-                                    </div>
-                                    ` : ''}
-                                    ${video.video?.no_watermark ? `
-                                    <div class="download-btn" onclick="downloadFile('${video.video.no_watermark}', 'tiktok-nowm.mp4')">
-                                        <i class="fas fa-video"></i>
-                                        No Watermark
-                                    </div>
-                                    ` : ''}
-                                    ${video.video?.with_watermark ? `
-                                    <div class="download-btn" onclick="downloadFile('${video.video.with_watermark}', 'tiktok-wm.mp4')">
-                                        <i class="fas fa-video"></i>
-                                        With Watermark
-                                    </div>
-                                    ` : ''}
-                                    ${video.music?.url ? `
-                                    <div class="download-btn audio-btn" onclick="downloadFile('${video.music.url}', 'tiktok-audio.mp3')">
-                                        <i class="fas fa-headphones"></i>
-                                        Download Audio (MP3)
-                                    </div>
-                                    ` : ''}
+                                    ${downloadBtnsHTML}
                                 </div>
                             </div>
                         </div>
@@ -762,6 +867,7 @@
                 showToast("Video loaded successfully!");
 
             } catch (err) {
+                console.error("Error:", err);
                 result.innerHTML = `
                     <div class="error-msg">
                         <i class="fas fa-times-circle"></i>
@@ -775,11 +881,27 @@
             }
         }
 
-        async function downloadFile(url, filename) {
+        async function downloadFile(url, filename, btnElement) {
             showToast("Starting download...");
             
+            // Add downloading state
+            if (btnElement) {
+                btnElement.classList.add('downloading');
+                const originalHTML = btnElement.innerHTML;
+                btnElement.innerHTML = `<div class="spinner" style="width:16px;height:16px;border-width:2px;"></div><span>Downloading...</span>`;
+                
+                // Restore button after download
+                setTimeout(() => {
+                    btnElement.classList.remove('downloading');
+                    btnElement.innerHTML = originalHTML;
+                }, 3000);
+            }
+            
             try {
-                const res = await fetch(url);
+                // Gunakan proxy untuk download
+                const proxyUrl = getProxyUrl(url, filename);
+                
+                const res = await fetch(proxyUrl);
                 
                 if (!res.ok) throw new Error("Download failed");
                 
@@ -792,12 +914,16 @@
                 document.body.appendChild(a);
                 a.click();
                 a.remove();
-                window.URL.revokeObjectURL(blobUrl);
+                
+                setTimeout(() => {
+                    window.URL.revokeObjectURL(blobUrl);
+                }, 100);
 
                 showToast("Download complete!");
             } catch (err) {
-                // Fallback: Open in new tab
-                window.open(url, '_blank');
+                console.error("Download error:", err);
+                // Fallback: buka di tab baru dengan proxy
+                window.open(getProxyUrl(url, filename), '_blank');
                 showToast("Opening in new tab...");
             }
         }
