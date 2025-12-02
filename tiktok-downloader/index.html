@@ -35,7 +35,6 @@
             padding: 20px 15px 40px;
         }
 
-        /* Animated Background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -91,7 +90,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Header */
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -123,7 +121,6 @@
             font-size: 14px;
         }
 
-        /* Input Section */
         .input-section {
             margin-bottom: 20px;
         }
@@ -211,7 +208,6 @@
             transform: none;
         }
 
-        /* Loading Spinner */
         .spinner {
             width: 20px;
             height: 20px;
@@ -225,7 +221,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Result Section */
         .result {
             margin-top: 25px;
             animation: fadeIn 0.5s ease;
@@ -236,7 +231,6 @@
             to { opacity: 1; }
         }
 
-        /* Video Card */
         .video-card {
             background: rgba(38, 35, 79, 0.6);
             border-radius: 20px;
@@ -278,7 +272,6 @@
             padding: 20px;
         }
 
-        /* Author Section */
         .author-section {
             display: flex;
             align-items: center;
@@ -306,7 +299,6 @@
             color: #8a87a8;
         }
 
-        /* Title */
         .video-title {
             font-size: 14px;
             line-height: 1.5;
@@ -318,7 +310,6 @@
             overflow: hidden;
         }
 
-        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -352,7 +343,6 @@
             color: #fff;
         }
 
-        /* Music Section */
         .music-section {
             background: rgba(196, 76, 255, 0.1);
             padding: 15px;
@@ -399,7 +389,6 @@
             color: #8a87a8;
         }
 
-        /* Audio Player */
         audio {
             width: 100%;
             height: 45px;
@@ -411,7 +400,6 @@
             background: rgba(38, 35, 79, 0.8);
         }
 
-        /* Download Section */
         .download-section h4 {
             font-size: 14px;
             font-weight: 600;
@@ -486,7 +474,6 @@
             border-color: #ff6b9d;
         }
 
-        /* Error Message */
         .error-msg {
             background: rgba(255, 107, 129, 0.15);
             border: 1px solid rgba(255, 107, 129, 0.3);
@@ -505,7 +492,6 @@
             font-size: 20px;
         }
 
-        /* Toast Notification */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -535,7 +521,6 @@
             background: rgba(220, 53, 69, 0.95);
         }
 
-        /* Footer */
         .footer {
             text-align: center;
             margin-top: 25px;
@@ -558,7 +543,6 @@
             color: #c44cff;
         }
 
-        /* Responsive */
         @media (max-width: 480px) {
             .container {
                 padding: 25px 20px;
@@ -583,7 +567,6 @@
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
     <div class="bg-animation">
         <span></span>
         <span></span>
@@ -595,14 +578,12 @@
     </div>
 
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <div class="logo">🎵</div>
             <h1>TikTok Downloader</h1>
             <p>Download videos without watermark - Fast & Free!</p>
         </div>
 
-        <!-- Input Section -->
         <div class="input-section">
             <div class="input-wrapper">
                 <input type="text" id="url" placeholder="Paste TikTok video URL here..." />
@@ -616,23 +597,18 @@
             </button>
         </div>
 
-        <!-- Result -->
         <div class="result" id="result"></div>
 
-        <!-- Footer -->
         <div class="footer">
             <p>Made with ❤️ by <a href="https://github.com/oyy-gus" target="_blank">oyy-gus</a></p>
         </div>
     </div>
 
-    <!-- Toast -->
     <div class="toast" id="toast"></div>
 
     <script>
-        // API Endpoint
         const API_URL = "https://oyy-gus.koyeb.app/api/tiktok";
 
-        // Show Toast Notification
         function showToast(message, isError = false) {
             const toast = document.getElementById("toast");
             toast.innerHTML = `<i class="fas fa-${isError ? 'exclamation-circle' : 'check-circle'}"></i> ${message}`;
@@ -643,7 +619,6 @@
             }, 3000);
         }
 
-        // Paste URL from Clipboard
         async function pasteUrl() {
             try {
                 const text = await navigator.clipboard.readText();
@@ -654,7 +629,6 @@
             }
         }
 
-        // Format Number
         function formatNumber(num) {
             if (!num) return "0";
             if (num >= 1000000) {
@@ -666,17 +640,14 @@
             return num.toString();
         }
 
-        // Fetch TikTok Data
         async function fetchData() {
             const input = document.getElementById("url");
             const result = document.getElementById("result");
             const searchBtn = document.getElementById("searchBtn");
             const url = input.value.trim();
 
-            // Clear result
             result.innerHTML = "";
 
-            // Validate URL
             if (!url) {
                 result.innerHTML = `
                     <div class="error-msg">
@@ -687,7 +658,6 @@
                 return;
             }
 
-            // Show loading state
             searchBtn.disabled = true;
             searchBtn.innerHTML = `<div class="spinner"></div><span>Processing...</span>`;
 
@@ -711,7 +681,6 @@
                         </div>
                         
                         <div class="video-info">
-                            <!-- Author -->
                             <div class="author-section">
                                 <img class="author-avatar" src="${video.author?.avatar || 'https://via.placeholder.com/45'}" alt="Avatar" onerror="this.src='https://via.placeholder.com/45'" />
                                 <div class="author-info">
@@ -720,10 +689,8 @@
                                 </div>
                             </div>
 
-                            <!-- Title -->
                             <p class="video-title">${video.title || 'No description'}</p>
 
-                            <!-- Stats -->
                             <div class="stats-grid">
                                 <div class="stat-item">
                                     <i class="fas fa-play"></i>
@@ -743,7 +710,6 @@
                                 </div>
                             </div>
 
-                            <!-- Music -->
                             ${video.music?.title ? `
                             <div class="music-section">
                                 <div class="music-icon">
@@ -756,12 +722,10 @@
                             </div>
                             ` : ''}
 
-                            <!-- Audio Player -->
                             ${video.music?.url ? `
                             <audio controls src="${video.music.url}"></audio>
                             ` : ''}
 
-                            <!-- Download Buttons -->
                             <div class="download-section">
                                 <h4><i class="fas fa-download"></i> Download Options</h4>
                                 <div class="download-grid">
@@ -811,7 +775,6 @@
             }
         }
 
-        // Download File
         async function downloadFile(url, filename) {
             showToast("Starting download...");
             
@@ -839,14 +802,12 @@
             }
         }
 
-        // Enter Key Support
         document.getElementById("url").addEventListener("keypress", function(e) {
             if (e.key === "Enter") {
                 fetchData();
             }
         });
 
-        // Register Service Worker
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("sw.js")
                 .then(() => console.log("✅ Service Worker registered"))
