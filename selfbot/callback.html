@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authenticating... - OwO Bot</title>
+    <meta name="theme-color" content="#0f0f1a">
+    <meta name="msapplication-navbutton-color" content="#0f0f1a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦉</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -34,7 +39,6 @@
             overflow: hidden;
         }
 
-        /* ========== ANIMATED BACKGROUND ========== */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -72,7 +76,6 @@
             }
         }
 
-        /* ========== GLOWING ORBS ========== */
         .glow-orb {
             position: fixed;
             width: 300px;
@@ -102,7 +105,6 @@
             50% { transform: scale(1.1); opacity: 0.35; }
         }
 
-        /* ========== CARD ========== */
         .card {
             position: relative;
             z-index: 1;
@@ -132,7 +134,6 @@
             }
         }
 
-        /* ========== LOADER ========== */
         .loader-container {
             margin-bottom: 30px;
         }
@@ -197,7 +198,6 @@
             to { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        /* ========== SUCCESS ICON ========== */
         .success-container {
             display: none;
             margin-bottom: 30px;
@@ -248,7 +248,6 @@
             }
         }
 
-        /* ========== ERROR ICON ========== */
         .error-container {
             display: none;
             margin-bottom: 30px;
@@ -276,7 +275,6 @@
             80% { transform: translateX(10px); }
         }
 
-        /* ========== TEXT ========== */
         .title {
             color: #fff;
             font-size: 26px;
@@ -299,7 +297,6 @@
             font-size: 13px;
         }
 
-        /* ========== ERROR BOX ========== */
         .error-box {
             display: none;
             background: rgba(239, 68, 68, 0.15);
@@ -319,7 +316,6 @@
             margin-bottom: 6px;
         }
 
-        /* ========== BUTTON ========== */
         .btn {
             display: none;
             margin-top: 25px;
@@ -365,7 +361,6 @@
             justify-content: center;
         }
 
-        /* ========== PROGRESS STEPS ========== */
         .progress-steps {
             display: flex;
             justify-content: center;
@@ -432,7 +427,6 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* ========== REDIRECT COUNTDOWN ========== */
         .countdown {
             display: none;
             margin-top: 20px;
@@ -449,7 +443,6 @@
             font-size: 15px;
         }
 
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 480px) {
             .card {
                 padding: 45px 30px;
@@ -519,7 +512,6 @@
             }
         }
 
-        /* ========== SELECTION ========== */
         ::selection {
             background: var(--primary);
             color: #fff;
@@ -527,18 +519,14 @@
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
     <div class="bg-animation">
         <span></span><span></span><span></span><span></span><span></span>
     </div>
 
-    <!-- Glowing Orbs -->
     <div class="glow-orb glow-orb-1"></div>
     <div class="glow-orb glow-orb-2"></div>
 
-    <!-- Main Card -->
     <div class="card">
-        <!-- Loading State -->
         <div class="loader-container" id="loaderContainer">
             <div class="loader">
                 <div class="loader-ring"></div>
@@ -547,7 +535,6 @@
             </div>
         </div>
 
-        <!-- Success State -->
         <div class="success-container" id="successContainer">
             <div class="success-icon">
                 <svg class="success-checkmark" viewBox="0 0 24 24">
@@ -556,28 +543,23 @@
             </div>
         </div>
 
-        <!-- Error State -->
         <div class="error-container" id="errorContainer">
             <div class="error-icon">✕</div>
         </div>
 
-        <!-- Title & Message -->
         <h2 class="title" id="title">Authenticating...</h2>
         <p class="message" id="message">Please wait while we verify your account</p>
         <p class="sub-message" id="subMessage">This will only take a moment</p>
 
-        <!-- Error Details -->
         <div class="error-box" id="errorBox">
             <strong>Error Details:</strong>
             <span id="errorDetails"></span>
         </div>
 
-        <!-- Countdown -->
         <div class="countdown" id="countdown">
             Redirecting in <span class="countdown-number" id="countdownNumber">3</span> seconds...
         </div>
 
-        <!-- Buttons -->
         <a href="/selfbot/" class="btn" id="retryBtn">🔄 Try Again</a>
         
         <div class="btn-group" id="btnGroup">
@@ -585,7 +567,6 @@
             <a href="/selfbot/dashboard.html" class="btn btn-secondary">📊 Dashboard</a>
         </div>
 
-        <!-- Progress Steps -->
         <div class="progress-steps">
             <div class="step completed" id="step1">
                 <div class="step-icon">1</div>
@@ -603,12 +584,10 @@
     </div>
 
     <script>
-        // ========== CONFIGURATION ==========
         const BACKEND_URL = 'https://oyy-gus.koyeb.app';
         const DASHBOARD_PATH = '/selfbot/dashboard.html';
         const LOGIN_PATH = '/selfbot/';
 
-        // ========== DOM ELEMENTS ==========
         const elements = {
             loaderContainer: document.getElementById('loaderContainer'),
             successContainer: document.getElementById('successContainer'),
@@ -627,16 +606,13 @@
             step3: document.getElementById('step3')
         };
 
-        // ========== URL PARAMETERS ==========
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
         const error = urlParams.get('error');
         const errorDescription = urlParams.get('error_description');
         const state = urlParams.get('state');
 
-        // ========== MAIN AUTHENTICATION FLOW ==========
         async function handleAuthentication() {
-            // Check for OAuth errors
             if (error) {
                 showError(
                     'Authorization Denied',
@@ -646,7 +622,6 @@
                 return;
             }
 
-            // Check for authorization code
             if (!code) {
                 showError(
                     'Missing Authorization',
@@ -656,7 +631,6 @@
                 return;
             }
 
-            // Verify state (CSRF protection) - optional but recommended
             const savedState = sessionStorage.getItem('oauth_state');
             if (savedState && state && savedState !== state) {
                 showError(
@@ -668,16 +642,13 @@
                 return;
             }
 
-            // Clear saved state
             sessionStorage.removeItem('oauth_state');
 
             try {
-                // Update UI - Verifying
                 updateStep(2, 'active');
                 elements.message.textContent = 'Exchanging authorization code...';
                 elements.subMessage.textContent = 'Connecting to Discord API';
 
-                // Exchange code for token
                 const response = await fetch(`${BACKEND_URL}/api/auth/discord/callback`, {
                     method: 'POST',
                     headers: {
@@ -696,11 +667,9 @@
                     throw new Error('No token received from server');
                 }
 
-                // Store authentication data
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
 
-                // Show success
                 showSuccess(data.user);
 
             } catch (err) {
@@ -713,57 +682,44 @@
             }
         }
 
-        // ========== SHOW SUCCESS STATE ==========
         function showSuccess(user) {
-            // Update steps
             updateStep(2, 'completed');
             updateStep(3, 'completed');
 
-            // Hide loader, show success
             elements.loaderContainer.style.display = 'none';
             elements.successContainer.style.display = 'block';
 
-            // Update text
             elements.title.textContent = 'Welcome Back!';
             elements.message.textContent = `Successfully logged in as ${user?.username || 'User'}`;
             elements.subMessage.textContent = 'Redirecting you to the dashboard...';
 
-            // Show countdown
             elements.countdown.style.display = 'block';
             startCountdown(3);
         }
 
-        // ========== SHOW ERROR STATE ==========
         function showError(title, details, hint) {
-            // Update steps
             updateStep(2, 'error');
 
-            // Hide loader, show error
             elements.loaderContainer.style.display = 'none';
             elements.errorContainer.style.display = 'block';
 
-            // Update text
             elements.title.textContent = title;
             elements.message.textContent = hint || 'Please try again.';
             elements.subMessage.style.display = 'none';
 
-            // Show error details
             if (details) {
                 elements.errorBox.style.display = 'block';
                 elements.errorDetails.textContent = details;
             }
 
-            // Show retry button
             elements.retryBtn.style.display = 'inline-block';
 
-            // Update step icon to error
             elements.step2.querySelector('.step-icon').textContent = '✕';
             elements.step2.querySelector('.step-icon').style.background = 'linear-gradient(135deg, var(--danger), #dc2626)';
             elements.step2.querySelector('.step-icon').style.boxShadow = '0 4px 15px rgba(239, 68, 68, 0.4)';
             elements.step2.classList.remove('active');
         }
 
-        // ========== UPDATE STEP STATE ==========
         function updateStep(stepNumber, state) {
             const step = elements[`step${stepNumber}`];
             
@@ -777,7 +733,6 @@
             }
         }
 
-        // ========== COUNTDOWN & REDIRECT ==========
         function startCountdown(seconds) {
             let count = seconds;
             elements.countdownNumber.textContent = count;
@@ -793,12 +748,10 @@
             }, 1000);
         }
 
-        // ========== HANDLE ALREADY LOGGED IN ==========
         async function checkExistingSession() {
             const token = localStorage.getItem('token');
             
             if (token && !code && !error) {
-                // Already logged in, redirect to dashboard
                 try {
                     const response = await fetch(`${BACKEND_URL}/api/auth/me`, {
                         headers: { 'Authorization': `Bearer ${token}` }
@@ -820,7 +773,6 @@
                         return true;
                     }
                 } catch (e) {
-                    // Token invalid, continue with auth
                     localStorage.removeItem('token');
                     localStorage.removeItem('user');
                 }
@@ -829,7 +781,6 @@
             return false;
         }
 
-        // ========== KEYBOARD SHORTCUTS ==========
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 window.location.href = LOGIN_PATH;
@@ -839,27 +790,21 @@
             }
         });
 
-        // ========== INITIALIZE ==========
         async function init() {
-            // Clean URL (remove code from address bar for security)
             if (code || error) {
                 const cleanUrl = window.location.origin + window.location.pathname;
                 window.history.replaceState({}, document.title, cleanUrl);
             }
 
-            // Check if already logged in
             const alreadyLoggedIn = await checkExistingSession();
             
             if (!alreadyLoggedIn) {
-                // Small delay for UX
                 setTimeout(handleAuthentication, 500);
             }
         }
 
-        // Start the authentication process
         document.addEventListener('DOMContentLoaded', init);
 
-        // Fallback if DOMContentLoaded already fired
         if (document.readyState !== 'loading') {
             init();
         }

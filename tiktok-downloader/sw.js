@@ -7,7 +7,6 @@ const urlsToCache = [
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'
 ];
 
-// Install
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -16,7 +15,6 @@ self.addEventListener('install', event => {
   );
 });
 
-// Activate
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -31,7 +29,6 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
@@ -39,7 +36,6 @@ self.addEventListener('fetch', event => {
         return response || fetch(event.request);
       })
       .catch(() => {
-        // Fallback for offline
       })
   );
 });

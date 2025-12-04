@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OwO Bot - Login</title>
+    <meta name="theme-color" content="#0f0f1a">
+    <meta name="msapplication-navbutton-color" content="#0f0f1a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦉</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -35,7 +40,6 @@
             position: relative;
         }
 
-        /* ========== ANIMATED BACKGROUND ========== */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -78,7 +82,6 @@
             }
         }
 
-        /* ========== GLOWING ORB ========== */
         .glow-orb {
             position: fixed;
             width: 400px;
@@ -109,7 +112,6 @@
             66% { transform: translate(-20px, 20px) scale(0.95); }
         }
 
-        /* ========== LOGIN CONTAINER ========== */
         .login-container {
             position: relative;
             z-index: 1;
@@ -141,7 +143,6 @@
             }
         }
 
-        /* ========== LOGO ========== */
         .logo {
             text-align: center;
             margin-bottom: 40px;
@@ -195,7 +196,6 @@
             font-weight: 400;
         }
 
-        /* ========== FEATURES ========== */
         .features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -250,7 +250,6 @@
             font-weight: 500;
         }
 
-        /* ========== DISCORD BUTTON ========== */
         .discord-btn {
             width: 100%;
             padding: 18px 28px;
@@ -332,7 +331,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ========== STATS ========== */
         .stats {
             display: flex;
             justify-content: center;
@@ -364,7 +362,6 @@
             margin-top: 4px;
         }
 
-        /* ========== DISCLAIMER ========== */
         .disclaimer {
             margin-top: 30px;
             padding: 18px;
@@ -384,7 +381,6 @@
             color: #fca5a5;
         }
 
-        /* ========== VERSION BADGE ========== */
         .version-badge {
             position: fixed;
             bottom: 20px;
@@ -398,7 +394,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 520px) {
             .login-card {
                 padding: 40px 28px;
@@ -485,7 +480,6 @@
             }
         }
 
-        /* ========== SELECTION ========== */
         ::selection {
             background: var(--primary);
             color: #fff;
@@ -493,26 +487,22 @@
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
     <div class="bg-animation">
         <span></span><span></span><span></span><span></span><span></span>
         <span></span><span></span><span></span><span></span><span></span>
     </div>
 
-    <!-- Glowing Orbs -->
     <div class="glow-orb glow-orb-1"></div>
     <div class="glow-orb glow-orb-2"></div>
 
     <div class="login-container">
         <div class="login-card">
-            <!-- Logo Section -->
             <div class="logo">
                 <div class="logo-icon">🦉</div>
                 <h1>OwO Bot</h1>
                 <p>Automate your OwO farming experience</p>
             </div>
 
-            <!-- Features Grid -->
             <div class="features">
                 <div class="feature">
                     <span class="feature-icon">⚡</span>
@@ -532,7 +522,6 @@
                 </div>
             </div>
 
-            <!-- Discord Login Button -->
             <button class="discord-btn" id="loginBtn" onclick="loginWithDiscord()">
                 <div class="spinner"></div>
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -541,7 +530,6 @@
                 <span class="btn-text">Login with Discord</span>
             </button>
 
-            <!-- Stats -->
             <div class="stats">
                 <div class="stat-item">
                     <span class="stat-value">24/7</span>
@@ -557,7 +545,6 @@
                 </div>
             </div>
 
-            <!-- Disclaimer -->
             <div class="disclaimer">
                 <p>
                     <strong>⚠️ Disclaimer:</strong> Use at your own risk. This tool is for educational purposes only.
@@ -567,26 +554,21 @@
         </div>
     </div>
 
-    <!-- Version Badge -->
     <div class="version-badge">v3.0.0</div>
 
     <script>
-        // ========== CONFIGURATION ==========
         const CLIENT_ID = '1446041744545415239';
         const REDIRECT_URI = 'https://oyy-gus.github.io/selfbot/callback.html';
         const BACKEND_URL = 'https://oyy-gus.koyeb.app';
         const DASHBOARD_PATH = '/selfbot/dashboard.html';
 
-        // ========== LOGIN FUNCTION ==========
         function loginWithDiscord() {
             const btn = document.getElementById('loginBtn');
             btn.classList.add('loading');
 
-            // Build OAuth URL
             const scope = 'identify email';
             const state = generateState();
             
-            // Save state for CSRF protection
             sessionStorage.setItem('oauth_state', state);
             
             const params = new URLSearchParams({
@@ -600,20 +582,17 @@
 
             const url = `https://discord.com/api/oauth2/authorize?${params.toString()}`;
             
-            // Small delay for UX
             setTimeout(() => {
                 window.location.href = url;
             }, 500);
         }
 
-        // Generate random state for CSRF protection
         function generateState() {
             const array = new Uint8Array(16);
             crypto.getRandomValues(array);
             return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
         }
 
-        // ========== CHECK EXISTING SESSION ==========
         async function checkSession() {
             const token = localStorage.getItem('token');
             
@@ -627,20 +606,16 @@
                 });
 
                 if (response.ok) {
-                    // Valid session, redirect to dashboard
                     window.location.href = DASHBOARD_PATH;
                 } else {
-                    // Invalid token, clear storage
                     localStorage.removeItem('token');
                     localStorage.removeItem('user');
                 }
             } catch (error) {
                 console.error('Session check failed:', error);
-                // Don't clear on network error, might be temporary
             }
         }
 
-        // ========== FEATURE ANIMATIONS ==========
         function initAnimations() {
             const features = document.querySelectorAll('.feature');
             
@@ -656,21 +631,17 @@
             });
         }
 
-        // ========== KEYBOARD SHORTCUT ==========
         document.addEventListener('keydown', (e) => {
-            // Enter key to login
             if (e.key === 'Enter') {
                 loginWithDiscord();
             }
         });
 
-        // ========== INITIALIZE ==========
         document.addEventListener('DOMContentLoaded', () => {
             checkSession();
             initAnimations();
         });
 
-        // ========== HANDLE OAUTH ERROR ==========
         const urlParams = new URLSearchParams(window.location.search);
         const error = urlParams.get('error');
         
@@ -678,7 +649,6 @@
             const errorDesc = urlParams.get('error_description') || 'Login was cancelled or failed';
             console.error('OAuth Error:', error, errorDesc);
             
-            // Show error toast (simple version)
             const toast = document.createElement('div');
             toast.style.cssText = `
                 position: fixed;
@@ -698,17 +668,14 @@
             toast.textContent = '❌ ' + errorDesc;
             document.body.appendChild(toast);
             
-            // Remove error from URL
             window.history.replaceState({}, document.title, window.location.pathname);
             
-            // Remove toast after 5 seconds
             setTimeout(() => {
                 toast.style.animation = 'slideDown 0.5s ease forwards';
                 setTimeout(() => toast.remove(), 500);
             }, 5000);
         }
 
-        // Add toast animation styles
         const style = document.createElement('style');
         style.textContent = `
             @keyframes slideUp {

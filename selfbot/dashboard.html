@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>OwO Bot Dashboard</title>
+    <meta name="theme-color" content="#0f0f1a">
+    <meta name="msapplication-navbutton-color" content="#0f0f1a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -37,7 +42,6 @@
             overflow-x: hidden;
         }
 
-        /* ========== SIDEBAR ========== */
         .sidebar {
             position: fixed;
             left: 0;
@@ -237,7 +241,6 @@
             box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
         }
 
-        /* ========== MOBILE HEADER ========== */
         .mobile-header {
             display: none;
             position: fixed;
@@ -302,7 +305,6 @@
         .overlay.active { display: block; }
         .sidebar.active { transform: translateX(0); }
 
-        /* ========== MAIN CONTENT ========== */
         .main {
             margin-left: 280px;
             padding: 35px;
@@ -364,7 +366,6 @@
 
         .status-text { color: var(--gray); }
 
-        /* ========== PAGES ========== */
         .page { display: none; animation: fadeSlideIn 0.5s ease; }
         .page.active { display: block; }
 
@@ -373,7 +374,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ========== QUICK STATS BAR ========== */
         .quick-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -423,7 +423,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* ========== TOOLBAR ========== */
         .toolbar {
             display: flex;
             gap: 12px;
@@ -494,7 +493,6 @@
         .btn-sm { padding: 10px 16px; font-size: 13px; border-radius: 10px; }
         .btn-icon { width: 40px; height: 40px; padding: 0; border-radius: 10px; }
 
-        /* ========== ACCOUNT CARDS ========== */
         .accounts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -665,7 +663,6 @@
         .card-actions .btn { width: 100%; }
         .card-actions .btn-full { grid-column: span 2; }
 
-        /* ========== STATS PAGE ========== */
         .stats-overview {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -742,7 +739,6 @@
             gap: 10px;
         }
 
-        /* ========== SETTINGS PAGE ========== */
         .settings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -827,7 +823,6 @@
             line-height: 1.6;
         }
 
-        /* ========== LOGS PAGE ========== */
         .logs-container {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -908,7 +903,6 @@
 
         .log-message { color: #e2e8f0; }
 
-        /* ========== MODAL ========== */
         .modal {
             display: none;
             position: fixed;
@@ -984,7 +978,6 @@
             margin-top: 6px;
         }
 
-        /* ========== TOAST ========== */
         .toast-container {
             position: fixed;
             bottom: 30px;
@@ -1030,7 +1023,6 @@
         }
         .toast-close:hover { opacity: 1; }
 
-        /* ========== EMPTY STATE ========== */
         .empty-state {
             text-align: center;
             padding: 80px 20px;
@@ -1063,7 +1055,6 @@
             font-size: 15px;
         }
 
-        /* ========== LOADING ========== */
         .loading-spinner {
             display: inline-block;
             width: 20px;
@@ -1078,7 +1069,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 1200px) {
             .accounts-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
             .charts-grid { grid-template-columns: 1fr; }
@@ -1109,13 +1099,11 @@
             .modal-content { padding: 28px 20px; }
         }
 
-        /* ========== SCROLLBAR ========== */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 4px; }
         ::-webkit-scrollbar-thumb { background: var(--gray-dark); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
-        /* ========== SELECTION ========== */
         ::selection {
             background: var(--primary);
             color: #fff;
@@ -1123,7 +1111,6 @@
     </style>
 </head>
 <body>
-    <!-- Mobile Header -->
     <div class="mobile-header">
         <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
         <div class="mobile-logo">
@@ -1136,10 +1123,8 @@
         </div>
     </div>
 
-    <!-- Overlay -->
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-logo">
@@ -1198,7 +1183,6 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <main class="main">
         <div class="page-header">
             <div class="page-title-group">
@@ -1211,7 +1195,6 @@
             </div>
         </div>
 
-        <!-- Dashboard Page -->
         <div class="page active" id="dashboard-page">
             <div class="quick-stats">
                 <div class="quick-stat">
@@ -1261,7 +1244,6 @@
             </div>
         </div>
 
-        <!-- Accounts Page -->
         <div class="page" id="accounts-page">
             <div class="toolbar">
                 <button class="btn btn-primary" onclick="openModal('addModal')">➕ Add New Account</button>
@@ -1277,7 +1259,6 @@
             </div>
         </div>
 
-        <!-- Stats Page -->
         <div class="page" id="stats-page">
             <div class="stats-overview">
                 <div class="stat-card">
@@ -1324,7 +1305,6 @@
             </div>
         </div>
 
-        <!-- Settings Page -->
         <div class="page" id="settings-page">
             <div class="settings-grid">
                 <div class="settings-card">
@@ -1368,7 +1348,6 @@
             </div>
         </div>
 
-        <!-- Logs Page -->
         <div class="page" id="logs-page">
             <div class="logs-container">
                 <div class="logs-toolbar">
@@ -1394,7 +1373,6 @@
         </div>
     </main>
 
-    <!-- Add Account Modal -->
     <div class="modal" id="addModal">
         <div class="modal-content">
             <div class="modal-close" onclick="closeModal('addModal')">✕</div>
@@ -1428,7 +1406,6 @@
         </div>
     </div>
 
-    <!-- Edit Account Modal -->
     <div class="modal" id="editModal">
         <div class="modal-content">
             <div class="modal-close" onclick="closeModal('editModal')">✕</div>
@@ -1457,15 +1434,12 @@
         </div>
     </div>
 
-    <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
-        // ========== CONFIGURATION ==========
         const API = 'https://oyy-gus.koyeb.app';
         const PATH = '/selfbot';
         
-        // ========== STATE ==========
         let socket = null;
         let userData = { accounts: [], globalSettings: {} };
         let logs = [];
@@ -1473,7 +1447,6 @@
         let commandsChart = null;
         let currentFilter = 'all';
 
-        // ========== INITIALIZATION ==========
         async function init() {
             const token = localStorage.getItem('token');
             const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -1483,7 +1456,6 @@
                 return;
             }
 
-            // Set user info
             if (user.username) {
                 document.getElementById('userName').textContent = user.username;
             }
@@ -1499,13 +1471,11 @@
             await loadData();
             connectSocket();
             
-            // Auto refresh every 30 seconds
             setInterval(loadData, 30000);
             
             addLog('Dashboard initialized', 'success');
         }
 
-        // ========== SOCKET CONNECTION ==========
         function connectSocket() {
             try {
                 socket = io(API, { 
@@ -1571,7 +1541,6 @@
             if (mobileText) mobileText.textContent = online ? 'Online' : 'Offline';
         }
 
-        // ========== DATA LOADING ==========
         async function loadData() {
             try {
                 const response = await fetch(`${API}/api/config`, {
@@ -1595,7 +1564,6 @@
             }
         }
 
-        // ========== RENDERING ==========
         function renderAll() {
             renderAccounts();
             renderDashboardAccounts();
@@ -1737,7 +1705,6 @@
             const captchas = sum('captchaCount');
             const active = userData.accounts.filter(a => a.enabled && a.statusHunting === 'aktif').length;
             
-            // Update stat cards
             document.getElementById('sHunts').textContent = hunts.toLocaleString();
             document.getElementById('sOwo').textContent = owo.toLocaleString();
             document.getElementById('sBattles').textContent = battles.toLocaleString();
@@ -1745,7 +1712,6 @@
             document.getElementById('sCaptchas').textContent = captchas.toLocaleString();
             document.getElementById('sActive').textContent = active;
             
-            // Update quick stats
             document.getElementById('qsHunts').textContent = hunts.toLocaleString();
             document.getElementById('qsOwo').textContent = owo.toLocaleString();
             document.getElementById('qsBattles').textContent = battles.toLocaleString();
@@ -1760,11 +1726,9 @@
             
             if (!ctx1 || !ctx2) return;
             
-            // Destroy existing charts
             if (accountsChart) accountsChart.destroy();
             if (commandsChart) commandsChart.destroy();
             
-            // Accounts Chart
             accountsChart = new Chart(ctx1, {
                 type: 'bar',
                 data: {
@@ -1811,7 +1775,6 @@
                 }
             });
             
-            // Commands Distribution Chart
             const sum = (key) => userData.accounts.reduce((s, a) => s + (a[key] || 0), 0);
             
             commandsChart = new Chart(ctx2, {
@@ -1857,7 +1820,6 @@
                 document.getElementById('defaultAction').value = userData.globalSettings.action || 'pray';
             }
             
-            // Config preview
             const config = {
                 owoId: "408785106942164992",
                 accounts: (userData.accounts || []).map(a => ({
@@ -1880,7 +1842,6 @@
             }
         }
 
-        // ========== ACCOUNT ACTIONS ==========
         async function controlAccount(id, action) {
             const account = userData.accounts.find(a => a._id === id);
             if (!account) return;
@@ -2017,20 +1978,17 @@
             openModal('editModal');
         }
 
-        // ========== NAVIGATION ==========
         function setupNavigation() {
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', () => {
-                    // Remove active from all
+
                     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
                     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                     
-                    // Add active to clicked
                     item.classList.add('active');
                     const page = item.dataset.page;
                     document.getElementById(`${page}-page`).classList.add('active');
                     
-                    // Update title
                     const titles = {
                         dashboard: { title: 'Dashboard', subtitle: 'Welcome back! Here\'s your bot overview.' },
                         accounts: { title: 'Accounts', subtitle: 'Manage your OwO farming accounts.' },
@@ -2042,18 +2000,14 @@
                     document.getElementById('pageTitle').textContent = titles[page]?.title || 'Dashboard';
                     document.getElementById('pageSubtitle').textContent = titles[page]?.subtitle || '';
                     
-                    // Update charts if on stats page
                     if (page === 'stats') updateCharts();
                     
-                    // Close mobile sidebar
                     if (window.innerWidth < 992) toggleSidebar();
                 });
             });
         }
 
-        // ========== FORMS ==========
         function setupForms() {
-            // Add Account Form
             document.getElementById('addForm').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
@@ -2091,7 +2045,6 @@
                 }
             });
             
-            // Edit Account Form
             document.getElementById('editForm').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
@@ -2123,7 +2076,6 @@
                 }
             });
             
-            // Settings Form
             document.getElementById('settingsForm').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
@@ -2152,7 +2104,6 @@
             });
         }
 
-        // ========== LOGS ==========
         function addLog(message, type = 'info') {
             const now = new Date();
             const time = now.toLocaleTimeString('en-US', { hour12: false });
@@ -2212,7 +2163,6 @@
             showToast('Logs exported!', 'success');
         }
 
-        // ========== UTILITIES ==========
         function openModal(id) {
             document.getElementById(id).classList.add('active');
         }
@@ -2246,10 +2196,8 @@
             
             container.appendChild(toast);
             
-            // Trigger animation
             setTimeout(() => toast.classList.add('active'), 10);
             
-            // Auto remove
             setTimeout(() => {
                 toast.classList.remove('active');
                 setTimeout(() => toast.remove(), 400);
@@ -2293,21 +2241,18 @@
             showToast('Config downloaded!', 'success');
         }
 
-        // Close modal on outside click
         window.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) {
                 e.target.classList.remove('active');
             }
         });
 
-        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 document.querySelectorAll('.modal.active').forEach(m => m.classList.remove('active'));
             }
         });
 
-        // Initialize on DOM load
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>

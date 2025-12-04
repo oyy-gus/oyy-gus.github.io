@@ -682,7 +682,6 @@
             return num.toString();
         }
 
-        // Fungsi untuk membuat URL proxy
         function getProxyUrl(url, filename) {
             if (!url) return null;
             return `${PROXY_URL}?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename || 'download')}`;
@@ -713,7 +712,7 @@
                 const res = await fetch(`${API_URL}?url=${encodeURIComponent(url)}`);
                 const data = await res.json();
 
-                console.log("API Response:", data); // Debug
+                console.log("API Response:", data); 
 
                 if (!data.success || !data.data) {
                     throw new Error(data.error || "Failed to fetch video");
@@ -721,7 +720,6 @@
 
                 const video = data.data;
 
-                // Build thumbnail HTML
                 let thumbnailHTML = '';
                 if (video.thumbnail) {
                     thumbnailHTML = `<img src="${video.thumbnail}" alt="Video thumbnail" onerror="this.parentElement.innerHTML='<div class=\\'thumbnail-placeholder\\'><i class=\\'fas fa-video\\'></i><span>No Preview</span></div>'" />`;
@@ -729,7 +727,6 @@
                     thumbnailHTML = `<div class="thumbnail-placeholder"><i class="fas fa-video"></i><span>No Preview</span></div>`;
                 }
 
-                // Build duration badge
                 let durationBadge = '';
                 if (video.duration) {
                     durationBadge = `
@@ -739,7 +736,6 @@
                     `;
                 }
 
-                // Build music section
                 let musicHTML = '';
                 if (video.music?.title || video.music?.url) {
                     musicHTML = `
@@ -755,7 +751,6 @@
                     `;
                 }
 
-                // Build audio player - menggunakan proxy
                 let audioPlayerHTML = '';
                 if (video.music?.url) {
                     const audioProxyUrl = getProxyUrl(video.music.url, 'audio.mp3');
@@ -769,7 +764,6 @@
                     `;
                 }
 
-                // Build download buttons
                 let downloadBtnsHTML = '';
                 
                 if (video.video?.no_watermark_hd) {
@@ -884,13 +878,11 @@
         async function downloadFile(url, filename, btnElement) {
             showToast("Starting download...");
             
-            // Add downloading state
             if (btnElement) {
                 btnElement.classList.add('downloading');
                 const originalHTML = btnElement.innerHTML;
                 btnElement.innerHTML = `<div class="spinner" style="width:16px;height:16px;border-width:2px;"></div><span>Downloading...</span>`;
                 
-                // Restore button after download
                 setTimeout(() => {
                     btnElement.classList.remove('downloading');
                     btnElement.innerHTML = originalHTML;
@@ -898,7 +890,6 @@
             }
             
             try {
-                // Gunakan proxy untuk download
                 const proxyUrl = getProxyUrl(url, filename);
                 
                 const res = await fetch(proxyUrl);
@@ -922,7 +913,6 @@
                 showToast("Download complete!");
             } catch (err) {
                 console.error("Download error:", err);
-                // Fallback: buka di tab baru dengan proxy
                 window.open(getProxyUrl(url, filename), '_blank');
                 showToast("Opening in new tab...");
             }
