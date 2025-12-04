@@ -6,6 +6,7 @@
     <title>OwO Bot Dashboard</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="sidebar">
@@ -27,9 +28,9 @@
             </a>
         </nav>
         <div class="user-info">
-            <img id="userAvatar" src="" alt="Avatar">
-            <span id="username"></span>
-            <button onclick="logout()">Logout</button>
+            <img id="userAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+            <span id="username">Loading...</span>
+            <button onclick="logout()" class="logout-btn">Logout</button>
         </div>
     </div>
     
@@ -48,10 +49,11 @@
                 <button class="btn btn-primary" onclick="showAddAccountModal()">+ Add Account</button>
                 <button class="btn btn-success" onclick="startAllAccounts()">Start All</button>
                 <button class="btn btn-danger" onclick="stopAllAccounts()">Stop All</button>
+                <button class="btn btn-secondary" onclick="refreshAccounts()">🔄 Refresh</button>
             </div>
             
             <div class="accounts-grid" id="accountsGrid">
-                <!-- Account cards will be loaded here -->
+                <div class="loading">Loading accounts...</div>
             </div>
         </div>
         
@@ -71,8 +73,8 @@
                     <p class="stat-value" id="totalCaptchas">0</p>
                 </div>
                 <div class="stat-card">
-                    <h3>Uptime</h3>
-                    <p class="stat-value" id="uptime">00:00:00</p>
+                    <h3>Success Rate</h3>
+                    <p class="stat-value" id="successRate">0%</p>
                 </div>
             </div>
             
@@ -108,8 +110,8 @@
             <div class="settings-section">
                 <h2>Bot Configuration</h2>
                 <div class="config-display">
-                    <pre id="configDisplay"></pre>
-                    <button class="btn btn-secondary" onclick="downloadConfig()">Download config.js</button>
+                    <pre id="configDisplay">{}</pre>
+                    <button class="btn btn-secondary" onclick="downloadConfig()">📥 Download config.js</button>
                 </div>
             </div>
         </div>
@@ -119,9 +121,10 @@
             <div class="logs-container">
                 <div class="logs-header">
                     <button class="btn btn-secondary" onclick="clearLogs()">Clear Logs</button>
+                    <button class="btn btn-primary" onclick="refreshLogs()">🔄 Refresh</button>
                 </div>
                 <div class="logs-content" id="logsContent">
-                    <!-- Logs will be displayed here -->
+                    <div class="log-entry">Waiting for logs...</div>
                 </div>
             </div>
         </div>
@@ -135,24 +138,61 @@
             <form id="addAccountForm">
                 <div class="form-group">
                     <label>Account Name</label>
-                    <input type="text" id="accountName" required>
+                    <input type="text" id="accountName" required placeholder="e.g., Main Account">
                 </div>
                 <div class="form-group">
-                    <label>Token</label>
-                    <input type="password" id="accountToken" required>
+                    <label>Discord Token</label>
+                    <input type="password" id="accountToken" required placeholder="Your Discord token">
+                    <small>Your Discord token for selfbot</small>
                 </div>
                 <div class="form-group">
                     <label>Channel ID</label>
-                    <input type="text" id="channelId">
+                    <input type="text" id="channelId" placeholder="e.g., 123456789">
+                    <small>Discord channel ID for hunting</small>
                 </div>
                 <div class="form-group">
                     <label>Prefix</label>
-                    <input type="text" id="prefix" value="owo">
+                    <input type="text" id="prefix" value="owo" placeholder="owo">
+                    <small>Command prefix (usually 'owo')</small>
                 </div>
                 <button type="submit" class="btn btn-primary">Add Account</button>
             </form>
         </div>
     </div>
+    
+    <!-- Edit Account Modal -->
+    <div id="editAccountModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Account</h2>
+            <form id="editAccountForm">
+                <input type="hidden" id="editAccountId">
+                <div class="form-group">
+                    <label>Account Name</label>
+                    <input type="text" id="editAccountName" required>
+                </div>
+                <div class="form-group">
+                    <label>Channel ID</label>
+                    <input type="text" id="editChannelId">
+                </div>
+                <div class="form-group">
+                    <label>Prefix</label>
+                    <input type="text" id="editPrefix">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="editStatus">
+                        <option value="aktif">Active</option>
+                        <option value="nonaktif">Inactive</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
     
     <script src="js/dashboard.js"></script>
 </body>
