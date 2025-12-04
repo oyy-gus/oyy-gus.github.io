@@ -5,148 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authenticating...</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .loader-container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 400px;
-        }
-        
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #5865F2;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        h2 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-        
-        p {
-            color: #666;
-            margin-bottom: 20px;
-        }
-        
-        .error {
-            color: #e74c3c;
-            display: none;
-        }
-        
-        .retry-btn {
-            background: #5865F2;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            display: none;
-            margin-top: 20px;
-        }
-
-        .retry-btn:hover {
-            background: #4752C4;
-        }
+        body { font-family: Arial; background: linear-gradient(135deg, #667eea, #764ba2); min-height: 100vh; display: flex; justify-content: center; align-items: center; margin: 0; }
+        .box { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 500px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #5865F2; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        h2 { color: #333; }
+        p { color: #666; }
+        .error { color: #e74c3c; background: #ffeaea; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: left; font-size: 14px; word-break: break-all; }
+        .retry { background: #5865F2; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; margin-top: 20px; text-decoration: none; display: inline-block; }
+        .debug { background: #f5f5f5; padding: 10px; margin-top: 20px; text-align: left; font-size: 12px; border-radius: 8px; }
     </style>
 </head>
 <body>
-    <div class="loader-container">
+    <div class="box">
         <div class="loader" id="loader"></div>
-        <h2 id="status-title">Authenticating...</h2>
-        <p id="status-message">Please wait while we log you in</p>
-        <div class="error" id="error-message"></div>
-        <a href="/selfbot/" class="retry-btn" id="retry-btn">Try Again</a>
+        <h2 id="title">Authenticating...</h2>
+        <p id="message">Please wait</p>
+        <div class="error" id="error" style="display:none"></div>
+        <div class="debug" id="debug" style="display:none"></div>
+        <a href="/selfbot/" class="retry" id="retry" style="display:none">Try Again</a>
     </div>
 
     <script>
-        // Configuration
         const BACKEND_URL = 'https://oyy-gus.koyeb.app';
         
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
         const error = urlParams.get('error');
         
+        // Show debug info
+        document.getElementById('debug').style.display = 'block';
+        document.getElementById('debug').innerHTML = `
+            <strong>Debug Info:</strong><br>
+            Backend: ${BACKEND_URL}<br>
+            Code: ${code ? code.substring(0, 15) + '...' : 'NULL'}<br>
+            Error: ${error || 'None'}
+        `;
+        
         async function handleCallback() {
             if (error) {
-                showError('Authorization denied. Please try again.');
+                showError('Discord denied authorization: ' + error);
                 return;
             }
             
             if (!code) {
-                showError('No authorization code received.');
+                showError('No authorization code received');
                 return;
             }
             
             try {
+                // Test backend first
+                document.getElementById('message').textContent = 'Testing backend...';
+                
+                const healthCheck = await fetch(`${BACKEND_URL}/health`).catch(() => null);
+                if (!healthCheck || !healthCheck.ok) {
+                    throw new Error('Backend is not reachable. Check if Koyeb service is running.');
+                }
+                
+                document.getElementById('message').textContent = 'Authenticating...';
+                
                 const response = await fetch(`${BACKEND_URL}/api/auth/discord/callback`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ code })
                 });
                 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'Authentication failed');
-                }
-                
                 const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error + (data.details ? ': ' + data.details : ''));
+                }
                 
                 if (data.token) {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     
-                    document.getElementById('status-title').textContent = 'Success!';
-                    document.getElementById('status-message').textContent = 'Redirecting to dashboard...';
+                    document.getElementById('title').textContent = '✅ Success!';
+                    document.getElementById('message').textContent = 'Redirecting...';
+                    document.getElementById('loader').style.display = 'none';
                     
                     setTimeout(() => {
                         window.location.href = '/selfbot/dashboard.html';
                     }, 1000);
                 } else {
-                    throw new Error('No token received');
+                    throw new Error('No token received from server');
                 }
                 
-            } catch (error) {
-                console.error('Auth error:', error);
-                showError(error.message || 'Authentication failed. Please try again.');
+            } catch (err) {
+                console.error('Auth error:', err);
+                showError(err.message);
             }
         }
         
-        function showError(message) {
+        function showError(msg) {
             document.getElementById('loader').style.display = 'none';
-            document.getElementById('status-title').textContent = 'Error';
-            document.getElementById('status-message').style.display = 'none';
-            document.getElementById('error-message').textContent = message;
-            document.getElementById('error-message').style.display = 'block';
-            document.getElementById('retry-btn').style.display = 'inline-block';
+            document.getElementById('title').textContent = '❌ Error';
+            document.getElementById('message').style.display = 'none';
+            document.getElementById('error').textContent = msg;
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('retry').style.display = 'inline-block';
         }
         
         handleCallback();
