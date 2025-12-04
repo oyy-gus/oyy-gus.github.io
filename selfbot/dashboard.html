@@ -6,821 +6,110 @@
     <title>OwO Bot Dashboard</title>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
     <style>
-        /* ========================================
-           RESET & BASE STYLES
-           ======================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fa;
-            display: flex;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* ========================================
-           SIDEBAR
-           ======================================== */
-        .sidebar {
-            width: 250px;
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            left: 0;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-        }
-
-        .logo {
-            padding: 20px;
-            background: rgba(0,0,0,0.2);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .logo h2 {
-            color: white;
-            text-align: center;
-            font-size: 24px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        /* Navigation */
-        nav {
-            flex: 1;
-            padding: 20px 0;
-            overflow-y: auto;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 20px;
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 15px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .nav-item:hover {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            padding-left: 25px;
-        }
-
-        .nav-item.active {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            font-weight: 600;
-        }
-
-        .nav-item.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: #f39c12;
-        }
-
-        .nav-item span {
-            font-size: 20px;
-        }
-
-        /* User Info */
-        .user-info {
-            padding: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-            background: rgba(0,0,0,0.2);
-        }
-
-        .user-info img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .user-info #username {
-            flex: 1;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .logout-btn {
-            padding: 6px 12px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: background 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: #c0392b;
-            transform: scale(1.05);
-        }
-
-        /* ========================================
-           MAIN CONTENT
-           ======================================== */
-        .main-content {
-            flex: 1;
-            margin-left: 250px;
-            padding: 30px;
-            background: #f5f7fa;
-            min-height: 100vh;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e0e6ed;
-        }
-
-        .header h1 {
-            color: #2c3e50;
-            font-size: 28px;
-            font-weight: 600;
-        }
-
-        .bot-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
-            background: white;
-            border-radius: 50px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .status-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            position: relative;
-        }
-
-        .status-indicator.online {
-            background: #27ae60;
-            animation: pulse 2s infinite;
-        }
-
-        .status-indicator.offline {
-            background: #e74c3c;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(39, 174, 96, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
-            }
-        }
-
-        /* ========================================
-           PAGES
-           ======================================== */
-        .page {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Toolbar */
-        .toolbar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        /* ========================================
-           BUTTONS
-           ======================================== */
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #2980b9, #21618c);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #27ae60, #229954);
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: linear-gradient(135deg, #229954, #1e8449);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: linear-gradient(135deg, #c0392b, #a93226);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: linear-gradient(135deg, #7f8c8d, #707b7c);
-        }
-
-        /* ========================================
-           ACCOUNT CARDS
-           ======================================== */
-        .accounts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .account-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #e0e6ed;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .account-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.12);
-        }
-
-        .account-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #2ecc71);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .account-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .account-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f0f3f7;
-        }
-
-        .account-header h3 {
-            color: #2c3e50;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .account-status {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .account-status.active {
-            background: #27ae60;
-            animation: pulse 2s infinite;
-        }
-
-        .account-status.inactive {
-            background: #e74c3c;
-        }
-
-        .account-status.paused {
-            background: #f39c12;
-            animation: blink 2s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50%, 100% { opacity: 1; }
-            25%, 75% { opacity: 0.5; }
-        }
-
-        .account-info {
-            margin-bottom: 15px;
-        }
-
-        .account-info p {
-            color: #5d6d7e;
-            font-size: 14px;
-            margin: 8px 0;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .account-info p strong {
-            color: #34495e;
-            font-weight: 600;
-        }
-
-        .account-info p small {
-            color: #95a5a6;
-            font-size: 11px;
-        }
-
-        .account-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .account-actions button {
-            flex: 1;
-            padding: 8px;
-            font-size: 12px;
-        }
-
-        /* ========================================
-           STATS
-           ======================================== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            border: 1px solid #e0e6ed;
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-card h3 {
-            color: #7f8c8d;
-            font-size: 14px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-value {
-            font-size: 36px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #3498db, #2ecc71);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .chart-container {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-        }
-
-        /* ========================================
-           SETTINGS
-           ======================================== */
-        .settings-section {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-        }
-
-        .settings-section h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f3f7;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #34495e;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 15px;
-            border: 2px solid #e0e6ed;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #3498db;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-        }
-
-        .form-group small {
-            display: block;
-            margin-top: 5px;
-            color: #7f8c8d;
-            font-size: 12px;
-        }
-
-        .config-display {
-            margin-top: 20px;
-        }
-
-        .config-display pre {
-            background: #2c3e50;
-            color: #2ecc71;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            line-height: 1.5;
-            max-height: 400px;
-        }
-
-        /* ========================================
-           LOGS
-           ======================================== */
-        .logs-container {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            height: 600px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-        }
-
-        .logs-header {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e0e6ed;
-        }
-
-        .logs-content {
-            flex: 1;
-            background: #1e272e;
-            color: #4cd137;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            overflow-y: auto;
-            border-radius: 8px;
-            line-height: 1.6;
-        }
-
-        .log-entry {
-            margin-bottom: 5px;
-            padding: 3px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .log-entry:last-child {
-            border-bottom: none;
-        }
-
-        /* ========================================
-           MODAL
-           ======================================== */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.show {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            animation: slideUp 0.3s ease;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-content h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 22px;
-        }
-
-        .close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #95a5a6;
-            transition: color 0.3s;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .close:hover {
-            color: #e74c3c;
-            background: rgba(231, 76, 60, 0.1);
-        }
-
-        /* ========================================
-           TOAST NOTIFICATION
-           ======================================== */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            z-index: 10000;
-            max-width: 350px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .toast.info {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-        }
-
-        .toast.success {
-            background: linear-gradient(135deg, #27ae60, #229954);
-        }
-
-        .toast.error {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-        }
-
-        .toast.warning {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
-        }
-
-        /* ========================================
-           UTILITY CLASSES
-           ======================================== */
-        .loading {
-            text-align: center;
-            padding: 60px;
-            color: #7f8c8d;
-            font-size: 16px;
-        }
-
-        .loading::before {
-            content: '⏳ ';
-            font-size: 24px;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 80px 20px;
-            color: #95a5a6;
-        }
-
-        .empty-state p {
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-
-        /* ========================================
-           SCROLLBAR
-           ======================================== */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #95a5a6;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #7f8c8d;
-        }
-
-        /* ========================================
-           RESPONSIVE DESIGN
-           ======================================== */
-        @media (max-width: 1200px) {
-            .accounts-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 70px;
-            }
-            
-            .sidebar .logo h2 {
-                font-size: 18px;
-            }
-            
-            .nav-item span {
-                display: none;
-            }
-            
-            .user-info #username,
-            .logout-btn {
-                display: none;
-            }
-            
-            .main-content {
-                margin-left: 70px;
-                padding: 20px;
-            }
-            
-            .accounts-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .toolbar {
-                flex-direction: column;
-            }
-            
-            .toolbar .btn {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-            
-            .modal-content {
-                width: 95%;
-                padding: 20px;
-            }
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f5f7fa;display:flex;min-height:100vh;overflow-x:hidden}
+        .sidebar{width:250px;background:linear-gradient(135deg,#2c3e50 0%,#3498db 100%);height:100vh;display:flex;flex-direction:column;position:fixed;left:0;top:0;z-index:1000;box-shadow:2px 0 10px rgba(0,0,0,0.1)}
+        .logo{padding:20px;background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(255,255,255,0.1)}
+        .logo h2{color:white;text-align:center;font-size:24px;text-shadow:2px 2px 4px rgba(0,0,0,0.2)}
+        nav{flex:1;padding:20px 0;overflow-y:auto}
+        .nav-item{display:flex;align-items:center;gap:15px;padding:15px 20px;color:rgba(255,255,255,0.8);text-decoration:none;transition:all 0.3s ease;font-size:15px;position:relative;cursor:pointer}
+        .nav-item:hover{background:rgba(255,255,255,0.1);color:white;padding-left:25px}
+        .nav-item.active{background:rgba(255,255,255,0.2);color:white;font-weight:600}
+        .nav-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:#f39c12}
+        .nav-item span{font-size:20px}
+        .user-info{padding:20px;border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:10px;color:white;background:rgba(0,0,0,0.2)}
+        .user-info img{width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,0.3)}
+        .user-info #username{flex:1;font-size:14px;font-weight:500}
+        .logout-btn{padding:6px 12px;background:#e74c3c;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:background 0.3s}
+        .logout-btn:hover{background:#c0392b}
+        .main-content{flex:1;margin-left:250px;padding:30px;background:#f5f7fa;min-height:100vh}
+        .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid #e0e6ed}
+        .header h1{color:#2c3e50;font-size:28px;font-weight:600}
+        .bot-status{display:flex;align-items:center;gap:10px;padding:10px 20px;background:white;border-radius:50px;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+        .status-indicator{width:12px;height:12px;border-radius:50%}
+        .status-indicator.online{background:#27ae60;animation:pulse 2s infinite}
+        .status-indicator.offline{background:#e74c3c}
+        @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(39,174,96,0.7)}70%{box-shadow:0 0 0 10px rgba(39,174,96,0)}100%{box-shadow:0 0 0 0 rgba(39,174,96,0)}}
+        .page{display:none;animation:fadeIn 0.3s ease}
+        .page.active{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .toolbar{display:flex;gap:10px;margin-bottom:25px;flex-wrap:wrap}
+        .btn{padding:10px 20px;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;transition:all 0.3s ease;display:inline-flex;align-items:center;gap:5px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.15)}
+        .btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+        .btn-primary{background:linear-gradient(135deg,#3498db,#2980b9);color:white}
+        .btn-success{background:linear-gradient(135deg,#27ae60,#229954);color:white}
+        .btn-danger{background:linear-gradient(135deg,#e74c3c,#c0392b);color:white}
+        .btn-secondary{background:linear-gradient(135deg,#95a5a6,#7f8c8d);color:white}
+        .btn-warning{background:linear-gradient(135deg,#f39c12,#e67e22);color:white}
+        .accounts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-bottom:30px}
+        .account-card{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 15px rgba(0,0,0,0.08);transition:all 0.3s ease;border:1px solid #e0e6ed;position:relative;overflow:hidden}
+        .account-card:hover{transform:translateY(-5px);box-shadow:0 5px 25px rgba(0,0,0,0.12)}
+        .account-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#3498db,#2ecc71);transform:scaleX(0);transition:transform 0.3s ease}
+        .account-card:hover::before{transform:scaleX(1)}
+        .account-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #f0f3f7}
+        .account-header h3{color:#2c3e50;font-size:18px;font-weight:600}
+        .account-status{width:12px;height:12px;border-radius:50%}
+        .account-status.active{background:#27ae60;animation:pulse 2s infinite}
+        .account-status.inactive{background:#e74c3c}
+        .account-status.paused{background:#f39c12;animation:blink 2s infinite}
+        @keyframes blink{0%,50%,100%{opacity:1}25%,75%{opacity:0.5}}
+        .account-info{margin-bottom:15px}
+        .account-info p{color:#5d6d7e;font-size:14px;margin:8px 0;display:flex;justify-content:space-between}
+        .account-info p strong{color:#34495e;font-weight:600}
+        .account-actions{display:flex;gap:8px;flex-wrap:wrap}
+        .account-actions button{flex:1;padding:8px;font-size:12px;min-width:70px}
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:30px}
+        .stat-card{background:white;padding:25px;border-radius:12px;text-align:center;box-shadow:0 2px 15px rgba(0,0,0,0.08);border:1px solid #e0e6ed;transition:transform 0.3s ease}
+        .stat-card:hover{transform:translateY(-5px)}
+        .stat-card h3{color:#7f8c8d;font-size:14px;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+        .stat-value{font-size:36px;font-weight:bold;background:linear-gradient(135deg,#3498db,#2ecc71);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .chart-container{background:white;padding:25px;border-radius:12px;box-shadow:0 2px 15px rgba(0,0,0,0.08)}
+        .settings-section{background:white;padding:30px;border-radius:12px;margin-bottom:20px;box-shadow:0 2px 15px rgba(0,0,0,0.08)}
+        .settings-section h2{color:#2c3e50;margin-bottom:20px;font-size:20px;padding-bottom:10px;border-bottom:2px solid #f0f3f7}
+        .form-group{margin-bottom:20px}
+        .form-group label{display:block;margin-bottom:8px;color:#34495e;font-weight:500;font-size:14px}
+        .form-group input,.form-group select{width:100%;padding:10px 15px;border:2px solid #e0e6ed;border-radius:8px;font-size:14px;transition:all 0.3s ease;background:#f8f9fa}
+        .form-group input:focus,.form-group select:focus{outline:none;border-color:#3498db;background:white;box-shadow:0 0 0 3px rgba(52,152,219,0.1)}
+        .form-group small{display:block;margin-top:5px;color:#7f8c8d;font-size:12px}
+        .config-display{margin-top:20px}
+        .config-display pre{background:#2c3e50;color:#2ecc71;padding:20px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:13px;line-height:1.5;max-height:400px}
+        .logs-container{background:white;border-radius:12px;padding:20px;height:600px;display:flex;flex-direction:column;box-shadow:0 2px 15px rgba(0,0,0,0.08)}
+        .logs-header{display:flex;gap:10px;margin-bottom:15px;padding-bottom:15px;border-bottom:1px solid #e0e6ed}
+        .logs-content{flex:1;background:#1e272e;color:#4cd137;padding:15px;font-family:'Courier New',monospace;font-size:12px;overflow-y:auto;border-radius:8px;line-height:1.6}
+        .log-entry{margin-bottom:5px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+        .modal{display:none;position:fixed;z-index:2000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(5px);align-items:center;justify-content:center}
+        .modal.show{display:flex;animation:fadeIn 0.3s ease}
+        .modal-content{background:white;padding:30px;border-radius:12px;width:90%;max-width:500px;position:relative;animation:slideUp 0.3s ease;box-shadow:0 10px 40px rgba(0,0,0,0.2)}
+        @keyframes slideUp{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
+        .modal-content h2{color:#2c3e50;margin-bottom:20px;font-size:22px}
+        .close{position:absolute;right:20px;top:15px;font-size:28px;cursor:pointer;color:#95a5a6;transition:color 0.3s;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+        .close:hover{color:#e74c3c;background:rgba(231,76,60,0.1)}
+        .toast{position:fixed;bottom:20px;right:20px;padding:15px 25px;border-radius:8px;color:white;font-weight:500;opacity:0;transform:translateY(20px);transition:all 0.3s ease;z-index:10000;max-width:350px;box-shadow:0 5px 20px rgba(0,0,0,0.2)}
+        .toast.show{opacity:1;transform:translateY(0)}
+        .toast.info{background:linear-gradient(135deg,#3498db,#2980b9)}
+        .toast.success{background:linear-gradient(135deg,#27ae60,#229954)}
+        .toast.error{background:linear-gradient(135deg,#e74c3c,#c0392b)}
+        .toast.warning{background:linear-gradient(135deg,#f39c12,#e67e22)}
+        .loading{text-align:center;padding:60px;color:#7f8c8d;font-size:16px}
+        .empty-state{text-align:center;padding:80px 20px;color:#95a5a6}
+        .empty-state p{margin-bottom:20px;font-size:18px}
+        ::-webkit-scrollbar{width:8px;height:8px}
+        ::-webkit-scrollbar-track{background:#f1f1f1}
+        ::-webkit-scrollbar-thumb{background:#95a5a6;border-radius:4px}
+        ::-webkit-scrollbar-thumb:hover{background:#7f8c8d}
+        @media(max-width:768px){.sidebar{width:70px}.sidebar .logo h2{font-size:16px}.nav-item span:last-child{display:none}.user-info #username,.logout-btn{display:none}.main-content{margin-left:70px;padding:15px}.accounts-grid{grid-template-columns:1fr}.toolbar{flex-direction:column}.toolbar .btn{width:100%}}
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <div class="logo">
-            <h2>🦉 OwO Bot</h2>
-        </div>
+        <div class="logo"><h2>🦉 OwO Bot</h2></div>
         <nav>
-            <a class="nav-item active" data-page="accounts">
-                <span>👤</span> Accounts
-            </a>
-            <a class="nav-item" data-page="stats">
-                <span>📊</span> Statistics
-            </a>
-            <a class="nav-item" data-page="settings">
-                <span>⚙️</span> Settings
-            </a>
-            <a class="nav-item" data-page="logs">
-                <span>📜</span> Logs
-            </a>
+            <a class="nav-item active" data-page="accounts"><span>👤</span> <span>Accounts</span></a>
+            <a class="nav-item" data-page="stats"><span>📊</span> <span>Statistics</span></a>
+            <a class="nav-item" data-page="settings"><span>⚙️</span> <span>Settings</span></a>
+            <a class="nav-item" data-page="logs"><span>📜</span> <span>Logs</span></a>
         </nav>
         <div class="user-info">
             <img id="userAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
@@ -842,40 +131,22 @@
         <div id="accounts-page" class="page active">
             <div class="toolbar">
                 <button class="btn btn-primary" onclick="showAddAccountModal()">+ Add Account</button>
-                <button class="btn btn-success" onclick="startAllAccounts()">Start All</button>
-                <button class="btn btn-danger" onclick="stopAllAccounts()">Stop All</button>
+                <button class="btn btn-success" onclick="startAllAccounts()">▶️ Start All</button>
+                <button class="btn btn-danger" onclick="stopAllAccounts()">⏹️ Stop All</button>
                 <button class="btn btn-secondary" onclick="refreshAccounts()">🔄 Refresh</button>
             </div>
-            
-            <div class="accounts-grid" id="accountsGrid">
-                <div class="loading">Loading accounts...</div>
-            </div>
+            <div class="accounts-grid" id="accountsGrid"><div class="loading">⏳ Loading accounts...</div></div>
         </div>
         
         <!-- Stats Page -->
         <div id="stats-page" class="page">
             <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Total Hunts</h3>
-                    <p class="stat-value" id="totalHunts">0</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Active Accounts</h3>
-                    <p class="stat-value" id="activeAccounts">0</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Total Captchas</h3>
-                    <p class="stat-value" id="totalCaptchas">0</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Success Rate</h3>
-                    <p class="stat-value" id="successRate">0%</p>
-                </div>
+                <div class="stat-card"><h3>Total Hunts</h3><p class="stat-value" id="totalHunts">0</p></div>
+                <div class="stat-card"><h3>Active Accounts</h3><p class="stat-value" id="activeAccounts">0</p></div>
+                <div class="stat-card"><h3>Total Captchas</h3><p class="stat-value" id="totalCaptchas">0</p></div>
+                <div class="stat-card"><h3>Success Rate</h3><p class="stat-value" id="successRate">100%</p></div>
             </div>
-            
-            <div class="chart-container">
-                <canvas id="huntChart"></canvas>
-            </div>
+            <div class="chart-container"><canvas id="huntChart"></canvas></div>
         </div>
         
         <!-- Settings Page -->
@@ -898,10 +169,9 @@
                             <option value="curse">Curse</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                    <button type="submit" class="btn btn-primary">💾 Save Settings</button>
                 </form>
             </div>
-            
             <div class="settings-section">
                 <h2>Bot Configuration</h2>
                 <div class="config-display">
@@ -915,12 +185,10 @@
         <div id="logs-page" class="page">
             <div class="logs-container">
                 <div class="logs-header">
-                    <button class="btn btn-secondary" onclick="clearLogs()">Clear Logs</button>
+                    <button class="btn btn-secondary" onclick="clearLogs()">🗑️ Clear</button>
                     <button class="btn btn-primary" onclick="refreshLogs()">🔄 Refresh</button>
                 </div>
-                <div class="logs-content" id="logsContent">
-                    <div class="log-entry">Waiting for logs...</div>
-                </div>
+                <div class="logs-content" id="logsContent"><div class="log-entry">[System] Waiting for logs...</div></div>
             </div>
         </div>
     </div>
@@ -938,19 +206,18 @@
                 <div class="form-group">
                     <label>Discord Token</label>
                     <input type="password" id="accountToken" required placeholder="Your Discord token">
-                    <small>Your Discord token for selfbot</small>
+                    <small>⚠️ Keep your token safe!</small>
                 </div>
                 <div class="form-group">
                     <label>Channel ID</label>
-                    <input type="text" id="channelId" placeholder="e.g., 123456789">
-                    <small>Discord channel ID for hunting</small>
+                    <input type="text" id="channelId" placeholder="e.g., 123456789012345678">
+                    <small>Right-click channel → Copy ID</small>
                 </div>
                 <div class="form-group">
                     <label>Prefix</label>
                     <input type="text" id="prefix" value="owo" placeholder="owo">
-                    <small>Command prefix (usually 'owo')</small>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Account</button>
+                <button type="submit" class="btn btn-primary">➕ Add Account</button>
             </form>
         </div>
     </div>
@@ -974,36 +241,24 @@
                     <label>Prefix</label>
                     <input type="text" id="editPrefix">
                 </div>
-                <div class="form-group">
-                    <label>Status</label>
-                    <select id="editStatus">
-                        <option value="aktif">Active</option>
-                        <option value="nonaktif">Inactive</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-primary">💾 Save Changes</button>
             </form>
         </div>
     </div>
     
-    <!-- Toast Notification -->
     <div id="toast" class="toast"></div>
     
     <script>
-        // ========================================
-        // CONFIGURATION
-        // ========================================
+        // ============ CONFIGURATION ============
         const API_URL = 'https://oyy-gus.koyeb.app';
         const BASE_PATH = '/selfbot';
+        // =======================================
 
         let socket = null;
         let userData = {};
-        let logs = [];
         let chart = null;
 
-        // ========================================
-        // INITIALIZATION
-        // ========================================
+        // Initialize
         async function init() {
             console.log('🚀 Initializing dashboard...');
             
@@ -1011,46 +266,25 @@
             const user = JSON.parse(localStorage.getItem('user') || '{}');
             
             if (!token) {
-                console.log('❌ No token found, redirecting to login');
                 window.location.href = BASE_PATH + '/';
                 return;
             }
             
-            // Set user info
-            if (user.username) {
-                document.getElementById('username').textContent = user.username;
-            }
-            
+            if (user.username) document.getElementById('username').textContent = user.username;
             if (user.avatar && user.discordId) {
-                document.getElementById('userAvatar').src = 
-                    `https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png`;
+                document.getElementById('userAvatar').src = `https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png`;
             }
             
-            // Setup event listeners
             setupNavigation();
             setupForms();
-            
-            // Load initial data
             await loadUserData();
-            
-            // Connect to WebSocket after data loaded
             connectWebSocket();
         }
 
-        // ========================================
-        // WEBSOCKET CONNECTION
-        // ========================================
+        // WebSocket
         function connectWebSocket() {
-            console.log('📡 Connecting to WebSocket...');
-            
             try {
-                socket = io(API_URL, {
-                    transports: ['websocket', 'polling'],
-                    reconnection: true,
-                    reconnectionDelay: 1000,
-                    reconnectionAttempts: 5
-                });
-                
+                socket = io(API_URL, { transports: ['websocket', 'polling'], reconnection: true });
                 const user = JSON.parse(localStorage.getItem('user') || '{}');
                 
                 socket.on('connect', () => {
@@ -1065,351 +299,278 @@
                 });
                 
                 socket.on('config-updated', (data) => {
-                    console.log('📥 Config updated:', data);
                     userData = data;
                     renderAccounts();
                     updateStats();
                 });
                 
-                socket.on('bot-status', (data) => {
-                    console.log('🤖 Bot status:', data);
-                    updateBotStatus(data);
-                });
-                
-                socket.on('error', (error) => {
-                    console.error('❌ Socket error:', error);
-                });
-                
+                socket.on('bot-status', updateBotStatus);
             } catch (error) {
-                console.error('❌ Failed to connect WebSocket:', error);
-                showToast('WebSocket connection failed', 'error');
+                console.error('WebSocket error:', error);
             }
         }
 
-        // ========================================
-        // DATA LOADING
-        // ========================================
+        // Load Data
         async function loadUserData() {
             const token = localStorage.getItem('token');
-            
-            console.log('📥 Loading user data...');
-            
             try {
                 const response = await fetch(`${API_URL}/api/config`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
                 
                 if (!response.ok) {
-                    if (response.status === 401) {
-                        showToast('Session expired, please login again', 'error');
-                        logout();
-                        return;
-                    }
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    if (response.status === 401) { logout(); return; }
+                    throw new Error('Failed to load data');
                 }
                 
                 userData = await response.json();
-                console.log('✅ User data loaded:', userData);
-                
-                // Render data
                 renderAccounts();
                 updateStats();
                 updateSettings();
-                
             } catch (error) {
-                console.error('❌ Error loading data:', error);
-                showToast('Failed to load data: ' + error.message, 'error');
+                console.error('Error:', error);
+                showToast('Failed to load data', 'error');
             }
         }
 
-        // ========================================
-        // RENDER FUNCTIONS
-        // ========================================
+        // Render Accounts
         function renderAccounts() {
             const grid = document.getElementById('accountsGrid');
             
             if (!userData.accounts || userData.accounts.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-state">
-                        <p>😴 No accounts added yet</p>
-                        <button class="btn btn-primary" onclick="showAddAccountModal()">Add Your First Account</button>
-                    </div>
-                `;
+                grid.innerHTML = `<div class="empty-state"><p>😴 No accounts yet</p><button class="btn btn-primary" onclick="showAddAccountModal()">Add Account</button></div>`;
                 return;
             }
             
-            grid.innerHTML = userData.accounts.map(account => `
-                <div class="account-card" data-id="${account._id}">
-                    <div class="account-header">
-                        <h3>${account.name}</h3>
-                        <span class="account-status ${getStatusClass(account)}" title="${getStatusText(account)}"></span>
-                    </div>
-                    <div class="account-info">
-                        <p><strong>Channel:</strong> ${account.channelId || 'Not set'}</p>
-                        <p><strong>Prefix:</strong> ${account.prefix}</p>
-                        <p><strong>Status:</strong> ${getStatusText(account)}</p>
-                        <p><strong>Hunts:</strong> ${account.huntCount || 0} / ${account.totalHunts || 0}</p>
-                        ${account.lastHuntTime ? `<p><small>Last: ${new Date(account.lastHuntTime).toLocaleString()}</small></p>` : ''}
-                    </div>
-                    <div class="account-actions">
-                        <button onclick="toggleAccount('${account._id}')" class="btn ${account.enabled ? 'btn-danger' : 'btn-success'}">
-                            ${account.enabled ? '⏸️ Disable' : '▶️ Enable'}
-                        </button>
-                        <button onclick="editAccount('${account._id}')" class="btn btn-secondary">✏️ Edit</button>
-                        <button onclick="deleteAccount('${account._id}')" class="btn btn-danger">🗑️ Delete</button>
-                    </div>
-                </div>
-            `).join('');
+            grid.innerHTML = userData.accounts.map(acc => {
+                const isRunning = acc.enabled && acc.statusHunting === 'aktif';
+                const statusClass = !acc.enabled ? 'inactive' : isRunning ? 'active' : 'paused';
+                const statusText = !acc.enabled ? '🔴 Disabled' : isRunning ? '🟢 Running' : '🟡 Ready';
+                
+                return `
+                    <div class="account-card">
+                        <div class="account-header">
+                            <h3>${acc.name}</h3>
+                            <span class="account-status ${statusClass}"></span>
+                        </div>
+                        <div class="account-info">
+                            <p><strong>Channel:</strong> ${acc.channelId || 'Not set'}</p>
+                            <p><strong>Prefix:</strong> ${acc.prefix || 'owo'}</p>
+                            <p><strong>Status:</strong> ${statusText}</p>
+                            <p><strong>Hunts:</strong> ${acc.totalHunts || 0}</p>
+                        </div>
+                        <div class="account-actions">
+                            ${isRunning ? 
+                                `<button onclick="controlAccount('${acc._id}','stop')" class="btn btn-warning">⏸️ Stop</button>` :
+                                `<button onclick="controlAccount('${acc._id}','start')" class="btn btn-success" ${!acc.channelId ? 'disabled' : ''}>▶️ Start</button>`
+                            }
+                            <button onclick="toggleAccount('${acc._id}')" class="btn ${acc.enabled ? 'btn-danger' : 'btn-success'}">${acc.enabled ? '🔴' : '🟢'}</button>
+                            <button onclick="editAccount('${acc._id}')" class="btn btn-secondary">✏️</button>
+                            <button onclick="deleteAccount('${acc._id}')" class="btn btn-danger">🗑️</button>
+                        </div>
+                    </div>`;
+            }).join('');
         }
 
-        function getStatusClass(account) {
-            if (!account.enabled) return 'inactive';
-            if (account.statusHunting === 'aktif') return 'active';
-            if (account.captchaDetected) return 'paused';
-            return 'inactive';
-        }
-
-        function getStatusText(account) {
-            if (!account.enabled) return '🔴 Disabled';
-            if (account.captchaDetected) return '⏸️ Captcha';
-            if (account.statusHunting === 'aktif') return '🟢 Active';
-            return '🟡 Ready';
-        }
-
-        // ========================================
-        // NAVIGATION
-        // ========================================
-        function setupNavigation() {
-            const navItems = document.querySelectorAll('.nav-item');
-            const pages = document.querySelectorAll('.page');
+        // Account Control
+        async function controlAccount(accountId, action) {
+            const token = localStorage.getItem('token');
+            const acc = userData.accounts.find(a => a._id === accountId);
             
-            navItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    // Update active nav
-                    navItems.forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                    
-                    // Show page
-                    const pageName = item.dataset.page;
-                    pages.forEach(page => {
-                        page.classList.remove('active');
-                    });
-                    
-                    const targetPage = document.getElementById(`${pageName}-page`);
-                    if (targetPage) {
-                        targetPage.classList.add('active');
-                        
-                        // Load page specific data
-                        if (pageName === 'logs') {
-                            refreshLogs();
-                        } else if (pageName === 'stats') {
-                            updateChart();
-                        }
-                    }
+            try {
+                showToast(`${action === 'start' ? 'Starting' : 'Stopping'} ${acc.name}...`, 'info');
+                
+                const response = await fetch(`${API_URL}/api/bot/command`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ command: action, target: 'account', accountId, accountName: acc.name })
                 });
-            });
-        }
-
-        // ========================================
-        // FORMS SETUP
-        // ========================================
-        function setupForms() {
-            // Add account form
-            const addForm = document.getElementById('addAccountForm');
-            if (addForm) {
-                addForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    
-                    const token = localStorage.getItem('token');
-                    const data = {
-                        name: document.getElementById('accountName').value,
-                        token: document.getElementById('accountToken').value,
-                        channelId: document.getElementById('channelId').value,
-                        prefix: document.getElementById('prefix').value || 'owo'
-                    };
-                    
-                    try {
-                        const response = await fetch(`${API_URL}/api/config/account`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${token}`
-                            },
-                            body: JSON.stringify(data)
-                        });
-                        
-                        if (response.ok) {
-                            showToast('Account added successfully!', 'success');
-                            closeModal();
-                            await loadUserData();
-                        } else {
-                            const error = await response.json();
-                            throw new Error(error.error || 'Failed to add account');
-                        }
-                    } catch (error) {
-                        showToast('Error: ' + error.message, 'error');
-                    }
-                });
-            }
-            
-            // Edit account form
-            const editForm = document.getElementById('editAccountForm');
-            if (editForm) {
-                editForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    
-                    const accountId = document.getElementById('editAccountId').value;
-                    const token = localStorage.getItem('token');
-                    
-                    const data = {
-                        name: document.getElementById('editAccountName').value,
-                        channelId: document.getElementById('editChannelId').value,
-                        prefix: document.getElementById('editPrefix').value,
-                        statusHunting: document.getElementById('editStatus').value
-                    };
-                    
-                    try {
-                        const response = await fetch(`${API_URL}/api/config/account/${accountId}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${token}`
-                            },
-                            body: JSON.stringify(data)
-                        });
-                        
-                        if (response.ok) {
-                            showToast('Account updated successfully!', 'success');
-                            closeEditModal();
-                            await loadUserData();
-                        } else {
-                            throw new Error('Failed to update account');
-                        }
-                    } catch (error) {
-                        showToast('Error: ' + error.message, 'error');
-                    }
-                });
-            }
-            
-            // Global settings form
-            const settingsForm = document.getElementById('globalSettingsForm');
-            if (settingsForm) {
-                settingsForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    
-                    const token = localStorage.getItem('token');
-                    const data = {
-                        minDelayBetweenAccounts: parseInt(document.getElementById('minDelay').value),
-                        maxDelayBetweenAccounts: parseInt(document.getElementById('maxDelay').value),
-                        action: document.getElementById('defaultAction').value
-                    };
-                    
-                    try {
-                        const response = await fetch(`${API_URL}/api/config/global`, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${token}`
-                            },
-                            body: JSON.stringify(data)
-                        });
-                        
-                        if (response.ok) {
-                            showToast('Settings saved successfully!', 'success');
-                        } else {
-                            throw new Error('Failed to save settings');
-                        }
-                    } catch (error) {
-                        showToast('Error: ' + error.message, 'error');
-                    }
-                });
+                
+                if (response.ok) {
+                    showToast(`✅ ${acc.name} ${action}ed!`, 'success');
+                    setTimeout(loadUserData, 1500);
+                } else throw new Error('Failed');
+            } catch (error) {
+                showToast('❌ Error: ' + error.message, 'error');
             }
         }
 
-        // ========================================
-        // ACCOUNT ACTIONS
-        // ========================================
+        async function startAllAccounts() {
+            const token = localStorage.getItem('token');
+            try {
+                showToast('Starting all accounts...', 'info');
+                const response = await fetch(`${API_URL}/api/bot/command`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ command: 'startAll', target: 'all' })
+                });
+                if (response.ok) {
+                    showToast('✅ All accounts starting!', 'success');
+                    setTimeout(loadUserData, 2000);
+                }
+            } catch (error) { showToast('❌ Error', 'error'); }
+        }
+
+        async function stopAllAccounts() {
+            const token = localStorage.getItem('token');
+            try {
+                showToast('Stopping all accounts...', 'info');
+                const response = await fetch(`${API_URL}/api/bot/command`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ command: 'stopAll', target: 'all' })
+                });
+                if (response.ok) {
+                    showToast('✅ All accounts stopped!', 'success');
+                    setTimeout(loadUserData, 2000);
+                }
+            } catch (error) { showToast('❌ Error', 'error'); }
+        }
+
         async function toggleAccount(accountId) {
             const token = localStorage.getItem('token');
-            const account = userData.accounts.find(a => a._id === accountId);
-            
-            if (!account) return;
+            const acc = userData.accounts.find(a => a._id === accountId);
             
             try {
                 const response = await fetch(`${API_URL}/api/config/account/${accountId}`, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        enabled: !account.enabled
-                    })
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ enabled: !acc.enabled })
                 });
-                
                 if (response.ok) {
-                    showToast(`Account ${account.enabled ? 'disabled' : 'enabled'}`, 'success');
-                    await loadUserData();
+                    showToast(`Account ${acc.enabled ? 'disabled' : 'enabled'}`, 'success');
+                    loadUserData();
                 }
-            } catch (error) {
-                showToast('Error: ' + error.message, 'error');
-            }
-        }
-
-        function editAccount(accountId) {
-            const account = userData.accounts.find(a => a._id === accountId);
-            if (!account) return;
-            
-            document.getElementById('editAccountId').value = account._id;
-            document.getElementById('editAccountName').value = account.name;
-            document.getElementById('editChannelId').value = account.channelId || '';
-            document.getElementById('editPrefix').value = account.prefix;
-            document.getElementById('editStatus').value = account.statusHunting;
-            
-            document.getElementById('editAccountModal').classList.add('show');
+            } catch (error) { showToast('Error', 'error'); }
         }
 
         async function deleteAccount(accountId) {
-            if (!confirm('Are you sure you want to delete this account?')) return;
-            
+            if (!confirm('Delete this account?')) return;
             const token = localStorage.getItem('token');
             
             try {
                 const response = await fetch(`${API_URL}/api/config/account/${accountId}`, {
                     method: 'DELETE',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
-                
                 if (response.ok) {
-                    showToast('Account deleted successfully!', 'success');
-                    await loadUserData();
+                    showToast('Account deleted', 'success');
+                    loadUserData();
                 }
-            } catch (error) {
-                showToast('Error: ' + error.message, 'error');
-            }
+            } catch (error) { showToast('Error', 'error'); }
         }
 
-        // ========================================
-        // UPDATE FUNCTIONS
-        // ========================================
+        function editAccount(accountId) {
+            const acc = userData.accounts.find(a => a._id === accountId);
+            if (!acc) return;
+            
+            document.getElementById('editAccountId').value = acc._id;
+            document.getElementById('editAccountName').value = acc.name;
+            document.getElementById('editChannelId').value = acc.channelId || '';
+            document.getElementById('editPrefix').value = acc.prefix || 'owo';
+            document.getElementById('editAccountModal').classList.add('show');
+        }
+
+        // Navigation
+        function setupNavigation() {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    
+                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                    const page = document.getElementById(`${item.dataset.page}-page`);
+                    if (page) {
+                        page.classList.add('active');
+                        if (item.dataset.page === 'stats') updateChart();
+                    }
+                });
+            });
+        }
+
+        // Forms
+        function setupForms() {
+            document.getElementById('addAccountForm')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const token = localStorage.getItem('token');
+                const data = {
+                    name: document.getElementById('accountName').value,
+                    token: document.getElementById('accountToken').value,
+                    channelId: document.getElementById('channelId').value,
+                    prefix: document.getElementById('prefix').value || 'owo'
+                };
+                
+                try {
+                    const response = await fetch(`${API_URL}/api/config/account`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                        body: JSON.stringify(data)
+                    });
+                    if (response.ok) {
+                        showToast('Account added!', 'success');
+                        closeModal();
+                        loadUserData();
+                    } else {
+                        const err = await response.json();
+                        throw new Error(err.error);
+                    }
+                } catch (error) { showToast('Error: ' + error.message, 'error'); }
+            });
+
+            document.getElementById('editAccountForm')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const token = localStorage.getItem('token');
+                const accountId = document.getElementById('editAccountId').value;
+                
+                try {
+                    const response = await fetch(`${API_URL}/api/config/account/${accountId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                        body: JSON.stringify({
+                            name: document.getElementById('editAccountName').value,
+                            channelId: document.getElementById('editChannelId').value,
+                            prefix: document.getElementById('editPrefix').value
+                        })
+                    });
+                    if (response.ok) {
+                        showToast('Account updated!', 'success');
+                        closeEditModal();
+                        loadUserData();
+                    }
+                } catch (error) { showToast('Error', 'error'); }
+            });
+
+            document.getElementById('globalSettingsForm')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const token = localStorage.getItem('token');
+                
+                try {
+                    const response = await fetch(`${API_URL}/api/config/global`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                        body: JSON.stringify({
+                            minDelayBetweenAccounts: parseInt(document.getElementById('minDelay').value),
+                            maxDelayBetweenAccounts: parseInt(document.getElementById('maxDelay').value),
+                            action: document.getElementById('defaultAction').value
+                        })
+                    });
+                    if (response.ok) showToast('Settings saved!', 'success');
+                } catch (error) { showToast('Error', 'error'); }
+            });
+        }
+
+        // Updates
         function updateStats() {
             if (!userData.accounts) return;
+            const total = userData.accounts.reduce((s, a) => s + (a.totalHunts || 0), 0);
+            const active = userData.accounts.filter(a => a.enabled && a.statusHunting === 'aktif').length;
+            const captchas = userData.accounts.reduce((s, a) => s + (a.captchaCount || 0), 0);
             
-            const totalHunts = userData.accounts.reduce((sum, acc) => sum + (acc.totalHunts || 0), 0);
-            const activeAccounts = userData.accounts.filter(acc => acc.enabled && acc.statusHunting === 'aktif').length;
-            const totalCaptchas = userData.accounts.reduce((sum, acc) => sum + (acc.captchaCount || 0), 0);
-            const successRate = totalHunts > 0 ? Math.round(((totalHunts - totalCaptchas) / totalHunts) * 100) : 100;
-            
-            document.getElementById('totalHunts').textContent = totalHunts.toLocaleString();
-            document.getElementById('activeAccounts').textContent = activeAccounts;
-            document.getElementById('totalCaptchas').textContent = totalCaptchas;
-            document.getElementById('successRate').textContent = successRate + '%';
+            document.getElementById('totalHunts').textContent = total.toLocaleString();
+            document.getElementById('activeAccounts').textContent = active;
+            document.getElementById('totalCaptchas').textContent = captchas;
+            document.getElementById('successRate').textContent = (total > 0 ? Math.round(((total - captchas) / total) * 100) : 100) + '%';
         }
 
         function updateSettings() {
@@ -1418,176 +579,68 @@
                 document.getElementById('maxDelay').value = userData.globalSettings.maxDelayBetweenAccounts || 5000;
                 document.getElementById('defaultAction').value = userData.globalSettings.action || 'pray';
             }
-            
-            // Update config display
-            const configObj = generateConfigObject();
-            document.getElementById('configDisplay').textContent = JSON.stringify(configObj, null, 2);
+            document.getElementById('configDisplay').textContent = JSON.stringify(generateConfig(), null, 2);
         }
 
         function updateBotStatus(data) {
-            const statusEl = document.getElementById('botStatus');
-            if (data.online) {
-                statusEl.classList.remove('offline');
-                statusEl.classList.add('online');
-            } else {
-                statusEl.classList.remove('online');
-                statusEl.classList.add('offline');
-            }
+            const el = document.getElementById('botStatus');
+            el.className = `status-indicator ${data.online ? 'online' : 'offline'}`;
         }
 
         function updateChart() {
             const ctx = document.getElementById('huntChart');
-            if (!ctx) return;
-            
-            if (chart) {
-                chart.destroy();
-            }
-            
-            const labels = userData.accounts ? userData.accounts.map(a => a.name) : [];
-            const data = userData.accounts ? userData.accounts.map(a => a.totalHunts || 0) : [];
+            if (!ctx || !userData.accounts) return;
+            if (chart) chart.destroy();
             
             chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Total Hunts',
-                        data: data,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
+                    labels: userData.accounts.map(a => a.name),
+                    datasets: [{ label: 'Total Hunts', data: userData.accounts.map(a => a.totalHunts || 0), backgroundColor: 'rgba(52,152,219,0.6)', borderColor: 'rgba(52,152,219,1)', borderWidth: 1 }]
                 },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
+                options: { scales: { y: { beginAtZero: true } } }
             });
         }
 
-        // ========================================
-        // UTILITY FUNCTIONS
-        // ========================================
-        function refreshAccounts() {
-            loadUserData();
-        }
-
-        async function refreshLogs() {
-            const logsEl = document.getElementById('logsContent');
-            logsEl.innerHTML = '<div class="log-entry">[' + new Date().toLocaleTimeString() + '] Logs refreshed</div>';
-        }
-
-        function clearLogs() {
-            document.getElementById('logsContent').innerHTML = '<div class="log-entry">Logs cleared</div>';
-            logs = [];
-        }
-
-        function showAddAccountModal() {
-            document.getElementById('addAccountModal').classList.add('show');
-            document.getElementById('addAccountForm').reset();
-        }
-
-        function closeModal() {
-            document.getElementById('addAccountModal').classList.remove('show');
-        }
-
-        function closeEditModal() {
-            document.getElementById('editAccountModal').classList.remove('show');
-        }
-
-        function generateConfigObject() {
-            if (!userData.accounts) return {};
-            
+        // Utilities
+        function generateConfig() {
             return {
                 owoId: "408785106942164992",
-                accounts: userData.accounts.map(acc => ({
-                    name: acc.name,
-                    token: acc.token || 'HIDDEN',
-                    channelId: acc.channelId,
-                    channelIds: acc.channelIds || [],
-                    currentChannelIndex: 0,
-                    lastChannelRotation: null,
-                    prefix: acc.prefix,
-                    statusHunting: acc.statusHunting,
-                    enabled: acc.enabled
+                accounts: (userData.accounts || []).map(a => ({
+                    name: a.name, token: 'HIDDEN', channelId: a.channelId,
+                    channelIds: a.channelIds || [], prefix: a.prefix,
+                    statusHunting: a.statusHunting, enabled: a.enabled
                 })),
-                globalSettings: userData.globalSettings || {
-                    minDelayBetweenAccounts: 3000,
-                    maxDelayBetweenAccounts: 5000,
-                    action: 'pray'
-                }
+                globalSettings: userData.globalSettings || {}
             };
         }
 
         function downloadConfig() {
-            const config = generateConfigObject();
-            const configStr = `module.exports = ${JSON.stringify(config, null, 4)};`;
-            
-            const blob = new Blob([configStr], { type: 'text/javascript' });
-            const url = URL.createObjectURL(blob);
+            const blob = new Blob([`module.exports = ${JSON.stringify(generateConfig(), null, 4)};`], { type: 'text/javascript' });
             const a = document.createElement('a');
-            a.href = url;
+            a.href = URL.createObjectURL(blob);
             a.download = 'config.js';
             a.click();
-            URL.revokeObjectURL(url);
-            
-            showToast('Config file downloaded!', 'success');
+            showToast('Config downloaded!', 'success');
         }
 
-        function showToast(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = `toast show ${type}`;
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+        function showToast(msg, type = 'info') {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = `toast show ${type}`;
+            setTimeout(() => t.classList.remove('show'), 3000);
         }
 
-        async function startAllAccounts() {
-            showToast('Starting all accounts...', 'info');
-            // Would send command to bot via backend
-        }
+        function showAddAccountModal() { document.getElementById('addAccountModal').classList.add('show'); }
+        function closeModal() { document.getElementById('addAccountModal').classList.remove('show'); document.getElementById('addAccountForm').reset(); }
+        function closeEditModal() { document.getElementById('editAccountModal').classList.remove('show'); }
+        function refreshAccounts() { loadUserData(); }
+        function refreshLogs() { document.getElementById('logsContent').innerHTML = `<div class="log-entry">[${new Date().toLocaleTimeString()}] Logs refreshed</div>`; }
+        function clearLogs() { document.getElementById('logsContent').innerHTML = '<div class="log-entry">[System] Logs cleared</div>'; }
+        function logout() { localStorage.clear(); window.location.href = BASE_PATH + '/'; }
 
-        async function stopAllAccounts() {
-            showToast('Stopping all accounts...', 'info');
-            // Would send command to bot via backend
-        }
-
-        function logout() {
-            localStorage.clear();
-            window.location.href = BASE_PATH + '/';
-        }
-
-        // ========================================
-        // EVENT LISTENERS
-        // ========================================
-        // Click outside modal to close
-        window.onclick = function(event) {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (event.target === modal) {
-                    modal.classList.remove('show');
-                }
-            });
-        }
-
-        // Error handler
-        window.addEventListener('error', (event) => {
-            console.error('Global error:', event.error);
-        });
-
-        // ========================================
-        // INITIALIZE ON LOAD
-        // ========================================
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
+        window.onclick = (e) => { if (e.target.classList.contains('modal')) e.target.classList.remove('show'); };
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>

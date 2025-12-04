@@ -4,7 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OwO Bot Hunting - Login</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .login-box h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .login-box > p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-3px);
+        }
+
+        .feature span {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            margin: 0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .discord-login {
+            background: #5865F2;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .discord-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.4);
+            background: #4752C4;
+        }
+
+        .disclaimer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .disclaimer p {
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -45,10 +147,11 @@
     </div>
     
     <script>
-        // Configuration dengan data Anda
-        const CLIENT_ID = '1446041744545415239'; // GANTI dengan Discord Client ID Anda!
+        // ============ CONFIGURATION - GANTI DENGAN DATA ANDA! ============
+        const CLIENT_ID = '1446041744545415239';  // GANTI!
         const REDIRECT_URI = 'https://oyy-gus.github.io/selfbot/callback.html';
         const BACKEND_URL = 'https://oyy-gus.koyeb.app';
+        // =================================================================
         
         function loginWithDiscord() {
             const scope = 'identify email';
@@ -56,7 +159,7 @@
             window.location.href = authUrl;
         }
         
-        // Check if user already logged in
+        // Check if already logged in
         const token = localStorage.getItem('token');
         if (token) {
             verifyToken();
@@ -71,10 +174,8 @@
                 });
                 
                 if (response.ok) {
-                    // Token valid, redirect to dashboard
                     window.location.href = '/selfbot/dashboard.html';
                 } else {
-                    // Token invalid, clear storage
                     localStorage.clear();
                 }
             } catch (error) {
