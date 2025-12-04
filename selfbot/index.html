@@ -4,12 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OwO Bot - Login</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦉</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #10b981;
+            --danger: #ef4444;
+            --dark: #1a1a2e;
+            --darker: #0f0f1a;
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         body {
@@ -20,11 +31,11 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
-        /* Animated Background */
+        /* ========== ANIMATED BACKGROUND ========== */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -33,15 +44,14 @@
             height: 100%;
             overflow: hidden;
             z-index: 0;
+            pointer-events: none;
         }
 
         .bg-animation span {
             position: absolute;
             display: block;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            animation: move 25s linear infinite;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            animation: float-up 25s linear infinite;
             bottom: -150px;
             border-radius: 50%;
         }
@@ -57,164 +67,278 @@
         .bg-animation span:nth-child(9) { left: 65%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
         .bg-animation span:nth-child(10) { left: 90%; width: 90px; height: 90px; animation-delay: 0s; animation-duration: 11s; }
 
-        @keyframes move {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-1500px) rotate(720deg); opacity: 0; }
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1500px) rotate(720deg);
+                opacity: 0;
+            }
         }
 
-        /* Login Container */
+        /* ========== GLOWING ORB ========== */
+        .glow-orb {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: orb-float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .glow-orb-1 {
+            top: -100px;
+            right: -100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .glow-orb-2 {
+            bottom: -100px;
+            left: -100px;
+            background: linear-gradient(135deg, #00d9ff, var(--primary));
+            animation-delay: -4s;
+        }
+
+        @keyframes orb-float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* ========== LOGIN CONTAINER ========== */
         .login-container {
             position: relative;
             z-index: 1;
             width: 100%;
-            max-width: 440px;
+            max-width: 480px;
         }
 
         .login-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 50px 40px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            animation: cardAppear 0.8s ease-out;
+            border-radius: 28px;
+            padding: 50px 45px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: card-appear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        @keyframes cardAppear {
-            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes card-appear {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
-        /* Logo */
+        /* ========== LOGO ========== */
         .logo {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
         }
 
         .logo-icon {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 45px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            animation: float 3s ease-in-out infinite;
+            margin: 0 auto 24px;
+            font-size: 50px;
+            box-shadow: 
+                0 15px 35px rgba(102, 126, 234, 0.4),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+            animation: logo-float 3s ease-in-out infinite;
+            position: relative;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+            z-index: -1;
+        }
+
+        @keyframes logo-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
         }
 
         .logo h1 {
             color: #fff;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .logo p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 15px;
             font-weight: 400;
         }
 
-        /* Features */
+        /* ========== FEATURES ========== */
         .features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin: 30px 0;
+            gap: 14px;
+            margin: 35px 0;
         }
 
         .feature {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 18px 15px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 20px 16px;
             text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .feature:hover::before {
+            left: 100%;
         }
 
         .feature:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(102, 126, 234, 0.3);
         }
 
         .feature-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
+            font-size: 32px;
+            margin-bottom: 10px;
             display: block;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
         }
 
-        .feature span:last-child {
+        .feature-text {
             color: rgba(255, 255, 255, 0.85);
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
         }
 
-        /* Discord Button */
+        /* ========== DISCORD BUTTON ========== */
         .discord-btn {
             width: 100%;
-            padding: 16px 24px;
+            padding: 18px 28px;
             background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
             color: #fff;
             border: none;
-            border-radius: 14px;
-            font-size: 16px;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 17px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4);
-            margin-top: 25px;
+            gap: 14px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 10px 30px rgba(88, 101, 242, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discord-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .discord-btn:hover::before {
+            left: 100%;
         }
 
         .discord-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(88, 101, 242, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(88, 101, 242, 0.5);
         }
 
         .discord-btn:active {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
         .discord-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
         }
 
-        /* Disclaimer */
-        .disclaimer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
+        .discord-btn.loading {
+            pointer-events: none;
+            opacity: 0.8;
         }
 
-        .disclaimer p {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 11px;
-            line-height: 1.6;
+        .discord-btn .spinner {
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
         }
 
-        /* Stats */
+        .discord-btn.loading .spinner {
+            display: block;
+        }
+
+        .discord-btn.loading .btn-text,
+        .discord-btn.loading svg {
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ========== STATS ========== */
         .stats {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 25px;
-            padding-top: 25px;
+            gap: 40px;
+            margin-top: 35px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -224,33 +348,76 @@
 
         .stat-value {
             color: #fff;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             display: block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .stat-label {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            margin-top: 4px;
         }
 
-        /* Responsive */
-        @media (max-width: 480px) {
+        /* ========== DISCLAIMER ========== */
+        .disclaimer {
+            margin-top: 30px;
+            padding: 18px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .disclaimer p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .disclaimer strong {
+            color: #fca5a5;
+        }
+
+        /* ========== VERSION BADGE ========== */
+        .version-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 520px) {
             .login-card {
-                padding: 40px 25px;
-                border-radius: 20px;
+                padding: 40px 28px;
+                border-radius: 24px;
             }
 
             .logo-icon {
-                width: 75px;
-                height: 75px;
-                font-size: 38px;
+                width: 85px;
+                height: 85px;
+                font-size: 42px;
+                border-radius: 24px;
             }
 
             .logo h1 {
-                font-size: 24px;
+                font-size: 26px;
+            }
+
+            .logo p {
+                font-size: 14px;
             }
 
             .features {
@@ -258,29 +425,70 @@
             }
 
             .feature {
-                padding: 14px 10px;
+                padding: 16px 12px;
+                border-radius: 14px;
             }
 
             .feature-icon {
-                font-size: 24px;
+                font-size: 26px;
             }
 
-            .feature span:last-child {
+            .feature-text {
                 font-size: 11px;
             }
 
             .discord-btn {
-                padding: 14px 20px;
+                padding: 16px 24px;
                 font-size: 15px;
+                border-radius: 14px;
             }
 
             .stats {
-                gap: 20px;
+                gap: 25px;
             }
 
             .stat-value {
-                font-size: 20px;
+                font-size: 24px;
             }
+
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .glow-orb {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .login-card {
+                padding: 35px 22px;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .feature {
+                padding: 14px 8px;
+            }
+
+            .feature-text {
+                font-size: 10px;
+            }
+
+            .stats {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+        }
+
+        /* ========== SELECTION ========== */
+        ::selection {
+            background: var(--primary);
+            color: #fff;
         }
     </style>
 </head>
@@ -291,40 +499,49 @@
         <span></span><span></span><span></span><span></span><span></span>
     </div>
 
+    <!-- Glowing Orbs -->
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+
     <div class="login-container">
         <div class="login-card">
+            <!-- Logo Section -->
             <div class="logo">
                 <div class="logo-icon">🦉</div>
-                <h1>OwO Bot Hunting</h1>
-                <p>Automate your OwO experience</p>
+                <h1>OwO Bot</h1>
+                <p>Automate your OwO farming experience</p>
             </div>
 
+            <!-- Features Grid -->
             <div class="features">
                 <div class="feature">
                     <span class="feature-icon">⚡</span>
-                    <span>Multi Account</span>
+                    <span class="feature-text">Multi Account</span>
                 </div>
                 <div class="feature">
                     <span class="feature-icon">🔄</span>
-                    <span>Auto Rotation</span>
+                    <span class="feature-text">Auto Rotation</span>
                 </div>
                 <div class="feature">
                     <span class="feature-icon">🛡️</span>
-                    <span>Anti Captcha</span>
+                    <span class="feature-text">Anti Captcha</span>
                 </div>
                 <div class="feature">
                     <span class="feature-icon">📊</span>
-                    <span>Real-time Stats</span>
+                    <span class="feature-text">Real-time Stats</span>
                 </div>
             </div>
 
-            <button class="discord-btn" onclick="loginWithDiscord()">
+            <!-- Discord Login Button -->
+            <button class="discord-btn" id="loginBtn" onclick="loginWithDiscord()">
+                <div class="spinner"></div>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
                 </svg>
-                Login with Discord
+                <span class="btn-text">Login with Discord</span>
             </button>
 
+            <!-- Stats -->
             <div class="stats">
                 <div class="stat-item">
                     <span class="stat-value">24/7</span>
@@ -340,36 +557,170 @@
                 </div>
             </div>
 
+            <!-- Disclaimer -->
             <div class="disclaimer">
-                <p>⚠️ Use at your own risk. Educational purposes only.<br>We are not affiliated with Discord or OwO Bot.</p>
+                <p>
+                    <strong>⚠️ Disclaimer:</strong> Use at your own risk. This tool is for educational purposes only.
+                    <br>We are not affiliated with Discord or OwO Bot.
+                </p>
             </div>
         </div>
     </div>
 
+    <!-- Version Badge -->
+    <div class="version-badge">v3.0.0</div>
+
     <script>
+        // ========== CONFIGURATION ==========
         const CLIENT_ID = '1446041744545415239';
         const REDIRECT_URI = 'https://oyy-gus.github.io/selfbot/callback.html';
         const BACKEND_URL = 'https://oyy-gus.koyeb.app';
+        const DASHBOARD_PATH = '/selfbot/dashboard.html';
 
+        // ========== LOGIN FUNCTION ==========
         function loginWithDiscord() {
+            const btn = document.getElementById('loginBtn');
+            btn.classList.add('loading');
+
+            // Build OAuth URL
             const scope = 'identify email';
-            const url = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=${scope}`;
-            window.location.href = url;
+            const state = generateState();
+            
+            // Save state for CSRF protection
+            sessionStorage.setItem('oauth_state', state);
+            
+            const params = new URLSearchParams({
+                client_id: CLIENT_ID,
+                redirect_uri: REDIRECT_URI,
+                response_type: 'code',
+                scope: scope,
+                state: state,
+                prompt: 'consent'
+            });
+
+            const url = `https://discord.com/api/oauth2/authorize?${params.toString()}`;
+            
+            // Small delay for UX
+            setTimeout(() => {
+                window.location.href = url;
+            }, 500);
         }
 
-        // Check existing session
-        (async () => {
+        // Generate random state for CSRF protection
+        function generateState() {
+            const array = new Uint8Array(16);
+            crypto.getRandomValues(array);
+            return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        // ========== CHECK EXISTING SESSION ==========
+        async function checkSession() {
             const token = localStorage.getItem('token');
-            if (token) {
-                try {
-                    const res = await fetch(`${BACKEND_URL}/api/auth/me`, {
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
-                    if (res.ok) window.location.href = '/selfbot/dashboard.html';
-                    else localStorage.clear();
-                } catch { localStorage.clear(); }
+            
+            if (!token) return;
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/auth/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    // Valid session, redirect to dashboard
+                    window.location.href = DASHBOARD_PATH;
+                } else {
+                    // Invalid token, clear storage
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                }
+            } catch (error) {
+                console.error('Session check failed:', error);
+                // Don't clear on network error, might be temporary
             }
-        })();
+        }
+
+        // ========== FEATURE ANIMATIONS ==========
+        function initAnimations() {
+            const features = document.querySelectorAll('.feature');
+            
+            features.forEach((feature, index) => {
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    feature.style.transition = 'all 0.5s ease';
+                    feature.style.opacity = '1';
+                    feature.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
+        }
+
+        // ========== KEYBOARD SHORTCUT ==========
+        document.addEventListener('keydown', (e) => {
+            // Enter key to login
+            if (e.key === 'Enter') {
+                loginWithDiscord();
+            }
+        });
+
+        // ========== INITIALIZE ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            checkSession();
+            initAnimations();
+        });
+
+        // ========== HANDLE OAUTH ERROR ==========
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        
+        if (error) {
+            const errorDesc = urlParams.get('error_description') || 'Login was cancelled or failed';
+            console.error('OAuth Error:', error, errorDesc);
+            
+            // Show error toast (simple version)
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 16px 24px;
+                background: linear-gradient(135deg, #ef4444, #dc2626);
+                color: white;
+                border-radius: 12px;
+                font-size: 14px;
+                font-weight: 500;
+                z-index: 1000;
+                box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
+                animation: slideUp 0.5s ease;
+            `;
+            toast.textContent = '❌ ' + errorDesc;
+            document.body.appendChild(toast);
+            
+            // Remove error from URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+            
+            // Remove toast after 5 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideDown 0.5s ease forwards';
+                setTimeout(() => toast.remove(), 500);
+            }, 5000);
+        }
+
+        // Add toast animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideUp {
+                from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+                to { opacity: 1; transform: translateX(-50%) translateY(0); }
+            }
+            @keyframes slideDown {
+                from { opacity: 1; transform: translateX(-50%) translateY(0); }
+                to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

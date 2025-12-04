@@ -3,11 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authenticating...</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Authenticating... - OwO Bot</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦉</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1a1a2e;
+            --darker: #0f0f1a;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
@@ -16,129 +31,838 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow: hidden;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 50px 40px;
-            text-align: center;
-            max-width: 400px;
+        /* ========== ANIMATED BACKGROUND ========== */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-animation span {
+            position: absolute;
+            display: block;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            animation: float-up 20s linear infinite;
+            bottom: -100px;
+            border-radius: 50%;
+        }
+
+        .bg-animation span:nth-child(1) { left: 15%; width: 60px; height: 60px; animation-delay: 0s; }
+        .bg-animation span:nth-child(2) { left: 30%; width: 30px; height: 30px; animation-delay: 1s; animation-duration: 15s; }
+        .bg-animation span:nth-child(3) { left: 50%; width: 80px; height: 80px; animation-delay: 2s; }
+        .bg-animation span:nth-child(4) { left: 70%; width: 40px; height: 40px; animation-delay: 0s; animation-duration: 18s; }
+        .bg-animation span:nth-child(5) { left: 85%; width: 50px; height: 50px; animation-delay: 3s; }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1200px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ========== GLOWING ORBS ========== */
+        .glow-orb {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            pointer-events: none;
+            animation: orb-pulse 4s ease-in-out infinite;
+        }
+
+        .glow-orb-1 {
+            top: -50px;
+            right: -50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .glow-orb-2 {
+            bottom: -50px;
+            left: -50px;
+            background: linear-gradient(135deg, #00d9ff, var(--primary));
+            animation-delay: -2s;
+        }
+
+        @keyframes orb-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.25; }
+            50% { transform: scale(1.1); opacity: 0.35; }
+        }
+
+        /* ========== CARD ========== */
+        .card {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 55px 50px;
+            text-align: center;
+            max-width: 440px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: card-appear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes card-appear {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ========== LOADER ========== */
+        .loader-container {
+            margin-bottom: 30px;
         }
 
         .loader {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid #667eea;
+            width: 70px;
+            height: 70px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
+            border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 25px;
+        }
+
+        .loader-ring:nth-child(2) {
+            width: 55px;
+            height: 55px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-top-color: var(--secondary);
+            animation-duration: 0.8s;
+            animation-direction: reverse;
+        }
+
+        .loader-ring:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-top-color: #a78bfa;
+            animation-duration: 0.6s;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
 
-        h2 { color: #fff; font-size: 22px; margin-bottom: 10px; }
-        p { color: rgba(255, 255, 255, 0.7); font-size: 14px; }
-        
-        .error { 
-            background: rgba(231, 76, 60, 0.2); 
-            color: #ff6b6b; 
-            padding: 15px; 
-            border-radius: 12px; 
-            margin-top: 20px;
-            font-size: 13px;
-            display: none;
+        .loader-ring:nth-child(2) {
+            animation-name: spin-reverse;
         }
 
-        .btn {
+        @keyframes spin-reverse {
+            from { transform: translate(-50%, -50%) rotate(360deg); }
+            to { transform: translate(-50%, -50%) rotate(0deg); }
+        }
+
+        .loader-ring:nth-child(3) {
+            animation-name: spin-center;
+        }
+
+        @keyframes spin-center {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* ========== SUCCESS ICON ========== */
+        .success-container {
             display: none;
-            margin-top: 20px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
+            margin-bottom: 30px;
         }
 
         .success-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
-            display: none;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--success), #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 40px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+            animation: success-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
+        @keyframes success-pop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-checkmark {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            animation: checkmark 0.5s ease-in-out 0.2s forwards;
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+        }
+
+        @keyframes checkmark {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* ========== ERROR ICON ========== */
+        .error-container {
+            display: none;
+            margin-bottom: 30px;
+        }
+
+        .error-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 40px;
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
+            animation: error-shake 0.5s ease-in-out;
+        }
+
+        @keyframes error-shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-10px); }
+            80% { transform: translateX(10px); }
+        }
+
+        /* ========== TEXT ========== */
+        .title {
+            color: #fff;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .message {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .sub-message {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+        }
+
+        /* ========== ERROR BOX ========== */
+        .error-box {
+            display: none;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 16px 20px;
+            border-radius: 14px;
+            margin-top: 20px;
+            font-size: 13px;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .error-box strong {
+            color: #fecaca;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* ========== BUTTON ========== */
+        .btn {
+            display: none;
+            margin-top: 25px;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.35);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.45);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: none;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: none;
+        }
+
+        .btn-group {
+            display: none;
+            margin-top: 25px;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        /* ========== PROGRESS STEPS ========== */
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        .step.completed {
+            opacity: 1;
+        }
+
+        .step-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            animation: step-pulse 1.5s ease-in-out infinite;
+        }
+
+        .step.completed .step-icon {
+            background: var(--success);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        @keyframes step-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .step-text {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .step.active .step-text,
+        .step.completed .step-text {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ========== REDIRECT COUNTDOWN ========== */
+        .countdown {
+            display: none;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 10px;
+            color: #6ee7b7;
+            font-size: 13px;
+        }
+
+        .countdown-number {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 480px) {
-            .card { padding: 40px 25px; }
-            h2 { font-size: 20px; }
+            .card {
+                padding: 45px 30px;
+                border-radius: 24px;
+            }
+
+            .title {
+                font-size: 22px;
+            }
+
+            .message {
+                font-size: 14px;
+            }
+
+            .loader {
+                width: 60px;
+                height: 60px;
+            }
+
+            .loader-ring:nth-child(2) {
+                width: 45px;
+                height: 45px;
+            }
+
+            .loader-ring:nth-child(3) {
+                width: 30px;
+                height: 30px;
+            }
+
+            .success-icon,
+            .error-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 35px;
+            }
+
+            .progress-steps {
+                gap: 20px;
+            }
+
+            .step-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+
+            .step-text {
+                font-size: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 14px 30px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+
+            .glow-orb {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* ========== SELECTION ========== */
+        ::selection {
+            background: var(--primary);
+            color: #fff;
         }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <!-- Glowing Orbs -->
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+
+    <!-- Main Card -->
     <div class="card">
-        <div class="loader" id="loader"></div>
-        <div class="success-icon" id="successIcon">✅</div>
-        <h2 id="title">Authenticating...</h2>
-        <p id="message">Please wait while we verify your account</p>
-        <div class="error" id="error"></div>
-        <a href="/selfbot/" class="btn" id="retryBtn">Try Again</a>
+        <!-- Loading State -->
+        <div class="loader-container" id="loaderContainer">
+            <div class="loader">
+                <div class="loader-ring"></div>
+                <div class="loader-ring"></div>
+                <div class="loader-ring"></div>
+            </div>
+        </div>
+
+        <!-- Success State -->
+        <div class="success-container" id="successContainer">
+            <div class="success-icon">
+                <svg class="success-checkmark" viewBox="0 0 24 24">
+                    <path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-container" id="errorContainer">
+            <div class="error-icon">✕</div>
+        </div>
+
+        <!-- Title & Message -->
+        <h2 class="title" id="title">Authenticating...</h2>
+        <p class="message" id="message">Please wait while we verify your account</p>
+        <p class="sub-message" id="subMessage">This will only take a moment</p>
+
+        <!-- Error Details -->
+        <div class="error-box" id="errorBox">
+            <strong>Error Details:</strong>
+            <span id="errorDetails"></span>
+        </div>
+
+        <!-- Countdown -->
+        <div class="countdown" id="countdown">
+            Redirecting in <span class="countdown-number" id="countdownNumber">3</span> seconds...
+        </div>
+
+        <!-- Buttons -->
+        <a href="/selfbot/" class="btn" id="retryBtn">🔄 Try Again</a>
+        
+        <div class="btn-group" id="btnGroup">
+            <a href="/selfbot/" class="btn">🔄 Try Again</a>
+            <a href="/selfbot/dashboard.html" class="btn btn-secondary">📊 Dashboard</a>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step completed" id="step1">
+                <div class="step-icon">1</div>
+                <span class="step-text">Authorize</span>
+            </div>
+            <div class="step active" id="step2">
+                <div class="step-icon">2</div>
+                <span class="step-text">Verify</span>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-icon">3</div>
+                <span class="step-text">Complete</span>
+            </div>
+        </div>
     </div>
 
     <script>
+        // ========== CONFIGURATION ==========
         const BACKEND_URL = 'https://oyy-gus.koyeb.app';
-        const code = new URLSearchParams(window.location.search).get('code');
-        const error = new URLSearchParams(window.location.search).get('error');
+        const DASHBOARD_PATH = '/selfbot/dashboard.html';
+        const LOGIN_PATH = '/selfbot/';
 
-        async function handleAuth() {
-            if (error) return showError('Authorization denied by user');
-            if (!code) return showError('No authorization code received');
+        // ========== DOM ELEMENTS ==========
+        const elements = {
+            loaderContainer: document.getElementById('loaderContainer'),
+            successContainer: document.getElementById('successContainer'),
+            errorContainer: document.getElementById('errorContainer'),
+            title: document.getElementById('title'),
+            message: document.getElementById('message'),
+            subMessage: document.getElementById('subMessage'),
+            errorBox: document.getElementById('errorBox'),
+            errorDetails: document.getElementById('errorDetails'),
+            countdown: document.getElementById('countdown'),
+            countdownNumber: document.getElementById('countdownNumber'),
+            retryBtn: document.getElementById('retryBtn'),
+            btnGroup: document.getElementById('btnGroup'),
+            step1: document.getElementById('step1'),
+            step2: document.getElementById('step2'),
+            step3: document.getElementById('step3')
+        };
+
+        // ========== URL PARAMETERS ==========
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const error = urlParams.get('error');
+        const errorDescription = urlParams.get('error_description');
+        const state = urlParams.get('state');
+
+        // ========== MAIN AUTHENTICATION FLOW ==========
+        async function handleAuthentication() {
+            // Check for OAuth errors
+            if (error) {
+                showError(
+                    'Authorization Denied',
+                    errorDescription || 'You cancelled the login or authorization was denied.',
+                    'Please try again to access the dashboard.'
+                );
+                return;
+            }
+
+            // Check for authorization code
+            if (!code) {
+                showError(
+                    'Missing Authorization',
+                    'No authorization code was received from Discord.',
+                    'Please start the login process again.'
+                );
+                return;
+            }
+
+            // Verify state (CSRF protection) - optional but recommended
+            const savedState = sessionStorage.getItem('oauth_state');
+            if (savedState && state && savedState !== state) {
+                showError(
+                    'Security Error',
+                    'State mismatch detected. This could be a CSRF attack.',
+                    'Please try logging in again.'
+                );
+                sessionStorage.removeItem('oauth_state');
+                return;
+            }
+
+            // Clear saved state
+            sessionStorage.removeItem('oauth_state');
 
             try {
-                const res = await fetch(`${BACKEND_URL}/api/auth/discord/callback`, {
+                // Update UI - Verifying
+                updateStep(2, 'active');
+                elements.message.textContent = 'Exchanging authorization code...';
+                elements.subMessage.textContent = 'Connecting to Discord API';
+
+                // Exchange code for token
+                const response = await fetch(`${BACKEND_URL}/api/auth/discord/callback`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({ code })
                 });
 
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Authentication failed');
+                const data = await response.json();
 
-                if (data.token) {
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('user', JSON.stringify(data.user));
-                    
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('successIcon').style.display = 'block';
-                    document.getElementById('title').textContent = 'Success!';
-                    document.getElementById('message').textContent = 'Redirecting to dashboard...';
-                    
-                    setTimeout(() => window.location.href = '/selfbot/dashboard.html', 1200);
+                if (!response.ok) {
+                    throw new Error(data.error || data.details || 'Authentication failed');
                 }
-            } catch (e) {
-                showError(e.message);
+
+                if (!data.token) {
+                    throw new Error('No token received from server');
+                }
+
+                // Store authentication data
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                // Show success
+                showSuccess(data.user);
+
+            } catch (err) {
+                console.error('Authentication error:', err);
+                showError(
+                    'Authentication Failed',
+                    err.message || 'An unexpected error occurred during authentication.',
+                    'Please try again. If the problem persists, contact support.'
+                );
             }
         }
 
-        function showError(msg) {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('title').textContent = 'Error';
-            document.getElementById('message').style.display = 'none';
-            document.getElementById('error').textContent = msg;
-            document.getElementById('error').style.display = 'block';
-            document.getElementById('retryBtn').style.display = 'inline-block';
+        // ========== SHOW SUCCESS STATE ==========
+        function showSuccess(user) {
+            // Update steps
+            updateStep(2, 'completed');
+            updateStep(3, 'completed');
+
+            // Hide loader, show success
+            elements.loaderContainer.style.display = 'none';
+            elements.successContainer.style.display = 'block';
+
+            // Update text
+            elements.title.textContent = 'Welcome Back!';
+            elements.message.textContent = `Successfully logged in as ${user?.username || 'User'}`;
+            elements.subMessage.textContent = 'Redirecting you to the dashboard...';
+
+            // Show countdown
+            elements.countdown.style.display = 'block';
+            startCountdown(3);
         }
 
-        handleAuth();
+        // ========== SHOW ERROR STATE ==========
+        function showError(title, details, hint) {
+            // Update steps
+            updateStep(2, 'error');
+
+            // Hide loader, show error
+            elements.loaderContainer.style.display = 'none';
+            elements.errorContainer.style.display = 'block';
+
+            // Update text
+            elements.title.textContent = title;
+            elements.message.textContent = hint || 'Please try again.';
+            elements.subMessage.style.display = 'none';
+
+            // Show error details
+            if (details) {
+                elements.errorBox.style.display = 'block';
+                elements.errorDetails.textContent = details;
+            }
+
+            // Show retry button
+            elements.retryBtn.style.display = 'inline-block';
+
+            // Update step icon to error
+            elements.step2.querySelector('.step-icon').textContent = '✕';
+            elements.step2.querySelector('.step-icon').style.background = 'linear-gradient(135deg, var(--danger), #dc2626)';
+            elements.step2.querySelector('.step-icon').style.boxShadow = '0 4px 15px rgba(239, 68, 68, 0.4)';
+            elements.step2.classList.remove('active');
+        }
+
+        // ========== UPDATE STEP STATE ==========
+        function updateStep(stepNumber, state) {
+            const step = elements[`step${stepNumber}`];
+            
+            step.classList.remove('active', 'completed');
+            
+            if (state === 'active') {
+                step.classList.add('active');
+            } else if (state === 'completed') {
+                step.classList.add('completed');
+                step.querySelector('.step-icon').textContent = '✓';
+            }
+        }
+
+        // ========== COUNTDOWN & REDIRECT ==========
+        function startCountdown(seconds) {
+            let count = seconds;
+            elements.countdownNumber.textContent = count;
+
+            const interval = setInterval(() => {
+                count--;
+                elements.countdownNumber.textContent = count;
+
+                if (count <= 0) {
+                    clearInterval(interval);
+                    window.location.href = DASHBOARD_PATH;
+                }
+            }, 1000);
+        }
+
+        // ========== HANDLE ALREADY LOGGED IN ==========
+        async function checkExistingSession() {
+            const token = localStorage.getItem('token');
+            
+            if (token && !code && !error) {
+                // Already logged in, redirect to dashboard
+                try {
+                    const response = await fetch(`${BACKEND_URL}/api/auth/me`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+
+                    if (response.ok) {
+                        elements.title.textContent = 'Already Logged In';
+                        elements.message.textContent = 'Redirecting to dashboard...';
+                        elements.subMessage.style.display = 'none';
+                        
+                        updateStep(1, 'completed');
+                        updateStep(2, 'completed');
+                        updateStep(3, 'completed');
+                        
+                        setTimeout(() => {
+                            window.location.href = DASHBOARD_PATH;
+                        }, 1000);
+                        
+                        return true;
+                    }
+                } catch (e) {
+                    // Token invalid, continue with auth
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                }
+            }
+            
+            return false;
+        }
+
+        // ========== KEYBOARD SHORTCUTS ==========
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.href = LOGIN_PATH;
+            }
+            if (e.key === 'Enter' && elements.retryBtn.style.display !== 'none') {
+                window.location.href = LOGIN_PATH;
+            }
+        });
+
+        // ========== INITIALIZE ==========
+        async function init() {
+            // Clean URL (remove code from address bar for security)
+            if (code || error) {
+                const cleanUrl = window.location.origin + window.location.pathname;
+                window.history.replaceState({}, document.title, cleanUrl);
+            }
+
+            // Check if already logged in
+            const alreadyLoggedIn = await checkExistingSession();
+            
+            if (!alreadyLoggedIn) {
+                // Small delay for UX
+                setTimeout(handleAuthentication, 500);
+            }
+        }
+
+        // Start the authentication process
+        document.addEventListener('DOMContentLoaded', init);
+
+        // Fallback if DOMContentLoaded already fired
+        if (document.readyState !== 'loading') {
+            init();
+        }
     </script>
 </body>
 </html>
