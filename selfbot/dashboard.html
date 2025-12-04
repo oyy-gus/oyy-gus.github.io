@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OwO Bot Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <h2>🦉 OwO Bot</h2>
+        </div>
+        <nav>
+            <a href="#" class="nav-item active" data-page="accounts">
+                <span>👤</span> Accounts
+            </a>
+            <a href="#" class="nav-item" data-page="stats">
+                <span>📊</span> Statistics
+            </a>
+            <a href="#" class="nav-item" data-page="settings">
+                <span>⚙️</span> Settings
+            </a>
+            <a href="#" class="nav-item" data-page="logs">
+                <span>📜</span> Logs
+            </a>
+        </nav>
+        <div class="user-info">
+            <img id="userAvatar" src="" alt="Avatar">
+            <span id="username"></span>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <h1>Dashboard</h1>
+            <div class="bot-status">
+                <span id="botStatus" class="status-indicator offline"></span>
+                <span>Bot Status</span>
+            </div>
+        </div>
+        
+        <!-- Accounts Page -->
+        <div id="accounts-page" class="page active">
+            <div class="toolbar">
+                <button class="btn btn-primary" onclick="showAddAccountModal()">+ Add Account</button>
+                <button class="btn btn-success" onclick="startAllAccounts()">Start All</button>
+                <button class="btn btn-danger" onclick="stopAllAccounts()">Stop All</button>
+            </div>
+            
+            <div class="accounts-grid" id="accountsGrid">
+                <!-- Account cards will be loaded here -->
+            </div>
+        </div>
+        
+        <!-- Stats Page -->
+        <div id="stats-page" class="page">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Hunts</h3>
+                    <p class="stat-value" id="totalHunts">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Accounts</h3>
+                    <p class="stat-value" id="activeAccounts">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Captchas</h3>
+                    <p class="stat-value" id="totalCaptchas">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Uptime</h3>
+                    <p class="stat-value" id="uptime">00:00:00</p>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="huntChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Settings Page -->
+        <div id="settings-page" class="page">
+            <div class="settings-section">
+                <h2>Global Settings</h2>
+                <form id="globalSettingsForm">
+                    <div class="form-group">
+                        <label>Min Delay Between Accounts (ms)</label>
+                        <input type="number" id="minDelay" min="1000" value="3000">
+                    </div>
+                    <div class="form-group">
+                        <label>Max Delay Between Accounts (ms)</label>
+                        <input type="number" id="maxDelay" min="1000" value="5000">
+                    </div>
+                    <div class="form-group">
+                        <label>Default Action</label>
+                        <select id="defaultAction">
+                            <option value="pray">Pray</option>
+                            <option value="curse">Curse</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                </form>
+            </div>
+            
+            <div class="settings-section">
+                <h2>Bot Configuration</h2>
+                <div class="config-display">
+                    <pre id="configDisplay"></pre>
+                    <button class="btn btn-secondary" onclick="downloadConfig()">Download config.js</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Logs Page -->
+        <div id="logs-page" class="page">
+            <div class="logs-container">
+                <div class="logs-header">
+                    <button class="btn btn-secondary" onclick="clearLogs()">Clear Logs</button>
+                </div>
+                <div class="logs-content" id="logsContent">
+                    <!-- Logs will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Account Modal -->
+    <div id="addAccountModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add New Account</h2>
+            <form id="addAccountForm">
+                <div class="form-group">
+                    <label>Account Name</label>
+                    <input type="text" id="accountName" required>
+                </div>
+                <div class="form-group">
+                    <label>Token</label>
+                    <input type="password" id="accountToken" required>
+                </div>
+                <div class="form-group">
+                    <label>Channel ID</label>
+                    <input type="text" id="channelId">
+                </div>
+                <div class="form-group">
+                    <label>Prefix</label>
+                    <input type="text" id="prefix" value="owo">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Account</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
