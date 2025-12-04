@@ -1,4 +1,4 @@
-const API_URL = 'https://your-backend.koyeb.app';
+const API_URL = 'https://oyy-gus.koyeb.app';
 let socket;
 let userData = {};
 

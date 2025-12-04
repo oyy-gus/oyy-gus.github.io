@@ -45,8 +45,8 @@
     </div>
     
     <script>
-        const CLIENT_ID = 'YOUR_DISCORD_CLIENT_ID';
-        const REDIRECT_URI = 'https://yourusername.github.io/callback';
+        const CLIENT_ID = '1186877231503519796';
+        const REDIRECT_URI = 'https://oyy-gus.github.io/callback';
         
         function loginWithDiscord() {
             const scope = 'identify email';
@@ -66,7 +66,7 @@
         
         async function handleCallback(code) {
             try {
-                const response = await fetch('https://your-backend.koyeb.app/api/auth/discord/callback', {
+                const response = await fetch('https://oyy-gus.koyeb.app/api/auth/discord/callback', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
