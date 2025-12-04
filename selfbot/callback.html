@@ -85,78 +85,102 @@
         <a href="/selfbot/" class="retry-btn" style="display: none;" id="retry-btn">Try Again</a>
     </div>
 
+
     <script>
-        // Configuration dengan URL Anda
-        const BACKEND_URL = 'https://oyy-gus.koyeb.app';
+    // Configuration dengan URL Anda
+    const BACKEND_URL = 'https://oyy-gus.koyeb.app';
+    
+    // Get the authorization code from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const error = urlParams.get('error');
+    
+    async function handleCallback() {
+        console.log('🔍 Debug Info:');
+        console.log('Backend URL:', BACKEND_URL);
+        console.log('Code:', code);
+        console.log('Error:', error);
         
-        // Get the authorization code from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        const error = urlParams.get('error');
-        
-        async function handleCallback() {
-            // Check for errors first
-            if (error) {
-                showError('Authorization denied. Please try again.');
-                return;
-            }
-            
-            if (!code) {
-                showError('No authorization code received.');
-                return;
-            }
-            
-            try {
-                // Send code to backend
-                const response = await fetch(`${BACKEND_URL}/api/auth/discord/callback`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ code })
-                });
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'Authentication failed');
-                }
-                
-                const data = await response.json();
-                
-                if (data.token) {
-                    // Save token and user data
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('user', JSON.stringify(data.user));
-                    
-                    // Update UI
-                    document.getElementById('status-title').textContent = 'Success!';
-                    document.getElementById('status-message').textContent = 'Redirecting to dashboard...';
-                    
-                    // Redirect to dashboard
-                    setTimeout(() => {
-                        window.location.href = '/selfbot/dashboard.html';
-                    }, 1000);
-                } else {
-                    throw new Error('No token received');
-                }
-                
-            } catch (error) {
-                console.error('Auth error:', error);
-                showError(error.message || 'Authentication failed. Please try again.');
-            }
+        // Check for errors first
+        if (error) {
+            showError('Authorization denied. Please try again.');
+            return;
         }
         
-        function showError(message) {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('status-title').textContent = 'Error';
-            document.getElementById('status-message').style.display = 'none';
-            document.getElementById('error-message').textContent = message;
-            document.getElementById('error-message').style.display = 'block';
-            document.getElementById('retry-btn').style.display = 'inline-block';
+        if (!code) {
+            showError('No authorization code received.');
+            return;
         }
         
-        // Start authentication process
-        handleCallback();
-    </script>
+        try {
+            console.log('📤 Sending request to backend...');
+            
+            // Send code to backend
+            const response = await fetch(`${BACKEND_URL}/api/auth/discord/callback`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ code })
+            });
+            
+            console.log('📥 Response status:', response.status);
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('❌ Backend error:', errorData);
+                throw new Error(errorData.error || 'Authentication failed');
+            }
+            
+            const data = await response.json();
+            console.log('✅ Success data:', data);
+            
+            if (data.token) {
+                // Save token and user data
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                // Update UI
+                document.getElementById('status-title').textContent = 'Success!';
+                document.getElementById('status-message').textContent = 'Redirecting to dashboard...';
+                
+                // Redirect to dashboard
+                setTimeout(() => {
+                    window.location.href = '/selfbot/dashboard.html';
+                }, 1000);
+            } else {
+                throw new Error('No token received');
+            }
+            
+        } catch (error) {
+            console.error('❌ Auth error:', error);
+            
+            // More detailed error for debugging
+            let errorMessage = 'Authentication failed. ';
+            
+            if (error.message.includes('Failed to fetch')) {
+                errorMessage += 'Cannot connect to backend. Please check if backend is running.';
+            } else if (error.message.includes('CORS')) {
+                errorMessage += 'CORS error. Backend needs to allow frontend origin.';
+            } else {
+                errorMessage += error.message;
+            }
+            
+            showError(errorMessage);
+        }
+    }
+    
+    function showError(message) {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('status-title').textContent = 'Error';
+        document.getElementById('status-message').style.display = 'none';
+        document.getElementById('error-message').textContent = message;
+        document.getElementById('error-message').style.display = 'block';
+        document.getElementById('retry-btn').style.display = 'inline-block';
+    }
+    
+    // Start authentication process
+    handleCallback();
+</script>
 </body>
 </html>
