@@ -3,7 +3,7 @@
 // =====================================================
 
 // Google Apps Script Web App URL (GANTI DENGAN URL ANDA)
-const SCRIPT_URL = '1_ZytQmZc2kc1b07_PMXDatQfiIjNVrMSkvfnJ_OZd0E';
+const SCRIPT_URL = 'https://script.google.com/home/projects/1TZuKeJjRt9W-WOJap50ZrTU_D7r1S4j5mBBPN1ry5UwSTM7WxYjXPIar/edit';
 
 // Storage Keys
 const STORAGE_KEY = 'kuesioner_koperasi_data';
