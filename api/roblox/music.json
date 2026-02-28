@@ -1,62 +1,136 @@
 [
-    {
-        "title": "DJ DI ANTARA KAU DAN AKU",
-        "roblox_id": 137397260190882,
-        "author": "GussJTM"
-    },
-    {
-        "title": "DJ JUNGLE DUTCH",
-        "roblox_id": 99739661180914,
-        "author": "Guss_KM"
-    },
-    {
-        "title": "DJ BREAKBEAT KAMNH X AISHITERU 2 X SOLEDAD",
-        "roblox_id": 76702037547745,
-        "author": "Guss_KM"
-    },
-    {
-        "title": "BREAKBEAT BAILAR SIKSA MENANGGUNG RINDU AISHITERU",
-        "roblox_id": 105114283123605,
-        "author": "Guss_KM"
-    },
-    {
-        "title": "DJ Voodoo",
-        "roblox_id": 107455847026361,
-        "author": "Guss_KM"
-    },
-    {
-        "title": "DJ JANDA BODONG V2",
-        "roblox_id": 76027262745280,
-        "author": "Guss_KM"
-    },
-    {
-        "title": "DJ DUA KURSI",
-        "roblox_id": 84946250558323,
-        "author": "Guss_KM"
-    },
-    {
-        "title": "DJ ADA BAYANGANMU",
-        "roblox_id": 99377291619177,
-        "author": "Guss_KM"
-    },
-    {
-        "title": "DJ SALAH",
-        "roblox_id": 110258874730333,
-        "author": "Guss_KM"
-    },
-    {
-        "title": "Cartel",
-        "roblox_id": 94588771299691,
-        "author": "sometimes3136"    
-    },
-    {
-        "title": "DJ NGGA DULU",
-        "roblox_id": 90412041524419,
-        "author": "sometimes3136"
-    },
-    {
-        "title": "",
-        "roblox_id": 0,
-        "author": ""
-    }
+  {
+    "request": [{
+        "by_jull": [
+          {
+            "title": "You Dont Even Know",
+            "sound_id": "111149969264803"
+          },
+          {
+            "title": "Breakbeat Remix",
+            "sound_id": "104227537425198"
+          },
+          {
+            "title": "DJ ALWAYS LOVING YOU",
+            "sound_id": "84552280374794"
+          }
+        ]
+    }],
+    "dj": [
+      {
+        "random": [
+          {
+            "title": "DJ JEALOUSY VELOCITY",
+            "sound_id": "89501777604655"
+          },
+          {
+            "title": "DJ UNTUNGNYA HIDUP HARUS TETAP BERJALAN",
+            "sound_id": "100076054127542"
+          },
+          {
+            "title": "DJ MANGU",
+            "sound_id": "117289628255606"
+          },
+          {
+            "title": "DJ SAMPAI AKHIR",
+            "sound_id": "126888998031809"
+          },
+          {
+            "title": "DJ TERTAWAN HATI X TAK SEGAMPANG ITU X SISA RASA",
+            "sound_id": "139735519149522"
+          },
+          {
+            "title": "DJ BERDUA LEBIH BAIK",
+            "sound_id": "95531563140400"
+          },
+          {
+            "title": "DJ KONCO MESRA",
+            "sound_id": "123369864623197"
+          },
+          {
+            "title": "DJ SALAH",
+            "sound_id": "104873341103232"
+          },
+          {
+            "title": "DJ MERINDUKANMU X MASIH CINTA",
+            "sound_id": "120871173590822"
+          },
+          {
+            "title": "TABOLA BALE X MASHUP LATIN LATIN",
+            "sound_id": "87936147630400"
+          },
+          {
+            "title": "DJ MAMA MUDA",
+            "sound_id": "89565604812206"
+          },
+          {
+            "title": "DJ SIK ASIK",
+            "sound_id": "94988199114736"
+          },
+          {
+            "title": "DJ MYSTERIOUS GIRL X SECOND LIFE",
+            "sound_id": "72900428417922"
+          },
+          {
+            "title": "DJ SEPARUH AKU",
+            "sound_id": "95059052240252"
+          },
+          {
+            "title": "DJ BINTANG 5 VELOCITY",
+            "sound_id": "74615701371170"
+          },
+          {
+            "title": "DJ BERUBAH",
+            "sound_id": "105075687529834"
+          },
+          {
+            "title": "DJ WHAT IT IS",
+            "sound_id": "113215045230122"
+          },
+          {
+            "title": "DJ LELAKI CADANGAN VELOCITY",
+            "sound_id": "90452453882378"
+          },
+          {
+            "title": "DJ MENGAPA TAK MENCOBA JUJUR",
+            "sound_id": "98832732044326"
+          },
+          {
+            "title": "DJ KEONG RACUN",
+            "sound_id": "81776659797651"
+          },
+          {
+            "title": "DJ LAMUNAN X CI JIU MEN HUI YI",
+            "sound_id": "119306273479281"
+          },
+          {
+            "title": "DJ CLBK",
+            "sound_id": "113483520563503"
+          },
+          {
+            "title": "DJ TAPI BERPUTAR PUTAR",
+            "sound_id": "125330716469130"
+          },
+          {
+            "title": "DJ LAGI SYANTIK X LAGI TAMVAN KACIW",
+            "sound_id": "93970774672931"
+          },
+          {
+            "title": "",
+            "sound_id": ""
+          },
+          {
+            "title": "",
+            "sound_id": ""
+          }
+        ],
+        "jono_joni": [
+          {
+            "title": "NEMEN",
+            "sound_id": "95364428935155"
+          }
+        ]
+      }
+    ]
+  }
 ]
