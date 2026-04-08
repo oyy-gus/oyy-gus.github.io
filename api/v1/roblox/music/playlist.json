@@ -1,479 +1,71 @@
 {
-  "meta": {
-    "version": "1.0.0",
-    "updated_at": "2026-03-27",
-    "total_songs": 64,
-    "total_djs": 4
-  },
+  "dj": [
+    { "title": "You Dont Even Know", "sound_id": "111149969264803" },
+    { "title": "Breakbeat Remix", "sound_id": "104227537425198" },
+    { "title": "DJ ALWAYS LOVING YOU", "sound_id": "84552280374794" },
 
-  "djs": {
-    "random": {
-      "name": "DJ Random",
-      "thumbnail": "rbxassetid://111"
-    },
-    "jono_joni": {
-      "name": "DJ Jono & Joni",
-      "thumbnail": "rbxassetid://123"
-    },
-    "kearisk": {
-      "name": "DJ Kearisk",
-      "thumbnail": "rbxassetid://456"
-    },
-    "requests": {
-      "name": "Player Requests",
-      "thumbnail": "rbxassetid://789"
-    }
-  },
+    { "title": "DJ JEALOUSY VELOCITY", "sound_id": "89501777604655" },
+    { "title": "DJ UNTUNGNYA HIDUP HARUS TETAP BERJALAN", "sound_id": "100076054127542" },
+    { "title": "DJ MANGU", "sound_id": "117289628255606" },
+    { "title": "DJ SAMPAI AKHIR", "sound_id": "126888998031809" },
+    { "title": "DJ TERTAWAN HATI X TAK SEGAMPANG ITU X SISA RASA", "sound_id": "139735519149522" },
+    { "title": "DJ BERDUA LEBIH BAIK", "sound_id": "95531563140400" },
+    { "title": "DJ KONCO MESRA", "sound_id": "123369864623197" },
+    { "title": "DJ SALAH", "sound_id": "104873341103232" },
+    { "title": "DJ MERINDUKANMU X MASIH CINTA", "sound_id": "120871173590822" },
+    { "title": "TABOLA BALE X MASHUP LATIN LATIN", "sound_id": "87936147630400" },
+    { "title": "DJ MAMA MUDA", "sound_id": "89565604812206" },
+    { "title": "DJ SIK ASIK", "sound_id": "94988199114736" },
+    { "title": "DJ MYSTERIOUS GIRL X SECOND LIFE", "sound_id": "72900428417922" },
+    { "title": "DJ SEPARUH AKU", "sound_id": "95059052240252" },
+    { "title": "DJ BINTANG 5 VELOCITY", "sound_id": "74615701371170" },
+    { "title": "DJ BERUBAH", "sound_id": "105075687529834" },
+    { "title": "DJ WHAT IT IS", "sound_id": "113215045230122" },
+    { "title": "DJ LELAKI CADANGAN VELOCITY", "sound_id": "90452453882378" },
+    { "title": "DJ MENGAPA TAK MENCOBA JUJUR", "sound_id": "98832732044326" },
+    { "title": "DJ KEONG RACUN", "sound_id": "81776659797651" },
+    { "title": "DJ LAMUNAN X CI JIU MEN HUI YI", "sound_id": "119306273479281" },
+    { "title": "DJ CLBK", "sound_id": "113483520563503" },
+    { "title": "DJ TAPI BERPUTAR PUTAR", "sound_id": "125330716469130" },
+    { "title": "DJ LAGI SYANTIK X LAGI TAMVAN KACIW", "sound_id": "93970774672931" },
 
-  "songs": [{
-    "id": 1,
-    "title": "You Dont Even Know",
-    "sound_id": "111149969264803",
-    "dj": "requests",
-    "category": "request"
-  },
-    {
-      "id": 2,
-      "title": "Breakbeat Remix",
-      "sound_id": "104227537425198",
-      "dj": "requests",
-      "category": "request"
-    },
-    {
-      "id": 3,
-      "title": "DJ ALWAYS LOVING YOU",
-      "sound_id": "84552280374794",
-      "dj": "requests",
-      "category": "request"
-    },
+    { "title": "NEMEN", "sound_id": "95364428935155" },
+    { "title": "TETEG ATI", "sound_id": "91886220273489" },
+    { "title": "LINTANG SEWENGI", "sound_id": "97932398471551" },
+    { "title": "MENDUNG TANPO UDAN", "sound_id": "78005341046657" },
+    { "title": "OJO NANGIS", "sound_id": "135010021293259" },
+    { "title": "TOP TOPAN", "sound_id": "99746128640072" },
+    { "title": "AMBYAR MAK PYAR", "sound_id": "95994860588240" },
+    { "title": "KLEBUS", "sound_id": "102338618401121" },
+    { "title": "APA KABAR SAYANG", "sound_id": "101072297669982" },
+    { "title": "FULL SENYUM SAYANG", "sound_id": "122568100043600" },
+    { "title": "RUNGKAD", "sound_id": "80349323931005" },
+    { "title": "RASAH BALI", "sound_id": "77820667865130" },
+    { "title": "EGO", "sound_id": "128762602594044" },
+    { "title": "SANES", "sound_id": "132867293181670" },
+    { "title": "CRITO MUSTAHIL", "sound_id": "88776506586351" },
+    { "title": "KALIH WELASKU", "sound_id": "86519417104882" },
+    { "title": "GINIO", "sound_id": "131598875335490" },
+    { "title": "ASAL KAU BAHAGIA", "sound_id": "80299177169182" },
+    { "title": "DADI SIJI", "sound_id": "115856527967172" },
+    { "title": "KISINAN", "sound_id": "114051364615893" },
+    { "title": "KISINAN 2", "sound_id": "127507765651759" },
+    { "title": "DUMES", "sound_id": "98025729761965" },
+    { "title": "WIRANG", "sound_id": "77180286715949" },
+    { "title": "PELANGGARAN", "sound_id": "108376776695772" },
+    { "title": "ANAK LANANG", "sound_id": "72013801888677" },
+    { "title": "TRESNO TEKANE MATI", "sound_id": "136516571083206" },
+    { "title": "TAMBAL BAN", "sound_id": "118498276710036" },
+    { "title": "NRESNANI", "sound_id": "124091533388883" },
+    { "title": "LAMUNAN", "sound_id": "138615617324411" },
+    { "title": "SIGAR", "sound_id": "79042285639391" },
+    { "title": "KALAH", "sound_id": "75185286552242" },
 
-    {
-      "id": 4,
-      "title": "DJ JEALOUSY VELOCITY",
-      "sound_id": "89501777604655",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 5,
-      "title": "DJ UNTUNGNYA HIDUP HARUS TETAP BERJALAN",
-      "sound_id": "100076054127542",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 6,
-      "title": "DJ MANGU",
-      "sound_id": "117289628255606",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 7,
-      "title": "DJ SAMPAI AKHIR",
-      "sound_id": "126888998031809",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 8,
-      "title": "DJ TERTAWAN HATI X TAK SEGAMPANG ITU X SISA RASA",
-      "sound_id": "139735519149522",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 9,
-      "title": "DJ BERDUA LEBIH BAIK",
-      "sound_id": "95531563140400",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 10,
-      "title": "DJ KONCO MESRA",
-      "sound_id": "123369864623197",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 11,
-      "title": "DJ SALAH",
-      "sound_id": "104873341103232",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 12,
-      "title": "DJ MERINDUKANMU X MASIH CINTA",
-      "sound_id": "120871173590822",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 13,
-      "title": "TABOLA BALE X MASHUP LATIN LATIN",
-      "sound_id": "87936147630400",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 14,
-      "title": "DJ MAMA MUDA",
-      "sound_id": "89565604812206",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 15,
-      "title": "DJ SIK ASIK",
-      "sound_id": "94988199114736",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 16,
-      "title": "DJ MYSTERIOUS GIRL X SECOND LIFE",
-      "sound_id": "72900428417922",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 17,
-      "title": "DJ SEPARUH AKU",
-      "sound_id": "95059052240252",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 18,
-      "title": "DJ BINTANG 5 VELOCITY",
-      "sound_id": "74615701371170",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 19,
-      "title": "DJ BERUBAH",
-      "sound_id": "105075687529834",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 20,
-      "title": "DJ WHAT IT IS",
-      "sound_id": "113215045230122",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 21,
-      "title": "DJ LELAKI CADANGAN VELOCITY",
-      "sound_id": "90452453882378",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 22,
-      "title": "DJ MENGAPA TAK MENCOBA JUJUR",
-      "sound_id": "98832732044326",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 23,
-      "title": "DJ KEONG RACUN",
-      "sound_id": "81776659797651",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 24,
-      "title": "DJ LAMUNAN X CI JIU MEN HUI YI",
-      "sound_id": "119306273479281",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 25,
-      "title": "DJ CLBK",
-      "sound_id": "113483520563503",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 26,
-      "title": "DJ TAPI BERPUTAR PUTAR",
-      "sound_id": "125330716469130",
-      "dj": "random",
-      "category": "party"
-    },
-    {
-      "id": 27,
-      "title": "DJ LAGI SYANTIK X LAGI TAMVAN KACIW",
-      "sound_id": "93970774672931",
-      "dj": "random",
-      "category": "party"
-    },
-
-    {
-      "id": 28,
-      "title": "NEMEN",
-      "sound_id": "95364428935155",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 29,
-      "title": "TETEG ATI",
-      "sound_id": "91886220273489",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 30,
-      "title": "LINTANG SEWENGI",
-      "sound_id": "97932398471551",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 31,
-      "title": "MENDUNG TANPO UDAN",
-      "sound_id": "78005341046657",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 32,
-      "title": "OJO NANGIS",
-      "sound_id": "135010021293259",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 33,
-      "title": "TOP TOPAN",
-      "sound_id": "99746128640072",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 34,
-      "title": "AMBYAR MAK PYAR",
-      "sound_id": "95994860588240",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 35,
-      "title": "KLEBUS",
-      "sound_id": "102338618401121",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 36,
-      "title": "APA KABAR SAYANG",
-      "sound_id": "101072297669982",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 37,
-      "title": "FULL SENYUM SAYANG",
-      "sound_id": "122568100043600",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 38,
-      "title": "RUNGKAD",
-      "sound_id": "80349323931005",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 39,
-      "title": "RASAH BALI",
-      "sound_id": "77820667865130",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 40,
-      "title": "EGO",
-      "sound_id": "128762602594044",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 41,
-      "title": "SANES",
-      "sound_id": "132867293181670",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 42,
-      "title": "CRITO MUSTAHIL",
-      "sound_id": "88776506586351",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 43,
-      "title": "KALIH WELASKU",
-      "sound_id": "86519417104882",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 44,
-      "title": "GINIO",
-      "sound_id": "131598875335490",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 45,
-      "title": "ASAL KAU BAHAGIA",
-      "sound_id": "80299177169182",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 46,
-      "title": "DADI SIJI",
-      "sound_id": "115856527967172",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 47,
-      "title": "KISINAN",
-      "sound_id": "114051364615893",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 48,
-      "title": "KISINAN 2",
-      "sound_id": "127507765651759",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 49,
-      "title": "DUMES",
-      "sound_id": "98025729761965",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 50,
-      "title": "WIRANG",
-      "sound_id": "77180286715949",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 51,
-      "title": "PELANGGARAN",
-      "sound_id": "108376776695772",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 52,
-      "title": "ANAK LANANG",
-      "sound_id": "72013801888677",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 53,
-      "title": "TRESNO TEKANE MATI",
-      "sound_id": "136516571083206",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 54,
-      "title": "TAMBAL BAN",
-      "sound_id": "118498276710036",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 55,
-      "title": "NRESNANI",
-      "sound_id": "124091533388883",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 56,
-      "title": "LAMUNAN",
-      "sound_id": "138615617324411",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 57,
-      "title": "SIGAR",
-      "sound_id": "79042285639391",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-    {
-      "id": 58,
-      "title": "KALAH",
-      "sound_id": "75185286552242",
-      "dj": "jono_joni",
-      "category": "dangdut"
-    },
-
-    {
-      "id": 59,
-      "title": "Feel The Vibe",
-      "sound_id": "76715413817412",
-      "dj": "kearisk",
-      "category": "edm"
-    },
-    {
-      "id": 60,
-      "title": "BADBOY",
-      "sound_id": "105950471754734",
-      "dj": "kearisk",
-      "category": "edm"
-    },
-    {
-      "id": 61,
-      "title": "So Time",
-      "sound_id": "123851588906131",
-      "dj": "kearisk",
-      "category": "edm"
-    },
-    {
-      "id": 62,
-      "title": "Move Dat Thing",
-      "sound_id": "140634938219264",
-      "dj": "kearisk",
-      "category": "edm"
-    },
-    {
-      "id": 63,
-      "title": "Boy bye",
-      "sound_id": "90212195706356",
-      "dj": "kearisk",
-      "category": "edm"
-    },
-    {
-      "id": 64,
-      "title": "Voodoo",
-      "sound_id": "74097685710561",
-      "dj": "kearisk",
-      "category": "edm"
-    }]
-    }
+    { "title": "Feel The Vibe", "sound_id": "76715413817412" },
+    { "title": "BADBOY", "sound_id": "105950471754734" },
+    { "title": "So Time", "sound_id": "123851588906131" },
+    { "title": "Move Dat Thing", "sound_id": "140634938219264" },
+    { "title": "Boy bye", "sound_id": "90212195706356" },
+    { "title": "Voodoo", "sound_id": "74097685710561" }
+  ]
+}
