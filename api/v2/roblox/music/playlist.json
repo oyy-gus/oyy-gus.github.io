@@ -1,5 +1,5 @@
 {
-  "galau": [
+  "dj": [
     { "title": "You Dont Even Know", "sound_id": "111149969264803" },
     { "title": "Breakbeat Remix", "sound_id": "104227537425198" },
     { "title": "DJ ALWAYS LOVING YOU", "sound_id": "84552280374794" },
@@ -67,7 +67,7 @@
     { "title": "Boy bye", "sound_id": "90212195706356" },
     { "title": "Voodoo", "sound_id": "74097685710561" }
   ],
-  "dj": [
+  "galau": [
     { "title": "Mawar Jingga", "sound_id": "132169543541066" },
     { "title": "Kita Usahakan Lagi", "sound_id": "103155356900349" },
     { "title": "Terlalu Dalam", "sound_id": "109046156920946" },
