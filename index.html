@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#020617">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Guss</title>
-  <meta name="keywords" content="Guss, social media, tiktok, instagram, github, discord">
+  <meta name="keywords" content="Guss, social media, tiktok, instagram, github, discord, developer">
   <meta name="description" content="Welcome to my personal portfolio - Connect with me on social media!" />
   <meta property="og:site_name" content="Guss" />
   <meta property="og:title" content="Guss - Personal Portfolio" />
@@ -17,7 +17,9 @@
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/97151655" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <script src="https://kit.fontawesome.com/b423d98a73.js" crossorigin="anonymous"></script>
 
   <style>
@@ -26,14 +28,15 @@
       --cyan-dark: #06b6d4;
       --cyan-glow: rgba(34, 211, 238, 0.6);
       --magenta: #f472b6;
-      --magenta-dark: #ec4899;
       --magenta-glow: rgba(244, 114, 182, 0.6);
       --lime: #a3e635;
-      --lime-dark: #84cc16;
       --violet: #a78bfa;
-      --violet-dark: #8b5cf6;
       --amber: #fbbf24;
       --amber-dark: #f59e0b;
+      --rose: #fb7185;
+      --emerald: #34d399;
+      --sky: #38bdf8;
+      --orange: #fb923c;
       --bg-primary: #020617;
       --bg-secondary: #0f172a;
       --bg-card: rgba(15, 23, 42, 0.8);
@@ -46,71 +49,67 @@
     * {
       box-sizing: border-box;
       margin: 0;
-      padding: 0;
+      padding: 0
     }
 
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: smooth
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     #matrix-canvas {
       position: fixed;
       inset: 0;
       z-index: 0;
-      pointer-events: none;
+      pointer-events: none
     }
 
     .bg-layer {
       position: fixed;
       inset: 0;
       z-index: 1;
-      pointer-events: none;
+      pointer-events: none
     }
 
     .bg-gradient {
       background:
-        radial-gradient(ellipse 50% 80% at 20% 0%, rgba(34, 211, 238, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 80% at 80% 100%, rgba(244, 114, 182, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+        radial-gradient(ellipse 50% 80% at 20% 0%, rgba(34, 211, 238, .08) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 80% at 80% 100%, rgba(244, 114, 182, .08) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(139, 92, 246, .05) 0%, transparent 50%);
     }
 
     .scanlines {
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(34, 211, 238, 0.008) 2px,
-        rgba(34, 211, 238, 0.008) 4px
-      );
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(34, 211, 238, .008) 2px, rgba(34, 211, 238, .008) 4px);
       animation: scanMove 8s linear infinite;
     }
 
     @keyframes scanMove {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(4px); }
+      0% {
+        transform: translateY(0)
+      }
+
+      100% {
+        transform: translateY(4px)
+      }
     }
 
     .grid-overlay {
-      background-image:
-        linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(34, 211, 238, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, .03) 1px, transparent 1px);
       background-size: 80px 80px;
       mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%);
       -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%);
     }
 
     .vignette {
-      background: radial-gradient(ellipse at center, transparent 50%, var(--bg-primary) 100%);
+      background: radial-gradient(ellipse at center, transparent 50%, var(--bg-primary) 100%)
     }
 
     .glitch-line {
@@ -120,27 +119,44 @@
       opacity: 0;
       z-index: 2;
       pointer-events: none;
-      box-shadow: 0 0 10px var(--cyan), 0 0 30px var(--cyan-glow);
+      box-shadow: 0 0 10px var(--cyan), 0 0 30px var(--cyan-glow)
     }
 
     .glitch-line-1 {
       width: 100%;
       top: 20%;
-      animation: glitchLine 8s ease-in-out infinite;
+      animation: glitchLine 8s ease-in-out infinite
     }
 
     .glitch-line-2 {
       width: 60%;
       top: 65%;
       left: 20%;
-      animation: glitchLine 12s ease-in-out infinite 3s;
+      animation: glitchLine 12s ease-in-out infinite 3s
     }
 
     @keyframes glitchLine {
-      0%, 95%, 100% { opacity: 0; transform: scaleX(0); }
-      96% { opacity: 0.6; transform: scaleX(1); }
-      97% { opacity: 0; transform: scaleX(1); }
-      98% { opacity: 0.4; transform: scaleX(0.5); }
+
+      0%,
+      95%,
+      100% {
+        opacity: 0;
+        transform: scaleX(0)
+      }
+
+      96% {
+        opacity: .6;
+        transform: scaleX(1)
+      }
+
+      97% {
+        opacity: 0
+      }
+
+      98% {
+        opacity: .4;
+        transform: scaleX(.5)
+      }
     }
 
     .floating-shapes {
@@ -148,23 +164,23 @@
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      overflow: hidden;
+      overflow: hidden
     }
 
     .shape {
       position: absolute;
       border: 1px solid;
-      opacity: 0.08;
+      opacity: .08
     }
 
     .shape-1 {
       width: 200px;
       height: 200px;
       border-color: var(--cyan);
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
       top: 10%;
       right: -5%;
-      animation: morphFloat 20s ease-in-out infinite;
+      animation: morphFloat 20s ease-in-out infinite
     }
 
     .shape-2 {
@@ -174,7 +190,7 @@
       top: 60%;
       left: -3%;
       animation: morphFloat 25s ease-in-out infinite reverse;
-      transform: rotate(45deg);
+      transform: rotate(45deg)
     }
 
     .shape-3 {
@@ -184,25 +200,27 @@
       border-radius: 50%;
       bottom: 15%;
       right: 10%;
-      animation: morphFloat 15s ease-in-out infinite 5s;
+      animation: morphFloat 15s ease-in-out infinite 5s
     }
 
     @keyframes morphFloat {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translate(0, 0) rotate(0deg) scale(1);
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        border-radius: 30% 70% 70% 30%/30% 30% 70% 70%
       }
+
       25% {
-        transform: translate(30px, -40px) rotate(90deg) scale(1.1);
-        border-radius: 50% 50% 30% 70% / 50% 70% 30% 50%;
+        transform: translate(30px, -40px) rotate(90deg) scale(1.1)
       }
+
       50% {
-        transform: translate(-20px, 20px) rotate(180deg) scale(0.9);
-        border-radius: 70% 30% 50% 50% / 30% 50% 50% 70%;
+        transform: translate(-20px, 20px) rotate(180deg) scale(.9)
       }
+
       75% {
-        transform: translate(10px, -10px) rotate(270deg) scale(1.05);
-        border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+        transform: translate(10px, -10px) rotate(270deg) scale(1.05)
       }
     }
 
@@ -216,16 +234,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(2, 6, 23, 0.8);
+      background: rgba(2, 6, 23, .8);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-color);
-      transition: all 0.3s ease;
+      transition: all .3s ease
     }
 
     .navbar.scrolled {
       padding: 12px 24px;
-      background: rgba(2, 6, 23, 0.95);
+      background: rgba(2, 6, 23, .95)
     }
 
     .nav-logo {
@@ -237,12 +255,12 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      text-shadow: 0 0 20px var(--cyan-glow);
+      text-shadow: 0 0 20px var(--cyan-glow)
     }
 
     .nav-logo-bracket {
       color: var(--text-muted);
-      font-weight: 400;
+      font-weight: 400
     }
 
     .nav-status {
@@ -250,10 +268,10 @@
       align-items: center;
       gap: 8px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
+      font-size: .7rem;
       color: var(--lime);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 2px
     }
 
     .nav-status-dot {
@@ -262,12 +280,19 @@
       background: var(--lime);
       border-radius: 50%;
       box-shadow: 0 0 10px var(--lime);
-      animation: blink 2s ease-in-out infinite;
+      animation: blink 2s ease-in-out infinite
     }
 
     @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .3
+      }
     }
 
     .main-wrapper {
@@ -276,7 +301,7 @@
       max-width: 680px;
       margin: 0 auto;
       padding: 0 20px;
-      min-height: 100vh;
+      min-height: 100vh
     }
 
     .hero {
@@ -287,12 +312,12 @@
       align-items: center;
       text-align: center;
       padding: 80px 0 40px;
-      position: relative;
+      position: relative
     }
 
     .hero-avatar-container {
       position: relative;
-      margin-bottom: 40px;
+      margin-bottom: 40px
     }
 
     .avatar-hex {
@@ -301,7 +326,7 @@
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: center
     }
 
     .avatar-hex-border {
@@ -309,19 +334,24 @@
       inset: -4px;
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       background: linear-gradient(135deg, var(--cyan), var(--magenta), var(--violet));
-      animation: hexRotateColor 4s linear infinite;
+      animation: hexRotateColor 4s linear infinite
     }
 
     @keyframes hexRotateColor {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
+      0% {
+        filter: hue-rotate(0deg)
+      }
+
+      100% {
+        filter: hue-rotate(360deg)
+      }
     }
 
     .avatar-hex-inner {
       position: absolute;
       inset: 0;
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      background: var(--bg-primary);
+      background: var(--bg-primary)
     }
 
     .avatar-img {
@@ -331,13 +361,13 @@
       object-fit: cover;
       position: relative;
       z-index: 2;
-      transition: all 0.5s ease;
-      filter: saturate(1.1);
+      transition: all .5s ease;
+      filter: saturate(1.1)
     }
 
     .avatar-img:hover {
       transform: scale(1.05);
-      filter: saturate(1.4) brightness(1.1);
+      filter: saturate(1.4) brightness(1.1)
     }
 
     .avatar-orbit {
@@ -347,9 +377,9 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      border: 1px dashed rgba(34, 211, 238, 0.15);
+      border: 1px dashed rgba(34, 211, 238, .15);
       border-radius: 50%;
-      animation: orbitSpin 20s linear infinite;
+      animation: orbitSpin 20s linear infinite
     }
 
     .avatar-orbit-dot {
@@ -361,24 +391,29 @@
       top: -4px;
       left: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 0 15px var(--cyan-glow);
+      box-shadow: 0 0 15px var(--cyan-glow)
     }
 
     .avatar-orbit-2 {
       width: 260px;
       height: 260px;
-      border-color: rgba(244, 114, 182, 0.1);
-      animation: orbitSpin 30s linear infinite reverse;
+      border-color: rgba(244, 114, 182, .1);
+      animation: orbitSpin 30s linear infinite reverse
     }
 
     .avatar-orbit-2 .avatar-orbit-dot {
       background: var(--magenta);
-      box-shadow: 0 0 15px var(--magenta-glow);
+      box-shadow: 0 0 15px var(--magenta-glow)
     }
 
     @keyframes orbitSpin {
-      from { transform: translate(-50%, -50%) rotate(0deg); }
-      to { transform: translate(-50%, -50%) rotate(360deg); }
+      from {
+        transform: translate(-50%, -50%) rotate(0deg)
+      }
+
+      to {
+        transform: translate(-50%, -50%) rotate(360deg)
+      }
     }
 
     .avatar-glow {
@@ -390,13 +425,22 @@
       height: 200px;
       background: radial-gradient(circle, var(--cyan-glow) 0%, transparent 60%);
       filter: blur(40px);
-      opacity: 0.4;
-      animation: avatarGlowPulse 3s ease-in-out infinite;
+      opacity: .4;
+      animation: avatarGlowPulse 3s ease-in-out infinite
     }
 
     @keyframes avatarGlowPulse {
-      0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-      50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.15); }
+
+      0%,
+      100% {
+        opacity: .3;
+        transform: translate(-50%, -50%) scale(1)
+      }
+
+      50% {
+        opacity: .6;
+        transform: translate(-50%, -50%) scale(1.15)
+      }
     }
 
     .hero-title {
@@ -407,13 +451,13 @@
       line-height: 1;
       margin-bottom: 16px;
       position: relative;
-      cursor: default;
+      cursor: default
     }
 
     .hero-title-main {
       position: relative;
       display: inline-block;
-      color: var(--text-primary);
+      color: var(--text-primary)
     }
 
     .hero-title-main::before,
@@ -424,49 +468,94 @@
       left: 0;
       width: 100%;
       height: 100%;
-      opacity: 0;
+      opacity: 0
     }
 
     .hero-title-main::before {
       color: var(--cyan);
-      animation: glitch-1 4s infinite;
+      animation: glitch-1 4s infinite
     }
 
     .hero-title-main::after {
       color: var(--magenta);
-      animation: glitch-2 4s infinite;
+      animation: glitch-2 4s infinite
     }
 
     @keyframes glitch-1 {
-      0%, 90%, 100% { opacity: 0; transform: translate(0); }
-      91% { opacity: 0.8; transform: translate(-3px, -1px); clip-path: inset(20% 0 60% 0); }
-      93% { opacity: 0.6; transform: translate(3px, 1px); clip-path: inset(50% 0 20% 0); }
-      95% { opacity: 0; transform: translate(0); }
+
+      0%,
+      90%,
+      100% {
+        opacity: 0;
+        transform: translate(0)
+      }
+
+      91% {
+        opacity: .8;
+        transform: translate(-3px, -1px);
+        clip-path: inset(20% 0 60% 0)
+      }
+
+      93% {
+        opacity: .6;
+        transform: translate(3px, 1px);
+        clip-path: inset(50% 0 20% 0)
+      }
+
+      95% {
+        opacity: 0
+      }
     }
 
     @keyframes glitch-2 {
-      0%, 88%, 100% { opacity: 0; transform: translate(0); }
-      89% { opacity: 0.8; transform: translate(3px, 2px); clip-path: inset(40% 0 30% 0); }
-      92% { opacity: 0.5; transform: translate(-2px, -1px); clip-path: inset(10% 0 70% 0); }
-      94% { opacity: 0; transform: translate(0); }
+
+      0%,
+      88%,
+      100% {
+        opacity: 0;
+        transform: translate(0)
+      }
+
+      89% {
+        opacity: .8;
+        transform: translate(3px, 2px);
+        clip-path: inset(40% 0 30% 0)
+      }
+
+      92% {
+        opacity: .5;
+        transform: translate(-2px, -1px);
+        clip-path: inset(10% 0 70% 0)
+      }
+
+      94% {
+        opacity: 0
+      }
     }
 
     .hero-subtitle {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+      font-size: .85rem;
       color: var(--text-secondary);
       margin-bottom: 32px;
-      letter-spacing: 1px;
+      letter-spacing: 1px
     }
 
-    .hero-subtitle .typed-cursor {
+    .typed-cursor {
       color: var(--cyan);
-      animation: cursorBlink 1s step-end infinite;
+      animation: cursorBlink 1s step-end infinite
     }
 
     @keyframes cursorBlink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0
+      }
     }
 
     .hero-tags {
@@ -474,36 +563,48 @@
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
-      margin-bottom: 40px;
+      margin-bottom: 40px
     }
 
     .hero-tag {
       padding: 6px 16px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
+      font-size: .7rem;
       font-weight: 500;
       border-radius: 4px;
       border: 1px solid;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1px
     }
 
     .tag-cyan {
       color: var(--cyan);
-      border-color: rgba(34, 211, 238, 0.3);
-      background: rgba(34, 211, 238, 0.05);
+      border-color: rgba(34, 211, 238, .3);
+      background: rgba(34, 211, 238, .05)
     }
 
     .tag-magenta {
       color: var(--magenta);
-      border-color: rgba(244, 114, 182, 0.3);
-      background: rgba(244, 114, 182, 0.05);
+      border-color: rgba(244, 114, 182, .3);
+      background: rgba(244, 114, 182, .05)
     }
 
     .tag-violet {
       color: var(--violet);
-      border-color: rgba(167, 139, 250, 0.3);
-      background: rgba(167, 139, 250, 0.05);
+      border-color: rgba(167, 139, 250, .3);
+      background: rgba(167, 139, 250, .05)
+    }
+
+    .tag-lime {
+      color: var(--lime);
+      border-color: rgba(163, 230, 53, .3);
+      background: rgba(163, 230, 53, .05)
+    }
+
+    .tag-amber {
+      color: var(--amber);
+      border-color: rgba(251, 191, 36, .3);
+      background: rgba(251, 191, 36, .05)
     }
 
     .scroll-indicator {
@@ -515,24 +616,33 @@
       gap: 8px;
       color: var(--text-muted);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
+      font-size: .65rem;
       letter-spacing: 3px;
       text-transform: uppercase;
-      animation: scrollBounce 2s ease-in-out infinite;
+      animation: scrollBounce 2s ease-in-out infinite
     }
 
     .scroll-indicator i {
       font-size: 1rem;
-      color: var(--cyan);
+      color: var(--cyan)
     }
 
     @keyframes scrollBounce {
-      0%, 100% { transform: translateY(0); opacity: 0.5; }
-      50% { transform: translateY(8px); opacity: 1; }
+
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: .5
+      }
+
+      50% {
+        transform: translateY(8px);
+        opacity: 1
+      }
     }
 
-    .links-section {
-      padding: 40px 0 60px;
+    .section-pad {
+      padding: 20px 0 60px
     }
 
     .section-header {
@@ -540,7 +650,7 @@
       align-items: center;
       gap: 16px;
       margin-bottom: 24px;
-      padding: 0 4px;
+      padding: 0 4px
     }
 
     .section-icon {
@@ -552,34 +662,29 @@
       border: 1px solid var(--border-color);
       border-radius: 8px;
       color: var(--cyan);
-      font-size: 0.85rem;
-      background: rgba(34, 211, 238, 0.05);
-    }
-
-    .section-header-text {
-      flex: 1;
+      font-size: .85rem;
+      background: rgba(34, 211, 238, .05)
     }
 
     .section-title {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: .8rem;
       font-weight: 700;
-      color: var(--text-primary);
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 3px
     }
 
     .section-line {
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, var(--border-color), transparent);
+      background: linear-gradient(90deg, var(--border-color), transparent)
     }
 
     .cards-grid {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 48px;
+      margin-bottom: 48px
     }
 
     .card {
@@ -594,11 +699,11 @@
       text-decoration: none;
       color: var(--text-primary);
       overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: all .4s cubic-bezier(.25, .46, .45, .94);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       -webkit-tap-highlight-color: transparent;
-      cursor: pointer;
+      cursor: pointer
     }
 
     .card::before {
@@ -610,41 +715,31 @@
       width: 3px;
       background: var(--card-accent, var(--cyan));
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity .3s ease
     }
 
     .card::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(34, 211, 238, 0.03) 0%,
-        transparent 50%
-      );
+      background: linear-gradient(135deg, rgba(34, 211, 238, .03) 0%, transparent 50%);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity .3s ease
     }
 
     .card:hover {
       transform: translateX(8px);
-      border-color: rgba(34, 211, 238, 0.3);
-      box-shadow:
-        0 0 0 1px rgba(34, 211, 238, 0.1),
-        0 20px 40px -15px rgba(0, 0, 0, 0.5),
-        -4px 0 30px -10px var(--card-glow, var(--cyan-glow));
+      border-color: rgba(34, 211, 238, .3);
+      box-shadow: 0 0 0 1px rgba(34, 211, 238, .1), 0 20px 40px -15px rgba(0, 0, 0, .5), -4px 0 30px -10px var(--card-glow, var(--cyan-glow))
     }
 
-    .card:hover::before {
-      opacity: 1;
-    }
-
+    .card:hover::before,
     .card:hover::after {
-      opacity: 1;
+      opacity: 1
     }
 
     .card:active {
-      transform: translateX(4px) scale(0.99);
+      transform: translateX(4px) scale(.99)
     }
 
     .card-icon {
@@ -659,41 +754,41 @@
       position: relative;
       z-index: 1;
       flex-shrink: 0;
-      transition: all 0.4s ease;
+      transition: all .4s ease
     }
 
     .card:hover .card-icon {
-      transform: scale(1.1);
+      transform: scale(1.1)
     }
 
-    .card-icon.ci-tiktok {
+    .ci-tiktok {
       background: linear-gradient(135deg, #69c9d0, #ee1d52);
-      box-shadow: 0 4px 15px rgba(238, 29, 82, 0.3);
+      box-shadow: 0 4px 15px rgba(238, 29, 82, .3)
     }
 
-    .card-icon.ci-instagram {
+    .ci-instagram {
       background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-      box-shadow: 0 4px 15px rgba(253, 29, 29, 0.3);
+      box-shadow: 0 4px 15px rgba(253, 29, 29, .3)
     }
 
-    .card-icon.ci-github {
+    .ci-github {
       background: linear-gradient(135deg, #24292e, #6e5494);
-      box-shadow: 0 4px 15px rgba(110, 84, 148, 0.3);
+      box-shadow: 0 4px 15px rgba(110, 84, 148, .3)
     }
 
-    .card-icon.ci-discord {
+    .ci-discord {
       background: linear-gradient(135deg, #5865F2, #7289da);
-      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+      box-shadow: 0 4px 15px rgba(88, 101, 242, .3)
     }
 
-    .card-icon.ci-download {
+    .ci-download {
       background: linear-gradient(135deg, #06b6d4, #0284c7);
-      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+      box-shadow: 0 4px 15px rgba(6, 182, 212, .3)
     }
 
-    .card-icon.ci-saweria {
+    .ci-saweria {
       background: linear-gradient(135deg, #f59e0b, #f97316);
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, .3)
     }
 
     .card-content {
@@ -703,78 +798,69 @@
       gap: 3px;
       position: relative;
       z-index: 1;
-      min-width: 0;
+      min-width: 0
     }
 
     .card-title {
-      font-family: 'Inter', sans-serif;
       font-size: 1rem;
       font-weight: 600;
-      letter-spacing: -0.2px;
+      letter-spacing: -.2px
     }
 
     .card-desc {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
+      font-size: .7rem;
       color: var(--text-muted);
-      letter-spacing: 0.5px;
+      letter-spacing: .5px
     }
 
     .card-arrow {
       position: relative;
       z-index: 1;
       color: var(--text-muted);
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
-      flex-shrink: 0;
+      font-size: .9rem;
+      transition: all .3s ease;
+      flex-shrink: 0
     }
 
     .card:hover .card-arrow {
       color: var(--card-accent, var(--cyan));
-      transform: translateX(4px);
+      transform: translateX(4px)
     }
 
     .card[data-accent="tiktok"] {
       --card-accent: #ee1d52;
-      --card-glow: rgba(238, 29, 82, 0.4);
+      --card-glow: rgba(238, 29, 82, .4)
     }
 
     .card[data-accent="instagram"] {
       --card-accent: #fd1d1d;
-      --card-glow: rgba(253, 29, 29, 0.4);
+      --card-glow: rgba(253, 29, 29, .4)
     }
 
     .card[data-accent="github"] {
       --card-accent: #8b5cf6;
-      --card-glow: rgba(139, 92, 246, 0.4);
+      --card-glow: rgba(139, 92, 246, .4)
     }
 
     .card[data-accent="discord"] {
       --card-accent: #5865F2;
-      --card-glow: rgba(88, 101, 242, 0.4);
+      --card-glow: rgba(88, 101, 242, .4)
     }
 
     .card[data-accent="download"] {
       --card-accent: #06b6d4;
-      --card-glow: rgba(6, 182, 212, 0.4);
+      --card-glow: rgba(6, 182, 212, .4)
     }
 
     .card[data-accent="saweria"] {
       --card-accent: #f59e0b;
-      --card-glow: rgba(245, 158, 11, 0.4);
-      border-color: rgba(245, 158, 11, 0.15);
+      --card-glow: rgba(245, 158, 11, .4);
+      border-color: rgba(245, 158, 11, .15)
     }
 
     .card[data-accent="saweria"]:hover {
-      border-color: rgba(245, 158, 11, 0.3);
-    }
-
-    .card[data-accent="saweria"]::after {
-      background: linear-gradient(
-        135deg,
-        rgba(245, 158, 11, 0.05) 0%,
-        transparent 50%
-      );
+      border-color: rgba(245, 158, 11, .3)
     }
 
     .donate-badge {
@@ -782,22 +868,22 @@
       top: 12px;
       right: 12px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.55rem;
+      font-size: .55rem;
       padding: 3px 8px;
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: rgba(245, 158, 11, .15);
+      border: 1px solid rgba(245, 158, 11, .3);
       border-radius: 4px;
       color: var(--amber);
       text-transform: uppercase;
       letter-spacing: 1px;
-      z-index: 1;
+      z-index: 1
     }
 
     .stats-bar {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      margin: 48px 0;
+      margin: 48px 0
     }
 
     .stat-item {
@@ -807,13 +893,12 @@
       border: 1px solid var(--border-color);
       border-radius: 12px;
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      transition: all 0.3s ease;
+      transition: all .3s ease
     }
 
     .stat-item:hover {
-      border-color: rgba(34, 211, 238, 0.3);
-      transform: translateY(-4px);
+      border-color: rgba(34, 211, 238, .3);
+      transform: translateY(-4px)
     }
 
     .stat-number {
@@ -824,25 +909,220 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      line-height: 1.2;
+      line-height: 1.2
     }
 
     .stat-label {
-      font-size: 0.65rem;
+      font-size: .65rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 2px;
-      margin-top: 4px;
+      margin-top: 4px
+    }
+
+    .skills-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .skill-category {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      transition: all .3s ease
+    }
+
+    .skill-category:hover {
+      border-color: rgba(34, 211, 238, .25)
+    }
+
+    .skill-cat-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: rgba(34, 211, 238, .02);
+      border-bottom: 1px solid var(--border-color);
+      cursor: pointer;
+      user-select: none;
+      transition: background .3s ease
+    }
+
+    .skill-cat-header:hover {
+      background: rgba(34, 211, 238, .05)
+    }
+
+    .skill-cat-icon {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 1rem;
+      flex-shrink: 0
+    }
+
+    .skill-cat-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      flex: 1
+    }
+
+    .skill-cat-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--text-muted);
+      padding: 3px 10px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 20px
+    }
+
+    .skill-cat-toggle {
+      font-size: .7rem;
+      color: var(--text-muted);
+      transition: transform .3s ease
+    }
+
+    .skill-category.collapsed .skill-cat-toggle {
+      transform: rotate(-90deg)
+    }
+
+    .skill-category.collapsed .skill-cat-body {
+      max-height: 0;
+      padding: 0 20px;
+      opacity: 0
+    }
+
+    .skill-cat-body {
+      padding: 16px 20px;
+      max-height: 800px;
+      opacity: 1;
+      transition: max-height .4s ease, padding .4s ease, opacity .3s ease;
+      overflow: hidden
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .skill-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      font-weight: 500;
+      cursor: default;
+      transition: all .3s ease;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .skill-chip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .3s ease;
+      background: rgba(255, 255, 255, .03)
+    }
+
+    .skill-chip:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px -8px var(--chip-glow)
+    }
+
+    .skill-chip:hover::before {
+      opacity: 1
+    }
+
+    .skill-chip-icon {
+      font-size: 1rem;
+      line-height: 1
+    }
+
+    .skill-chip-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--chip-color), transparent);
+      width: 0;
+      transition: width 1.2s cubic-bezier(.25, .46, .45, .94)
+    }
+
+    .skill-chip.animated .skill-chip-bar {
+      width: var(--bar-width)
+    }
+
+    .skill-level-dots {
+      display: flex;
+      gap: 3px;
+      align-items: center
+    }
+
+    .skill-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .15);
+      transition: all .3s ease
+    }
+
+    .skill-dot.filled {
+      background: var(--chip-color);
+      box-shadow: 0 0 6px var(--chip-glow)
+    }
+
+    .skill-level-badge {
+      font-size: .5rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid;
+      margin-left: 2px;
+      opacity: .8;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px
+    }
+
+    .skills-total {
+      text-align: center;
+      margin-top: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      color: var(--text-muted);
+      padding: 12px;
+      border: 1px dashed var(--border-color);
+      border-radius: 10px
+    }
+
+    .skills-total b {
+      color: var(--cyan);
+      font-size: 1.1rem
     }
 
     .terminal-card {
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, .9);
       border: 1px solid var(--border-color);
       border-radius: 12px;
       overflow: hidden;
       margin: 48px 0;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px)
     }
 
     .terminal-header {
@@ -850,119 +1130,525 @@
       align-items: center;
       gap: 8px;
       padding: 12px 16px;
-      background: rgba(34, 211, 238, 0.03);
-      border-bottom: 1px solid var(--border-color);
+      background: rgba(34, 211, 238, .03);
+      border-bottom: 1px solid var(--border-color)
     }
 
     .terminal-dot {
       width: 10px;
       height: 10px;
-      border-radius: 50%;
+      border-radius: 50%
     }
 
-    .terminal-dot.red { background: #ef4444; }
-    .terminal-dot.yellow { background: #eab308; }
-    .terminal-dot.green { background: #22c55e; }
+    .terminal-dot.red {
+      background: #ef4444
+    }
+
+    .terminal-dot.yellow {
+      background: #eab308
+    }
+
+    .terminal-dot.green {
+      background: #22c55e
+    }
 
     .terminal-title {
       flex: 1;
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text-muted);
+      font-size: .7rem;
+      color: var(--text-muted)
     }
 
     .terminal-body {
       padding: 20px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      line-height: 1.8;
+      font-size: .78rem;
+      line-height: 1.8
     }
 
     .terminal-line {
       display: flex;
       gap: 8px;
-      margin-bottom: 4px;
+      margin-bottom: 4px
     }
 
     .terminal-prompt {
       color: var(--cyan);
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
     .terminal-command {
-      color: var(--text-secondary);
+      color: var(--text-secondary)
     }
 
     .terminal-output {
       color: var(--lime);
-      padding-left: 28px;
+      padding-left: 28px
     }
 
-    .terminal-comment {
-      color: var(--text-muted);
+    .terminal-output-multi {
+      color: var(--lime);
       padding-left: 28px;
-      font-style: italic;
+      line-height: 1.6
+    }
+
+    .terminal-output-key {
+      color: var(--cyan)
+    }
+
+    .terminal-output-val {
+      color: var(--amber)
+    }
+
+    .terminal-output-arr {
+      color: var(--magenta)
+    }
+
+    .game-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap
+    }
+
+    .game-tab {
+      padding: 10px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      backdrop-filter: blur(10px);
+      user-select: none
+    }
+
+    .game-tab:hover {
+      border-color: rgba(34, 211, 238, .3);
+      color: var(--text-secondary)
+    }
+
+    .game-tab.active {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(34, 211, 238, .1);
+      box-shadow: 0 0 20px rgba(34, 211, 238, .15)
+    }
+
+    .game-container {
+      background: rgba(15, 23, 42, .9);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(20px)
+    }
+
+    .game-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: rgba(34, 211, 238, .03);
+      border-bottom: 1px solid var(--border-color)
+    }
+
+    .game-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .game-score-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      color: var(--lime);
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .game-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center
+    }
+
+    .game-panel {
+      display: none;
+      width: 100%
+    }
+
+    .game-panel.active {
+      display: block
+    }
+
+    .game-btn {
+      padding: 10px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--bg-primary);
+      background: var(--cyan);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px
+    }
+
+    .game-btn:hover {
+      background: var(--magenta);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(244, 114, 182, .4)
+    }
+
+    .game-btn:active {
+      transform: translateY(0) scale(.97)
+    }
+
+    .game-btn-secondary {
+      background: transparent;
+      color: var(--cyan);
+      border: 1px solid rgba(34, 211, 238, .3)
+    }
+
+    .game-btn-secondary:hover {
+      background: rgba(34, 211, 238, .1);
+      color: var(--cyan);
+      border-color: var(--cyan)
+    }
+
+    .game-msg {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .85rem;
+      color: var(--text-secondary);
+      text-align: center;
+      margin: 12px 0;
+      min-height: 24px
+    }
+
+    .game-msg.win {
+      color: var(--lime);
+      text-shadow: 0 0 10px rgba(163, 230, 53, .5)
+    }
+
+    .game-msg.lose {
+      color: #ef4444;
+      text-shadow: 0 0 10px rgba(239, 68, 68, .5)
+    }
+
+    .snake-canvas-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%
+    }
+
+    #snake-canvas {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: rgba(2, 6, 23, .8);
+      max-width: 100%;
+      image-rendering: pixelated;
+      touch-action: none
+    }
+
+    .snake-controls {
+      display: grid;
+      grid-template-areas: ". up ." "left down right";
+      gap: 8px
+    }
+
+    .snake-ctrl-btn {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--cyan);
+      background: rgba(34, 211, 238, .08);
+      border: 1px solid rgba(34, 211, 238, .25);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all .2s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    .snake-ctrl-btn:hover,
+    .snake-ctrl-btn:active {
+      background: rgba(34, 211, 238, .2);
+      border-color: var(--cyan);
+      box-shadow: 0 0 15px rgba(34, 211, 238, .3)
+    }
+
+    .ctrl-up {
+      grid-area: up
+    }
+
+    .ctrl-down {
+      grid-area: down
+    }
+
+    .ctrl-left {
+      grid-area: left
+    }
+
+    .ctrl-right {
+      grid-area: right
+    }
+
+    .snake-info {
+      display: flex;
+      gap: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      color: var(--text-muted)
+    }
+
+    .snake-info span b {
+      color: var(--cyan)
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-width: 320px;
+      margin: 0 auto 16px;
+      width: 100%
+    }
+
+    .memory-card-item {
+      aspect-ratio: 1;
+      perspective: 600px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    .memory-card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform .5s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .memory-card-item.flipped .memory-card-inner,
+    .memory-card-item.matched .memory-card-inner {
+      transform: rotateY(180deg)
+    }
+
+    .memory-card-front,
+    .memory-card-back {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      font-size: 1.8rem
+    }
+
+    .memory-card-front {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--cyan);
+      font-size: 1.2rem;
+      transition: all .3s ease
+    }
+
+    .memory-card-front:hover {
+      border-color: rgba(34, 211, 238, .4);
+      box-shadow: 0 0 20px rgba(34, 211, 238, .15)
+    }
+
+    .memory-card-back {
+      background: rgba(34, 211, 238, .1);
+      border: 1px solid rgba(34, 211, 238, .3);
+      transform: rotateY(180deg)
+    }
+
+    .memory-card-item.matched .memory-card-back {
+      background: rgba(163, 230, 53, .1);
+      border-color: rgba(163, 230, 53, .4);
+      box-shadow: 0 0 20px rgba(163, 230, 53, .2)
+    }
+
+    .memory-stats {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      color: var(--text-muted)
+    }
+
+    .memory-stats b {
+      color: var(--cyan)
+    }
+
+    .reaction-area {
+      width: 100%;
+      max-width: 400px;
+      height: 280px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: all .3s ease;
+      border: 2px dashed var(--border-color);
+      background: rgba(2, 6, 23, .6);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      margin: 0 auto
+    }
+
+    .reaction-area.waiting {
+      border-color: rgba(239, 68, 68, .5);
+      background: rgba(239, 68, 68, .05)
+    }
+
+    .reaction-area.ready {
+      border-color: rgba(163, 230, 53, .8);
+      background: rgba(163, 230, 53, .1);
+      border-style: solid;
+      box-shadow: 0 0 40px rgba(163, 230, 53, .2)
+    }
+
+    .reaction-area.result {
+      border-color: rgba(34, 211, 238, .5);
+      background: rgba(34, 211, 238, .05)
+    }
+
+    .reaction-area.too-early {
+      border-color: rgba(244, 114, 182, .5);
+      background: rgba(244, 114, 182, .05)
+    }
+
+    .reaction-icon {
+      font-size: 3rem;
+      line-height: 1
+    }
+
+    .reaction-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .9rem;
+      color: var(--text-secondary);
+      text-align: center
+    }
+
+    .reaction-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--cyan), var(--lime));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent
+    }
+
+    .reaction-best {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      color: var(--text-muted);
+      margin-top: 12px
+    }
+
+    .reaction-best b {
+      color: var(--amber)
     }
 
     .footer {
       padding: 40px 0;
       text-align: center;
-      border-top: 1px solid var(--border-color);
+      border-top: 1px solid var(--border-color)
     }
 
     .footer-content {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 20px
     }
 
     .footer-ascii {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.55rem;
+      font-size: .55rem;
       color: var(--text-muted);
       line-height: 1.4;
       white-space: pre;
-      opacity: 0.5;
+      opacity: .5
     }
 
     .footer-text {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: .75rem;
       color: var(--text-secondary);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 8px
     }
 
     .footer-heart {
       color: #ef4444;
-      animation: heartbeat 1.5s ease-in-out infinite;
+      animation: heartbeat 1.5s ease-in-out infinite
     }
 
     @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      15% { transform: scale(1.3); }
-      30% { transform: scale(1); }
-      45% { transform: scale(1.15); }
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      15% {
+        transform: scale(1.3)
+      }
+
+      30% {
+        transform: scale(1)
+      }
+
+      45% {
+        transform: scale(1.15)
+      }
     }
 
     .footer-link {
       color: var(--cyan);
       text-decoration: none;
-      transition: all 0.3s ease;
-      position: relative;
+      transition: all .3s ease
     }
 
     .footer-link:hover {
       color: var(--magenta);
-      text-shadow: 0 0 15px var(--magenta-glow);
+      text-shadow: 0 0 15px var(--magenta-glow)
     }
 
     .footer-actions {
       display: flex;
-      gap: 12px;
+      gap: 12px
     }
 
     .footer-btn {
@@ -971,166 +1657,51 @@
       gap: 8px;
       padding: 10px 20px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: .75rem;
       color: var(--text-secondary);
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 8px;
       text-decoration: none;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      transition: all .3s ease
     }
 
     .footer-btn:hover {
       border-color: var(--cyan);
       color: var(--cyan);
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px -10px var(--cyan-glow);
+      box-shadow: 0 10px 25px -10px var(--cyan-glow)
     }
 
     .reveal {
       opacity: 0;
       transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: all .8s cubic-bezier(.25, .46, .45, .94)
     }
 
     .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0)
     }
 
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-40px);
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    .stagger-1 {
+      transition-delay: .1s
     }
 
-    .reveal-left.visible {
-      opacity: 1;
-      transform: translateX(0);
+    .stagger-2 {
+      transition-delay: .2s
     }
 
-    .stagger-1 { transition-delay: 0.1s; }
-    .stagger-2 { transition-delay: 0.2s; }
-    .stagger-3 { transition-delay: 0.3s; }
-    .stagger-4 { transition-delay: 0.4s; }
-    .stagger-5 { transition-delay: 0.5s; }
-    .stagger-6 { transition-delay: 0.6s; }
-    .stagger-7 { transition-delay: 0.7s; }
-
-    @media (max-width: 600px) {
-      .hero-title {
-        font-size: 3.2rem;
-        letter-spacing: -2px;
-      }
-
-      .avatar-hex {
-        width: 130px;
-        height: 130px;
-      }
-
-      .avatar-img {
-        width: 120px;
-        height: 120px;
-      }
-
-      .avatar-orbit {
-        width: 180px;
-        height: 180px;
-      }
-
-      .avatar-orbit-2 {
-        width: 220px;
-        height: 220px;
-      }
-
-      .card {
-        padding: 16px 18px;
-        gap: 14px;
-      }
-
-      .card-icon {
-        width: 42px;
-        height: 42px;
-        font-size: 1rem;
-        border-radius: 8px;
-      }
-
-      .card-title {
-        font-size: 0.9rem;
-      }
-
-      .stats-bar {
-        gap: 8px;
-      }
-
-      .stat-number {
-        font-size: 1.4rem;
-      }
-
-      .stat-item {
-        padding: 16px 8px;
-      }
-
-      .hero-tags {
-        gap: 6px;
-      }
-
-      .hero-tag {
-        font-size: 0.6rem;
-        padding: 5px 12px;
-      }
-
-      .shape-1, .shape-2, .shape-3 {
-        display: none;
-      }
-
-      .terminal-body {
-        font-size: 0.7rem;
-        padding: 16px;
-      }
+    .stagger-3 {
+      transition-delay: .3s
     }
 
-    @media (max-width: 400px) {
-      .hero-title {
-        font-size: 2.6rem;
-      }
-
-      .card-desc {
-        display: none;
-      }
-
-      .stat-label {
-        font-size: 0.55rem;
-        letter-spacing: 1px;
-      }
-
-      .footer-ascii {
-        font-size: 0.45rem;
-      }
+    .stagger-4 {
+      transition-delay: .4s
     }
 
-    ::selection {
-      background: var(--cyan);
-      color: var(--bg-primary);
-    }
-
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: rgba(34, 211, 238, 0.3);
-      border-radius: 2px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--cyan);
+    .stagger-5 {
+      transition-delay: .5s
     }
 
     .cursor-glow {
@@ -1140,14 +1711,14 @@
       border-radius: 50%;
       pointer-events: none;
       z-index: 3;
-      background: radial-gradient(circle, rgba(34, 211, 238, 0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(34, 211, 238, .06) 0%, transparent 70%);
       transform: translate(-50%, -50%);
-      transition: opacity 0.3s ease;
-      opacity: 0;
+      transition: opacity .3s ease;
+      opacity: 0
     }
 
     .cursor-glow.active {
-      opacity: 1;
+      opacity: 1
     }
 
     .loader {
@@ -1160,28 +1731,28 @@
       align-items: center;
       justify-content: center;
       gap: 24px;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
+      transition: opacity .5s ease, visibility .5s ease
     }
 
     .loader.hidden {
       opacity: 0;
-      visibility: hidden;
+      visibility: hidden
     }
 
     .loader-text {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: .8rem;
       color: var(--cyan);
       letter-spacing: 4px;
-      text-transform: uppercase;
+      text-transform: uppercase
     }
 
     .loader-bar {
       width: 200px;
       height: 2px;
-      background: rgba(34, 211, 238, 0.1);
+      background: rgba(34, 211, 238, .1);
       border-radius: 1px;
-      overflow: hidden;
+      overflow: hidden
     }
 
     .loader-progress {
@@ -1189,14 +1760,182 @@
       background: var(--cyan);
       border-radius: 1px;
       box-shadow: 0 0 10px var(--cyan-glow);
-      animation: loadProgress 1.5s ease-in-out forwards;
+      animation: loadProgress 1.5s ease-in-out forwards
     }
 
     @keyframes loadProgress {
-      0% { width: 0%; }
-      30% { width: 30%; }
-      60% { width: 60%; }
-      100% { width: 100%; }
+      0% {
+        width: 0%
+      }
+
+      30% {
+        width: 30%
+      }
+
+      60% {
+        width: 60%
+      }
+
+      100% {
+        width: 100%
+      }
+    }
+
+    ::selection {
+      background: var(--cyan);
+      color: var(--bg-primary)
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(34, 211, 238, .3);
+      border-radius: 2px
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--cyan)
+    }
+
+    @media(max-width:600px) {
+      .hero-title {
+        font-size: 3.2rem;
+        letter-spacing: -2px
+      }
+
+      .avatar-hex {
+        width: 130px;
+        height: 130px
+      }
+
+      .avatar-img {
+        width: 120px;
+        height: 120px
+      }
+
+      .avatar-orbit {
+        width: 180px;
+        height: 180px
+      }
+
+      .avatar-orbit-2 {
+        width: 220px;
+        height: 220px
+      }
+
+      .card {
+        padding: 16px 18px;
+        gap: 14px
+      }
+
+      .card-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+        border-radius: 8px
+      }
+
+      .card-title {
+        font-size: .9rem
+      }
+
+      .stats-bar {
+        gap: 8px
+      }
+
+      .stat-number {
+        font-size: 1.4rem
+      }
+
+      .stat-item {
+        padding: 16px 8px
+      }
+
+      .hero-tag {
+        font-size: .6rem;
+        padding: 5px 12px
+      }
+
+      .shape {
+        display: none
+      }
+
+      .terminal-body {
+        font-size: .68rem;
+        padding: 16px
+      }
+
+      .memory-grid {
+        gap: 8px
+      }
+
+      .memory-card-front,
+      .memory-card-back {
+        font-size: 1.4rem;
+        border-radius: 8px
+      }
+
+      .reaction-area {
+        height: 220px
+      }
+
+      .reaction-time {
+        font-size: 2rem
+      }
+
+      .game-tab {
+        padding: 8px 14px;
+        font-size: .65rem
+      }
+
+      .snake-ctrl-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem
+      }
+
+      .skill-chip {
+        font-size: .63rem;
+        padding: 6px 10px;
+        gap: 6px
+      }
+
+      .skill-cat-name {
+        font-size: .68rem
+      }
+    }
+
+    @media(max-width:400px) {
+      .hero-title {
+        font-size: 2.6rem
+      }
+
+      .card-desc {
+        display: none
+      }
+
+      .stat-label {
+        font-size: .55rem;
+        letter-spacing: 1px
+      }
+
+      .footer-ascii {
+        font-size: .45rem
+      }
+
+      .skills-grid {
+        gap: 6px
+      }
+
+      .skill-level-badge {
+        display: none
+      }
     }
   </style>
 </head>
@@ -1208,19 +1947,14 @@
       <div class="loader-progress"></div>
     </div>
   </div>
-
   <div class="cursor-glow" id="cursorGlow"></div>
-
   <canvas id="matrix-canvas"></canvas>
-
   <div class="bg-layer bg-gradient"></div>
   <div class="bg-layer scanlines"></div>
   <div class="bg-layer grid-overlay"></div>
   <div class="bg-layer vignette"></div>
-
   <div class="glitch-line glitch-line-1"></div>
   <div class="glitch-line glitch-line-2"></div>
-
   <div class="floating-shapes">
     <div class="shape shape-1"></div>
     <div class="shape shape-2"></div>
@@ -1228,15 +1962,8 @@
   </div>
 
   <nav class="navbar" id="navbar">
-    <a class="nav-logo" href="#">
-      <span class="nav-logo-bracket">{</span>
-      Guss
-      <span class="nav-logo-bracket">}</span>
-    </a>
-    <div class="nav-status">
-      <span class="nav-status-dot"></span>
-      Online
-    </div>
+    <a class="nav-logo" href="#"><span class="nav-logo-bracket">{</span>Guss<span class="nav-logo-bracket">}</span></a>
+    <div class="nav-status"><span class="nav-status-dot"></span>Online</div>
   </nav>
 
   <div class="main-wrapper">
@@ -1252,33 +1979,19 @@
         <div class="avatar-hex">
           <div class="avatar-hex-border"></div>
           <div class="avatar-hex-inner"></div>
-          <img
-            class="avatar-img"
-            src="https://avatars.githubusercontent.com/u/97151655"
-            alt="Guss"
-            loading="eager"
-          />
+          <img class="avatar-img" src="https://avatars.githubusercontent.com/u/97151655" alt="Guss" loading="eager" />
         </div>
       </div>
-
-      <h1 class="hero-title reveal stagger-2">
-        <span class="hero-title-main" data-text="Guss">Guss</span>
-      </h1>
-
-      <p class="hero-subtitle reveal stagger-3">
-        <span id="typed-text"></span><span class="typed-cursor">|</span>
-      </p>
-
+      <h1 class="hero-title reveal stagger-2"><span class="hero-title-main" data-text="Guss">Guss</span></h1>
+      <p class="hero-subtitle reveal stagger-3"><span id="typed-text"></span><span class="typed-cursor">|</span></p>
       <div class="hero-tags reveal stagger-4">
-        <span class="hero-tag tag-cyan">Developer</span>
-        <span class="hero-tag tag-magenta">Creator</span>
-        <span class="hero-tag tag-violet">Designer</span>
+        <span class="hero-tag tag-cyan">Full-Stack</span>
+        <span class="hero-tag tag-magenta">Bot Dev</span>
+        <span class="hero-tag tag-violet">Creator</span>
+        <span class="hero-tag tag-lime">Multi-Lang</span>
+        <span class="hero-tag tag-amber">Self-Taught</span>
       </div>
-
-      <div class="scroll-indicator">
-        <span>Scroll</span>
-        <i class="fas fa-chevron-down"></i>
-      </div>
+      <div class="scroll-indicator"><span>Scroll</span><i class="fas fa-chevron-down"></i></div>
     </section>
 
     <div class="stats-bar">
@@ -1296,108 +2009,152 @@
       </div>
     </div>
 
-    <section class="links-section">
+    <section class="section-pad">
       <div class="section-header reveal">
-        <div class="section-icon">
-          <i class="fas fa-link"></i>
-        </div>
-        <div class="section-header-text">
+        <div class="section-icon"><i class="fas fa-link"></i></div>
+        <div>
           <h2 class="section-title">Connect</h2>
         </div>
         <div class="section-line"></div>
       </div>
-
       <div class="cards-grid">
-        <a class="card reveal stagger-1" href="https://www.tiktok.com/@oyy_gus" target="_blank" rel="noopener" data-accent="tiktok">
-          <div class="card-icon ci-tiktok">
-            <i class="fab fa-tiktok"></i>
-          </div>
-          <div class="card-content">
-            <span class="card-title">TikTok</span>
-            <span class="card-desc">@oyy_gus</span>
-          </div>
+        <a class="card reveal stagger-1" href="https://www.tiktok.com/@oyy_gus" target="_blank" rel="noopener"
+          data-accent="tiktok">
+          <div class="card-icon ci-tiktok"><i class="fab fa-tiktok"></i></div>
+          <div class="card-content"><span class="card-title">TikTok</span><span class="card-desc">@oyy_gus</span></div>
           <i class="fas fa-arrow-right card-arrow"></i>
         </a>
-
-        <a class="card reveal stagger-2" href="https://instagram.com/oyy_gus" target="_blank" rel="noopener" data-accent="instagram">
-          <div class="card-icon ci-instagram">
-            <i class="fab fa-instagram"></i>
-          </div>
-          <div class="card-content">
-            <span class="card-title">Instagram</span>
-            <span class="card-desc">@oyy_gus</span>
-          </div>
-          <i class="fas fa-arrow-right card-arrow"></i>
+        <a class="card reveal stagger-2" href="https://instagram.com/oyy_gus" target="_blank" rel="noopener"
+          data-accent="instagram">
+          <div class="card-icon ci-instagram"><i class="fab fa-instagram"></i></div>
+          <div class="card-content"><span class="card-title">Instagram</span><span class="card-desc">@oyy_gus</span>
+          </div><i class="fas fa-arrow-right card-arrow"></i>
         </a>
-
-        <a class="card reveal stagger-3" href="https://github.com/oyy-gus" target="_blank" rel="noopener" data-accent="github">
-          <div class="card-icon ci-github">
-            <i class="fab fa-github"></i>
-          </div>
-          <div class="card-content">
-            <span class="card-title">GitHub</span>
-            <span class="card-desc">check my repositories</span>
-          </div>
-          <i class="fas fa-arrow-right card-arrow"></i>
+        <a class="card reveal stagger-3" href="https://github.com/oyy-gus" target="_blank" rel="noopener"
+          data-accent="github">
+          <div class="card-icon ci-github"><i class="fab fa-github"></i></div>
+          <div class="card-content"><span class="card-title">GitHub</span><span class="card-desc">check my
+              repositories</span></div><i class="fas fa-arrow-right card-arrow"></i>
         </a>
-
-        <a class="card reveal stagger-4" href="https://discord.gg/ZnMFNwcYzy" target="_blank" rel="noopener" data-accent="discord">
-          <div class="card-icon ci-discord">
-            <i class="fab fa-discord"></i>
-          </div>
-          <div class="card-content">
-            <span class="card-title">Discord</span>
-            <span class="card-desc">join the community</span>
-          </div>
-          <i class="fas fa-arrow-right card-arrow"></i>
+        <a class="card reveal stagger-4" href="https://discord.gg/ZnMFNwcYzy" target="_blank" rel="noopener"
+          data-accent="discord">
+          <div class="card-icon ci-discord"><i class="fab fa-discord"></i></div>
+          <div class="card-content"><span class="card-title">Discord</span><span class="card-desc">join the
+              community</span></div><i class="fas fa-arrow-right card-arrow"></i>
         </a>
       </div>
-
       <div class="section-header reveal">
-        <div class="section-icon">
-          <i class="fas fa-wrench"></i>
-        </div>
-        <div class="section-header-text">
+        <div class="section-icon"><i class="fas fa-wrench"></i></div>
+        <div>
           <h2 class="section-title">Tools</h2>
         </div>
         <div class="section-line"></div>
       </div>
-
       <div class="cards-grid">
-        <a class="card reveal stagger-1" href="https://oyy-gus.github.io/tiktok-downloader" target="_blank" rel="noopener" data-accent="download">
-          <div class="card-icon ci-download">
-            <i class="fas fa-download"></i>
-          </div>
-          <div class="card-content">
-            <span class="card-title">TikTok Downloader</span>
-            <span class="card-desc">download without watermark</span>
-          </div>
-          <i class="fas fa-arrow-right card-arrow"></i>
+        <a class="card reveal stagger-1" href="https://oyy-gus.github.io/tiktok-downloader" target="_blank"
+          rel="noopener" data-accent="download">
+          <div class="card-icon ci-download"><i class="fas fa-download"></i></div>
+          <div class="card-content"><span class="card-title">TikTok Downloader</span><span class="card-desc">download
+              without watermark</span></div><i class="fas fa-arrow-right card-arrow"></i>
         </a>
       </div>
-
       <div class="section-header reveal">
-        <div class="section-icon" style="color: var(--amber); border-color: rgba(245, 158, 11, 0.2); background: rgba(245, 158, 11, 0.05);">
-          <i class="fas fa-heart"></i>
-        </div>
-        <div class="section-header-text">
+        <div class="section-icon"
+          style="color:var(--amber);border-color:rgba(245,158,11,.2);background:rgba(245,158,11,.05)"><i
+            class="fas fa-heart"></i></div>
+        <div>
           <h2 class="section-title">Support</h2>
         </div>
         <div class="section-line"></div>
       </div>
-
       <div class="cards-grid">
-        <a class="card reveal stagger-1" href="https://saweria.co/GussJTM" target="_blank" rel="noopener" data-accent="saweria">
-          <span class="donate-badge">☕ Support</span>
-          <div class="card-icon ci-saweria">
-            <i class="fas fa-mug-hot"></i>
-          </div>
-          <div class="card-content">
-            <span class="card-title">Buy Me a Coffee</span>
-            <span class="card-desc">support via saweria</span>
-          </div>
-          <i class="fas fa-arrow-right card-arrow"></i>
+        <a class="card reveal stagger-1" href="https://saweria.co/GussJTM" target="_blank" rel="noopener"
+          data-accent="saweria"><span class="donate-badge">☕ Support</span>
+          <div class="card-icon ci-saweria"><i class="fas fa-mug-hot"></i></div>
+          <div class="card-content"><span class="card-title">Buy Me a Coffee</span><span class="card-desc">support via
+              saweria</span></div><i class="fas fa-arrow-right card-arrow"></i>
         </a>
+      </div>
+    </section>
+
+    <section class="section-pad" style="padding-top:0">
+      <div class="section-header reveal">
+        <div class="section-icon"
+          style="color:var(--violet);border-color:rgba(167,139,250,.2);background:rgba(167,139,250,.05)"><i
+            class="fas fa-code"></i></div>
+        <div>
+          <h2 class="section-title">Skills & Tech Stack</h2>
+        </div>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-wrapper" id="skills-wrapper"></div>
+      <div class="skills-total reveal" id="skills-total"></div>
+    </section>
+
+    <section class="section-pad" style="padding-top:0">
+      <div class="section-header reveal">
+        <div class="section-icon"
+          style="color:var(--magenta);border-color:rgba(244,114,182,.2);background:rgba(244,114,182,.05)"><i
+            class="fas fa-gamepad"></i></div>
+        <div>
+          <h2 class="section-title">Mini Games</h2>
+        </div>
+        <div class="section-line"></div>
+      </div>
+      <div class="game-tabs reveal">
+        <div class="game-tab active" data-game="snake"><i class="fas fa-worm"></i> Snake</div>
+        <div class="game-tab" data-game="memory"><i class="fas fa-brain"></i> Memory</div>
+        <div class="game-tab" data-game="reaction"><i class="fas fa-bolt"></i> Reaction</div>
+      </div>
+      <div class="game-container reveal">
+        <div class="game-panel active" id="game-snake">
+          <div class="game-header">
+            <div class="game-title"><i class="fas fa-worm"></i> Snake</div>
+            <div class="game-score-display">Score: <b id="snake-score">0</b></div>
+          </div>
+          <div class="game-body">
+            <div class="snake-canvas-wrapper">
+              <canvas id="snake-canvas" width="320" height="320"></canvas>
+              <div class="snake-info"><span>Best: <b id="snake-best">0</b></span><span>Speed: <b
+                    id="snake-speed">Normal</b></span></div>
+              <div class="snake-controls">
+                <div class="snake-ctrl-btn ctrl-up" data-dir="up"><i class="fas fa-chevron-up"></i></div>
+                <div class="snake-ctrl-btn ctrl-left" data-dir="left"><i class="fas fa-chevron-left"></i></div>
+                <div class="snake-ctrl-btn ctrl-down" data-dir="down"><i class="fas fa-chevron-down"></i></div>
+                <div class="snake-ctrl-btn ctrl-right" data-dir="right"><i class="fas fa-chevron-right"></i></div>
+              </div>
+              <div id="snake-msg" class="game-msg">Press Start or use Arrow Keys</div>
+              <div style="display:flex;gap:10px"><button class="game-btn" id="snake-start-btn">Start</button><button
+                  class="game-btn game-btn-secondary" id="snake-reset-btn">Reset</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="game-panel" id="game-memory">
+          <div class="game-header">
+            <div class="game-title"><i class="fas fa-brain"></i> Memory Match</div>
+            <div class="game-score-display">Pairs: <b id="memory-pairs">0</b>/8</div>
+          </div>
+          <div class="game-body">
+            <div class="memory-stats"><span>Moves: <b id="memory-moves">0</b></span><span>Best: <b
+                  id="memory-best">-</b></span><span>Time: <b id="memory-timer">0s</b></span></div>
+            <div class="memory-grid" id="memory-grid"></div>
+            <div id="memory-msg" class="game-msg">Find all matching pairs!</div>
+            <button class="game-btn" id="memory-restart-btn">New Game</button>
+          </div>
+        </div>
+        <div class="game-panel" id="game-reaction">
+          <div class="game-header">
+            <div class="game-title"><i class="fas fa-bolt"></i> Reaction Time</div>
+            <div class="game-score-display">Attempts: <b id="reaction-attempts">0</b></div>
+          </div>
+          <div class="game-body">
+            <div class="reaction-area" id="reaction-area">
+              <div class="reaction-icon">⚡</div>
+              <div class="reaction-text">Click / Tap to start</div>
+            </div>
+            <div class="reaction-best" id="reaction-best-display">Best: <b>-</b></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1409,271 +2166,388 @@
         <div class="terminal-title">guss@portfolio ~ terminal</div>
       </div>
       <div class="terminal-body">
-        <div class="terminal-line">
-          <span class="terminal-prompt">$</span>
-          <span class="terminal-command">whoami</span>
+        <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-command">whoami</span>
         </div>
-        <div class="terminal-output">Guss - Developer & Creator</div>
-        <br>
-        <div class="terminal-line">
-          <span class="terminal-prompt">$</span>
-          <span class="terminal-command">cat skills.txt</span>
-        </div>
-        <div class="terminal-output">JavaScript, HTML/CSS, Python, Node.js</div>
-        <br>
-        <div class="terminal-line">
-          <span class="terminal-prompt">$</span>
-          <span class="terminal-command">echo $STATUS</span>
-        </div>
-        <div class="terminal-output">🟢 Available for collaboration</div>
-        <br>
-        <div class="terminal-line">
-          <span class="terminal-prompt">$</span>
-          <span class="terminal-command" id="terminal-typed"></span><span class="typed-cursor">|</span>
-        </div>
+        <div class="terminal-output">Guss — Multi-Language Developer & Bot Maker</div><br>
+        <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-command">cat
+            about.json</span></div>
+        <div class="terminal-output-multi">
+          {<br>
+          &nbsp;&nbsp;<span class="terminal-output-key">"name"</span>: <span
+            class="terminal-output-val">"Guss"</span>,<br>
+          &nbsp;&nbsp;<span class="terminal-output-key">"role"</span>: <span class="terminal-output-val">"Full-Stack &
+            Bot Developer"</span>,<br>
+          &nbsp;&nbsp;<span class="terminal-output-key">"languages"</span>: <span
+            class="terminal-output-arr">[</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-output-val">"JavaScript"</span>, <span
+            class="terminal-output-val">"Python"</span>, <span class="terminal-output-val">"PHP"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-output-val">"Java"</span>, <span
+            class="terminal-output-val">"C"</span>, <span class="terminal-output-val">"C++"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-output-val">"C#"</span>, <span
+            class="terminal-output-val">"TypeScript"</span>, <span class="terminal-output-val">"Go"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-output-val">"Rust"</span>, <span
+            class="terminal-output-val">"Ruby"</span>, <span class="terminal-output-val">"Kotlin"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-output-val">"Swift"</span>, <span
+            class="terminal-output-val">"Dart"</span>, <span class="terminal-output-val">"Lua"</span><br>
+          &nbsp;&nbsp;<span class="terminal-output-arr">]</span>,<br>
+          &nbsp;&nbsp;<span class="terminal-output-key">"self_taught"</span>: <span
+            class="terminal-output-val">true</span>,<br>
+          &nbsp;&nbsp;<span class="terminal-output-key">"available"</span>: <span
+            class="terminal-output-val">true</span><br>
+          }
+        </div><br>
+        <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-command">echo
+            $STATUS</span></div>
+        <div class="terminal-output">🟢 Available for collaboration</div><br>
+        <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-command"
+            id="terminal-typed"></span><span class="typed-cursor">|</span></div>
       </div>
     </div>
 
     <footer class="footer reveal">
       <div class="footer-content">
         <div class="footer-ascii">
- ██████  ██    ██ ███████ ███████ 
-██       ██    ██ ██      ██      
-██   ███ ██    ██ ███████ ███████ 
-██    ██ ██    ██      ██      ██ 
- ██████   ██████  ███████ ███████ 
+          ██████ ██ ██ ███████ ███████
+          ██ ██ ██ ██ ██
+          ██ ███ ██ ██ ███████ ███████
+          ██ ██ ██ ██ ██ ██
+          ██████ ██████ ███████ ███████
         </div>
-
         <div class="footer-actions">
-          <a class="footer-btn" href="https://github.com/oyy-gus/oyy-gus.github.io/fork" target="_blank" rel="noopener">
-            <i class="fas fa-code-fork"></i>
-            Fork
-          </a>
-          <a class="footer-btn" href="https://github.com/oyy-gus" target="_blank" rel="noopener">
-            <i class="fab fa-github"></i>
-            GitHub
-          </a>
+          <a class="footer-btn" href="https://github.com/oyy-gus/oyy-gus.github.io/fork" target="_blank"
+            rel="noopener"><i class="fas fa-code-fork"></i>Fork</a>
+          <a class="footer-btn" href="https://github.com/oyy-gus" target="_blank" rel="noopener"><i
+              class="fab fa-github"></i>GitHub</a>
         </div>
-
-        <div class="footer-text">
-          <span>Built with</span>
-          <span class="footer-heart">♥</span>
-          <span>by</span>
-          <a class="footer-link" href="https://github.com/oyy-gus" target="_blank" rel="noopener">Guss</a>
-        </div>
+        <div class="footer-text">Built with <span class="footer-heart">♥</span> by <a class="footer-link"
+            href="https://github.com/oyy-gus" target="_blank" rel="noopener">Guss</a></div>
       </div>
     </footer>
   </div>
 
   <script>
+    const SKILLS = [
+      {
+        category: 'Programming Languages',
+        icon: '💻',
+        color: '#22d3ee',
+        glow: 'rgba(34,211,238,.45)',
+        items: [
+          { name: 'JavaScript', icon: '🟨', level: 5 },
+          { name: 'Python', icon: '🐍', level: 4 },
+          { name: 'PHP', icon: '🐘', level: 4 },
+          { name: 'Java', icon: '☕', level: 3 },
+          { name: 'C', icon: '⚙️', level: 3 },
+          { name: 'C++', icon: '🔧', level: 3 },
+          { name: 'C#', icon: '🟪', level: 2 },
+          { name: 'TypeScript', icon: '🔷', level: 3 },
+          { name: 'Go', icon: '🐹', level: 2 },
+          { name: 'Rust', icon: '🦀', level: 2 },
+          { name: 'Ruby', icon: '💎', level: 2 },
+          { name: 'Kotlin', icon: '🟣', level: 2 },
+          { name: 'Swift', icon: '🍎', level: 2 },
+          { name: 'Dart', icon: '🎯', level: 2 },
+          { name: 'Lua', icon: '🌙', level: 3 },
+          { name: 'Perl', icon: '🐫', level: 1 },
+          { name: 'R', icon: '📊', level: 1 },
+          { name: 'Scala', icon: '🔴', level: 1 },
+        ]
+      },
+      {
+        category: 'Web Technologies',
+        icon: '🌐',
+        color: '#f472b6',
+        glow: 'rgba(244,114,182,.45)',
+        items: [
+          { name: 'HTML5', icon: '📄', level: 5 },
+          { name: 'CSS3', icon: '🎨', level: 5 },
+          { name: 'Sass/SCSS', icon: '💅', level: 3 },
+          { name: 'Tailwind CSS', icon: '💨', level: 3 },
+          { name: 'Bootstrap', icon: '🅱️', level: 4 },
+          { name: 'jQuery', icon: '📜', level: 4 },
+          { name: 'REST API', icon: '🔌', level: 4 },
+          { name: 'GraphQL', icon: '◈', level: 2 },
+          { name: 'WebSocket', icon: '🔗', level: 3 },
+          { name: 'PWA', icon: '📱', level: 3 },
+        ]
+      },
+      {
+        category: 'Frameworks & Runtime',
+        icon: '⚡',
+        color: '#a78bfa',
+        glow: 'rgba(167,139,250,.45)',
+        items: [
+          { name: 'Node.js', icon: '🟢', level: 5 },
+          { name: 'Express.js', icon: '🚂', level: 4 },
+          { name: 'React', icon: '⚛️', level: 2 },
+          { name: 'Next.js', icon: '▲', level: 2 },
+          { name: 'Vue.js', icon: '🟩', level: 2 },
+          { name: 'Laravel', icon: '🔺', level: 3 },
+          { name: 'Django', icon: '🐍', level: 2 },
+          { name: 'Flask', icon: '🧪', level: 3 },
+          { name: 'Spring Boot', icon: '🍃', level: 1 },
+          { name: 'Flutter', icon: '💙', level: 2 },
+          { name: 'Electron', icon: '⚡', level: 2 },
+          { name: 'Deno', icon: '🦕', level: 2 },
+          { name: 'Bun', icon: '🍞', level: 2 },
+        ]
+      },
+      {
+        category: 'Bot Development',
+        icon: '🤖',
+        color: '#fb7185',
+        glow: 'rgba(251,113,133,.45)',
+        items: [
+          { name: 'Discord Bot', icon: '🎮', level: 5 },
+          { name: 'discord.js', icon: '📦', level: 5 },
+          { name: 'WhatsApp Bot', icon: '💬', level: 5 },
+          { name: 'Baileys', icon: '📱', level: 5 },
+          { name: 'Telegram Bot', icon: '✈️', level: 3 },
+          { name: 'Slash Commands', icon: '⚡', level: 5 },
+          { name: 'Webhook', icon: '🔗', level: 4 },
+          { name: 'API Scraping', icon: '🕷️', level: 4 },
+          { name: 'Puppeteer', icon: '🎭', level: 3 },
+          { name: 'Cheerio', icon: '🍒', level: 3 },
+          { name: 'Selenium', icon: '🌐', level: 2 },
+        ]
+      },
+      {
+        category: 'Databases',
+        icon: '🗄️',
+        color: '#fbbf24',
+        glow: 'rgba(251,191,36,.45)',
+        items: [
+          { name: 'MongoDB', icon: '🍃', level: 3 },
+          { name: 'MySQL', icon: '🐬', level: 3 },
+          { name: 'PostgreSQL', icon: '🐘', level: 2 },
+          { name: 'SQLite', icon: '🗃️', level: 3 },
+          { name: 'Redis', icon: '🔴', level: 2 },
+          { name: 'Firebase', icon: '🔥', level: 3 },
+          { name: 'Supabase', icon: '⚡', level: 2 },
+          { name: 'JSON DB', icon: '📄', level: 5 },
+          { name: 'Prisma', icon: '🔷', level: 2 },
+        ]
+      },
+      {
+        category: 'DevOps & Cloud',
+        icon: '☁️',
+        color: '#38bdf8',
+        glow: 'rgba(56,189,248,.45)',
+        items: [
+          { name: 'Git', icon: '🌿', level: 4 },
+          { name: 'GitHub', icon: '🐙', level: 5 },
+          { name: 'Docker', icon: '🐳', level: 2 },
+          { name: 'Linux', icon: '🐧', level: 3 },
+          { name: 'Nginx', icon: '🟩', level: 2 },
+          { name: 'Apache', icon: '🔴', level: 2 },
+          { name: 'Vercel', icon: '▲', level: 3 },
+          { name: 'Railway', icon: '🚂', level: 3 },
+          { name: 'Netlify', icon: '🟢', level: 3 },
+          { name: 'Heroku', icon: '🟪', level: 3 },
+          { name: 'AWS', icon: '☁️', level: 1 },
+          { name: 'GCP', icon: '🔵', level: 1 },
+          { name: 'CI/CD', icon: '🔄', level: 2 },
+        ]
+      },
+      {
+        category: 'Tools & IDEs',
+        icon: '🛠️',
+        color: '#a3e635',
+        glow: 'rgba(163,230,53,.45)',
+        items: [
+          { name: 'VS Code', icon: '🔵', level: 5 },
+          { name: 'Vim/Neovim', icon: '📗', level: 2 },
+          { name: 'Termux', icon: '📱', level: 4 },
+          { name: 'Postman', icon: '📮', level: 3 },
+          { name: 'Insomnia', icon: '🟣', level: 2 },
+          { name: 'Figma', icon: '🎨', level: 2 },
+          { name: 'Replit', icon: '🔄', level: 4 },
+          { name: 'npm', icon: '📦', level: 5 },
+          { name: 'yarn', icon: '🧶', level: 3 },
+          { name: 'pnpm', icon: '⚡', level: 3 },
+          { name: 'Webpack', icon: '📦', level: 2 },
+          { name: 'Vite', icon: '⚡', level: 3 },
+        ]
+      },
+      {
+        category: 'Markup & Data',
+        icon: '📝',
+        color: '#fb923c',
+        glow: 'rgba(251,146,60,.45)',
+        items: [
+          { name: 'JSON', icon: '📋', level: 5 },
+          { name: 'XML', icon: '📄', level: 3 },
+          { name: 'YAML', icon: '📝', level: 4 },
+          { name: 'TOML', icon: '⚙️', level: 3 },
+          { name: 'Markdown', icon: '📖', level: 5 },
+          { name: 'LaTeX', icon: '📐', level: 1 },
+          { name: 'CSV', icon: '📊', level: 5 },
+          { name: 'Regex', icon: '🔍', level: 3 },
+          { name: 'Bash Script', icon: '🖥️', level: 3 },
+          { name: 'PowerShell', icon: '🟦', level: 2 },
+          { name: 'SQL', icon: '🗃️', level: 3 },
+        ]
+      },
+      {
+        category: 'Currently Learning',
+        icon: '📚',
+        color: '#34d399',
+        glow: 'rgba(52,211,153,.45)',
+        items: [
+          { name: 'Machine Learning', icon: '🧠', level: 1 },
+          { name: 'TensorFlow', icon: '🔶', level: 1 },
+          { name: 'Three.js', icon: '🎲', level: 1 },
+          { name: 'Svelte', icon: '🔶', level: 1 },
+          { name: 'Astro', icon: '🚀', level: 1 },
+          { name: 'Zig', icon: '⚡', level: 1 },
+          { name: 'Haskell', icon: 'λ', level: 1 },
+          { name: 'Assembly', icon: '💾', level: 1 },
+          { name: 'Kubernetes', icon: '☸️', level: 1 },
+          { name: 'Web3/Solidity', icon: '🔗', level: 1 },
+        ]
+      }
+    ];
 
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('loader').classList.add('hidden');
-      }, 1800);
-    });
+    function renderSkills() {
+      const wrapper = document.getElementById('skills-wrapper');
+      wrapper.innerHTML = '';
+      const levelLabels = ['', 'Beginner', 'Learning', 'Intermediate', 'Advanced', 'Expert'];
+      let totalSkills = 0;
 
-    const canvas = document.getElementById('matrix-canvas');
-    const ctx = canvas.getContext('2d');
+      SKILLS.forEach((cat, ci) => {
+        totalSkills += cat.items.length;
+        const el = document.createElement('div');
+        el.className = 'skill-category reveal';
+        el.style.transitionDelay = (ci * 0.06) + 's';
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+        const chips = cat.items.map(skill => {
+          const dots = Array.from({ length: 5 }, (_, i) =>
+            `<div class="skill-dot ${i < skill.level ? 'filled' : ''}" style="--chip-color:${cat.color}"></div>`
+          ).join('');
+
+          const badge = skill.level === 5
+            ? `<span class="skill-level-badge" style="color:${cat.color};border-color:${cat.color}44">★ Expert</span>`
+            : skill.level === 4
+              ? `<span class="skill-level-badge" style="color:${cat.color};border-color:${cat.color}33">Advanced</span>`
+              : '';
+
+          return `
+        <div class="skill-chip"
+          style="--chip-color:${cat.color};--chip-glow:${cat.glow};--bar-width:${skill.level * 20}%;color:${cat.color};border-color:${cat.color}30;background:${cat.color}08"
+          title="${skill.name} — ${levelLabels[skill.level]} (${skill.level}/5)">
+          <span class="skill-chip-icon">${skill.icon}</span>
+          <span>${skill.name}</span>
+          <div class="skill-level-dots">${dots}</div>
+          ${badge}
+          <div class="skill-chip-bar"></div>
+        </div>`;
+        }).join('');
+
+        el.innerHTML = `
+      <div class="skill-cat-header" onclick="toggleCat(this)">
+        <div class="skill-cat-icon" style="background:${cat.color}12;color:${cat.color};border:1px solid ${cat.color}25">${cat.icon}</div>
+        <span class="skill-cat-name" style="color:${cat.color}">${cat.category}</span>
+        <span class="skill-cat-count">${cat.items.length} skills</span>
+        <i class="fas fa-chevron-down skill-cat-toggle" style="color:${cat.color}"></i>
+      </div>
+      <div class="skill-cat-body"><div class="skills-grid">${chips}</div></div>`;
+        wrapper.appendChild(el);
+      });
+
+      document.getElementById('skills-total').innerHTML =
+        `Total: <b>${totalSkills}</b> skills across <b>${SKILLS.length}</b> categories`;
+
+      document.querySelectorAll('.reveal').forEach(el => { if (!el.classList.contains('visible')) ro.observe(el) });
+
+      const barObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.querySelectorAll('.skill-chip').forEach((chip, i) => {
+              setTimeout(() => chip.classList.add('animated'), i * 40);
+            });
+            barObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.skill-cat-body').forEach(el => barObserver.observe(el));
     }
-    resizeCanvas();
+
+    function toggleCat(header) {
+      header.closest('.skill-category').classList.toggle('collapsed');
+    }
+
+    window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800) });
+
+    const canvas = document.getElementById('matrix-canvas'); const ctx = canvas.getContext('2d');
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight } resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-
-    const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン01';
-    const fontSize = 14;
-    let columns = Math.floor(canvas.width / fontSize);
-    let drops = Array(columns).fill(1);
-
-    function drawMatrix() {
-      ctx.fillStyle = 'rgba(2, 6, 23, 0.08)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'rgba(34, 211, 238, 0.07)';
-      ctx.font = `${fontSize}px 'JetBrains Mono', monospace`;
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.985) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-
+    const mchars = 'アイウエオカキクケコ01'; const fs = 14; let cols = Math.floor(canvas.width / fs); let drops = Array(cols).fill(1);
+    function drawMatrix() { ctx.fillStyle = 'rgba(2,6,23,0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'rgba(34,211,238,0.07)'; ctx.font = `${fs}px 'JetBrains Mono',monospace`; for (let i = 0; i < drops.length; i++) { ctx.fillText(mchars[Math.floor(Math.random() * mchars.length)], i * fs, drops[i] * fs); if (drops[i] * fs > canvas.height && Math.random() > .985) drops[i] = 0; drops[i]++ } }
     setInterval(drawMatrix, 50);
+    window.addEventListener('resize', () => { cols = Math.floor(canvas.width / fs); drops = Array(cols).fill(1) });
 
-    window.addEventListener('resize', () => {
-      columns = Math.floor(canvas.width / fontSize);
-      drops = Array(columns).fill(1);
-    });
+    const cg = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', e => { cg.classList.add('active'); cg.style.left = e.clientX + 'px'; cg.style.top = e.clientY + 'px' });
+    document.addEventListener('mouseleave', () => cg.classList.remove('active'));
 
-    const cursorGlow = document.getElementById('cursorGlow');
-    let mouseActive = false;
+    window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50));
 
-    document.addEventListener('mousemove', (e) => {
-      if (!mouseActive) {
-        cursorGlow.classList.add('active');
-        mouseActive = true;
-      }
-      cursorGlow.style.left = e.clientX + 'px';
-      cursorGlow.style.top = e.clientY + 'px';
-    });
+    const ro = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-    document.addEventListener('mouseleave', () => {
-      cursorGlow.classList.remove('active');
-      mouseActive = false;
-    });
+    const phrases = ['Full-Stack Developer', 'Discord Bot Maker', 'WhatsApp Bot Dev', 'Multi-Language Coder', 'PHP & Java Developer', 'C/C++ Programmer', 'Self-Taught Engineer', 'Open Source Fan', 'Code. Create. Repeat.'];
+    let pi = 0, ci2 = 0, del = false, tEl = document.getElementById('typed-text');
+    function typeEff() { const p = phrases[pi]; tEl.textContent = del ? p.substring(0, --ci2) : p.substring(0, ++ci2); let s = del ? 25 : 55; if (!del && ci2 === p.length) { s = 2000; del = true } else if (del && ci2 === 0) { del = false; pi = (pi + 1) % phrases.length; s = 400 } setTimeout(typeEff, s) }
+    setTimeout(typeEff, 2200);
 
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
-    });
+    const tPhrases = ['javac Main.java && java Main', 'php artisan serve', 'gcc -o app main.c && ./app', 'python scraper.py', 'node bot.js', 'go run server.go', 'cargo build --release', 'ruby app.rb', 'npm run dev', 'docker compose up', 'sudo make coffee ☕'];
+    let tp = 0, tc = 0, td = false, ttEl = document.getElementById('terminal-typed');
+    function tType() { if (!ttEl) return; const p = tPhrases[tp]; ttEl.textContent = td ? p.substring(0, --tc) : p.substring(0, ++tc); let s = td ? 20 : 45; if (!td && tc === p.length) { s = 3000; td = true } else if (td && tc === 0) { td = false; tp = (tp + 1) % tPhrases.length; s = 400 } setTimeout(tType, s) }
+    setTimeout(tType, 3500);
 
-    const revealElements = document.querySelectorAll('.reveal, .reveal-left');
+    const co = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting && e.target.dataset.count) { const t = parseInt(e.target.dataset.count); let c = 0; const iv = setInterval(() => { c += t / 60; if (c >= t) { e.target.textContent = t + '+'; clearInterval(iv) } else e.target.textContent = Math.floor(c) }, 30); co.unobserve(e.target) } }), { threshold: .5 });
+    document.querySelectorAll('[data-count]').forEach(c => co.observe(c));
 
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
+    const si = document.querySelector('.scroll-indicator'); const hero = document.querySelector('.hero');
+    window.addEventListener('scroll', () => { if (si) si.style.opacity = window.scrollY > 100 ? '0' : '1'; if (hero) { hero.style.transform = `translateY(${window.scrollY * .3}px)`; hero.style.opacity = Math.max(0, 1 - window.scrollY / 600) } });
 
-    revealElements.forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.game-tab').forEach(tab => { tab.addEventListener('click', () => { document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active')); document.querySelectorAll('.game-panel').forEach(p => p.classList.remove('active')); tab.classList.add('active'); document.getElementById('game-' + tab.dataset.game).classList.add('active') }) });
 
-    const typedPhrases = [
-      'Developer & Creator',
-      'Building cool stuff',
-      'Open source enthusiast',
-      'Code. Create. Repeat.',
-      'Welcome to my space'
-    ];
+    (() => {
+      const cvs = document.getElementById('snake-canvas'), c = cvs.getContext('2d'), SZ = 16, GR = cvs.width / SZ;
+      let snake, dir, nDir, food, score, best = 0, running, gl, speed;
+      function init() { snake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }]; dir = { x: 1, y: 0 }; nDir = { x: 1, y: 0 }; score = 0; speed = 120; placeFood(); updateUI(); draw() }
+      function placeFood() { do { food = { x: Math.floor(Math.random() * GR), y: Math.floor(Math.random() * GR) } } while (snake.some(s => s.x === food.x && s.y === food.y)) }
+      function draw() { c.fillStyle = 'rgba(2,6,23,.95)'; c.fillRect(0, 0, cvs.width, cvs.height); c.fillStyle = 'rgba(34,211,238,.04)'; for (let x = 0; x < GR; x++)for (let y = 0; y < GR; y++)c.fillRect(x * SZ + SZ / 2 - .5, y * SZ + SZ / 2 - .5, 1, 1); c.shadowBlur = 15; c.shadowColor = '#ef4444'; c.fillStyle = '#ef4444'; c.beginPath(); c.arc(food.x * SZ + SZ / 2, food.y * SZ + SZ / 2, SZ / 2 - 2, 0, Math.PI * 2); c.fill(); c.shadowBlur = 0; snake.forEach((s, i) => { const p = i / snake.length; c.fillStyle = `rgb(${Math.floor(34 + (244 - 34) * p)},${Math.floor(211 + (114 - 211) * p)},${Math.floor(238 + (182 - 238) * p)})`; if (i === 0) { c.shadowBlur = 10; c.shadowColor = 'rgba(34,211,238,.8)' } const pad = i === 0 ? 1 : 2; c.beginPath(); c.roundRect(s.x * SZ + pad, s.y * SZ + pad, SZ - pad * 2, SZ - pad * 2, 3); c.fill(); c.shadowBlur = 0 }) }
+      function update() { dir = { ...nDir }; const h = { x: snake[0].x + dir.x, y: snake[0].y + dir.y }; if (h.x < 0 || h.x >= GR || h.y < 0 || h.y >= GR) return gOver(); if (snake.some(s => s.x === h.x && s.y === h.y)) return gOver(); snake.unshift(h); if (h.x === food.x && h.y === food.y) { score++; if (score > best) best = score; if (speed > 60) speed -= 3; placeFood(); clearInterval(gl); gl = setInterval(update, speed) } else snake.pop(); updateUI(); draw() }
+      function gOver() { running = false; clearInterval(gl); document.getElementById('snake-msg').textContent = `Game Over! Score: ${score}`; document.getElementById('snake-msg').className = 'game-msg lose'; document.getElementById('snake-start-btn').textContent = 'Restart'; c.fillStyle = 'rgba(239,68,68,.3)'; c.fillRect(0, 0, cvs.width, cvs.height) }
+      function updateUI() { document.getElementById('snake-score').textContent = score; document.getElementById('snake-best').textContent = best; document.getElementById('snake-speed').textContent = speed > 100 ? 'Normal' : speed > 80 ? 'Fast' : 'Insane' }
+      function start() { if (running) return; init(); running = true; document.getElementById('snake-msg').textContent = ''; document.getElementById('snake-msg').className = 'game-msg'; document.getElementById('snake-start-btn').textContent = 'Playing...'; gl = setInterval(update, speed) }
+      function setDir(x, y) { if (dir.x === -x && dir.y === -y || dir.x === x && dir.y === y) return; nDir = { x, y } }
+      document.getElementById('snake-start-btn').addEventListener('click', start);
+      document.getElementById('snake-reset-btn').addEventListener('click', () => { running = false; clearInterval(gl); init(); document.getElementById('snake-msg').textContent = 'Press Start or use Arrow Keys'; document.getElementById('snake-msg').className = 'game-msg'; document.getElementById('snake-start-btn').textContent = 'Start' });
+      document.addEventListener('keydown', e => { if (!running && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) { start(); return } switch (e.key) { case 'ArrowUp': case 'w': case 'W': setDir(0, -1); e.preventDefault(); break; case 'ArrowDown': case 's': case 'S': setDir(0, 1); e.preventDefault(); break; case 'ArrowLeft': case 'a': case 'A': setDir(-1, 0); e.preventDefault(); break; case 'ArrowRight': case 'd': case 'D': setDir(1, 0); e.preventDefault(); break } });
+      document.querySelectorAll('.snake-ctrl-btn').forEach(b => { b.addEventListener('click', () => { if (!running) { start(); return } const d = b.dataset.dir; if (d === 'up') setDir(0, -1); else if (d === 'down') setDir(0, 1); else if (d === 'left') setDir(-1, 0); else setDir(1, 0) }) });
+      let sx, sy; cvs.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; e.preventDefault() }, { passive: false }); cvs.addEventListener('touchend', e => { if (!sx || !sy) return; const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; if (Math.abs(dx) < 20 && Math.abs(dy) < 20) return; if (!running) start(); Math.abs(dx) > Math.abs(dy) ? setDir(dx > 0 ? 1 : -1, 0) : setDir(0, dy > 0 ? 1 : -1); sx = sy = null });
+      init();
+    })();
 
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typedEl = document.getElementById('typed-text');
+    (() => {
+      const emojis = ['🚀', '⚡', '🎮', '💎', '🔥', '🌙', '🎯', '👾']; let cards, flipped, matched, moves, bestMoves, timer, tiv, startTime;
+      function shuffle(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[b[i], b[j]] = [b[j], b[i]] } return b }
+      function initMem() { cards = shuffle([...emojis, ...emojis]); flipped = []; matched = 0; moves = 0; clearInterval(tiv); timer = 0; startTime = null; const g = document.getElementById('memory-grid'); g.innerHTML = ''; cards.forEach((e, i) => { const c = document.createElement('div'); c.className = 'memory-card-item'; c.innerHTML = `<div class="memory-card-inner"><div class="memory-card-front"><i class="fas fa-question"></i></div><div class="memory-card-back">${e}</div></div>`; c.addEventListener('click', () => flip(c, i)); g.appendChild(c) }); upMem(); document.getElementById('memory-msg').textContent = 'Find all matching pairs!'; document.getElementById('memory-msg').className = 'game-msg' }
+      function flip(el, idx) { if (flipped.length >= 2 || el.classList.contains('flipped') || el.classList.contains('matched')) return; if (!startTime) { startTime = Date.now(); tiv = setInterval(() => { timer = Math.floor((Date.now() - startTime) / 1000); document.getElementById('memory-timer').textContent = timer + 's' }, 100) } el.classList.add('flipped'); flipped.push({ el, idx, emoji: cards[idx] }); if (flipped.length === 2) { moves++; document.getElementById('memory-moves').textContent = moves; if (flipped[0].emoji === flipped[1].emoji) { flipped.forEach(f => { f.el.classList.add('matched'); f.el.classList.remove('flipped') }); matched++; document.getElementById('memory-pairs').textContent = matched; flipped = []; if (matched === emojis.length) { clearInterval(tiv); if (!bestMoves || moves < bestMoves) { bestMoves = moves; document.getElementById('memory-best').textContent = bestMoves } document.getElementById('memory-msg').textContent = `🎉 Won in ${moves} moves & ${timer}s!`; document.getElementById('memory-msg').className = 'game-msg win' } } else setTimeout(() => { flipped.forEach(f => f.el.classList.remove('flipped')); flipped = [] }, 800) } }
+      function upMem() { document.getElementById('memory-moves').textContent = moves; document.getElementById('memory-pairs').textContent = matched; document.getElementById('memory-timer').textContent = '0s' }
+      document.getElementById('memory-restart-btn').addEventListener('click', initMem); initMem();
+    })();
 
-    function typeEffect() {
-      const currentPhrase = typedPhrases[phraseIndex];
+    (() => {
+      const area = document.getElementById('reaction-area'); let state = 'idle', to, st, att = 0, bt = null;
+      function ss(s, icon, text, cls) { state = s; area.className = 'reaction-area ' + (cls || ''); area.innerHTML = `<div class="reaction-icon">${icon}</div><div class="reaction-text">${text}</div>` }
+      area.addEventListener('click', () => { switch (state) { case 'idle': case 'result': case 'too-early': ss('waiting', '🔴', 'Wait for green...', 'waiting'); to = setTimeout(() => { ss('ready', '🟢', 'CLICK NOW!', 'ready'); st = performance.now() }, 1500 + Math.random() * 3500); break; case 'waiting': clearTimeout(to); ss('too-early', '😬', 'Too early! Click to retry', 'too-early'); break; case 'ready': const ms = Math.round(performance.now() - st); att++; document.getElementById('reaction-attempts').textContent = att; if (!bt || ms < bt) { bt = ms; document.getElementById('reaction-best-display').innerHTML = `Best: <b>${bt}ms</b>` } state = 'result'; area.className = 'reaction-area result'; area.innerHTML = `<div class="reaction-time">${ms}ms</div><div class="reaction-text">${ms < 200 ? '⚡ Incredible!' : ms < 300 ? '🔥 Great!' : ms < 400 ? '👍 Nice!' : '💪 Keep trying!'}</div><div class="reaction-text" style="font-size:.7rem;color:var(--text-muted);margin-top:8px">Click to try again</div>`; break } });
+    })();
 
-      if (isDeleting) {
-        typedEl.textContent = currentPhrase.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typedEl.textContent = currentPhrase.substring(0, charIndex + 1);
-        charIndex++;
-      }
-
-      let typeSpeed = isDeleting ? 30 : 60;
-
-      if (!isDeleting && charIndex === currentPhrase.length) {
-        typeSpeed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        phraseIndex = (phraseIndex + 1) % typedPhrases.length;
-        typeSpeed = 500;
-      }
-
-      setTimeout(typeEffect, typeSpeed);
-    }
-
-    setTimeout(typeEffect, 2200);
-
-    const terminalPhrases = [
-      'echo "Thanks for visiting!"',
-      'git commit -m "awesome"',
-      'npm run create-magic',
-      'sudo make coffee ☕',
-      'cat /dev/inspiration'
-    ];
-
-    let tPhraseIndex = 0;
-    let tCharIndex = 0;
-    let tIsDeleting = false;
-    let tTypedEl = document.getElementById('terminal-typed');
-
-    function terminalType() {
-      if (!tTypedEl) return;
-      const currentPhrase = terminalPhrases[tPhraseIndex];
-
-      if (tIsDeleting) {
-        tTypedEl.textContent = currentPhrase.substring(0, tCharIndex - 1);
-        tCharIndex--;
-      } else {
-        tTypedEl.textContent = currentPhrase.substring(0, tCharIndex + 1);
-        tCharIndex++;
-      }
-
-      let speed = tIsDeleting ? 25 : 50;
-
-      if (!tIsDeleting && tCharIndex === currentPhrase.length) {
-        speed = 3000;
-        tIsDeleting = true;
-      } else if (tIsDeleting && tCharIndex === 0) {
-        tIsDeleting = false;
-        tPhraseIndex = (tPhraseIndex + 1) % terminalPhrases.length;
-        speed = 500;
-      }
-
-      setTimeout(terminalType, speed);
-    }
-
-    setTimeout(terminalType, 3500);
-
-    const counters = document.querySelectorAll('[data-count]');
-
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const target = parseInt(el.dataset.count);
-          let current = 0;
-          const duration = 2000;
-          const step = target / (duration / 30);
-
-          const counter = setInterval(() => {
-            current += step;
-            if (current >= target) {
-              el.textContent = target + '+';
-              clearInterval(counter);
-            } else {
-              el.textContent = Math.floor(current);
-            }
-          }, 30);
-
-          counterObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0.5 });
-
-    counters.forEach(c => counterObserver.observe(c));
-
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    if (scrollIndicator) {
-      window.addEventListener('scroll', () => {
-        scrollIndicator.style.opacity = window.scrollY > 100 ? '0' : '1';
-        scrollIndicator.style.pointerEvents = window.scrollY > 100 ? 'none' : 'auto';
-      });
-    }
-
-    const hero = document.querySelector('.hero');
-    window.addEventListener('scroll', () => {
-      if (hero) {
-        const scroll = window.scrollY;
-        hero.style.transform = `translateY(${scroll * 0.3}px)`;
-        hero.style.opacity = Math.max(0, 1 - scroll / 600);
-      }
-    });
+    renderSkills();
   </script>
 </body>
 
