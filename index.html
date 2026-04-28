@@ -80,7 +80,10 @@
     }
 
     .bg-gradient {
-      background: radial-gradient(ellipse 50% 80% at 20% 0%, rgba(34, 211, 238, .08) 0%, transparent 50%), radial-gradient(ellipse 50% 80% at 80% 100%, rgba(244, 114, 182, .08) 0%, transparent 50%), radial-gradient(ellipse 80% 50% at 50% 50%, rgba(139, 92, 246, .05) 0%, transparent 50%)
+      background:
+        radial-gradient(ellipse 50% 80% at 20% 0%, rgba(34, 211, 238, .08) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 80% at 80% 100%, rgba(244, 114, 182, .08) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(139, 92, 246, .05) 0%, transparent 50%)
     }
 
     .scanlines {
@@ -778,11 +781,6 @@
       box-shadow: 0 4px 15px rgba(88, 101, 242, .3)
     }
 
-    .ci-download {
-      background: linear-gradient(135deg, #06b6d4, #0284c7);
-      box-shadow: 0 4px 15px rgba(6, 182, 212, .3)
-    }
-
     .ci-saweria {
       background: linear-gradient(135deg, #f59e0b, #f97316);
       box-shadow: 0 4px 15px rgba(245, 158, 11, .3)
@@ -845,11 +843,6 @@
       --card-glow: rgba(88, 101, 242, .4)
     }
 
-    .card[data-accent="download"] {
-      --card-accent: #06b6d4;
-      --card-glow: rgba(6, 182, 212, .4)
-    }
-
     .card[data-accent="saweria"] {
       --card-accent: #f59e0b;
       --card-glow: rgba(245, 158, 11, .4);
@@ -860,20 +853,47 @@
       border-color: rgba(245, 158, 11, .3)
     }
 
-    .donate-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .55rem;
-      padding: 3px 8px;
-      background: rgba(245, 158, 11, .15);
-      border: 1px solid rgba(245, 158, 11, .3);
-      border-radius: 4px;
+    .support-card .card-content {
+      gap: 6px;
+    }
+
+    .support-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .support-head .card-title {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .support-pill {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.28);
       color: var(--amber);
-      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 700;
       letter-spacing: 1px;
-      z-index: 1
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 520px) {
+      .support-head {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 8px;
+      }
     }
 
     .stats-bar {
@@ -2416,6 +2436,7 @@
       <div class="loader-progress"></div>
     </div>
   </div>
+
   <div class="cursor-glow" id="cursorGlow"></div>
   <canvas id="matrix-canvas"></canvas>
   <div class="bg-layer bg-gradient"></div>
@@ -2488,6 +2509,7 @@
         </div>
         <div class="section-line"></div>
       </div>
+
       <div class="cards-grid">
         <a class="card reveal stagger-1" href="https://www.tiktok.com/@oyy_gus" target="_blank" rel="noopener"
           data-accent="tiktok">
@@ -2495,39 +2517,29 @@
           <div class="card-content"><span class="card-title">TikTok</span><span class="card-desc">@oyy_gus</span></div>
           <i class="fas fa-arrow-right card-arrow"></i>
         </a>
+
         <a class="card reveal stagger-2" href="https://instagram.com/oyy_gus" target="_blank" rel="noopener"
           data-accent="instagram">
           <div class="card-icon ci-instagram"><i class="fab fa-instagram"></i></div>
           <div class="card-content"><span class="card-title">Instagram</span><span class="card-desc">@oyy_gus</span>
-          </div><i class="fas fa-arrow-right card-arrow"></i>
+          </div>
+          <i class="fas fa-arrow-right card-arrow"></i>
         </a>
+
         <a class="card reveal stagger-3" href="https://github.com/oyy-gus" target="_blank" rel="noopener"
           data-accent="github">
           <div class="card-icon ci-github"><i class="fab fa-github"></i></div>
           <div class="card-content"><span class="card-title">GitHub</span><span class="card-desc">check my
-              repositories</span></div><i class="fas fa-arrow-right card-arrow"></i>
+              repositories</span></div>
+          <i class="fas fa-arrow-right card-arrow"></i>
         </a>
+
         <a class="card reveal stagger-4" href="https://discord.gg/ZnMFNwcYzy" target="_blank" rel="noopener"
           data-accent="discord">
           <div class="card-icon ci-discord"><i class="fab fa-discord"></i></div>
           <div class="card-content"><span class="card-title">Discord</span><span class="card-desc">join the
-              community</span></div><i class="fas fa-arrow-right card-arrow"></i>
-        </a>
-      </div>
-
-      <div class="section-header reveal">
-        <div class="section-icon"><i class="fas fa-wrench"></i></div>
-        <div>
-          <h2 class="section-title">Tools</h2>
-        </div>
-        <div class="section-line"></div>
-      </div>
-      <div class="cards-grid">
-        <a class="card reveal stagger-1" href="https://oyy-gus.github.io/tiktok-downloader" target="_blank"
-          rel="noopener" data-accent="download">
-          <div class="card-icon ci-download"><i class="fas fa-download"></i></div>
-          <div class="card-content"><span class="card-title">TikTok Downloader</span><span class="card-desc">download
-              without watermark</span></div><i class="fas fa-arrow-right card-arrow"></i>
+              community</span></div>
+          <i class="fas fa-arrow-right card-arrow"></i>
         </a>
       </div>
 
@@ -2540,12 +2552,23 @@
         </div>
         <div class="section-line"></div>
       </div>
+
       <div class="cards-grid">
-        <a class="card reveal stagger-1" href="https://saweria.co/GussJTM" target="_blank" rel="noopener"
-          data-accent="saweria"><span class="donate-badge">☕ Support</span>
-          <div class="card-icon ci-saweria"><i class="fas fa-mug-hot"></i></div>
-          <div class="card-content"><span class="card-title">Buy Me a Coffee</span><span class="card-desc">support via
-              saweria</span></div><i class="fas fa-arrow-right card-arrow"></i>
+        <a class="card support-card reveal stagger-1" href="https://saweria.co/GussJTM" target="_blank" rel="noopener"
+          data-accent="saweria">
+          <div class="card-icon ci-saweria">
+            <i class="fas fa-mug-hot"></i>
+          </div>
+
+          <div class="card-content">
+            <span class="card-title">Buy Me a Coffee</span>
+            <span class="card-desc">support via saweria</span>
+          </div>
+
+          <div class="support-side">
+            <span class="support-pill">☕ Support</span>
+            <i class="fas fa-arrow-right card-arrow"></i>
+          </div>
         </a>
       </div>
     </section>
@@ -2574,11 +2597,13 @@
         </div>
         <div class="section-line"></div>
       </div>
+
       <div class="game-tabs reveal">
         <div class="game-tab active" data-game="snake"><i class="fas fa-worm"></i> Snake</div>
         <div class="game-tab" data-game="memory"><i class="fas fa-brain"></i> Memory</div>
         <div class="game-tab" data-game="reaction"><i class="fas fa-bolt"></i> Reaction</div>
       </div>
+
       <div class="game-container reveal">
         <div class="game-panel active" id="game-snake">
           <div class="game-header">
@@ -2602,6 +2627,7 @@
             </div>
           </div>
         </div>
+
         <div class="game-panel" id="game-memory">
           <div class="game-header">
             <div class="game-title"><i class="fas fa-brain"></i> Memory Match</div>
@@ -2615,6 +2641,7 @@
             <button class="game-btn" id="memory-restart-btn">New Game</button>
           </div>
         </div>
+
         <div class="game-panel" id="game-reaction">
           <div class="game-header">
             <div class="game-title"><i class="fas fa-bolt"></i> Reaction Time</div>
@@ -2754,26 +2781,49 @@
       wrapper.innerHTML = '';
       const lvlLabels = ['', 'Beginner', 'Learning', 'Intermediate', 'Advanced', 'Expert'];
       let total = 0;
+
       SKILLS.forEach((cat, ci) => {
         total += cat.items.length;
         const el = document.createElement('div');
         el.className = 'skill-category reveal';
         el.style.transitionDelay = (ci * .06) + 's';
+
         const chips = cat.items.map(s => {
           const dots = Array.from({ length: 5 }, (_, i) => `<div class="skill-dot ${i < s.level ? 'filled' : ''}" style="--chip-color:${cat.color}"></div>`).join('');
-          const badge = s.level === 5 ? `<span class="skill-level-badge" style="color:${cat.color};border-color:${cat.color}44">★ Expert</span>` : s.level === 4 ? `<span class="skill-level-badge" style="color:${cat.color};border-color:${cat.color}33">Advanced</span>` : '';
+          const badge = s.level === 5
+            ? `<span class="skill-level-badge" style="color:${cat.color};border-color:${cat.color}44">★ Expert</span>`
+            : s.level === 4
+              ? `<span class="skill-level-badge" style="color:${cat.color};border-color:${cat.color}33">Advanced</span>`
+              : '';
           return `<div class="skill-chip" style="--chip-color:${cat.color};--chip-glow:${cat.glow};--bar-width:${s.level * 20}%;color:${cat.color};border-color:${cat.color}30;background:${cat.color}08" title="${s.name} — ${lvlLabels[s.level]} (${s.level}/5)"><span class="skill-chip-icon">${s.icon}</span><span>${s.name}</span><div class="skill-level-dots">${dots}</div>${badge}<div class="skill-chip-bar"></div></div>`;
         }).join('');
+
         el.innerHTML = `<div class="skill-cat-header" onclick="toggleCat(this)"><div class="skill-cat-icon" style="background:${cat.color}12;color:${cat.color};border:1px solid ${cat.color}25">${cat.icon}</div><span class="skill-cat-name" style="color:${cat.color}">${cat.category}</span><span class="skill-cat-count">${cat.items.length} skills</span><i class="fas fa-chevron-down skill-cat-toggle" style="color:${cat.color}"></i></div><div class="skill-cat-body"><div class="skills-grid">${chips}</div></div>`;
         wrapper.appendChild(el);
       });
+
       const tot = document.getElementById('skills-total');
       if (tot) tot.innerHTML = `Total: <b>${total}</b> skills across <b>${SKILLS.length}</b> categories`;
-      document.querySelectorAll('.reveal').forEach(el => { if (!el.classList.contains('visible')) ro.observe(el) });
-      const barObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.skill-chip').forEach((c, i) => setTimeout(() => c.classList.add('animated'), i * 40)); barObs.unobserve(e.target) } }) }, { threshold: .2 });
+
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (!el.classList.contains('visible')) ro.observe(el);
+      });
+
+      const barObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.querySelectorAll('.skill-chip').forEach((c, i) => setTimeout(() => c.classList.add('animated'), i * 40));
+            barObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: .2 });
+
       document.querySelectorAll('.skill-cat-body').forEach(el => barObs.observe(el));
     }
-    function toggleCat(h) { h.closest('.skill-category').classList.toggle('collapsed') }
+
+    function toggleCat(h) {
+      h.closest('.skill-category').classList.toggle('collapsed');
+    }
 
     const RBX_API = 'https://oyy-gus.site/api/v2/roblox/music/playlist.json';
     const RBX_PER_PAGE = 24;
@@ -2811,7 +2861,12 @@
       const categories = [{ key: 'all', label: `Semua (${all.length})` }, ...Object.entries(rbxData).map(([k, v]) => ({ key: k, label: `${cap(k)} (${(v || []).length})` }))];
       tabs.innerHTML = categories.map(t => `<button class="rbx-tab ${rbxCat === t.key ? 'active' : ''}" data-cat="${esc(t.key)}">${esc(t.label)}</button>`).join('');
       tabs.querySelectorAll('.rbx-tab').forEach(btn => {
-        btn.addEventListener('click', () => { rbxCat = btn.dataset.cat; rbxPage = 1; rbxRenderTabs(); rbxRender() });
+        btn.addEventListener('click', () => {
+          rbxCat = btn.dataset.cat;
+          rbxPage = 1;
+          rbxRenderTabs();
+          rbxRender();
+        });
       });
     }
 
@@ -2836,24 +2891,25 @@
       grid.className = `rbx-grid reveal visible${rbxIsListView ? ' list-view' : ''}`;
 
       grid.innerHTML = shown.map(item => `
-    <article class="rbx-card">
-      <div class="rbx-card-top">
-        <span class="rbx-badge"><i class="fas fa-headphones"></i>${esc(item.cat)}</span>
-        <span class="rbx-index">#${item.idx}</span>
-      </div>
-      <div class="rbx-card-body">
-        <h3 class="rbx-title">${esc(item.title)}</h3>
-        <div class="rbx-code">
-          <div class="rbx-id">ID: ${esc(item.id)}</div>
-          rbxassetid://${esc(item.id)}
-        </div>
-        <div class="rbx-actions">
-          <button class="rbx-btn" data-copy="${esc(item.id)}" data-label="Copy ID"><i class="fas fa-copy"></i> ID</button>
-          <button class="rbx-btn amber" data-copy="rbxassetid://${esc(item.id)}" data-label="Copy Asset"><i class="fas fa-gamepad"></i> Asset</button>
-          <a class="rbx-btn muted" href="https://www.roblox.com/library/${encodeURIComponent(item.id)}" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Open</a>
-        </div>
-      </div>
-    </article>`).join('');
+        <article class="rbx-card">
+          <div class="rbx-card-top">
+            <span class="rbx-badge"><i class="fas fa-headphones"></i>${esc(item.cat)}</span>
+            <span class="rbx-index">#${item.idx}</span>
+          </div>
+          <div class="rbx-card-body">
+            <h3 class="rbx-title">${esc(item.title)}</h3>
+            <div class="rbx-code">
+              <div class="rbx-id">ID: ${esc(item.id)}</div>
+              rbxassetid://${esc(item.id)}
+            </div>
+            <div class="rbx-actions">
+              <button class="rbx-btn" data-copy="${esc(item.id)}" data-label="Copy ID"><i class="fas fa-copy"></i> ID</button>
+              <button class="rbx-btn amber" data-copy="rbxassetid://${esc(item.id)}" data-label="Copy Asset"><i class="fas fa-gamepad"></i> Asset</button>
+              <a class="rbx-btn muted" href="https://www.roblox.com/library/${encodeURIComponent(item.id)}" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Open</a>
+            </div>
+          </div>
+        </article>
+      `).join('');
 
       if (pag) {
         pag.style.display = totalPages > 1 ? 'flex' : 'none';
@@ -2871,7 +2927,10 @@
       el.className = `rbx-toast-item${type === 'amber' ? ' amber' : ''}`;
       el.innerHTML = `<i class="fas fa-check"></i>${esc(msg)}`;
       container.appendChild(el);
-      setTimeout(() => { el.style.animation = 'toastOut .3s ease forwards'; setTimeout(() => el.remove(), 350) }, 2000);
+      setTimeout(() => {
+        el.style.animation = 'toastOut .3s ease forwards';
+        setTimeout(() => el.remove(), 350);
+      }, 2000);
     }
 
     async function rbxLoad() {
@@ -2907,8 +2966,13 @@
             btn.innerHTML = `<i class="fas fa-check"></i> Done`;
             btn.disabled = true;
             rbxToast(`${label}: ${text.length > 40 ? text.slice(0, 40) + '...' : text}`, 'cyan');
-            setTimeout(() => { btn.innerHTML = oldHTML; btn.disabled = false }, 1400);
-          } catch { rbxToast('Gagal copy text', 'amber') }
+            setTimeout(() => {
+              btn.innerHTML = oldHTML;
+              btn.disabled = false;
+            }, 1400);
+          } catch {
+            rbxToast('Gagal copy text', 'amber');
+          }
         });
       }
 
@@ -2921,6 +2985,7 @@
           rbxRender();
         });
       }
+
       if (clearBtn) {
         clearBtn.addEventListener('click', () => {
           rbxQuery = '';
@@ -2944,83 +3009,346 @@
       }
 
       const gv = $('rbx-grid-view'), lv = $('rbx-list-view');
-      if (gv) gv.addEventListener('click', () => { rbxIsListView = false; gv.classList.add('active'); lv && lv.classList.remove('active'); rbxRender() });
-      if (lv) lv.addEventListener('click', () => { rbxIsListView = true; lv.classList.add('active'); gv && gv.classList.remove('active'); rbxRender() });
+      if (gv) gv.addEventListener('click', () => {
+        rbxIsListView = false;
+        gv.classList.add('active');
+        lv && lv.classList.remove('active');
+        rbxRender();
+      });
+      if (lv) lv.addEventListener('click', () => {
+        rbxIsListView = true;
+        lv.classList.add('active');
+        gv && gv.classList.remove('active');
+        rbxRender();
+      });
 
       const pv = $('rbx-prev'), pn = $('rbx-next');
-      if (pv) pv.addEventListener('click', () => { if (rbxPage > 1) { rbxPage--; rbxRender(); document.getElementById('roblox-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) } });
-      if (pn) pn.addEventListener('click', () => { const f = rbxFiltered(); const tp = Math.ceil(f.length / RBX_PER_PAGE); if (rbxPage < tp) { rbxPage++; rbxRender(); document.getElementById('roblox-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) } });
+      if (pv) pv.addEventListener('click', () => {
+        if (rbxPage > 1) {
+          rbxPage--;
+          rbxRender();
+          document.getElementById('roblox-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+      if (pn) pn.addEventListener('click', () => {
+        const f = rbxFiltered();
+        const tp = Math.ceil(f.length / RBX_PER_PAGE);
+        if (rbxPage < tp) {
+          rbxPage++;
+          rbxRender();
+          document.getElementById('roblox-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     }
 
     window.addEventListener('load', () => setTimeout(() => $('loader')?.classList.add('hidden'), 1800));
 
     const canv = document.getElementById('matrix-canvas'), ctx = canv.getContext('2d');
-    function resC() { canv.width = window.innerWidth; canv.height = window.innerHeight } resC();
+    function resC() { canv.width = window.innerWidth; canv.height = window.innerHeight }
+    resC();
     window.addEventListener('resize', resC);
-    const mch = 'アイウエオカキクケコ01'; const fs2 = 14; let cols = Math.floor(canv.width / fs2); let drops = Array(cols).fill(1);
-    function drawM() { ctx.fillStyle = 'rgba(2,6,23,.08)'; ctx.fillRect(0, 0, canv.width, canv.height); ctx.fillStyle = 'rgba(34,211,238,.07)'; ctx.font = `${fs2}px 'JetBrains Mono',monospace`; for (let i = 0; i < drops.length; i++) { ctx.fillText(mch[Math.floor(Math.random() * mch.length)], i * fs2, drops[i] * fs2); if (drops[i] * fs2 > canv.height && Math.random() > .985) drops[i] = 0; drops[i]++ } }
+    const mch = 'アイウエオカキクケコ01';
+    const fs2 = 14;
+    let cols = Math.floor(canv.width / fs2);
+    let drops = Array(cols).fill(1);
+
+    function drawM() {
+      ctx.fillStyle = 'rgba(2,6,23,.08)';
+      ctx.fillRect(0, 0, canv.width, canv.height);
+      ctx.fillStyle = 'rgba(34,211,238,.07)';
+      ctx.font = `${fs2}px 'JetBrains Mono',monospace`;
+      for (let i = 0; i < drops.length; i++) {
+        ctx.fillText(mch[Math.floor(Math.random() * mch.length)], i * fs2, drops[i] * fs2);
+        if (drops[i] * fs2 > canv.height && Math.random() > .985) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
     setInterval(drawM, 50);
-    window.addEventListener('resize', () => { cols = Math.floor(canv.width / fs2); drops = Array(cols).fill(1) });
+    window.addEventListener('resize', () => {
+      cols = Math.floor(canv.width / fs2);
+      drops = Array(cols).fill(1);
+    });
 
     const cg = document.getElementById('cursorGlow');
-    document.addEventListener('mousemove', e => { cg.classList.add('active'); cg.style.left = e.clientX + 'px'; cg.style.top = e.clientY + 'px' });
+    document.addEventListener('mousemove', e => {
+      cg.classList.add('active');
+      cg.style.left = e.clientX + 'px';
+      cg.style.top = e.clientY + 'px';
+    });
     document.addEventListener('mouseleave', () => cg.classList.remove('active'));
 
     window.addEventListener('scroll', () => document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50));
 
-    const ro = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+    const ro = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    }), { threshold: .08, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
     const phrases = ['Full-Stack Developer', 'Discord Bot Maker', 'WhatsApp Bot Dev', 'PHP & Java Developer', 'C/C++ Programmer', 'Multi-Language Coder', 'Self-Taught Engineer', 'Roblox Sound Curator'];
     let pi = 0, ci2 = 0, del = false, tEl = document.getElementById('typed-text');
-    function typeEff() { const p = phrases[pi]; tEl.textContent = del ? p.substring(0, --ci2) : p.substring(0, ++ci2); let s = del ? 25 : 55; if (!del && ci2 === p.length) { s = 2000; del = true } else if (del && ci2 === 0) { del = false; pi = (pi + 1) % phrases.length; s = 400 } setTimeout(typeEff, s) }
+    function typeEff() {
+      const p = phrases[pi];
+      tEl.textContent = del ? p.substring(0, --ci2) : p.substring(0, ++ci2);
+      let s = del ? 25 : 55;
+      if (!del && ci2 === p.length) { s = 2000; del = true }
+      else if (del && ci2 === 0) { del = false; pi = (pi + 1) % phrases.length; s = 400 }
+      setTimeout(typeEff, s);
+    }
     setTimeout(typeEff, 2200);
 
     const tPhrases = ['javac Main.java && java Main', 'php artisan serve', 'gcc -o app main.c && ./app', 'python scraper.py', 'node bot.js', 'go run server.go', 'cargo build --release', 'npm run dev', 'docker compose up', 'sudo make coffee ☕'];
     let tp = 0, tc = 0, td = false, ttEl = document.getElementById('terminal-typed');
-    function tType() { if (!ttEl) return; const p = tPhrases[tp]; ttEl.textContent = td ? p.substring(0, --tc) : p.substring(0, ++tc); let s = td ? 20 : 45; if (!td && tc === p.length) { s = 3000; td = true } else if (td && tc === 0) { td = false; tp = (tp + 1) % tPhrases.length; s = 400 } setTimeout(tType, s) }
+    function tType() {
+      if (!ttEl) return;
+      const p = tPhrases[tp];
+      ttEl.textContent = td ? p.substring(0, --tc) : p.substring(0, ++tc);
+      let s = td ? 20 : 45;
+      if (!td && tc === p.length) { s = 3000; td = true }
+      else if (td && tc === 0) { td = false; tp = (tp + 1) % tPhrases.length; s = 400 }
+      setTimeout(tType, s);
+    }
     setTimeout(tType, 3500);
 
-    const co = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting && e.target.dataset.count) { const t = parseInt(e.target.dataset.count); let c = 0; const iv = setInterval(() => { c += t / 60; if (c >= t) { e.target.textContent = t + '+'; clearInterval(iv) } else e.target.textContent = Math.floor(c) }, 30); co.unobserve(e.target) } }), { threshold: .5 });
+    const co = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting && e.target.dataset.count) {
+        const t = parseInt(e.target.dataset.count);
+        let c = 0;
+        const iv = setInterval(() => {
+          c += t / 60;
+          if (c >= t) {
+            e.target.textContent = t + '+';
+            clearInterval(iv);
+          } else e.target.textContent = Math.floor(c);
+        }, 30);
+        co.unobserve(e.target);
+      }
+    }), { threshold: .5 });
     document.querySelectorAll('[data-count]').forEach(c => co.observe(c));
 
     const si = document.querySelector('.scroll-indicator'), hero = document.querySelector('.hero');
-    window.addEventListener('scroll', () => { if (si) si.style.opacity = window.scrollY > 100 ? '0' : '1'; if (hero) { hero.style.transform = `translateY(${window.scrollY * .3}px)`; hero.style.opacity = Math.max(0, 1 - window.scrollY / 600) } });
+    window.addEventListener('scroll', () => {
+      if (si) si.style.opacity = window.scrollY > 100 ? '0' : '1';
+      if (hero) {
+        hero.style.transform = `translateY(${window.scrollY * .3}px)`;
+        hero.style.opacity = Math.max(0, 1 - window.scrollY / 600);
+      }
+    });
 
-    document.querySelectorAll('.game-tab').forEach(tab => { tab.addEventListener('click', () => { document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active')); document.querySelectorAll('.game-panel').forEach(p => p.classList.remove('active')); tab.classList.add('active'); document.getElementById('game-' + tab.dataset.game)?.classList.add('active') }) });
+    document.querySelectorAll('.game-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.game-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('game-' + tab.dataset.game)?.classList.add('active');
+      });
+    });
 
     (() => {
       const cvs = document.getElementById('snake-canvas'), c = cvs.getContext('2d'), SZ = 16, GR = cvs.width / SZ;
       let snake, dir, nDir, food, score, best = 0, running, gl, speed;
       function init() { snake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }]; dir = { x: 1, y: 0 }; nDir = { x: 1, y: 0 }; score = 0; speed = 120; placeFood(); updateUI(); draw() }
       function placeFood() { do { food = { x: Math.floor(Math.random() * GR), y: Math.floor(Math.random() * GR) } } while (snake.some(s => s.x === food.x && s.y === food.y)) }
-      function draw() { c.fillStyle = 'rgba(2,6,23,.95)'; c.fillRect(0, 0, cvs.width, cvs.height); c.fillStyle = 'rgba(34,211,238,.04)'; for (let x = 0; x < GR; x++)for (let y = 0; y < GR; y++)c.fillRect(x * SZ + SZ / 2 - .5, y * SZ + SZ / 2 - .5, 1, 1); c.shadowBlur = 15; c.shadowColor = '#ef4444'; c.fillStyle = '#ef4444'; c.beginPath(); c.arc(food.x * SZ + SZ / 2, food.y * SZ + SZ / 2, SZ / 2 - 2, 0, Math.PI * 2); c.fill(); c.shadowBlur = 0; snake.forEach((s, i) => { const p = i / snake.length; c.fillStyle = `rgb(${Math.floor(34 + (244 - 34) * p)},${Math.floor(211 + (114 - 211) * p)},${Math.floor(238 + (182 - 238) * p)})`; if (i === 0) { c.shadowBlur = 10; c.shadowColor = 'rgba(34,211,238,.8)' } const pad = i === 0 ? 1 : 2; c.beginPath(); c.roundRect(s.x * SZ + pad, s.y * SZ + pad, SZ - pad * 2, SZ - pad * 2, 3); c.fill(); c.shadowBlur = 0 }) }
-      function update() { dir = { ...nDir }; const h = { x: snake[0].x + dir.x, y: snake[0].y + dir.y }; if (h.x < 0 || h.x >= GR || h.y < 0 || h.y >= GR) return gOver(); if (snake.some(s => s.x === h.x && s.y === h.y)) return gOver(); snake.unshift(h); if (h.x === food.x && h.y === food.y) { score++; if (score > best) best = score; if (speed > 60) speed -= 3; placeFood(); clearInterval(gl); gl = setInterval(update, speed) } else snake.pop(); updateUI(); draw() }
-      function gOver() { running = false; clearInterval(gl); const msg = document.getElementById('snake-msg'); msg.textContent = `Game Over! Score: ${score}`; msg.className = 'game-msg lose'; document.getElementById('snake-start-btn').textContent = 'Restart'; c.fillStyle = 'rgba(239,68,68,.3)'; c.fillRect(0, 0, cvs.width, cvs.height) }
-      function updateUI() { document.getElementById('snake-score').textContent = score; document.getElementById('snake-best').textContent = best; document.getElementById('snake-speed').textContent = speed > 100 ? 'Normal' : speed > 80 ? 'Fast' : 'Insane' }
-      function start() { if (running) return; init(); running = true; document.getElementById('snake-msg').textContent = ''; document.getElementById('snake-msg').className = 'game-msg'; document.getElementById('snake-start-btn').textContent = 'Playing...'; gl = setInterval(update, speed) }
-      function setDir(x, y) { if (dir.x === -x && dir.y === -y || dir.x === x && dir.y === y) return; nDir = { x, y } }
+      function draw() {
+        c.fillStyle = 'rgba(2,6,23,.95)';
+        c.fillRect(0, 0, cvs.width, cvs.height);
+        c.fillStyle = 'rgba(34,211,238,.04)';
+        for (let x = 0; x < GR; x++) for (let y = 0; y < GR; y++) c.fillRect(x * SZ + SZ / 2 - .5, y * SZ + SZ / 2 - .5, 1, 1);
+        c.shadowBlur = 15; c.shadowColor = '#ef4444'; c.fillStyle = '#ef4444';
+        c.beginPath(); c.arc(food.x * SZ + SZ / 2, food.y * SZ + SZ / 2, SZ / 2 - 2, 0, Math.PI * 2); c.fill();
+        c.shadowBlur = 0;
+        snake.forEach((s, i) => {
+          const p = i / snake.length;
+          c.fillStyle = `rgb(${Math.floor(34 + (244 - 34) * p)},${Math.floor(211 + (114 - 211) * p)},${Math.floor(238 + (182 - 238) * p)})`;
+          if (i === 0) { c.shadowBlur = 10; c.shadowColor = 'rgba(34,211,238,.8)' }
+          const pad = i === 0 ? 1 : 2;
+          c.beginPath();
+          c.roundRect(s.x * SZ + pad, s.y * SZ + pad, SZ - pad * 2, SZ - pad * 2, 3);
+          c.fill();
+          c.shadowBlur = 0;
+        });
+      }
+      function update() {
+        dir = { ...nDir };
+        const h = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+        if (h.x < 0 || h.x >= GR || h.y < 0 || h.y >= GR) return gOver();
+        if (snake.some(s => s.x === h.x && s.y === h.y)) return gOver();
+        snake.unshift(h);
+        if (h.x === food.x && h.y === food.y) {
+          score++;
+          if (score > best) best = score;
+          if (speed > 60) speed -= 3;
+          placeFood();
+          clearInterval(gl);
+          gl = setInterval(update, speed);
+        } else snake.pop();
+        updateUI();
+        draw();
+      }
+      function gOver() {
+        running = false;
+        clearInterval(gl);
+        const msg = document.getElementById('snake-msg');
+        msg.textContent = `Game Over! Score: ${score}`;
+        msg.className = 'game-msg lose';
+        document.getElementById('snake-start-btn').textContent = 'Restart';
+        c.fillStyle = 'rgba(239,68,68,.3)';
+        c.fillRect(0, 0, cvs.width, cvs.height);
+      }
+      function updateUI() {
+        document.getElementById('snake-score').textContent = score;
+        document.getElementById('snake-best').textContent = best;
+        document.getElementById('snake-speed').textContent = speed > 100 ? 'Normal' : speed > 80 ? 'Fast' : 'Insane';
+      }
+      function start() {
+        if (running) return;
+        init();
+        running = true;
+        document.getElementById('snake-msg').textContent = '';
+        document.getElementById('snake-msg').className = 'game-msg';
+        document.getElementById('snake-start-btn').textContent = 'Playing...';
+        gl = setInterval(update, speed);
+      }
+      function setDir(x, y) {
+        if (dir.x === -x && dir.y === -y || dir.x === x && dir.y === y) return;
+        nDir = { x, y };
+      }
       document.getElementById('snake-start-btn').addEventListener('click', start);
-      document.getElementById('snake-reset-btn').addEventListener('click', () => { running = false; clearInterval(gl); init(); document.getElementById('snake-msg').textContent = 'Press Start or use Arrow Keys'; document.getElementById('snake-msg').className = 'game-msg'; document.getElementById('snake-start-btn').textContent = 'Start' });
-      document.addEventListener('keydown', e => { if (!running && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) { start(); return } switch (e.key) { case 'ArrowUp': case 'w': case 'W': setDir(0, -1); e.preventDefault(); break; case 'ArrowDown': case 's': case 'S': setDir(0, 1); e.preventDefault(); break; case 'ArrowLeft': case 'a': case 'A': setDir(-1, 0); e.preventDefault(); break; case 'ArrowRight': case 'd': case 'D': setDir(1, 0); e.preventDefault(); break } });
-      document.querySelectorAll('.snake-ctrl-btn').forEach(b => { b.addEventListener('click', () => { if (!running) { start(); return } const d = b.dataset.dir; if (d === 'up') setDir(0, -1); else if (d === 'down') setDir(0, 1); else if (d === 'left') setDir(-1, 0); else setDir(1, 0) }) });
-      let sx, sy; cvs.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; e.preventDefault() }, { passive: false }); cvs.addEventListener('touchend', e => { if (!sx || !sy) return; const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; if (Math.abs(dx) < 20 && Math.abs(dy) < 20) return; if (!running) start(); Math.abs(dx) > Math.abs(dy) ? setDir(dx > 0 ? 1 : -1, 0) : setDir(0, dy > 0 ? 1 : -1); sx = sy = null });
+      document.getElementById('snake-reset-btn').addEventListener('click', () => {
+        running = false;
+        clearInterval(gl);
+        init();
+        document.getElementById('snake-msg').textContent = 'Press Start or use Arrow Keys';
+        document.getElementById('snake-msg').className = 'game-msg';
+        document.getElementById('snake-start-btn').textContent = 'Start';
+      });
+      document.addEventListener('keydown', e => {
+        if (!running && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) { start(); return }
+        switch (e.key) {
+          case 'ArrowUp': case 'w': case 'W': setDir(0, -1); e.preventDefault(); break;
+          case 'ArrowDown': case 's': case 'S': setDir(0, 1); e.preventDefault(); break;
+          case 'ArrowLeft': case 'a': case 'A': setDir(-1, 0); e.preventDefault(); break;
+          case 'ArrowRight': case 'd': case 'D': setDir(1, 0); e.preventDefault(); break;
+        }
+      });
+      document.querySelectorAll('.snake-ctrl-btn').forEach(b => {
+        b.addEventListener('click', () => {
+          if (!running) { start(); return }
+          const d = b.dataset.dir;
+          if (d === 'up') setDir(0, -1);
+          else if (d === 'down') setDir(0, 1);
+          else if (d === 'left') setDir(-1, 0);
+          else setDir(1, 0);
+        });
+      });
+      let sx, sy;
+      cvs.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; e.preventDefault() }, { passive: false });
+      cvs.addEventListener('touchend', e => {
+        if (!sx || !sy) return;
+        const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+        if (Math.abs(dx) < 20 && Math.abs(dy) < 20) return;
+        if (!running) start();
+        Math.abs(dx) > Math.abs(dy) ? setDir(dx > 0 ? 1 : -1, 0) : setDir(0, dy > 0 ? 1 : -1);
+        sx = sy = null;
+      });
       init();
     })();
 
     (() => {
-      const emojis = ['🚀', '⚡', '🎮', '💎', '🔥', '🌙', '🎯', '👾']; let cards, flipped, matched, moves, bestMoves, timer, tiv, startTime;
+      const emojis = ['🚀', '⚡', '🎮', '💎', '🔥', '🌙', '🎯', '👾'];
+      let cards, flipped, matched, moves, bestMoves, timer, tiv, startTime;
       function shuffle(a) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[b[i], b[j]] = [b[j], b[i]] } return b }
-      function initMem() { cards = shuffle([...emojis, ...emojis]); flipped = []; matched = 0; moves = 0; clearInterval(tiv); timer = 0; startTime = null; const g = document.getElementById('memory-grid'); g.innerHTML = ''; cards.forEach((e, i) => { const c = document.createElement('div'); c.className = 'memory-card-item'; c.innerHTML = `<div class="memory-card-inner"><div class="memory-card-front"><i class="fas fa-question"></i></div><div class="memory-card-back">${e}</div></div>`; c.addEventListener('click', () => flip(c, i)); g.appendChild(c) }); upMem(); document.getElementById('memory-msg').textContent = 'Find all matching pairs!'; document.getElementById('memory-msg').className = 'game-msg' }
-      function flip(el, idx) { if (flipped.length >= 2 || el.classList.contains('flipped') || el.classList.contains('matched')) return; if (!startTime) { startTime = Date.now(); tiv = setInterval(() => { timer = Math.floor((Date.now() - startTime) / 1000); document.getElementById('memory-timer').textContent = timer + 's' }, 100) } el.classList.add('flipped'); flipped.push({ el, idx, emoji: cards[idx] }); if (flipped.length === 2) { moves++; document.getElementById('memory-moves').textContent = moves; if (flipped[0].emoji === flipped[1].emoji) { flipped.forEach(f => { f.el.classList.add('matched'); f.el.classList.remove('flipped') }); matched++; document.getElementById('memory-pairs').textContent = matched; flipped = []; if (matched === emojis.length) { clearInterval(tiv); if (!bestMoves || moves < bestMoves) { bestMoves = moves; document.getElementById('memory-best').textContent = bestMoves } document.getElementById('memory-msg').textContent = `🎉 Won in ${moves} moves & ${timer}s!`; document.getElementById('memory-msg').className = 'game-msg win' } } else setTimeout(() => { flipped.forEach(f => f.el.classList.remove('flipped')); flipped = [] }, 800) } }
-      function upMem() { document.getElementById('memory-moves').textContent = moves; document.getElementById('memory-pairs').textContent = matched; document.getElementById('memory-timer').textContent = '0s' }
-      document.getElementById('memory-restart-btn').addEventListener('click', initMem); initMem();
+      function initMem() {
+        cards = shuffle([...emojis, ...emojis]); flipped = []; matched = 0; moves = 0; clearInterval(tiv); timer = 0; startTime = null;
+        const g = document.getElementById('memory-grid'); g.innerHTML = '';
+        cards.forEach((e, i) => {
+          const c = document.createElement('div');
+          c.className = 'memory-card-item';
+          c.innerHTML = `<div class="memory-card-inner"><div class="memory-card-front"><i class="fas fa-question"></i></div><div class="memory-card-back">${e}</div></div>`;
+          c.addEventListener('click', () => flip(c, i));
+          g.appendChild(c);
+        });
+        upMem();
+        document.getElementById('memory-msg').textContent = 'Find all matching pairs!';
+        document.getElementById('memory-msg').className = 'game-msg';
+      }
+      function flip(el, idx) {
+        if (flipped.length >= 2 || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+        if (!startTime) {
+          startTime = Date.now();
+          tiv = setInterval(() => {
+            timer = Math.floor((Date.now() - startTime) / 1000);
+            document.getElementById('memory-timer').textContent = timer + 's';
+          }, 100);
+        }
+        el.classList.add('flipped');
+        flipped.push({ el, idx, emoji: cards[idx] });
+        if (flipped.length === 2) {
+          moves++;
+          document.getElementById('memory-moves').textContent = moves;
+          if (flipped[0].emoji === flipped[1].emoji) {
+            flipped.forEach(f => { f.el.classList.add('matched'); f.el.classList.remove('flipped') });
+            matched++;
+            document.getElementById('memory-pairs').textContent = matched;
+            flipped = [];
+            if (matched === emojis.length) {
+              clearInterval(tiv);
+              if (!bestMoves || moves < bestMoves) {
+                bestMoves = moves;
+                document.getElementById('memory-best').textContent = bestMoves;
+              }
+              document.getElementById('memory-msg').textContent = `🎉 Won in ${moves} moves & ${timer}s!`;
+              document.getElementById('memory-msg').className = 'game-msg win';
+            }
+          } else setTimeout(() => {
+            flipped.forEach(f => f.el.classList.remove('flipped'));
+            flipped = [];
+          }, 800);
+        }
+      }
+      function upMem() {
+        document.getElementById('memory-moves').textContent = moves;
+        document.getElementById('memory-pairs').textContent = matched;
+        document.getElementById('memory-timer').textContent = '0s';
+      }
+      document.getElementById('memory-restart-btn').addEventListener('click', initMem);
+      initMem();
     })();
 
     (() => {
-      const area = document.getElementById('reaction-area'); let state = 'idle', to, st, att = 0, bt = null;
-      function ss(s, icon, text, cls) { state = s; area.className = 'reaction-area ' + (cls || ''); area.innerHTML = `<div class="reaction-icon">${icon}</div><div class="reaction-text">${text}</div>` }
-      area.addEventListener('click', () => { switch (state) { case 'idle': case 'result': case 'too-early': ss('waiting', '🔴', 'Wait for green...', 'waiting'); to = setTimeout(() => { ss('ready', '🟢', 'CLICK NOW!', 'ready'); st = performance.now() }, 1500 + Math.random() * 3500); break; case 'waiting': clearTimeout(to); ss('too-early', '😬', 'Too early! Click to retry', 'too-early'); break; case 'ready': const ms = Math.round(performance.now() - st); att++; document.getElementById('reaction-attempts').textContent = att; if (!bt || ms < bt) { bt = ms; document.getElementById('reaction-best-display').innerHTML = `Best: <b>${bt}ms</b>` } state = 'result'; area.className = 'reaction-area result'; area.innerHTML = `<div class="reaction-time">${ms}ms</div><div class="reaction-text">${ms < 200 ? '⚡ Incredible!' : ms < 300 ? '🔥 Great!' : ms < 400 ? '👍 Nice!' : '💪 Keep trying!'}</div><div class="reaction-text" style="font-size:.7rem;color:var(--text-muted);margin-top:8px">Click to try again</div>`; break } });
+      const area = document.getElementById('reaction-area');
+      let state = 'idle', to, st, att = 0, bt = null;
+      function ss(s, icon, text, cls) {
+        state = s;
+        area.className = 'reaction-area ' + (cls || '');
+        area.innerHTML = `<div class="reaction-icon">${icon}</div><div class="reaction-text">${text}</div>`;
+      }
+      area.addEventListener('click', () => {
+        switch (state) {
+          case 'idle':
+          case 'result':
+          case 'too-early':
+            ss('waiting', '🔴', 'Wait for green...', 'waiting');
+            to = setTimeout(() => { ss('ready', '🟢', 'CLICK NOW!', 'ready'); st = performance.now() }, 1500 + Math.random() * 3500);
+            break;
+          case 'waiting':
+            clearTimeout(to);
+            ss('too-early', '😬', 'Too early! Click to retry', 'too-early');
+            break;
+          case 'ready':
+            const ms = Math.round(performance.now() - st);
+            att++;
+            document.getElementById('reaction-attempts').textContent = att;
+            if (!bt || ms < bt) {
+              bt = ms;
+              document.getElementById('reaction-best-display').innerHTML = `Best: <b>${bt}ms</b>`;
+            }
+            state = 'result';
+            area.className = 'reaction-area result';
+            area.innerHTML = `<div class="reaction-time">${ms}ms</div><div class="reaction-text">${ms < 200 ? '⚡ Incredible!' : ms < 300 ? '🔥 Great!' : ms < 400 ? '👍 Nice!' : '💪 Keep trying!'}</div><div class="reaction-text" style="font-size:.7rem;color:var(--text-muted);margin-top:8px">Click to try again</div>`;
+            break;
+        }
+      });
     })();
 
     renderSkills();
