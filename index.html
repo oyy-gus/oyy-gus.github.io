@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#020617">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Guss</title>
-  <meta name="keywords" content="Guss, social media, tiktok, instagram, github, discord, developer">
+  <meta name="keywords" content="Guss, social media, tiktok, instagram, github, discord, developer, roblox">
   <meta name="description" content="Welcome to my personal portfolio - Connect with me on social media!" />
   <meta property="og:site_name" content="Guss" />
   <meta property="og:title" content="Guss - Personal Portfolio" />
@@ -62,7 +62,7 @@
       color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      -webkit-font-smoothing: antialiased
     }
 
     #matrix-canvas {
@@ -80,15 +80,12 @@
     }
 
     .bg-gradient {
-      background:
-        radial-gradient(ellipse 50% 80% at 20% 0%, rgba(34, 211, 238, .08) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 80% at 80% 100%, rgba(244, 114, 182, .08) 0%, transparent 50%),
-        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(139, 92, 246, .05) 0%, transparent 50%);
+      background: radial-gradient(ellipse 50% 80% at 20% 0%, rgba(34, 211, 238, .08) 0%, transparent 50%), radial-gradient(ellipse 50% 80% at 80% 100%, rgba(244, 114, 182, .08) 0%, transparent 50%), radial-gradient(ellipse 80% 50% at 50% 50%, rgba(139, 92, 246, .05) 0%, transparent 50%)
     }
 
     .scanlines {
       background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(34, 211, 238, .008) 2px, rgba(34, 211, 238, .008) 4px);
-      animation: scanMove 8s linear infinite;
+      animation: scanMove 8s linear infinite
     }
 
     @keyframes scanMove {
@@ -105,7 +102,7 @@
       background-image: linear-gradient(rgba(34, 211, 238, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, .03) 1px, transparent 1px);
       background-size: 80px 80px;
       mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%)
     }
 
     .vignette {
@@ -298,7 +295,7 @@
     .main-wrapper {
       position: relative;
       z-index: 10;
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto;
       padding: 0 20px;
       min-height: 100vh
@@ -1029,7 +1026,7 @@
       transition: all .3s ease;
       position: relative;
       overflow: hidden;
-      user-select: none;
+      user-select: none
     }
 
     .skill-chip::before {
@@ -1121,7 +1118,7 @@
       border: 1px solid var(--border-color);
       border-radius: 12px;
       overflow: hidden;
-      margin: 48px 0;
+      margin: 0 0 48px;
       backdrop-filter: blur(20px)
     }
 
@@ -1579,6 +1576,467 @@
       color: var(--amber)
     }
 
+    .rbx-toolbar {
+      margin-bottom: 16px
+    }
+
+    .rbx-search-wrap {
+      display: flex;
+      gap: 10px;
+      align-items: center
+    }
+
+    .rbx-search-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      backdrop-filter: blur(20px);
+      transition: border-color .3s ease
+    }
+
+    .rbx-search-box:focus-within {
+      border-color: rgba(34, 211, 238, .4)
+    }
+
+    .rbx-search-box i {
+      color: var(--cyan);
+      font-size: .9rem;
+      flex-shrink: 0
+    }
+
+    .rbx-search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem
+    }
+
+    .rbx-search-box input::placeholder {
+      color: var(--text-muted)
+    }
+
+    .rbx-search-clear {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0;
+      font-size: .9rem;
+      display: none;
+      transition: color .2s ease
+    }
+
+    .rbx-search-clear:hover {
+      color: var(--text-primary)
+    }
+
+    .rbx-random-btn {
+      padding: 13px 16px;
+      background: rgba(251, 191, 36, .08);
+      border: 1px solid rgba(251, 191, 36, .25);
+      border-radius: 12px;
+      color: var(--amber);
+      font-size: .85rem;
+      cursor: pointer;
+      transition: all .25s ease;
+      flex-shrink: 0
+    }
+
+    .rbx-random-btn:hover {
+      background: rgba(251, 191, 36, .15);
+      transform: translateY(-1px)
+    }
+
+    .rbx-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px
+    }
+
+    .rbx-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .rbx-tab {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: rgba(15, 23, 42, .7);
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      cursor: pointer;
+      transition: all .25s ease;
+      user-select: none
+    }
+
+    .rbx-tab:hover {
+      color: var(--text-primary);
+      border-color: rgba(34, 211, 238, .3);
+      transform: translateY(-1px)
+    }
+
+    .rbx-tab.active {
+      color: var(--cyan);
+      border-color: rgba(34, 211, 238, .5);
+      background: rgba(34, 211, 238, .08);
+      box-shadow: 0 0 20px rgba(34, 211, 238, .08)
+    }
+
+    .rbx-stats-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .rbx-stats {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--text-muted)
+    }
+
+    .rbx-stats b {
+      color: var(--cyan)
+    }
+
+    .rbx-view-toggle {
+      display: flex;
+      gap: 4px
+    }
+
+    .rbx-view-btn {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: .8rem;
+      transition: all .2s ease
+    }
+
+    .rbx-view-btn.active,
+    .rbx-view-btn:hover {
+      border-color: rgba(34, 211, 238, .3);
+      color: var(--cyan);
+      background: rgba(34, 211, 238, .08)
+    }
+
+    .rbx-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, 1fr)
+    }
+
+    .rbx-grid.list-view {
+      grid-template-columns: 1fr
+    }
+
+    .rbx-card {
+      position: relative;
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+      transition: all .3s ease
+    }
+
+    .rbx-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(34, 211, 238, .35);
+      box-shadow: 0 18px 35px -20px rgba(34, 211, 238, .3)
+    }
+
+    .rbx-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(34, 211, 238, .05), transparent 55%);
+      opacity: 0;
+      transition: opacity .3s ease
+    }
+
+    .rbx-card:hover::before {
+      opacity: 1
+    }
+
+    .rbx-grid.list-view .rbx-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px
+    }
+
+    .rbx-grid.list-view .rbx-card-top {
+      margin-bottom: 0;
+      flex-shrink: 0
+    }
+
+    .rbx-grid.list-view .rbx-card-body {
+      flex: 1;
+      min-width: 0
+    }
+
+    .rbx-grid.list-view .rbx-title {
+      margin-bottom: 4px;
+      min-height: auto;
+      font-size: .85rem
+    }
+
+    .rbx-grid.list-view .rbx-code {
+      display: none
+    }
+
+    .rbx-grid.list-view .rbx-actions {
+      flex-wrap: nowrap
+    }
+
+    .rbx-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1
+    }
+
+    .rbx-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(34, 211, 238, .08);
+      border: 1px solid rgba(34, 211, 238, .2);
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      text-transform: uppercase;
+      letter-spacing: 1px
+    }
+
+    .rbx-index {
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem
+    }
+
+    .rbx-card-body {
+      position: relative;
+      z-index: 1
+    }
+
+    .rbx-title {
+      font-size: .9rem;
+      font-weight: 600;
+      line-height: 1.45;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+      min-height: 52px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden
+    }
+
+    .rbx-code {
+      margin-bottom: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(2, 6, 23, .65);
+      border: 1px solid rgba(255, 255, 255, .06);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      color: var(--amber);
+      word-break: break-all
+    }
+
+    .rbx-id {
+      color: var(--text-secondary);
+      margin-bottom: 4px
+    }
+
+    .rbx-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .rbx-btn {
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(34, 211, 238, .25);
+      background: rgba(34, 211, 238, .08);
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all .25s ease;
+      white-space: nowrap
+    }
+
+    .rbx-btn:hover {
+      border-color: rgba(34, 211, 238, .45);
+      background: rgba(34, 211, 238, .14);
+      transform: translateY(-1px)
+    }
+
+    .rbx-btn.amber {
+      color: var(--amber);
+      border-color: rgba(251, 191, 36, .25);
+      background: rgba(251, 191, 36, .08)
+    }
+
+    .rbx-btn.amber:hover {
+      border-color: rgba(251, 191, 36, .45);
+      background: rgba(251, 191, 36, .14)
+    }
+
+    .rbx-btn.muted {
+      color: var(--text-secondary);
+      border-color: rgba(255, 255, 255, .08);
+      background: rgba(255, 255, 255, .03)
+    }
+
+    .rbx-btn.muted:hover {
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, .16)
+    }
+
+    .rbx-loading,
+    .rbx-empty,
+    .rbx-error {
+      grid-column: 1/-1;
+      padding: 32px 24px;
+      border-radius: 14px;
+      border: 1px dashed var(--border-color);
+      background: rgba(15, 23, 42, .5);
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px
+    }
+
+    .rbx-error {
+      color: #f87171;
+      border-color: rgba(248, 113, 113, .25)
+    }
+
+    .rbx-pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      color: var(--text-muted)
+    }
+
+    .rbx-page-btn {
+      padding: 9px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(34, 211, 238, .25);
+      background: rgba(34, 211, 238, .08);
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      cursor: pointer;
+      transition: all .25s ease
+    }
+
+    .rbx-page-btn:hover:not(:disabled) {
+      background: rgba(34, 211, 238, .14);
+      transform: translateY(-1px)
+    }
+
+    .rbx-page-btn:disabled {
+      opacity: .3;
+      cursor: not-allowed
+    }
+
+    .rbx-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none
+    }
+
+    .rbx-toast-item {
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, .95);
+      border: 1px solid rgba(34, 211, 238, .3);
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, .5);
+      animation: toastIn .3s ease;
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .rbx-toast-item.amber {
+      border-color: rgba(251, 191, 36, .3);
+      color: var(--amber)
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(.95)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    @keyframes toastOut {
+      from {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+
+      to {
+        opacity: 0;
+        transform: translateY(10px) scale(.95)
+      }
+    }
+
     .footer {
       padding: 40px 0;
       text-align: center;
@@ -1700,10 +2158,6 @@
       transition-delay: .4s
     }
 
-    .stagger-5 {
-      transition-delay: .5s
-    }
-
     .cursor-glow {
       position: fixed;
       width: 300px;
@@ -1803,6 +2257,24 @@
       background: var(--cyan)
     }
 
+    @media(max-width:700px) {
+      .rbx-grid {
+        grid-template-columns: 1fr
+      }
+
+      .rbx-title {
+        min-height: auto
+      }
+
+      .rbx-search-wrap {
+        flex-wrap: wrap
+      }
+
+      .rbx-random-btn {
+        width: 100%
+      }
+    }
+
     @media(max-width:600px) {
       .hero-title {
         font-size: 3.2rem;
@@ -1839,10 +2311,6 @@
         height: 42px;
         font-size: 1rem;
         border-radius: 8px
-      }
-
-      .card-title {
-        font-size: .9rem
       }
 
       .stats-bar {
@@ -1906,8 +2374,13 @@
         gap: 6px
       }
 
-      .skill-cat-name {
-        font-size: .68rem
+      .rbx-btn {
+        font-size: .6rem;
+        padding: 6px 10px
+      }
+
+      .footer-ascii {
+        font-size: .45rem
       }
     }
 
@@ -1923,10 +2396,6 @@
       .stat-label {
         font-size: .55rem;
         letter-spacing: 1px
-      }
-
-      .footer-ascii {
-        font-size: .45rem
       }
 
       .skills-grid {
@@ -1960,6 +2429,7 @@
     <div class="shape shape-2"></div>
     <div class="shape shape-3"></div>
   </div>
+  <div class="rbx-toast" id="rbx-toast"></div>
 
   <nav class="navbar" id="navbar">
     <a class="nav-logo" href="#"><span class="nav-logo-bracket">{</span>Guss<span class="nav-logo-bracket">}</span></a>
@@ -1967,6 +2437,7 @@
   </nav>
 
   <div class="main-wrapper">
+
     <section class="hero">
       <div class="hero-avatar-container reveal stagger-1">
         <div class="avatar-glow"></div>
@@ -2043,6 +2514,7 @@
               community</span></div><i class="fas fa-arrow-right card-arrow"></i>
         </a>
       </div>
+
       <div class="section-header reveal">
         <div class="section-icon"><i class="fas fa-wrench"></i></div>
         <div>
@@ -2058,6 +2530,7 @@
               without watermark</span></div><i class="fas fa-arrow-right card-arrow"></i>
         </a>
       </div>
+
       <div class="section-header reveal">
         <div class="section-icon"
           style="color:var(--amber);border-color:rgba(245,158,11,.2);background:rgba(245,158,11,.05)"><i
@@ -2158,6 +2631,54 @@
       </div>
     </section>
 
+    <section class="section-pad" style="padding-top:0" id="roblox-section">
+      <div class="section-header reveal">
+        <div class="section-icon"
+          style="color:var(--amber);border-color:rgba(251,191,36,.2);background:rgba(251,191,36,.05)">
+          <i class="fas fa-music"></i>
+        </div>
+        <div>
+          <h2 class="section-title">Roblox Playlist</h2>
+        </div>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="rbx-toolbar reveal">
+        <div class="rbx-search-wrap">
+          <div class="rbx-search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="rbx-search" placeholder="Cari judul atau sound id..." autocomplete="off" />
+            <button class="rbx-search-clear" id="rbx-search-clear" title="Clear"><i class="fas fa-xmark"></i></button>
+          </div>
+          <button class="rbx-random-btn" id="rbx-random-btn" title="Random Sound">
+            <i class="fas fa-shuffle"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="rbx-meta reveal">
+        <div class="rbx-tabs" id="rbx-tabs"></div>
+        <div class="rbx-stats-row">
+          <div class="rbx-stats" id="rbx-stats">Memuat playlist...</div>
+          <div class="rbx-view-toggle">
+            <button class="rbx-view-btn active" id="rbx-grid-view" title="Grid View"><i
+                class="fas fa-grip"></i></button>
+            <button class="rbx-view-btn" id="rbx-list-view" title="List View"><i class="fas fa-list"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="rbx-grid reveal" id="rbx-grid">
+        <div class="rbx-loading"><i class="fas fa-spinner fa-spin"></i><span>Loading playlist...</span></div>
+      </div>
+
+      <div class="rbx-pagination reveal" id="rbx-pagination" style="display:none">
+        <button class="rbx-page-btn" id="rbx-prev">← Prev</button>
+        <span id="rbx-page-info">1 / 1</span>
+        <button class="rbx-page-btn" id="rbx-next">Next →</button>
+      </div>
+    </section>
+
     <div class="terminal-card reveal">
       <div class="terminal-header">
         <div class="terminal-dot red"></div>
@@ -2178,20 +2699,9 @@
           &nbsp;&nbsp;<span class="terminal-output-key">"role"</span>: <span class="terminal-output-val">"Full-Stack &
             Bot Developer"</span>,<br>
           &nbsp;&nbsp;<span class="terminal-output-key">"languages"</span>: <span
-            class="terminal-output-arr">[</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-output-val">"JavaScript"</span>, <span
-            class="terminal-output-val">"Python"</span>, <span class="terminal-output-val">"PHP"</span>,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-output-val">"Java"</span>, <span
-            class="terminal-output-val">"C"</span>, <span class="terminal-output-val">"C++"</span>,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-output-val">"C#"</span>, <span
-            class="terminal-output-val">"TypeScript"</span>, <span class="terminal-output-val">"Go"</span>,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-output-val">"Rust"</span>, <span
-            class="terminal-output-val">"Ruby"</span>, <span class="terminal-output-val">"Kotlin"</span>,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-output-val">"Swift"</span>, <span
-            class="terminal-output-val">"Dart"</span>, <span class="terminal-output-val">"Lua"</span><br>
-          &nbsp;&nbsp;<span class="terminal-output-arr">]</span>,<br>
-          &nbsp;&nbsp;<span class="terminal-output-key">"self_taught"</span>: <span
-            class="terminal-output-val">true</span>,<br>
+            class="terminal-output-arr">[</span><span
+            class="terminal-output-val">"JS","Python","PHP","Java","C","C++","C#","Go","Rust"</span><span
+            class="terminal-output-arr">]</span>,<br>
           &nbsp;&nbsp;<span class="terminal-output-key">"available"</span>: <span
             class="terminal-output-val">true</span><br>
           }
@@ -2227,280 +2737,246 @@
 
   <script>
     const SKILLS = [
-      {
-        category: 'Programming Languages',
-        icon: '💻',
-        color: '#22d3ee',
-        glow: 'rgba(34,211,238,.45)',
-        items: [
-          { name: 'JavaScript', icon: '🟨', level: 5 },
-          { name: 'Python', icon: '🐍', level: 4 },
-          { name: 'PHP', icon: '🐘', level: 4 },
-          { name: 'Java', icon: '☕', level: 3 },
-          { name: 'C', icon: '⚙️', level: 3 },
-          { name: 'C++', icon: '🔧', level: 3 },
-          { name: 'C#', icon: '🟪', level: 2 },
-          { name: 'TypeScript', icon: '🔷', level: 3 },
-          { name: 'Go', icon: '🐹', level: 2 },
-          { name: 'Rust', icon: '🦀', level: 2 },
-          { name: 'Ruby', icon: '💎', level: 2 },
-          { name: 'Kotlin', icon: '🟣', level: 2 },
-          { name: 'Swift', icon: '🍎', level: 2 },
-          { name: 'Dart', icon: '🎯', level: 2 },
-          { name: 'Lua', icon: '🌙', level: 3 },
-          { name: 'Perl', icon: '🐫', level: 1 },
-          { name: 'R', icon: '📊', level: 1 },
-          { name: 'Scala', icon: '🔴', level: 1 },
-        ]
-      },
-      {
-        category: 'Web Technologies',
-        icon: '🌐',
-        color: '#f472b6',
-        glow: 'rgba(244,114,182,.45)',
-        items: [
-          { name: 'HTML5', icon: '📄', level: 5 },
-          { name: 'CSS3', icon: '🎨', level: 5 },
-          { name: 'Sass/SCSS', icon: '💅', level: 3 },
-          { name: 'Tailwind CSS', icon: '💨', level: 3 },
-          { name: 'Bootstrap', icon: '🅱️', level: 4 },
-          { name: 'jQuery', icon: '📜', level: 4 },
-          { name: 'REST API', icon: '🔌', level: 4 },
-          { name: 'GraphQL', icon: '◈', level: 2 },
-          { name: 'WebSocket', icon: '🔗', level: 3 },
-          { name: 'PWA', icon: '📱', level: 3 },
-        ]
-      },
-      {
-        category: 'Frameworks & Runtime',
-        icon: '⚡',
-        color: '#a78bfa',
-        glow: 'rgba(167,139,250,.45)',
-        items: [
-          { name: 'Node.js', icon: '🟢', level: 5 },
-          { name: 'Express.js', icon: '🚂', level: 4 },
-          { name: 'React', icon: '⚛️', level: 2 },
-          { name: 'Next.js', icon: '▲', level: 2 },
-          { name: 'Vue.js', icon: '🟩', level: 2 },
-          { name: 'Laravel', icon: '🔺', level: 3 },
-          { name: 'Django', icon: '🐍', level: 2 },
-          { name: 'Flask', icon: '🧪', level: 3 },
-          { name: 'Spring Boot', icon: '🍃', level: 1 },
-          { name: 'Flutter', icon: '💙', level: 2 },
-          { name: 'Electron', icon: '⚡', level: 2 },
-          { name: 'Deno', icon: '🦕', level: 2 },
-          { name: 'Bun', icon: '🍞', level: 2 },
-        ]
-      },
-      {
-        category: 'Bot Development',
-        icon: '🤖',
-        color: '#fb7185',
-        glow: 'rgba(251,113,133,.45)',
-        items: [
-          { name: 'Discord Bot', icon: '🎮', level: 5 },
-          { name: 'discord.js', icon: '📦', level: 5 },
-          { name: 'WhatsApp Bot', icon: '💬', level: 5 },
-          { name: 'Baileys', icon: '📱', level: 5 },
-          { name: 'Telegram Bot', icon: '✈️', level: 3 },
-          { name: 'Slash Commands', icon: '⚡', level: 5 },
-          { name: 'Webhook', icon: '🔗', level: 4 },
-          { name: 'API Scraping', icon: '🕷️', level: 4 },
-          { name: 'Puppeteer', icon: '🎭', level: 3 },
-          { name: 'Cheerio', icon: '🍒', level: 3 },
-          { name: 'Selenium', icon: '🌐', level: 2 },
-        ]
-      },
-      {
-        category: 'Databases',
-        icon: '🗄️',
-        color: '#fbbf24',
-        glow: 'rgba(251,191,36,.45)',
-        items: [
-          { name: 'MongoDB', icon: '🍃', level: 3 },
-          { name: 'MySQL', icon: '🐬', level: 3 },
-          { name: 'PostgreSQL', icon: '🐘', level: 2 },
-          { name: 'SQLite', icon: '🗃️', level: 3 },
-          { name: 'Redis', icon: '🔴', level: 2 },
-          { name: 'Firebase', icon: '🔥', level: 3 },
-          { name: 'Supabase', icon: '⚡', level: 2 },
-          { name: 'JSON DB', icon: '📄', level: 5 },
-          { name: 'Prisma', icon: '🔷', level: 2 },
-        ]
-      },
-      {
-        category: 'DevOps & Cloud',
-        icon: '☁️',
-        color: '#38bdf8',
-        glow: 'rgba(56,189,248,.45)',
-        items: [
-          { name: 'Git', icon: '🌿', level: 4 },
-          { name: 'GitHub', icon: '🐙', level: 5 },
-          { name: 'Docker', icon: '🐳', level: 2 },
-          { name: 'Linux', icon: '🐧', level: 3 },
-          { name: 'Nginx', icon: '🟩', level: 2 },
-          { name: 'Apache', icon: '🔴', level: 2 },
-          { name: 'Vercel', icon: '▲', level: 3 },
-          { name: 'Railway', icon: '🚂', level: 3 },
-          { name: 'Netlify', icon: '🟢', level: 3 },
-          { name: 'Heroku', icon: '🟪', level: 3 },
-          { name: 'AWS', icon: '☁️', level: 1 },
-          { name: 'GCP', icon: '🔵', level: 1 },
-          { name: 'CI/CD', icon: '🔄', level: 2 },
-        ]
-      },
-      {
-        category: 'Tools & IDEs',
-        icon: '🛠️',
-        color: '#a3e635',
-        glow: 'rgba(163,230,53,.45)',
-        items: [
-          { name: 'VS Code', icon: '🔵', level: 5 },
-          { name: 'Vim/Neovim', icon: '📗', level: 2 },
-          { name: 'Termux', icon: '📱', level: 4 },
-          { name: 'Postman', icon: '📮', level: 3 },
-          { name: 'Insomnia', icon: '🟣', level: 2 },
-          { name: 'Figma', icon: '🎨', level: 2 },
-          { name: 'Replit', icon: '🔄', level: 4 },
-          { name: 'npm', icon: '📦', level: 5 },
-          { name: 'yarn', icon: '🧶', level: 3 },
-          { name: 'pnpm', icon: '⚡', level: 3 },
-          { name: 'Webpack', icon: '📦', level: 2 },
-          { name: 'Vite', icon: '⚡', level: 3 },
-        ]
-      },
-      {
-        category: 'Markup & Data',
-        icon: '📝',
-        color: '#fb923c',
-        glow: 'rgba(251,146,60,.45)',
-        items: [
-          { name: 'JSON', icon: '📋', level: 5 },
-          { name: 'XML', icon: '📄', level: 3 },
-          { name: 'YAML', icon: '📝', level: 4 },
-          { name: 'TOML', icon: '⚙️', level: 3 },
-          { name: 'Markdown', icon: '📖', level: 5 },
-          { name: 'LaTeX', icon: '📐', level: 1 },
-          { name: 'CSV', icon: '📊', level: 5 },
-          { name: 'Regex', icon: '🔍', level: 3 },
-          { name: 'Bash Script', icon: '🖥️', level: 3 },
-          { name: 'PowerShell', icon: '🟦', level: 2 },
-          { name: 'SQL', icon: '🗃️', level: 3 },
-        ]
-      },
-      {
-        category: 'Currently Learning',
-        icon: '📚',
-        color: '#34d399',
-        glow: 'rgba(52,211,153,.45)',
-        items: [
-          { name: 'Machine Learning', icon: '🧠', level: 1 },
-          { name: 'TensorFlow', icon: '🔶', level: 1 },
-          { name: 'Three.js', icon: '🎲', level: 1 },
-          { name: 'Svelte', icon: '🔶', level: 1 },
-          { name: 'Astro', icon: '🚀', level: 1 },
-          { name: 'Zig', icon: '⚡', level: 1 },
-          { name: 'Haskell', icon: 'λ', level: 1 },
-          { name: 'Assembly', icon: '💾', level: 1 },
-          { name: 'Kubernetes', icon: '☸️', level: 1 },
-          { name: 'Web3/Solidity', icon: '🔗', level: 1 },
-        ]
-      }
+      { category: 'Programming Languages', icon: '💻', color: '#22d3ee', glow: 'rgba(34,211,238,.45)', items: [{ name: 'JavaScript', icon: '🟨', level: 5 }, { name: 'Python', icon: '🐍', level: 4 }, { name: 'PHP', icon: '🐘', level: 4 }, { name: 'Java', icon: '☕', level: 3 }, { name: 'C', icon: '⚙️', level: 3 }, { name: 'C++', icon: '🔧', level: 3 }, { name: 'C#', icon: '🟪', level: 2 }, { name: 'TypeScript', icon: '🔷', level: 3 }, { name: 'Go', icon: '🐹', level: 2 }, { name: 'Rust', icon: '🦀', level: 2 }, { name: 'Ruby', icon: '💎', level: 2 }, { name: 'Kotlin', icon: '🟣', level: 2 }, { name: 'Swift', icon: '🍎', level: 2 }, { name: 'Dart', icon: '🎯', level: 2 }, { name: 'Lua', icon: '🌙', level: 3 }, { name: 'Perl', icon: '🐫', level: 1 }, { name: 'R', icon: '📊', level: 1 }, { name: 'Scala', icon: '🔴', level: 1 }] },
+      { category: 'Web Technologies', icon: '🌐', color: '#f472b6', glow: 'rgba(244,114,182,.45)', items: [{ name: 'HTML5', icon: '📄', level: 5 }, { name: 'CSS3', icon: '🎨', level: 5 }, { name: 'Sass/SCSS', icon: '💅', level: 3 }, { name: 'Tailwind CSS', icon: '💨', level: 3 }, { name: 'Bootstrap', icon: '🅱️', level: 4 }, { name: 'jQuery', icon: '📜', level: 4 }, { name: 'REST API', icon: '🔌', level: 4 }, { name: 'GraphQL', icon: '◈', level: 2 }, { name: 'WebSocket', icon: '🔗', level: 3 }, { name: 'PWA', icon: '📱', level: 3 }] },
+      { category: 'Frameworks & Runtime', icon: '⚡', color: '#a78bfa', glow: 'rgba(167,139,250,.45)', items: [{ name: 'Node.js', icon: '🟢', level: 5 }, { name: 'Express.js', icon: '🚂', level: 4 }, { name: 'React', icon: '⚛️', level: 2 }, { name: 'Next.js', icon: '▲', level: 2 }, { name: 'Vue.js', icon: '🟩', level: 2 }, { name: 'Laravel', icon: '🔺', level: 3 }, { name: 'Django', icon: '🐍', level: 2 }, { name: 'Flask', icon: '🧪', level: 3 }, { name: 'Spring Boot', icon: '🍃', level: 1 }, { name: 'Flutter', icon: '💙', level: 2 }, { name: 'Electron', icon: '⚡', level: 2 }, { name: 'Deno', icon: '🦕', level: 2 }, { name: 'Bun', icon: '🍞', level: 2 }] },
+      { category: 'Bot Development', icon: '🤖', color: '#fb7185', glow: 'rgba(251,113,133,.45)', items: [{ name: 'Discord Bot', icon: '🎮', level: 5 }, { name: 'discord.js', icon: '📦', level: 5 }, { name: 'WhatsApp Bot', icon: '💬', level: 5 }, { name: 'Baileys', icon: '📱', level: 5 }, { name: 'Telegram Bot', icon: '✈️', level: 3 }, { name: 'Slash Commands', icon: '⚡', level: 5 }, { name: 'Webhook', icon: '🔗', level: 4 }, { name: 'API Scraping', icon: '🕷️', level: 4 }, { name: 'Puppeteer', icon: '🎭', level: 3 }, { name: 'Cheerio', icon: '🍒', level: 3 }, { name: 'Selenium', icon: '🌐', level: 2 }] },
+      { category: 'Databases', icon: '🗄️', color: '#fbbf24', glow: 'rgba(251,191,36,.45)', items: [{ name: 'MongoDB', icon: '🍃', level: 3 }, { name: 'MySQL', icon: '🐬', level: 3 }, { name: 'PostgreSQL', icon: '🐘', level: 2 }, { name: 'SQLite', icon: '🗃️', level: 3 }, { name: 'Redis', icon: '🔴', level: 2 }, { name: 'Firebase', icon: '🔥', level: 3 }, { name: 'Supabase', icon: '⚡', level: 2 }, { name: 'JSON DB', icon: '📄', level: 5 }, { name: 'Prisma', icon: '🔷', level: 2 }] },
+      { category: 'DevOps & Cloud', icon: '☁️', color: '#38bdf8', glow: 'rgba(56,189,248,.45)', items: [{ name: 'Git', icon: '🌿', level: 4 }, { name: 'GitHub', icon: '🐙', level: 5 }, { name: 'Docker', icon: '🐳', level: 2 }, { name: 'Linux', icon: '🐧', level: 3 }, { name: 'Nginx', icon: '🟩', level: 2 }, { name: 'Vercel', icon: '▲', level: 3 }, { name: 'Railway', icon: '🚂', level: 3 }, { name: 'Netlify', icon: '🟢', level: 3 }, { name: 'Heroku', icon: '🟪', level: 3 }, { name: 'AWS', icon: '☁️', level: 1 }, { name: 'CI/CD', icon: '🔄', level: 2 }] },
+      { category: 'Tools & IDEs', icon: '🛠️', color: '#a3e635', glow: 'rgba(163,230,53,.45)', items: [{ name: 'VS Code', icon: '🔵', level: 5 }, { name: 'Vim/Neovim', icon: '📗', level: 2 }, { name: 'Termux', icon: '📱', level: 4 }, { name: 'Postman', icon: '📮', level: 3 }, { name: 'Figma', icon: '🎨', level: 2 }, { name: 'Replit', icon: '🔄', level: 4 }, { name: 'npm', icon: '📦', level: 5 }, { name: 'yarn', icon: '🧶', level: 3 }, { name: 'Vite', icon: '⚡', level: 3 }, { name: 'Webpack', icon: '📦', level: 2 }] },
+      { category: 'Markup & Data', icon: '📝', color: '#fb923c', glow: 'rgba(251,146,60,.45)', items: [{ name: 'JSON', icon: '📋', level: 5 }, { name: 'XML', icon: '📄', level: 3 }, { name: 'YAML', icon: '📝', level: 4 }, { name: 'TOML', icon: '⚙️', level: 3 }, { name: 'Markdown', icon: '📖', level: 5 }, { name: 'CSV', icon: '📊', level: 5 }, { name: 'Regex', icon: '🔍', level: 3 }, { name: 'Bash Script', icon: '🖥️', level: 3 }, { name: 'SQL', icon: '🗃️', level: 3 }] },
+      { category: 'Currently Learning', icon: '📚', color: '#34d399', glow: 'rgba(52,211,153,.45)', items: [{ name: 'Machine Learning', icon: '🧠', level: 1 }, { name: 'TensorFlow', icon: '🔶', level: 1 }, { name: 'Three.js', icon: '🎲', level: 1 }, { name: 'Svelte', icon: '🔶', level: 1 }, { name: 'Astro', icon: '🚀', level: 1 }, { name: 'Zig', icon: '⚡', level: 1 }, { name: 'Haskell', icon: 'λ', level: 1 }, { name: 'Assembly', icon: '💾', level: 1 }, { name: 'Kubernetes', icon: '☸️', level: 1 }, { name: 'Web3/Solidity', icon: '🔗', level: 1 }] }
     ];
 
     function renderSkills() {
       const wrapper = document.getElementById('skills-wrapper');
+      if (!wrapper) return;
       wrapper.innerHTML = '';
-      const levelLabels = ['', 'Beginner', 'Learning', 'Intermediate', 'Advanced', 'Expert'];
-      let totalSkills = 0;
-
+      const lvlLabels = ['', 'Beginner', 'Learning', 'Intermediate', 'Advanced', 'Expert'];
+      let total = 0;
       SKILLS.forEach((cat, ci) => {
-        totalSkills += cat.items.length;
+        total += cat.items.length;
         const el = document.createElement('div');
         el.className = 'skill-category reveal';
-        el.style.transitionDelay = (ci * 0.06) + 's';
-
-        const chips = cat.items.map(skill => {
-          const dots = Array.from({ length: 5 }, (_, i) =>
-            `<div class="skill-dot ${i < skill.level ? 'filled' : ''}" style="--chip-color:${cat.color}"></div>`
-          ).join('');
-
-          const badge = skill.level === 5
-            ? `<span class="skill-level-badge" style="color:${cat.color};border-color:${cat.color}44">★ Expert</span>`
-            : skill.level === 4
-              ? `<span class="skill-level-badge" style="color:${cat.color};border-color:${cat.color}33">Advanced</span>`
-              : '';
-
-          return `
-        <div class="skill-chip"
-          style="--chip-color:${cat.color};--chip-glow:${cat.glow};--bar-width:${skill.level * 20}%;color:${cat.color};border-color:${cat.color}30;background:${cat.color}08"
-          title="${skill.name} — ${levelLabels[skill.level]} (${skill.level}/5)">
-          <span class="skill-chip-icon">${skill.icon}</span>
-          <span>${skill.name}</span>
-          <div class="skill-level-dots">${dots}</div>
-          ${badge}
-          <div class="skill-chip-bar"></div>
-        </div>`;
+        el.style.transitionDelay = (ci * .06) + 's';
+        const chips = cat.items.map(s => {
+          const dots = Array.from({ length: 5 }, (_, i) => `<div class="skill-dot ${i < s.level ? 'filled' : ''}" style="--chip-color:${cat.color}"></div>`).join('');
+          const badge = s.level === 5 ? `<span class="skill-level-badge" style="color:${cat.color};border-color:${cat.color}44">★ Expert</span>` : s.level === 4 ? `<span class="skill-level-badge" style="color:${cat.color};border-color:${cat.color}33">Advanced</span>` : '';
+          return `<div class="skill-chip" style="--chip-color:${cat.color};--chip-glow:${cat.glow};--bar-width:${s.level * 20}%;color:${cat.color};border-color:${cat.color}30;background:${cat.color}08" title="${s.name} — ${lvlLabels[s.level]} (${s.level}/5)"><span class="skill-chip-icon">${s.icon}</span><span>${s.name}</span><div class="skill-level-dots">${dots}</div>${badge}<div class="skill-chip-bar"></div></div>`;
         }).join('');
-
-        el.innerHTML = `
-      <div class="skill-cat-header" onclick="toggleCat(this)">
-        <div class="skill-cat-icon" style="background:${cat.color}12;color:${cat.color};border:1px solid ${cat.color}25">${cat.icon}</div>
-        <span class="skill-cat-name" style="color:${cat.color}">${cat.category}</span>
-        <span class="skill-cat-count">${cat.items.length} skills</span>
-        <i class="fas fa-chevron-down skill-cat-toggle" style="color:${cat.color}"></i>
-      </div>
-      <div class="skill-cat-body"><div class="skills-grid">${chips}</div></div>`;
+        el.innerHTML = `<div class="skill-cat-header" onclick="toggleCat(this)"><div class="skill-cat-icon" style="background:${cat.color}12;color:${cat.color};border:1px solid ${cat.color}25">${cat.icon}</div><span class="skill-cat-name" style="color:${cat.color}">${cat.category}</span><span class="skill-cat-count">${cat.items.length} skills</span><i class="fas fa-chevron-down skill-cat-toggle" style="color:${cat.color}"></i></div><div class="skill-cat-body"><div class="skills-grid">${chips}</div></div>`;
         wrapper.appendChild(el);
       });
-
-      document.getElementById('skills-total').innerHTML =
-        `Total: <b>${totalSkills}</b> skills across <b>${SKILLS.length}</b> categories`;
-
+      const tot = document.getElementById('skills-total');
+      if (tot) tot.innerHTML = `Total: <b>${total}</b> skills across <b>${SKILLS.length}</b> categories`;
       document.querySelectorAll('.reveal').forEach(el => { if (!el.classList.contains('visible')) ro.observe(el) });
+      const barObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.skill-chip').forEach((c, i) => setTimeout(() => c.classList.add('animated'), i * 40)); barObs.unobserve(e.target) } }) }, { threshold: .2 });
+      document.querySelectorAll('.skill-cat-body').forEach(el => barObs.observe(el));
+    }
+    function toggleCat(h) { h.closest('.skill-category').classList.toggle('collapsed') }
 
-      const barObserver = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.querySelectorAll('.skill-chip').forEach((chip, i) => {
-              setTimeout(() => chip.classList.add('animated'), i * 40);
-            });
-            barObserver.unobserve(e.target);
-          }
+    const RBX_API = 'https://oyy-gus.site/api/v2/roblox/music/playlist.json';
+    const RBX_PER_PAGE = 24;
+    let rbxData = {}, rbxCat = 'all', rbxQuery = '', rbxPage = 1, rbxIsListView = false;
+
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+    function rbxFlat() {
+      const out = [];
+      Object.entries(rbxData).forEach(([cat, items]) => {
+        (items || []).forEach((item, i) => {
+          if (!item || !item.sound_id) return;
+          out.push({ cat, title: item.title || 'Untitled', id: String(item.sound_id), idx: i + 1 });
         });
-      }, { threshold: 0.2 });
-      document.querySelectorAll('.skill-cat-body').forEach(el => barObserver.observe(el));
+      });
+      return out;
     }
 
-    function toggleCat(header) {
-      header.closest('.skill-category').classList.toggle('collapsed');
+    function rbxFiltered() {
+      let items = rbxFlat();
+      if (rbxCat !== 'all') items = items.filter(x => x.cat === rbxCat);
+      if (rbxQuery.trim()) {
+        const q = rbxQuery.toLowerCase();
+        items = items.filter(x => x.title.toLowerCase().includes(q) || x.id.includes(q) || x.cat.toLowerCase().includes(q));
+      }
+      return items;
     }
 
-    window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800) });
+    function rbxRenderTabs() {
+      const tabs = $('rbx-tabs');
+      if (!tabs) return;
+      const all = rbxFlat();
+      const categories = [{ key: 'all', label: `Semua (${all.length})` }, ...Object.entries(rbxData).map(([k, v]) => ({ key: k, label: `${cap(k)} (${(v || []).length})` }))];
+      tabs.innerHTML = categories.map(t => `<button class="rbx-tab ${rbxCat === t.key ? 'active' : ''}" data-cat="${esc(t.key)}">${esc(t.label)}</button>`).join('');
+      tabs.querySelectorAll('.rbx-tab').forEach(btn => {
+        btn.addEventListener('click', () => { rbxCat = btn.dataset.cat; rbxPage = 1; rbxRenderTabs(); rbxRender() });
+      });
+    }
 
-    const canvas = document.getElementById('matrix-canvas'); const ctx = canvas.getContext('2d');
-    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight } resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    const mchars = 'アイウエオカキクケコ01'; const fs = 14; let cols = Math.floor(canvas.width / fs); let drops = Array(cols).fill(1);
-    function drawMatrix() { ctx.fillStyle = 'rgba(2,6,23,0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'rgba(34,211,238,0.07)'; ctx.font = `${fs}px 'JetBrains Mono',monospace`; for (let i = 0; i < drops.length; i++) { ctx.fillText(mchars[Math.floor(Math.random() * mchars.length)], i * fs, drops[i] * fs); if (drops[i] * fs > canvas.height && Math.random() > .985) drops[i] = 0; drops[i]++ } }
-    setInterval(drawMatrix, 50);
-    window.addEventListener('resize', () => { cols = Math.floor(canvas.width / fs); drops = Array(cols).fill(1) });
+    function rbxRender() {
+      const grid = $('rbx-grid'), stats = $('rbx-stats'), pag = $('rbx-pagination');
+      if (!grid) return;
+      const filtered = rbxFiltered();
+      const total = rbxFlat().length;
+      const totalPages = Math.max(1, Math.ceil(filtered.length / RBX_PER_PAGE));
+      if (rbxPage > totalPages) rbxPage = totalPages;
+      const start = (rbxPage - 1) * RBX_PER_PAGE;
+      const shown = filtered.slice(start, start + RBX_PER_PAGE);
+
+      if (stats) stats.innerHTML = `Menampilkan <b>${shown.length}</b> dari <b>${filtered.length}</b> sound &bull; total <b>${total}</b> &bull; hal. <b>${rbxPage}/${totalPages}</b>`;
+
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="rbx-empty"><i class="fas fa-circle-exclamation"></i><span>Tidak ada playlist yang cocok.</span></div>';
+        if (pag) pag.style.display = 'none';
+        return;
+      }
+
+      grid.className = `rbx-grid reveal visible${rbxIsListView ? ' list-view' : ''}`;
+
+      grid.innerHTML = shown.map(item => `
+    <article class="rbx-card">
+      <div class="rbx-card-top">
+        <span class="rbx-badge"><i class="fas fa-headphones"></i>${esc(item.cat)}</span>
+        <span class="rbx-index">#${item.idx}</span>
+      </div>
+      <div class="rbx-card-body">
+        <h3 class="rbx-title">${esc(item.title)}</h3>
+        <div class="rbx-code">
+          <div class="rbx-id">ID: ${esc(item.id)}</div>
+          rbxassetid://${esc(item.id)}
+        </div>
+        <div class="rbx-actions">
+          <button class="rbx-btn" data-copy="${esc(item.id)}" data-label="Copy ID"><i class="fas fa-copy"></i> ID</button>
+          <button class="rbx-btn amber" data-copy="rbxassetid://${esc(item.id)}" data-label="Copy Asset"><i class="fas fa-gamepad"></i> Asset</button>
+          <a class="rbx-btn muted" href="https://www.roblox.com/library/${encodeURIComponent(item.id)}" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Open</a>
+        </div>
+      </div>
+    </article>`).join('');
+
+      if (pag) {
+        pag.style.display = totalPages > 1 ? 'flex' : 'none';
+        const pi = $('rbx-page-info'), pv = $('rbx-prev'), pn = $('rbx-next');
+        if (pi) pi.textContent = `${rbxPage} / ${totalPages}`;
+        if (pv) pv.disabled = rbxPage <= 1;
+        if (pn) pn.disabled = rbxPage >= totalPages;
+      }
+    }
+
+    function rbxToast(msg, type = 'cyan') {
+      const container = $('rbx-toast');
+      if (!container) return;
+      const el = document.createElement('div');
+      el.className = `rbx-toast-item${type === 'amber' ? ' amber' : ''}`;
+      el.innerHTML = `<i class="fas fa-check"></i>${esc(msg)}`;
+      container.appendChild(el);
+      setTimeout(() => { el.style.animation = 'toastOut .3s ease forwards'; setTimeout(() => el.remove(), 350) }, 2000);
+    }
+
+    async function rbxLoad() {
+      const grid = $('rbx-grid'), stats = $('rbx-stats');
+      if (!grid) return;
+      grid.innerHTML = '<div class="rbx-loading"><i class="fas fa-spinner fa-spin"></i><span>Loading playlist...</span></div>';
+      if (stats) stats.textContent = 'Memuat playlist...';
+      try {
+        const res = await fetch(RBX_API, { headers: { 'Accept': 'application/json' } });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (!data || typeof data !== 'object') throw new Error('Format tidak valid');
+        rbxData = data;
+        rbxRenderTabs();
+        rbxRender();
+      } catch (err) {
+        grid.innerHTML = `<div class="rbx-error"><i class="fas fa-triangle-exclamation"></i><span>Gagal memuat: ${esc(err.message)}</span></div>`;
+        if (stats) stats.textContent = 'Gagal memuat playlist';
+        console.error('RBX error:', err);
+      }
+    }
+
+    function rbxInitEvents() {
+      const grid = $('rbx-grid');
+      if (grid) {
+        grid.addEventListener('click', async e => {
+          const btn = e.target.closest('[data-copy]');
+          if (!btn || btn.tagName === 'A') return;
+          const text = btn.dataset.copy, label = btn.dataset.label || 'Copied';
+          try {
+            await navigator.clipboard.writeText(text);
+            const oldHTML = btn.innerHTML;
+            btn.innerHTML = `<i class="fas fa-check"></i> Done`;
+            btn.disabled = true;
+            rbxToast(`${label}: ${text.length > 40 ? text.slice(0, 40) + '...' : text}`, 'cyan');
+            setTimeout(() => { btn.innerHTML = oldHTML; btn.disabled = false }, 1400);
+          } catch { rbxToast('Gagal copy text', 'amber') }
+        });
+      }
+
+      const searchInput = $('rbx-search'), clearBtn = $('rbx-search-clear');
+      if (searchInput) {
+        searchInput.addEventListener('input', e => {
+          rbxQuery = e.target.value;
+          rbxPage = 1;
+          if (clearBtn) clearBtn.style.display = rbxQuery ? 'block' : 'none';
+          rbxRender();
+        });
+      }
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          rbxQuery = '';
+          if (searchInput) searchInput.value = '';
+          clearBtn.style.display = 'none';
+          rbxPage = 1;
+          rbxRender();
+        });
+      }
+
+      const randBtn = $('rbx-random-btn');
+      if (randBtn) {
+        randBtn.addEventListener('click', () => {
+          const all = rbxFlat();
+          if (!all.length) return;
+          const pick = all[Math.floor(Math.random() * all.length)];
+          navigator.clipboard.writeText(pick.id).then(() => {
+            rbxToast(`🎲 Random: ${pick.title.slice(0, 35)}... → ID ${pick.id}`, 'amber');
+          }).catch(() => { });
+        });
+      }
+
+      const gv = $('rbx-grid-view'), lv = $('rbx-list-view');
+      if (gv) gv.addEventListener('click', () => { rbxIsListView = false; gv.classList.add('active'); lv && lv.classList.remove('active'); rbxRender() });
+      if (lv) lv.addEventListener('click', () => { rbxIsListView = true; lv.classList.add('active'); gv && gv.classList.remove('active'); rbxRender() });
+
+      const pv = $('rbx-prev'), pn = $('rbx-next');
+      if (pv) pv.addEventListener('click', () => { if (rbxPage > 1) { rbxPage--; rbxRender(); document.getElementById('roblox-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) } });
+      if (pn) pn.addEventListener('click', () => { const f = rbxFiltered(); const tp = Math.ceil(f.length / RBX_PER_PAGE); if (rbxPage < tp) { rbxPage++; rbxRender(); document.getElementById('roblox-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) } });
+    }
+
+    window.addEventListener('load', () => setTimeout(() => $('loader')?.classList.add('hidden'), 1800));
+
+    const canv = document.getElementById('matrix-canvas'), ctx = canv.getContext('2d');
+    function resC() { canv.width = window.innerWidth; canv.height = window.innerHeight } resC();
+    window.addEventListener('resize', resC);
+    const mch = 'アイウエオカキクケコ01'; const fs2 = 14; let cols = Math.floor(canv.width / fs2); let drops = Array(cols).fill(1);
+    function drawM() { ctx.fillStyle = 'rgba(2,6,23,.08)'; ctx.fillRect(0, 0, canv.width, canv.height); ctx.fillStyle = 'rgba(34,211,238,.07)'; ctx.font = `${fs2}px 'JetBrains Mono',monospace`; for (let i = 0; i < drops.length; i++) { ctx.fillText(mch[Math.floor(Math.random() * mch.length)], i * fs2, drops[i] * fs2); if (drops[i] * fs2 > canv.height && Math.random() > .985) drops[i] = 0; drops[i]++ } }
+    setInterval(drawM, 50);
+    window.addEventListener('resize', () => { cols = Math.floor(canv.width / fs2); drops = Array(cols).fill(1) });
 
     const cg = document.getElementById('cursorGlow');
     document.addEventListener('mousemove', e => { cg.classList.add('active'); cg.style.left = e.clientX + 'px'; cg.style.top = e.clientY + 'px' });
     document.addEventListener('mouseleave', () => cg.classList.remove('active'));
 
-    window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50));
+    window.addEventListener('scroll', () => document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50));
 
     const ro = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: .08, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-    const phrases = ['Full-Stack Developer', 'Discord Bot Maker', 'WhatsApp Bot Dev', 'Multi-Language Coder', 'PHP & Java Developer', 'C/C++ Programmer', 'Self-Taught Engineer', 'Open Source Fan', 'Code. Create. Repeat.'];
+    const phrases = ['Full-Stack Developer', 'Discord Bot Maker', 'WhatsApp Bot Dev', 'PHP & Java Developer', 'C/C++ Programmer', 'Multi-Language Coder', 'Self-Taught Engineer', 'Roblox Sound Curator'];
     let pi = 0, ci2 = 0, del = false, tEl = document.getElementById('typed-text');
     function typeEff() { const p = phrases[pi]; tEl.textContent = del ? p.substring(0, --ci2) : p.substring(0, ++ci2); let s = del ? 25 : 55; if (!del && ci2 === p.length) { s = 2000; del = true } else if (del && ci2 === 0) { del = false; pi = (pi + 1) % phrases.length; s = 400 } setTimeout(typeEff, s) }
     setTimeout(typeEff, 2200);
 
-    const tPhrases = ['javac Main.java && java Main', 'php artisan serve', 'gcc -o app main.c && ./app', 'python scraper.py', 'node bot.js', 'go run server.go', 'cargo build --release', 'ruby app.rb', 'npm run dev', 'docker compose up', 'sudo make coffee ☕'];
+    const tPhrases = ['javac Main.java && java Main', 'php artisan serve', 'gcc -o app main.c && ./app', 'python scraper.py', 'node bot.js', 'go run server.go', 'cargo build --release', 'npm run dev', 'docker compose up', 'sudo make coffee ☕'];
     let tp = 0, tc = 0, td = false, ttEl = document.getElementById('terminal-typed');
     function tType() { if (!ttEl) return; const p = tPhrases[tp]; ttEl.textContent = td ? p.substring(0, --tc) : p.substring(0, ++tc); let s = td ? 20 : 45; if (!td && tc === p.length) { s = 3000; td = true } else if (td && tc === 0) { td = false; tp = (tp + 1) % tPhrases.length; s = 400 } setTimeout(tType, s) }
     setTimeout(tType, 3500);
@@ -2508,10 +2984,10 @@
     const co = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting && e.target.dataset.count) { const t = parseInt(e.target.dataset.count); let c = 0; const iv = setInterval(() => { c += t / 60; if (c >= t) { e.target.textContent = t + '+'; clearInterval(iv) } else e.target.textContent = Math.floor(c) }, 30); co.unobserve(e.target) } }), { threshold: .5 });
     document.querySelectorAll('[data-count]').forEach(c => co.observe(c));
 
-    const si = document.querySelector('.scroll-indicator'); const hero = document.querySelector('.hero');
+    const si = document.querySelector('.scroll-indicator'), hero = document.querySelector('.hero');
     window.addEventListener('scroll', () => { if (si) si.style.opacity = window.scrollY > 100 ? '0' : '1'; if (hero) { hero.style.transform = `translateY(${window.scrollY * .3}px)`; hero.style.opacity = Math.max(0, 1 - window.scrollY / 600) } });
 
-    document.querySelectorAll('.game-tab').forEach(tab => { tab.addEventListener('click', () => { document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active')); document.querySelectorAll('.game-panel').forEach(p => p.classList.remove('active')); tab.classList.add('active'); document.getElementById('game-' + tab.dataset.game).classList.add('active') }) });
+    document.querySelectorAll('.game-tab').forEach(tab => { tab.addEventListener('click', () => { document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active')); document.querySelectorAll('.game-panel').forEach(p => p.classList.remove('active')); tab.classList.add('active'); document.getElementById('game-' + tab.dataset.game)?.classList.add('active') }) });
 
     (() => {
       const cvs = document.getElementById('snake-canvas'), c = cvs.getContext('2d'), SZ = 16, GR = cvs.width / SZ;
@@ -2520,7 +2996,7 @@
       function placeFood() { do { food = { x: Math.floor(Math.random() * GR), y: Math.floor(Math.random() * GR) } } while (snake.some(s => s.x === food.x && s.y === food.y)) }
       function draw() { c.fillStyle = 'rgba(2,6,23,.95)'; c.fillRect(0, 0, cvs.width, cvs.height); c.fillStyle = 'rgba(34,211,238,.04)'; for (let x = 0; x < GR; x++)for (let y = 0; y < GR; y++)c.fillRect(x * SZ + SZ / 2 - .5, y * SZ + SZ / 2 - .5, 1, 1); c.shadowBlur = 15; c.shadowColor = '#ef4444'; c.fillStyle = '#ef4444'; c.beginPath(); c.arc(food.x * SZ + SZ / 2, food.y * SZ + SZ / 2, SZ / 2 - 2, 0, Math.PI * 2); c.fill(); c.shadowBlur = 0; snake.forEach((s, i) => { const p = i / snake.length; c.fillStyle = `rgb(${Math.floor(34 + (244 - 34) * p)},${Math.floor(211 + (114 - 211) * p)},${Math.floor(238 + (182 - 238) * p)})`; if (i === 0) { c.shadowBlur = 10; c.shadowColor = 'rgba(34,211,238,.8)' } const pad = i === 0 ? 1 : 2; c.beginPath(); c.roundRect(s.x * SZ + pad, s.y * SZ + pad, SZ - pad * 2, SZ - pad * 2, 3); c.fill(); c.shadowBlur = 0 }) }
       function update() { dir = { ...nDir }; const h = { x: snake[0].x + dir.x, y: snake[0].y + dir.y }; if (h.x < 0 || h.x >= GR || h.y < 0 || h.y >= GR) return gOver(); if (snake.some(s => s.x === h.x && s.y === h.y)) return gOver(); snake.unshift(h); if (h.x === food.x && h.y === food.y) { score++; if (score > best) best = score; if (speed > 60) speed -= 3; placeFood(); clearInterval(gl); gl = setInterval(update, speed) } else snake.pop(); updateUI(); draw() }
-      function gOver() { running = false; clearInterval(gl); document.getElementById('snake-msg').textContent = `Game Over! Score: ${score}`; document.getElementById('snake-msg').className = 'game-msg lose'; document.getElementById('snake-start-btn').textContent = 'Restart'; c.fillStyle = 'rgba(239,68,68,.3)'; c.fillRect(0, 0, cvs.width, cvs.height) }
+      function gOver() { running = false; clearInterval(gl); const msg = document.getElementById('snake-msg'); msg.textContent = `Game Over! Score: ${score}`; msg.className = 'game-msg lose'; document.getElementById('snake-start-btn').textContent = 'Restart'; c.fillStyle = 'rgba(239,68,68,.3)'; c.fillRect(0, 0, cvs.width, cvs.height) }
       function updateUI() { document.getElementById('snake-score').textContent = score; document.getElementById('snake-best').textContent = best; document.getElementById('snake-speed').textContent = speed > 100 ? 'Normal' : speed > 80 ? 'Fast' : 'Insane' }
       function start() { if (running) return; init(); running = true; document.getElementById('snake-msg').textContent = ''; document.getElementById('snake-msg').className = 'game-msg'; document.getElementById('snake-start-btn').textContent = 'Playing...'; gl = setInterval(update, speed) }
       function setDir(x, y) { if (dir.x === -x && dir.y === -y || dir.x === x && dir.y === y) return; nDir = { x, y } }
@@ -2548,6 +3024,8 @@
     })();
 
     renderSkills();
+    rbxInitEvents();
+    rbxLoad();
   </script>
 </body>
 
